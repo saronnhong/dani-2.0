@@ -6,8 +6,10 @@ import { AppLoading } from 'expo';
 import Navigator from './navigation/Navigator';
 import { enableScreens } from 'react-native-screens';
 
+//Optimizes memory usage for screens for each native platform (UIViewController for iOS, and FragmentActivity for Android)
 enableScreens();
 
+//Loads custom fonts
 const fetchFonts = () => {
   return Font.loadAsync({
     'open-sans': require('./assets/fonts/OpenSans-Regular.ttf'),
