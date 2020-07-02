@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 
 const SplashScreen = props => {
     return (
-        <View>
+        <View style={styles.screen}>
             <Text>This is the Splash Screen. </Text>
             <Button title="Go to Log In!" 
             onPress={()=>{
@@ -15,6 +15,12 @@ const SplashScreen = props => {
     )
 };
 
-const styles= StyleSheet.create({});
+const styles= StyleSheet.create({
+    screen: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+});
 
 export default SplashScreen;
