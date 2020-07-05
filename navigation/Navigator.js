@@ -10,6 +10,7 @@ import SplashScreen from './../screens/SplashScreen';
 import LoginScreen from './../screens/LoginScreen';
 import MainMenuScreen from './../screens/MainMenuScreen';
 import SoundsMenuScreen from './../screens/SoundsMenuScreen';
+import SoundScreen from './../screens/SoundScreen';
 import FavoritesScreen from './../screens/FavoritesScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import Colors from './../constants/Colors';
@@ -28,7 +29,8 @@ const DaniStackNavigator = createStackNavigator({
     Splash: SplashScreen,
     Login: LoginScreen,
     MainMenu: MainMenuScreen,
-    SoundMenu: SoundsMenuScreen
+    SoundMenu: SoundsMenuScreen,
+    SoundScreen: SoundScreen
 
 },
     {
