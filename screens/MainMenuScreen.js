@@ -20,7 +20,7 @@ const MainMenuScreen = props => {
 MainMenuScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Main Menu',
-        headerLeft: () => (
+        headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName='ios-menu' onPress={() => {
                     navData.navigation.toggleDrawer();

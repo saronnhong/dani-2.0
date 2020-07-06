@@ -1,9 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 import { SOUNDS } from '../data/animals';
-import SoundButton from '../components/SoundButton';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
 
 const SoundsMenuScreen = props => {
 
@@ -24,7 +21,6 @@ const SoundsMenuScreen = props => {
                         <View style={styles.animalName}>
                             <Text >{animal.name}</Text>
                         </View>
-
                     </TouchableOpacity>
                 )}
             </View>
@@ -34,14 +30,7 @@ const SoundsMenuScreen = props => {
 
 SoundsMenuScreen.navigationOptions = navData => {
     return {
-        headerTitle: 'Sounds Menu',
-        headerLeft: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Menu" iconName='ios-menu' onPress={() => {
-                    navData.navigation.toggleDrawer();
-                 }} />
-            </HeaderButtons>
-        )
+        headerTitle: 'Sounds Menu'
     }
 }
 
@@ -75,7 +64,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 5,
         marginTop: 3
-
     }
 });
 export default SoundsMenuScreen;

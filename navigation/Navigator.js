@@ -6,12 +6,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
-import SplashScreen from './../screens/SplashScreen';
 import LoginScreen from './../screens/LoginScreen';
 import MainMenuScreen from './../screens/MainMenuScreen';
 import SoundsMenuScreen from './../screens/SoundsMenuScreen';
 import SoundScreen from './../screens/SoundScreen';
-import FavoritesScreen from './../screens/FavoritesScreen';
+import SpeechBoard from './../screens/SpeechBoard';
 import FiltersScreen from './../screens/FiltersScreen';
 import Colors from './../constants/Colors';
 
@@ -26,20 +25,18 @@ const defaultStackNavOptions = {
 }
 
 const DaniStackNavigator = createStackNavigator({
-    Splash: SplashScreen,
     Login: LoginScreen,
     MainMenu: MainMenuScreen,
     SoundMenu: SoundsMenuScreen,
     SoundScreen: SoundScreen
-
 },
     {
         defaultNavigationOptions: defaultStackNavOptions
     }
 )
 
-const FavoritesNavigator = createStackNavigator({
-    Favorites: FavoritesScreen
+const SpeechBoardNavigator = createStackNavigator({
+    SpeechBoard: SpeechBoard
 },
     {
         defaultNavigationOptions: defaultStackNavOptions
@@ -51,17 +48,17 @@ const tabScreenConfig = {
         navigationOptions: {
             tabBarLabel: 'Main',
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-restaurant' size={25} color={tabInfo.tintColor} />
+                return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
             },
             tabBarColor: Colors.primaryColor
         }
     },
     Tab1: {
-        screen: FavoritesNavigator,
+        screen: SpeechBoardNavigator,
         navigationOptions: {
-            tabBarLabel: 'Favorites',
+            tabBarLabel: 'Speech Board',
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-star' size={25} color={tabInfo.tintColor} />
+                return <Ionicons name='ios-chatbubbles' size={25} color={tabInfo.tintColor} />
             },
             tabBarColor: Colors.accentColor
         }
@@ -79,7 +76,7 @@ const FiltersNavigator = createStackNavigator({
 });
 
 const MainNavigator = createDrawerNavigator({
-    MealsFavs: TabNavigator,
+    Settings: TabNavigator,
     Filters: FiltersNavigator
 });
 
