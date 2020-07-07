@@ -25,7 +25,7 @@ const SpeechBoard = (props) => {
             <View style={styles.wordBoard}>
                 {wordBoard.map((board, index) =>
                     <TouchableOpacity key={index} style={styles.btnContainer} onPress={() => {
-                        Speech.speak("remove", {
+                        Speech.speak(board, {
                             language: 'en',
                             pitch: 1,
                             rate: 1,
