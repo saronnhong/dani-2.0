@@ -11,6 +11,7 @@ import MainMenuScreen from './../screens/MainMenuScreen';
 import SoundsMenuScreen from './../screens/SoundsMenuScreen';
 import SoundScreen from './../screens/SoundScreen';
 import SpeechBoard from './../screens/SpeechBoard';
+import SpeechMenu from './../screens/SpeechMenu';
 import FiltersScreen from './../screens/FiltersScreen';
 import Colors from './../constants/Colors';
 
@@ -36,6 +37,7 @@ const DaniStackNavigator = createStackNavigator({
 )
 
 const SpeechBoardNavigator = createStackNavigator({
+    SpeechMenu: SpeechMenu,
     SpeechBoard: SpeechBoard
 },
     {
@@ -56,7 +58,7 @@ const tabScreenConfig = {
     Tab1: {
         screen: SpeechBoardNavigator,
         navigationOptions: {
-            tabBarLabel: 'Speech Board',
+            tabBarLabel: 'Speech Menu',
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-chatbubbles' size={25} color={tabInfo.tintColor} />
             },
