@@ -22,7 +22,6 @@ const SpeechBoard = (props) => {
     const [wordBoard, setWordBoard] = useState([]);
     return (
         <View>
-
             <View style={styles.wordBoard}>
                 {wordBoard.map((board, index) =>
                     <TouchableOpacity key={index} style={styles.btnContainer} onPress={() => {
@@ -32,18 +31,12 @@ const SpeechBoard = (props) => {
                             rate: 1,
                             voice: Voices.nicky
                         });
-
-                        // const temp = wordBoard.filter(x => x != board);
-                        // setWordBoard(temp);
-                        // const temp = wordBoard.splice(0, wordBoard.length-1);
-                        // setWordBoard(temp);
                     }}>
                         <Text style={{ ...styles.btnText, backgroundColor: "#26c6da" }} >{board}</Text>
                     </TouchableOpacity>
                 )}
-
-                <TouchableOpacity style={styles.deleteContainer}onPress={() => {
-                    Speech.speak("pop", {
+                <TouchableOpacity style={styles.deleteContainer} onPress={() => {
+                    Speech.speak("delete", {
                         language: 'en',
                         pitch: 1,
                         rate: 1,
@@ -109,9 +102,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
-
         elevation: 6,
-
     },
     btnText: {
         fontSize: 14,
@@ -159,7 +150,6 @@ const styles = StyleSheet.create({
     deleteBtn: {
         marginRight: 30,
         color: "#d32f2f"
-        
     },
     deleteContainer: {
         flex: 1,
