@@ -26,12 +26,12 @@ const SpeechBoard = (props) => {
     const [imageBoard, setImageBoard] = useState([]);
 
     const onDelete = () => {
-        Speech.speak("delete", {
-            language: 'en',
-            pitch: 1,
-            rate: 1,
-            voice: Voices.nicky
-        });
+        // Speech.speak("delete", {
+        //     language: 'en',
+        //     pitch: 1,
+        //     rate: 1,
+        //     voice: Voices.nicky
+        // });
         const temp = wordBoard.splice(0, wordBoard.length - 1);
         setWordBoard(temp);
     }
@@ -110,8 +110,8 @@ const styles = StyleSheet.create({
         elevation: 6
     },
     imageBtn: {
-        width: '100%',
-        height: '80%'
+        width: '90%',
+        height: '72%'
     },
     btnText: {
         fontSize: 14,
