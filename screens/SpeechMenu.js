@@ -11,63 +11,49 @@ const SpeechMenu = (props) => {
     const categories = [
         {
             id: 1,
-            cat: "Sentence Starters",
+            cat: "Talk",
             url: null
         },
         {
             id: 2,
-            cat: "Core Basics",
+            cat: "I Feel",
             url: null
         },
         {
             id: 3,
-            cat: "Chat",
+            cat: "About Me",
             url: null,
         }, {
             id: 4,
-            cat: "Feelings",
-            url: null,
-        },
-        {
-            id: 5,
             cat: "Activities",
             url: null,
         },
         {
+            id: 5,
+            cat: "Food & Drink",
+            url: null,
+        },
+        {
             id: 6,
-            cat: "Toys",
-            url: null,
-        },
-        {
-            id: 7,
-            cat: "Food and Drink",
-            url: null,
-        },
-        {
-            id: 8,
-            cat: "Places",
-            url: null,
-        },
-        {
-            id: 9,
-            cat: "Who?",
-            url: null,
-        },
-        {
-            id: 10,
-            cat: "Colors",
-            url: null,
-        },
-        {
-            id: 11,
             cat: "Numbers",
             url: null,
         },
         {
-            id: 12,
-            cat: "Shapes",
+            id: 7,
+            cat: "Places",
             url: null,
-        }];
+        },
+        {
+            id: 8,
+            cat: "Colors",
+            url: null,
+        },
+        {
+            id: 9,
+            cat: "Core Basic",
+            url: null,
+        }
+    ];
 
     return (
 
@@ -141,7 +127,7 @@ const styles = StyleSheet.create({
         margin: 3,
         paddingHorizontal: 12,
         paddingTop: 45,
-        backgroundColor: '#1976D2',
+        backgroundColor: '#0F98DC',
         overflow: 'hidden',
         color: 'white',
         shadowColor: "#000",

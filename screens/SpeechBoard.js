@@ -6,6 +6,7 @@ import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import { Ionicons } from '@expo/vector-icons';
+import Colors from '../constants/Colors';
 
 
 
@@ -14,9 +15,13 @@ const SpeechBoard = (props) => {
     const filteredList = WORDS.filter(word => word.categoryId == catId);
 
     const colorPicker = {
-        "sentence starters": "#4caf50",
-        "chat": "#fb8c00",
-        "feelings": "#5e35b1"
+        "talk": Colors.sesameGreen, //sesame street green
+        "i feel": Colors.sesameYellow, //sesame street orange
+        "about me": "#B63136",
+        "activities": Colors.sesameOrange, //sesame street yellow
+        "food & drink": Colors.sesameGreen,
+        "places": "#638F54",
+        "colors": "#ED67AE"
     }
     const color = colorPicker[catId];
     const [wordBoard, setWordBoard] = useState([]);
@@ -24,7 +29,7 @@ const SpeechBoard = (props) => {
         <View>
             <View style={styles.wordBoard}>
                 {wordBoard.map((board, index) =>
-                    <TouchableOpacity key={index} style={styles.btnContainer} onPress={() => {
+                    <TouchableOpacity key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} onPress={() => {
                         Speech.speak(board, {
                             language: 'en',
                             pitch: 1,
@@ -32,7 +37,7 @@ const SpeechBoard = (props) => {
                             voice: Voices.nicky
                         });
                     }}>
-                        <Text style={{ ...styles.btnText, backgroundColor: "#26c6da" }} >{board}</Text>
+                        <Text style={styles.btnText} >{board}</Text>
                     </TouchableOpacity>
                 )}
                 <TouchableOpacity style={styles.deleteContainer} onPress={() => {
@@ -62,8 +67,10 @@ const SpeechBoard = (props) => {
                                 });
                                 setWordBoard(sentence => sentence.concat(word.word));
                             }}>
-                                <View style={styles.btnContainer}>
-                                    <Text style={{ ...styles.btnText, backgroundColor: color }} >{word.word}</Text>
+
+                                <View style={{ ...styles.btnContainer, backgroundColor: color }}>
+                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
+                                    {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
                             </TouchableOpacity>
                         )}
@@ -95,28 +102,17 @@ const styles = StyleSheet.create({
     btnContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-        elevation: 6,
-    },
-    btnText: {
-        fontSize: 14,
-        fontFamily: 'open-sans-bold',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 10,
+        borderColor: Colors.border,
         height: 80,
         width: 80,
         margin: 3,
-        paddingHorizontal: 10,
-        paddingTop: 25,
-        backgroundColor: '#1976D2',
+        paddingHorizontal: 3,
+        // backgroundColor: '#1976D2',
         overflow: 'hidden',
-        color: 'white',
+        paddingVertical: 3,
+
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -125,6 +121,20 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
         elevation: 6
+    },
+    imageBtn: {
+        width: '100%',
+        height: '80%'
+    },
+    btnText: {
+        fontSize: 14,
+        fontFamily: 'open-sans-bold',
+        color: 'white',
+    },
+    btnTextSmall: {
+        fontSize: 11,
+        fontFamily: 'open-sans-bold',
+        color: 'white',
     },
     wordRow: {
         flexDirection: 'row',
