@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
+import SentenceBar from '../components/SentenceBar';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
-import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
-
-
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
@@ -25,37 +23,24 @@ const SpeechBoard = (props) => {
     }
     const color = colorPicker[catId];
     const [wordBoard, setWordBoard] = useState([]);
+    const [imageBoard, setImageBoard] = useState([]);
+
+    const onDelete = () => {
+        Speech.speak("delete", {
+            language: 'en',
+            pitch: 1,
+            rate: 1,
+            voice: Voices.nicky
+        });
+        const temp = wordBoard.splice(0, wordBoard.length - 1);
+        setWordBoard(temp);
+    }
+
     return (
         <View>
-            <View style={styles.wordBoard}>
-                {wordBoard.map((board, index) =>
-                    <TouchableOpacity key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} onPress={() => {
-                        Speech.speak(board, {
-                            language: 'en',
-                            pitch: 1,
-                            rate: 1,
-                            voice: Voices.nicky
-                        });
-                    }}>
-                        <Text style={styles.btnText} >{board}</Text>
-                    </TouchableOpacity>
-                )}
-                <TouchableOpacity style={styles.deleteContainer} onPress={() => {
-                    Speech.speak("delete", {
-                        language: 'en',
-                        pitch: 1,
-                        rate: 1,
-                        voice: Voices.nicky
-                    });
-                    const temp = wordBoard.splice(0, wordBoard.length - 1);
-                    setWordBoard(temp);
-                }}>
-                    <Ionicons style={styles.deleteBtn} name='ios-backspace' size={30} />
-                </TouchableOpacity>
-            </View>
             <ScrollView >
+                <SentenceBar sendWord={wordBoard} sendImage={imageBoard} delete={onDelete} />
                 <View style={styles.screen}>
-
                     <View style={styles.wordRow}>
                         {filteredList.map(word =>
                             <TouchableOpacity key={word.id} onPress={() => {
@@ -66,6 +51,7 @@ const SpeechBoard = (props) => {
                                     voice: Voices.nicky
                                 });
                                 setWordBoard(sentence => sentence.concat(word.word));
+                                setImageBoard(sentence => sentence.concat(word.imageUrl));
                             }}>
 
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
@@ -81,18 +67,19 @@ const SpeechBoard = (props) => {
     )
 };
 
-// SpeechBoard.navigationOptions = navData => {
-//     return {
-//         headerTitle: 'Speech Board',
-//         headerRight: () => (
-//             <HeaderButtons HeaderButtonComponent={HeaderButton}>
-//                 <Item title="Menu" iconName='ios-menu' onPress={() => {
-//                     navData.navigation.toggleDrawer();
-//                 }} />
-//             </HeaderButtons>
-//         )
-//     }
-// }
+SpeechBoard.navigationOptions = navData => {
+    return {
+        headerTitle: 'Speech Board',
+        headerBackTitle: ' '
+        // headerRight: () => (
+        //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        //         <Item title="Menu" iconName='ios-menu' onPress={() => {
+        //             navData.navigation.toggleDrawer();
+        //         }} />
+        //     </HeaderButtons>
+        // )
+    }
+}
 
 const styles = StyleSheet.create({
     screen: {
@@ -147,24 +134,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: "open-sans-bold",
         marginVertical: 15,
-    },
-    wordBoard: {
-        height: 200,
-        backgroundColor: "#fafafa",
-        flexDirection: 'row',
-        width: '100%',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-        paddingTop: 10
-    },
-    deleteBtn: {
-        marginRight: 30,
-        color: "#d32f2f"
-    },
-    deleteContainer: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end'
     }
 });
 

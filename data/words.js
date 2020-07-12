@@ -47,7 +47,7 @@ export const WORDS = [
         't8',
         'talk',
         'How Are You?',
-        "http://www.saronnhong.com/images/dani/words/please.png"
+        null
     ),
     new Word(
         't9',

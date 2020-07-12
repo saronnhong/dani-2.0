@@ -85,23 +85,24 @@ const SpeechMenu = (props) => {
     )
 };
 
-// SpeechMenu.navigationOptions = navData => {
-//     return {
-//         headerTitle: 'Speech Menu',
-//         headerLeft: () => (
-//             <HeaderButtons HeaderButtonComponent={HeaderButton}>
-//                 <Item title="Menu" iconName='ios-menu' onPress={() => {
-//                     navData.navigation.toggleDrawer();
-//                 }} />
-//             </HeaderButtons>
-//         )
-//     }
-// }
+SpeechMenu.navigationOptions = navData => {
+    return {
+        headerTitle: 'Speech Menu',
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Menu" iconName='ios-menu' onPress={() => {
+                    navData.navigation.toggleDrawer();
+                }} />
+            </HeaderButtons>
+        )
+    }
+}
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     btnContainer: {
         justifyContent: 'center',
