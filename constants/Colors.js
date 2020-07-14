@@ -4,5 +4,7 @@ export default {
     border: "#464646",
     sesameGreen: "#00AF42",
     sesameOrange: '#F79741',
-    sesameYellow: '#FCD000'
+    sesameYellow: '#FCD000',
+    sesameRed: '#D6292D',
+    sesameRedOrange: '#F65138'
 }

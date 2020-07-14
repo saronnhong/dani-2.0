@@ -92,6 +92,16 @@ const AuthScreen = props => {
             });
         }, [dispatchFormState]);
 
+    const passwordResetHandler = useCallback(
+        (inputIdentifier, inputValue, inputValidity) => {
+            dispatchFormState({
+                type: FORM_INPUT_UPDATE,
+                value: " ",
+                isValid: inputValidity,
+                input: inputIdentifier
+            });
+        }, [dispatchFormState]);
+
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <LinearGradient colors={['#00b4f0', '#048abf', '#00498c']} style={styles.gradient}>
@@ -121,7 +131,7 @@ const AuthScreen = props => {
                             onInputChange={inputChangeHandler}
                             initialValue=""
                             color='white'
-                            
+                            clearTextOnFocus='true'
                         />
                         <View style={styles.buttonRow}>
                             <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
@@ -175,7 +185,6 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 10
-
     },
     buttonRow: {
         flexDirection: 'row',

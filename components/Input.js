@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
+import Colors from '../constants/Colors';
 
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const INPUT_BLUR = 'INPUT_BLUR';
@@ -10,8 +11,8 @@ const inputReducer = (state, action) => {
             return {
                 ...state,
                 value: action.value,
-                isValid: action.isValid,
-                touched: true
+                isValid: action.isValid
+                
             };
         case INPUT_BLUR:
             return {
@@ -75,7 +76,8 @@ const Input = props => {
                 style={styles.input}
                 value={inputState.value}
                 onChangeText={textChangeHandler}
-                // onBlur={lostFocusHandler}
+                onBlur={lostFocusHandler}
+                selectionColor='rgba(250,250,250,.6)'
             />
             {!inputState.isValid && inputState.touched && <View style={styles.errorContainer}><Text style={styles.errorText}>{props.errorText}</Text></View>}
         </View>
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
     input: {
         paddingHorizontal: 2,
         paddingVertical: 5,
-        borderBottomColor: '#ccc',
+        borderBottomColor: 'rgba(250,250,250,.7)',
         borderBottomWidth: 1
     },
     errorContainer: {
@@ -102,8 +104,8 @@ const styles = StyleSheet.create({
     },
     errorText: {
         fontFamily: 'open-sans',
-        color: 'red',
-        fontSize: 14
+        color: Colors.sesameRedOrange,
+        fontSize: 12
     }
 });
 
