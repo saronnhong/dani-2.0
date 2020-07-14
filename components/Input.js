@@ -10,7 +10,8 @@ const inputReducer = (state, action) => {
             return {
                 ...state,
                 value: action.value,
-                isValid: action.isValid
+                isValid: action.isValid,
+                touched: true
             };
         case INPUT_BLUR:
             return {
@@ -74,7 +75,7 @@ const Input = props => {
                 style={styles.input}
                 value={inputState.value}
                 onChangeText={textChangeHandler}
-                onBlur={lostFocusHandler}
+                // onBlur={lostFocusHandler}
             />
             {!inputState.isValid && inputState.touched && <View style={styles.errorContainer}><Text style={styles.errorText}>{props.errorText}</Text></View>}
         </View>

@@ -95,7 +95,7 @@ const AuthScreen = props => {
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={50} style={styles.screen}>
             <LinearGradient colors={['#e8f29b', '#adf2a2']} style={styles.gradient}>
                 <Card style={styles.authContainer}>
-                    <ScrollView>
+                    <ScrollView keyboardShouldPersistTaps={'handled'} >
                         <Input
                             id='email'
                             label='E-Mail'
