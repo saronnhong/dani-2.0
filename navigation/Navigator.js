@@ -1,18 +1,20 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, SafeAreaView, Button, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { createAppContainer } from 'react-navigation';
-import LoginScreen from './../screens/LoginScreen';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { useDispatch } from 'react-redux';
+import * as authActions from '../store/actions/auth';
+import AuthScreen from './../screens/AuthScreen';
 import MainMenuScreen from './../screens/MainMenuScreen';
 import SoundsMenuScreen from './../screens/SoundsMenuScreen';
 import SoundScreen from './../screens/SoundScreen';
 import SpeechBoard from './../screens/SpeechBoard';
 import SpeechMenu from './../screens/SpeechMenu';
 import FiltersScreen from './../screens/FiltersScreen';
+import StartupScreen from '../screens/StartUpScreen';
 import Colors from './../constants/Colors';
 
 const defaultStackNavOptions = {
@@ -26,7 +28,7 @@ const defaultStackNavOptions = {
 }
 
 const DaniStackNavigator = createStackNavigator({
-    Login: LoginScreen,
+    // Auth: AuthScreen,
     MainMenu: MainMenuScreen,
     SoundMenu: SoundsMenuScreen,
     SoundScreen: SoundScreen
@@ -80,6 +82,42 @@ const FiltersNavigator = createStackNavigator({
 const MainNavigator = createDrawerNavigator({
     Settings: TabNavigator,
     Filters: FiltersNavigator
-});
+},
+{
+    contentOptions: {
+      activeTintColor: Colors.primary
+    },
+    contentComponent: props => {
+      const dispatch = useDispatch();
+      return (
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+            <DrawerItems  {...props}/>
+            <Button
+              title="Logout"
+              color={Colors.primary}
+              onPress={() => {
+                dispatch(authActions.logout());
+                // props.navigation.navigate('Auth');
+              }}
+            />
+          </SafeAreaView>
+        </View>
+      );
+    }
+  }
+);
 
-export default createAppContainer(MainNavigator);
+const AuthNavigator = createStackNavigator({
+    Auth: AuthScreen
+  }, {
+    defaultNavigationOptions: defaultStackNavOptions
+  })
+  
+  const Main2Navigator = createSwitchNavigator({
+    Startup: StartupScreen,
+    Auth: AuthNavigator,
+    Main: MainNavigator
+  })
+
+export default createAppContainer(Main2Navigator);

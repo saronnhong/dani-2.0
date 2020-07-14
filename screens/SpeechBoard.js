@@ -33,7 +33,9 @@ const SpeechBoard = (props) => {
         //     voice: Voices.nicky
         // });
         const temp = wordBoard.splice(0, wordBoard.length - 1);
+        const temp2 = imageBoard.splice(0, imageBoard.length - 1);
         setWordBoard(temp);
+        setImageBoard(temp2);
     }
 
     return (

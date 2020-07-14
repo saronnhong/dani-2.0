@@ -71,7 +71,7 @@ export const WORDS = [
         't12',
         'talk',
         'When',
-        "http://www.saronnhong.com/images/dani/words/when-min.png"
+        "http://www.saronnhong.com/images/dani/words/when.png"
     ),
     new Word(
         't13',
