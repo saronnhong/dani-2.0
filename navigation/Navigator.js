@@ -111,7 +111,13 @@ const MainNavigator = createDrawerNavigator({
 const AuthNavigator = createStackNavigator({
     Auth: AuthScreen
   }, {
-    defaultNavigationOptions: defaultStackNavOptions
+    defaultNavigationOptions: {
+      headerStyle: {
+          backgroundColor: "#00b4f0",
+      },
+      headerTintColor: "white",
+      headerTitle: ''
+  }
   })
   
   const Main2Navigator = createSwitchNavigator({

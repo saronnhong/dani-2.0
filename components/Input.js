@@ -88,7 +88,8 @@ const styles = StyleSheet.create({
     },
     label: {
         fontFamily: 'open-sans-bold',
-        marginVertical: 8
+        marginVertical: 8,
+        color: 'rgba(250,250,250,.6)'
     },
     input: {
         paddingHorizontal: 2,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
+import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
@@ -7,6 +7,7 @@ import * as authActions from '../store/actions/auth';
 import Input from '../components/Input';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
@@ -92,8 +93,8 @@ const AuthScreen = props => {
         }, [dispatchFormState]);
 
     return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={50} style={styles.screen}>
-            <LinearGradient colors={['#e8f29b', '#adf2a2']} style={styles.gradient}>
+        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
+            <LinearGradient colors={['#00b4f0', '#048abf', '#00498c']} style={styles.gradient}>
                 <Card style={styles.authContainer}>
                     <ScrollView keyboardShouldPersistTaps={'handled'} >
                         <Input
@@ -106,6 +107,7 @@ const AuthScreen = props => {
                             errorText="Please enter a valid email address"
                             onInputChange={inputChangeHandler}
                             initialValue=""
+                            color='white'
                         />
                         <Input
                             id='password'
@@ -118,26 +120,29 @@ const AuthScreen = props => {
                             errorText="Please enter a valid password"
                             onInputChange={inputChangeHandler}
                             initialValue=""
+                            color='white'
+                            
                         />
-                        <View style={styles.buttonContainer}>
-                            {isLoading ? (
-                                <ActivityIndicator size="small" color={Colors.primary} />
-                            ) : (
-                                    <Button
-                                        title={isSignup ? 'Sign Up' : 'Login'}
-                                        color={Colors.primary}
-                                        onPress={authHandler}
-                                    />
-                                )}
-                        </View>
-                        <View style={styles.buttonContainer}>
-                            <Button
-                                title={`Switch to ${isSignup ? 'Login' : 'Sign Up'}`}
-                                color={Colors.accent}
-                                onPress={() => {
-                                    setIsSignup(prevState => !prevState)
-                                }}
-                            />
+                        <View style={styles.buttonRow}>
+                            <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
+                                {isLoading ? (
+                                    <ActivityIndicator size="small" color={Colors.primary} />
+                                ) : (
+                                        <Button
+                                            title={isSignup ? 'Sign Up' : 'Login'}
+                                            color='white'
+
+                                        />
+                                    )}
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                                setIsSignup(prevState => !prevState)
+                            }}>
+                                <Button
+                                    title={`${isSignup ? 'Login' : 'Sign Up'}`}
+                                    color={Colors.sesameYellow}
+                                />
+                            </TouchableOpacity>
                         </View>
 
                     </ScrollView>
@@ -158,8 +163,10 @@ const styles = StyleSheet.create({
     authContainer: {
         width: '80%',
         maxWidth: 400,
-        maxHeight: 400,
-        padding: 20
+        maxHeight: 600,
+        padding: 20,
+        backgroundColor: 'rgba(0,0,0, 0.15)',
+        marginBottom: '40%'
     },
     gradient: {
         flex: 1,
@@ -168,6 +175,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         marginTop: 10
+
+    },
+    buttonRow: {
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 });
 
