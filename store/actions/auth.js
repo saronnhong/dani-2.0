@@ -46,7 +46,7 @@ export const signup = (email, password) => {
         const resData = await response.json();
         console.log(resData);
         dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
-        const expirationDate = new Data(
+        const expirationDate = new Date(
             new Date().getTime() + parseInt(resData.expiresIn) * 1000
         );
         saveDataToStorage(resData.idToken, resData.localId, expirationDate);
