@@ -10,10 +10,8 @@ import * as wordActions from '../store/actions/sentenceBar';
 const SentenceBar = props => {
     const [barStatus, setBarStatus] = useState(false);
 
-    // let currState = [];
     let currState = useSelector(state => state.bar.words);
 
-    // let newSentence = "";
     let wordArr=[];
     for (let i = 0; i < currState.length; i++) {
         wordArr.push(currState[i].word);
@@ -48,7 +46,7 @@ const SentenceBar = props => {
                     <View style={styles.wordBoard}>
                         {currState.map((word, index) =>
                             <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
-                                {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
+                                {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
                                 {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                             </View>
                         )}

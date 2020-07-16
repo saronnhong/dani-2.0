@@ -12,12 +12,12 @@ const SpeechMenu = (props) => {
         {
             id: 1,
             cat: "Talk",
-            url: null
+            url: null,
         },
         {
             id: 2,
             cat: "I Feel",
-            url: null
+            url: null,
         },
         {
             id: 3,

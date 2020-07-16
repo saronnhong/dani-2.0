@@ -24,8 +24,8 @@ const SpeechBoard = (props) => {
         "colors": "#ED67AE"
     }
     const color = colorPicker[catId];
-    const [wordBoard, setWordBoard] = useState([]);
-    const [imageBoard, setImageBoard] = useState([]);
+    // const [wordBoard, setWordBoard] = useState([]);
+    // const [imageBoard, setImageBoard] = useState([]);
 
     // const onDelete = () => {
     //     const temp = wordBoard.splice(0, wordBoard.length - 1);
@@ -45,7 +45,7 @@ const SpeechBoard = (props) => {
     return (
         <View>
             <ScrollView >
-                <SentenceBar sendWord={wordBoard} sendImage={imageBoard} />
+                <SentenceBar />
                 <View style={styles.screen}>
                     <View style={styles.wordRow}>
                         {filteredList.map(word =>
@@ -56,13 +56,15 @@ const SpeechBoard = (props) => {
                                     rate: 1,
                                     voice: Voices.nicky
                                 });
-                                setWordBoard(sentence => sentence.concat(word.word));
-                                setImageBoard(sentence => sentence.concat(word.imageUrl));
+                                // setWordBoard(sentence => sentence.concat(word.word));
+                                // setImageBoard(sentence => sentence.concat(word.imageUrl));
                                 addToState(word);
                             }}>
 
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
+                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />} */}
+                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
+
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
                             </TouchableOpacity>
