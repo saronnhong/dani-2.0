@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import SentenceBar from '../components/SentenceBar';
 import * as Speech from 'expo-speech';
+import * as wordActions from '../store/actions/sentenceBar'
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
@@ -25,23 +27,25 @@ const SpeechBoard = (props) => {
     const [wordBoard, setWordBoard] = useState([]);
     const [imageBoard, setImageBoard] = useState([]);
 
-    const onDelete = () => {
-        // Speech.speak("delete", {
-        //     language: 'en',
-        //     pitch: 1,
-        //     rate: 1,
-        //     voice: Voices.nicky
-        // });
-        const temp = wordBoard.splice(0, wordBoard.length - 1);
-        const temp2 = imageBoard.splice(0, imageBoard.length - 1);
-        setWordBoard(temp);
-        setImageBoard(temp2);
+    // const onDelete = () => {
+    //     const temp = wordBoard.splice(0, wordBoard.length - 1);
+    //     const temp2 = imageBoard.splice(0, imageBoard.length - 1);
+    //     setWordBoard(temp);
+    //     setImageBoard(temp2);
+    // }
+    const dispatch = useDispatch();
+    const addToState = (word) => {
+        dispatch(wordActions.addToBar(word));
+        
     }
+    // const orders = useSelector(state => state.words);
+    // const currState = useSelector(state => state.bar.words);
+    // console.log(currState);
 
     return (
         <View>
             <ScrollView >
-                <SentenceBar sendWord={wordBoard} sendImage={imageBoard} delete={onDelete} />
+                <SentenceBar sendWord={wordBoard} sendImage={imageBoard} />
                 <View style={styles.screen}>
                     <View style={styles.wordRow}>
                         {filteredList.map(word =>
@@ -54,6 +58,7 @@ const SpeechBoard = (props) => {
                                 });
                                 setWordBoard(sentence => sentence.concat(word.word));
                                 setImageBoard(sentence => sentence.concat(word.imageUrl));
+                                addToState(word);
                             }}>
 
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
@@ -73,13 +78,6 @@ SpeechBoard.navigationOptions = navData => {
     return {
         headerTitle: 'Speech Board',
         headerBackTitle: ' '
-        // headerRight: () => (
-        //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        //         <Item title="Menu" iconName='ios-menu' onPress={() => {
-        //             navData.navigation.toggleDrawer();
-        //         }} />
-        //     </HeaderButtons>
-        // )
     }
 }
 

@@ -35,7 +35,7 @@ const Input = props => {
     const { onInputChange, id } = props;
 
     useEffect(() => {
-        if (inputState.touched){
+        if (inputState.isValid){
             onInputChange(id, inputState.value, inputState.isValid);
         }
         
@@ -78,6 +78,7 @@ const Input = props => {
                 onChangeText={textChangeHandler}
                 onBlur={lostFocusHandler}
                 selectionColor='rgba(250,250,250,.6)'
+                onEndEditing={()=> lostFocusHandler()}
             />
             {!inputState.isValid && inputState.touched && <View style={styles.errorContainer}><Text style={styles.errorText}>{props.errorText}</Text></View>}
         </View>

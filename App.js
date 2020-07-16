@@ -8,12 +8,14 @@ import { AppLoading } from 'expo';
 import Navigator from './navigation/Navigator';
 import { enableScreens } from 'react-native-screens';
 import authReducer from './store/reducers/auth';
+import sentenceReducer from './store/reducers/sentenceBar';
 import NavigationContainer from './navigation/NavigationContainer';
 
 //Optimizes memory usage for screens for each native platform (UIViewController for iOS, and FragmentActivity for Android)
 enableScreens();
 
 const rootReducer = combineReducers({
+  bar: sentenceReducer,
   auth: authReducer
 });
 

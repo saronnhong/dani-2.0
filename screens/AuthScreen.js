@@ -59,6 +59,7 @@ const AuthScreen = props => {
     }, [error]);
 
     const authHandler = async () => {
+        console.log(formState.inputValues);
         let action;
         if (isSignup) {
             action = authActions.signup(
@@ -90,16 +91,7 @@ const AuthScreen = props => {
                 isValid: inputValidity,
                 input: inputIdentifier
             });
-        }, [dispatchFormState]);
-
-    const passwordResetHandler = useCallback(
-        (inputIdentifier, inputValue, inputValidity) => {
-            dispatchFormState({
-                type: FORM_INPUT_UPDATE,
-                value: " ",
-                isValid: inputValidity,
-                input: inputIdentifier
-            });
+            
         }, [dispatchFormState]);
 
     return (
@@ -131,8 +123,10 @@ const AuthScreen = props => {
                             onInputChange={inputChangeHandler}
                             initialValue=""
                             color='white'
-                            clearTextOnFocus='true'
+                            clearTextOnFocus={true}
+                            
                         />
+                        
                         <View style={styles.buttonRow}>
                             <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
                                 {isLoading ? (
@@ -141,7 +135,6 @@ const AuthScreen = props => {
                                         <Button
                                             title={isSignup ? 'Sign Up' : 'Login'}
                                             color='white'
-
                                         />
                                     )}
                             </TouchableOpacity>

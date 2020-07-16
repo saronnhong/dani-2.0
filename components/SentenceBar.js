@@ -1,15 +1,34 @@
-import React, { useRef } from 'react';
+import React, { useRef, useCallback, useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
+import { useSelector, useDispatch } from 'react-redux';
+import * as wordActions from '../store/actions/sentenceBar';
 
 const SentenceBar = props => {
-    const wordArr = props.sendWord;
-    const imageArr = props.sendImage;
-    const newSentence = wordArr.join(" ");
+    const [barStatus, setBarStatus] = useState(false);
+
+    // let currState = [];
+    let currState = useSelector(state => state.bar.words);
+
+    // let newSentence = "";
+    let wordArr=[];
+    for (let i = 0; i < currState.length; i++) {
+        wordArr.push(currState[i].word);
+    }
+    let newSentence = wordArr.join(" ");
+
     const scrollViewRef = useRef();
+    const dispatch = useDispatch();
+
+    onDelete = useCallback(async () => {
+        setBarStatus(!barStatus);
+        dispatch(wordActions.removeFromBar());
+
+    }, [dispatch, barStatus]);
+
     return (
         <View style={styles.overAll}>
             <ScrollView
@@ -27,13 +46,13 @@ const SentenceBar = props => {
                     });
                 }}>
                     <View style={styles.wordBoard}>
-                        {wordArr.map((word, index) =>
+                        {currState.map((word, index) =>
                             <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
-                                {imageArr[index] != null && <Image style={styles.imageBtn} source={{ uri: imageArr[index] }} />}
-                                {(word.length < 7 || word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word}</Text> : <Text style={styles.btnTextSmall} >{word}</Text>}
+                                {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
+                                {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                             </View>
                         )}
-                        {wordArr.length > 0 && <TouchableOpacity style={styles.deleteContainer} onPress={props.delete}>
+                        {currState.length > 0 && <TouchableOpacity style={styles.deleteContainer} onPress={onDelete}>
                             <Ionicons style={styles.deleteBtn} name='ios-backspace' size={35} />
                         </TouchableOpacity>}
                     </View>
