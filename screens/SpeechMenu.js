@@ -5,6 +5,7 @@ import HeaderButton from '../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
+import Colors from '../constants/Colors';
 
 
 const SpeechMenu = (props) => {
@@ -55,6 +56,12 @@ const SpeechMenu = (props) => {
         }
     ];
 
+    addNewWord = () => {
+        props.navigation.navigate({
+            routeName: 'AddNewWord'
+        });
+    }
+
     return (
 
         <View style={styles.screen}>
@@ -79,6 +86,11 @@ const SpeechMenu = (props) => {
                         </View>
                     </TouchableOpacity>
                 )}
+                <TouchableOpacity onPress={addNewWord}>
+                <View style={styles.btnContainer} >
+                            <Text style={{...styles.btnText, backgroundColor: Colors.sesameRed}}>Add New Word</Text>
+                        </View>
+                </TouchableOpacity>
             </View>
         </View>
 

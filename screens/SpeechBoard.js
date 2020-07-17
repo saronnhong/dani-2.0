@@ -60,7 +60,6 @@ const SpeechBoard = (props) => {
                                 // setImageBoard(sentence => sentence.concat(word.imageUrl));
                                 addToState(word);
                             }}>
-
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
                                     {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />} */}
                                     {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}

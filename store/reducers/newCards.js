@@ -1,5 +1,5 @@
 import WORDS from '../../data/words';
-import { CREATE_WORD } from '../actions/newCards';
+import CREATE_WORDS from '../actions/newCards';
 import Word from '../../models/words';
 
 const initialState = {
@@ -14,19 +14,19 @@ export default (state = initialState, action) => {
         availableWords: action.words,
         userWords: action.userWords
       };
-    case CREATE_PRODUCT:
-      const newProduct = new Product(
-        action.productData.id,
-        action.productData.ownerId,
-        action.productData.title,
-        action.productData.imageUrl,
-        action.productData.description,
-        action.productData.price
+    case CREATE_WORDS:
+      const newWord = new Word(
+        action.wordData.id,
+        action.wordData.categoryId,
+        action.wordData.word,
+        action.wordData.imageUrl,
+        // action.wordData.phonetic,
+        action.wordData.ownerId,
       );
       return {
         ...state,
-        availableProducts: state.availableProducts.concat(newProduct),
-        userProducts: state.userProducts.concat(newProduct)
+        availableWords: state.availableWords.concat(newWord),
+        userWords: state.userWords.concat(newWord)
       };
     // case UPDATE_PRODUCT:
     //   const productIndex = state.userProducts.findIndex(

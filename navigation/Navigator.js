@@ -13,9 +13,11 @@ import SoundsMenuScreen from './../screens/SoundsMenuScreen';
 import SoundScreen from './../screens/SoundScreen';
 import SpeechBoard from './../screens/SpeechBoard';
 import SpeechMenu from './../screens/SpeechMenu';
+import AddNewWord from './../screens/AddNewWordScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import Colors from './../constants/Colors';
+import AddNewWordScreen from '../screens/AddNewWordScreen';
 
 const defaultStackNavOptions = {
     defaultNavigationOptions: {
@@ -40,7 +42,8 @@ const DaniStackNavigator = createStackNavigator({
 
 const SpeechBoardNavigator = createStackNavigator({
     SpeechMenu: SpeechMenu,
-    SpeechBoard: SpeechBoard
+    SpeechBoard: SpeechBoard,
+    AddNewWord: AddNewWord
 },
     {
         defaultNavigationOptions: defaultStackNavOptions

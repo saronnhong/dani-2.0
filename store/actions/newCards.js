@@ -1,44 +1,44 @@
 import Word from "../../models/words";
-
 // export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const CREATE_WORD = 'CREATE_WORD';
 // export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-export const SET_WORDS = 'SET_WORDS';
+// export const SET_WORDS = 'SET_WORDS';
 
-export const fetchProducts = () => {
-  return async (dispatch, getState) => {
-    const userId = getState().auth.userId;
-    try {
-      //any async code you want!
-      const response = await fetch('https://myshop-5025e.firebaseio.com/user_words.json');
+// export const fetchProducts = () => {
+//   return async (dispatch, getState) => {
+//     const userId = getState().auth.userId;
+//     try {
+//       //any async code you want!
+//       const response = await fetch('https://dani-2.firebaseio.com/user_words.json');
 
-      if (!response.ok) {
-        throw new Error('Something went wrong');
-      }
+//       if (!response.ok) {
+//         throw new Error('Something went wrong');
+//       }
 
-      const resData = await response.json();
-      const loadedProducts = [];
+//       const resData = await response.json();
+//       const loadedWords = [];
 
-      for (const key in resData) {
-        loadedProducts.push(new Product(
-          key,
-          resData[key].ownerId,
-          resData[key].title,
-          resData[key].imageUrl,
-          resData[key].description,
-          resData[key].price
-        ));
-      }
-      dispatch({
-        type: SET_PRODUCTS,
-        products: loadedProducts,
-        userProducts: loadedProducts.filter(prod => prod.ownerId === userId)
-      });
-    } catch (err) {
-      throw err;
-    }
-  }
-}
+//       for (const key in resData) {
+//         loadedWords.push(new Product(
+//           key,
+//           resData[key].id,
+//           resData[key].categoryId,
+//           resData[key].word,
+//           resData[key].imageUrl,
+//           resData[key].phonetic,
+//           resData[key].ownerId
+//         ));
+//       }
+//       dispatch({
+//         type: SET_WORDS,
+//         words: loadedWords,
+//         userWords: loadedWords.filter(prod => prod.ownerId === userId)
+//       });
+//     } catch (err) {
+//       throw err;
+//     }
+//   }
+// }
 
 // export const deleteProduct = productId => {
 //   return async (dispatch, getState) => {
@@ -58,38 +58,42 @@ export const fetchProducts = () => {
 //   }
 // };
 
-export const createProduct = (title, description, imageUrl, price) => {
+export const createWord = (categoryId, word, phonetic, voiceRecord, color, imageUrl) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
     //any async code you want!
     const response = await fetch(
-      `https://myshop-5025e.firebaseio.com/products.json?auth=${token}`,
+      `https://dani-2.firebaseio.com/words.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          title,
-          description,
+          categoryId,
+          word,
+          // phonetic,
+          // voiceRecord,
+          // color,
           imageUrl,
-          price,
           ownerId: userId
         })
       });
 
     const resData = await response.json();
-    console.log("id: "+resData.name);
+    console.log(resData);
 
     dispatch({
-      type: CREATE_PRODUCT,
+      type: CREATE_WORD,
       productData: {
         id: resData.name,
-        title,
-        description,
+        categoryId,
+        word,
+        // phonetic,
+        // voiceRecord,
+        // color,
         imageUrl,
-        price,
         ownerId: userId
       }
     });
