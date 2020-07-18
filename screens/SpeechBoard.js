@@ -8,6 +8,7 @@ import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as newWordActions from '../store/actions/newCards';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
@@ -58,6 +59,7 @@ const SpeechBoard = (props) => {
 
     return (
         <View>
+            <LinearGradient colors={['#00b4f0', '#048abf', '#00498c']} style={styles.gradient}>
             <ScrollView >
                 <SentenceBar />
                 <View style={styles.screen}>
@@ -97,6 +99,7 @@ const SpeechBoard = (props) => {
                     </View>
                 </View>
             </ScrollView>
+            </LinearGradient>
         </View>
     )
 };
@@ -161,6 +164,9 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: "open-sans-bold",
         marginVertical: 15,
+    },
+    gradient: {
+        height: "100%"
     }
 });
 

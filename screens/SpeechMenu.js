@@ -8,6 +8,7 @@ import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as wordActions from '../store/actions/newCards'
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 const SpeechMenu = (props) => {
@@ -62,7 +63,7 @@ const SpeechMenu = (props) => {
             url: null,
         },
     ];
-    
+
 
     addNewWord = () => {
         props.navigation.navigate({
@@ -81,50 +82,37 @@ const SpeechMenu = (props) => {
     return (
 
         <View style={styles.screen}>
-            <View style={styles.wordRow}>
-            {/* {userWords.userWords.map(word =>
-                    <TouchableOpacity key={word.id} onPress={() => {
-                        Speech.speak(word.word, {
-                            language: 'en',
-                            pitch: 1,
-                            rate: 1,
-                            voice: Voices.nicky
-                        });
-                    }}>
-                        <View style={styles.btnContainer}>
-                            <Text style={{ ...styles.btnText, backgroundColor: "#f2c063" }}>{word.word}</Text>
+            <LinearGradient colors={['#00b4f0', '#048abf', '#00498c']} style={styles.gradient}>
+                <View style={styles.wordRow}>
+                    {categories.map(word =>
+                        <TouchableOpacity key={word.id} onPress={() => {
+                            Speech.speak(word.cat, {
+                                language: 'en',
+                                pitch: 1,
+                                rate: 1,
+                                voice: Voices.nicky
+                            });
+                            props.navigation.navigate({
+                                routeName: 'SpeechBoard',
+                                params: {
+                                    categoryId: word.cat.toLowerCase()
+                                }
+                            });
+                        }}>
+                            <View style={styles.btnContainer}>
+                                <Text style={styles.btnText}>{word.cat}</Text>
+                            </View>
+                        </TouchableOpacity>
+                    )}
+                    <TouchableOpacity onPress={addNewWord}>
+                        <View style={styles.btnContainer} >
+                            <Text style={{ ...styles.btnText, backgroundColor: Colors.sesameRed }}>Add New Word</Text>
                         </View>
                     </TouchableOpacity>
-                )} */}
-
-
-                {categories.map(word =>
-                    <TouchableOpacity key={word.id} onPress={() => {
-                        Speech.speak(word.cat, {
-                            language: 'en',
-                            pitch: 1,
-                            rate: 1,
-                            voice: Voices.nicky
-                        });
-                        props.navigation.navigate({
-                            routeName: 'SpeechBoard',
-                            params: {
-                                categoryId: word.cat.toLowerCase()
-                            }
-                        });
-                    }}>
-                        <View style={styles.btnContainer}>
-                            <Text style={styles.btnText}>{word.cat}</Text>
-                        </View>
-                    </TouchableOpacity>
-                )}
-                <TouchableOpacity onPress={addNewWord}>
-                    <View style={styles.btnContainer} >
-                        <Text style={{ ...styles.btnText, backgroundColor: Colors.sesameRed }}>Add New Word</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
+                </View>
+                </LinearGradient>
         </View>
+        
 
     )
 };
@@ -145,8 +133,6 @@ SpeechMenu.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
     btnContainer: {
         justifyContent: 'center',
@@ -166,13 +152,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontFamily: 'open-sans-bold',
         borderWidth: 1,
-        borderRadius: 10,
+        borderRadius: 20,
         height: 110,
         width: 110,
         margin: 3,
         paddingHorizontal: 12,
-        paddingTop: 45,
-        backgroundColor: '#0F98DC',
+        paddingTop: 40,
+        backgroundColor: 'rgba(0,0,0,.4)',
         overflow: 'hidden',
         color: 'white',
         shadowColor: "#000",
@@ -196,6 +182,11 @@ const styles = StyleSheet.create({
         fontFamily: "open-sans-bold",
         marginVertical: 15,
 
+    },
+    gradient: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100%'
     }
 });
 
