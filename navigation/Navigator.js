@@ -17,7 +17,6 @@ import AddNewWord from './../screens/AddNewWordScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import Colors from './../constants/Colors';
-import AddNewWordScreen from '../screens/AddNewWordScreen';
 
 const defaultStackNavOptions = {
     defaultNavigationOptions: {

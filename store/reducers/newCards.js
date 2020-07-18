@@ -1,9 +1,9 @@
 import WORDS from '../../data/words';
-import CREATE_WORDS from '../actions/newCards';
+import { CREATE_WORDS, SET_WORDS } from '../actions/newCards';
 import Word from '../../models/words';
 
 const initialState = {
-  availableWords: [],
+  // availableWords: [],
   userWords: []
 };
 
@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
   switch (action.type) {
     case SET_WORDS:
       return {
-        availableWords: action.words,
+        // availableWords: action.words,
         userWords: action.userWords
       };
     case CREATE_WORDS:
@@ -20,12 +20,14 @@ export default (state = initialState, action) => {
         action.wordData.categoryId,
         action.wordData.word,
         action.wordData.imageUrl,
-        // action.wordData.phonetic,
+        action.wordData.phonetic,
+        action.wordData.color,
+        action.wordData.voiceRecord,
         action.wordData.ownerId,
       );
       return {
         ...state,
-        availableWords: state.availableWords.concat(newWord),
+        // availableWords: state.availableWords.concat(newWord),
         userWords: state.userWords.concat(newWord)
       };
     // case UPDATE_PRODUCT:

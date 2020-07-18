@@ -2,63 +2,48 @@ import Word from "../../models/words";
 // export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const CREATE_WORD = 'CREATE_WORD';
 // export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-// export const SET_WORDS = 'SET_WORDS';
+export const SET_WORDS = 'SET_WORDS';
 
-// export const fetchProducts = () => {
-//   return async (dispatch, getState) => {
-//     const userId = getState().auth.userId;
-//     try {
-//       //any async code you want!
-//       const response = await fetch('https://dani-2.firebaseio.com/user_words.json');
+export const fetchWords = () => {
+  return async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    try {
+      //any async code you want!
+      
+      const response = await fetch('https://dani-2.firebaseio.com/words.json');
 
-//       if (!response.ok) {
-//         throw new Error('Something went wrong');
-//       }
+      if (!response.ok) {
+        throw new Error('Something went wrong');
+      }
 
-//       const resData = await response.json();
-//       const loadedWords = [];
+      const resData = await response.json();
+      
+      const loadedWords = [];
+ 
+      for (const key in resData) {
+        loadedWords.push(new Word(
+          key,
+          resData[key].categoryId,
+          resData[key].word,
+          resData[key].imageUrl,
+          resData[key].phonetic,
+          resData[key].color,
+          resData[key].voiceRecord,
+          resData[key].ownerId
+        ));
+      }
+      dispatch({
+        type: SET_WORDS,
+        // words: loadedWords,
+        userWords: loadedWords
+      });
+    } catch (err) {
+      throw err;
+    }
+  }
+}
 
-//       for (const key in resData) {
-//         loadedWords.push(new Product(
-//           key,
-//           resData[key].id,
-//           resData[key].categoryId,
-//           resData[key].word,
-//           resData[key].imageUrl,
-//           resData[key].phonetic,
-//           resData[key].ownerId
-//         ));
-//       }
-//       dispatch({
-//         type: SET_WORDS,
-//         words: loadedWords,
-//         userWords: loadedWords.filter(prod => prod.ownerId === userId)
-//       });
-//     } catch (err) {
-//       throw err;
-//     }
-//   }
-// }
-
-// export const deleteProduct = productId => {
-//   return async (dispatch, getState) => {
-//     const token = getState().auth.token;
-//     const response = await fetch(
-//       `https://myshop-5025e.firebaseio.com/products/${productId}.json?auth=${token}`,
-//       {
-//         method: 'DELETE',
-//       }
-//     );
-
-//     if (!response.ok) {
-//       throw new Error('Something went wrong!');
-//     }
-
-//     dispatch({ type: DELETE_PRODUCT, pid: productId });
-//   }
-// };
-
-export const createWord = (categoryId, word, phonetic, voiceRecord, color, imageUrl) => {
+export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRecord) => {
   return async (dispatch, getState) => {
     const token = getState().auth.token;
     const userId = getState().auth.userId;
@@ -73,16 +58,15 @@ export const createWord = (categoryId, word, phonetic, voiceRecord, color, image
         body: JSON.stringify({
           categoryId,
           word,
-          // phonetic,
-          // voiceRecord,
-          // color,
           imageUrl,
+          phonetic,
+          color,
+          voiceRecord,
           ownerId: userId
         })
       });
 
     const resData = await response.json();
-    console.log(resData);
 
     dispatch({
       type: CREATE_WORD,
@@ -90,10 +74,10 @@ export const createWord = (categoryId, word, phonetic, voiceRecord, color, image
         id: resData.name,
         categoryId,
         word,
-        // phonetic,
-        // voiceRecord,
-        // color,
         imageUrl,
+        phonetic,
+        color,
+        voiceRecord,
         ownerId: userId
       }
     });

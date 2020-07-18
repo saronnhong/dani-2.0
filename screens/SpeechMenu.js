@@ -1,11 +1,13 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
+import * as wordActions from '../store/actions/newCards'
 
 
 const SpeechMenu = (props) => {
@@ -53,8 +55,14 @@ const SpeechMenu = (props) => {
             id: 9,
             cat: "Core Basic",
             url: null,
-        }
+        },
+        {
+            id: 10,
+            cat: "User Words",
+            url: null,
+        },
     ];
+    
 
     addNewWord = () => {
         props.navigation.navigate({
@@ -62,10 +70,34 @@ const SpeechMenu = (props) => {
         });
     }
 
+    // if (!isLoading) {
+    //     return (
+    //       <View style={styles.screen}>
+    //         <ActivityIndicator size='large' color={Colors.primaryColor} />
+    //       </View>
+    //     )
+    //   }
+
     return (
 
         <View style={styles.screen}>
             <View style={styles.wordRow}>
+            {/* {userWords.userWords.map(word =>
+                    <TouchableOpacity key={word.id} onPress={() => {
+                        Speech.speak(word.word, {
+                            language: 'en',
+                            pitch: 1,
+                            rate: 1,
+                            voice: Voices.nicky
+                        });
+                    }}>
+                        <View style={styles.btnContainer}>
+                            <Text style={{ ...styles.btnText, backgroundColor: "#f2c063" }}>{word.word}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )} */}
+
+
                 {categories.map(word =>
                     <TouchableOpacity key={word.id} onPress={() => {
                         Speech.speak(word.cat, {
@@ -87,9 +119,9 @@ const SpeechMenu = (props) => {
                     </TouchableOpacity>
                 )}
                 <TouchableOpacity onPress={addNewWord}>
-                <View style={styles.btnContainer} >
-                            <Text style={{...styles.btnText, backgroundColor: Colors.sesameRed}}>Add New Word</Text>
-                        </View>
+                    <View style={styles.btnContainer} >
+                        <Text style={{ ...styles.btnText, backgroundColor: Colors.sesameRed }}>Add New Word</Text>
+                    </View>
                 </TouchableOpacity>
             </View>
         </View>
