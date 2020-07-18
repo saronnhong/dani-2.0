@@ -1,5 +1,5 @@
 import Word from "../../models/words";
-// export const DELETE_PRODUCT = 'DELETE_PRODUCT';
+export const DELETE_WORD = 'DELETE_WORD';
 export const CREATE_WORD = 'CREATE_WORD';
 // export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 export const SET_WORDS = 'SET_WORDS';
@@ -83,7 +83,23 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
     });
   };
 };
+export const deleteWord = wordId => {
+  return async (dispatch, getState) => {
+    const token = getState().auth.token;
+    const response = await fetch(
+      `https://dani-2.firebaseio.com/words/${wordId}.json?auth=${token}`,
+      {
+        method: 'DELETE',
+      }
+    );
 
+    if (!response.ok) {
+      throw new Error('Something went wrong!');
+    }
+
+    dispatch({ type: DELETE_WORD, wid: wordId });
+  }
+};
 // export const updateProduct = (id, title, description, imageUrl) => {
 //   return async (dispatch, getState) => {
 //     const token = getState().auth.token;

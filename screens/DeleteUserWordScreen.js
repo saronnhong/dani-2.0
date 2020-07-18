@@ -3,29 +3,17 @@ import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, Al
 import { useSelector, useDispatch } from 'react-redux';
 import SentenceBar from '../components/SentenceBar';
 import * as Speech from 'expo-speech';
-import * as wordActions from '../store/actions/sentenceBar'
+// import * as wordActions from '../store/actions/sentenceBar'
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as newWordActions from '../store/actions/newCards';
 import { LinearGradient } from 'expo-linear-gradient';
+import * as wordsCardActions from '../store/actions/newCards'
 
-const SpeechBoard = (props) => {
-    const catId = props.navigation.state.params.categoryId;
-    const filteredList = WORDS.filter(word => word.categoryId == catId);
-
-    const colorPicker = {
-        "talk": Colors.sesameGreen, //sesame street green
-        "i feel": Colors.sesameYellow, //sesame street orange
-        "about me": "#B63136",
-        "activities": Colors.sesameOrange, //sesame street yellow
-        "food & drink": Colors.sesameGreen,
-        "places": "#638F54",
-        "colors": "#ED67AE",
-        "user words": "#f2c063"
-    }
-    const color = colorPicker[catId];
-
+const DeleteUserWordScreen = (props) => {
+    
+    const color = "#ED67AE";
     const dispatch = useDispatch();
 
     const addToState = (word) => {
@@ -62,34 +50,27 @@ const SpeechBoard = (props) => {
         <View>
             <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}>
                 <ScrollView >
-                    <SentenceBar />
+                    {/* <SentenceBar /> */}
                     <View style={styles.screen}>
                         <View style={styles.wordRow}>
-                            {filteredList.map(word =>
+                            {userWords.map(word =>
                                 <TouchableOpacity key={word.id} onPress={() => {
-                                    Speech.speak(word.word, {
+                                    Speech.speak("do you want to delete this card from your database", {
                                         language: 'en',
                                         pitch: 1,
                                         rate: 1,
                                         voice: Voices.nicky
                                     });
-                                    addToState(word);
-                                }}>
-                                    <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                        {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
-                                        {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
-                                    </View>
-                                </TouchableOpacity>
-                            )}
-                            {catId === "user words" && userWords.map(word =>
-                                <TouchableOpacity key={word.id} onPress={() => {
-                                    Speech.speak(word.word, {
-                                        language: 'en',
-                                        pitch: 1,
-                                        rate: 1,
-                                        voice: Voices.nicky
-                                    });
-                                    addToState(word);
+                                    Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
+                                        { text: 'No', style: 'default' },
+                                        {
+                                          text: 'Yes',
+                                          style: 'destructive',
+                                          onPress: () => {
+                                            dispatch(wordsCardActions.deleteWord(word.id));
+                                          }
+                                        }
+                                      ]);
                                 }}>
                                     <View style={{ ...styles.btnContainer, backgroundColor: color }}>
                                         {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
@@ -99,26 +80,22 @@ const SpeechBoard = (props) => {
                             )}
                         </View>
                     </View>
-                    {catId === "user words" &&
+                    
                         <View style={{ flex: 1, alignItems: 'center'}}>
-                            <TouchableOpacity style={styles.button} onPress={()=> {
-                                props.navigation.navigate({
-                                    routeName: 'DeleteUserWord',
-                                });
-                            }}>
+                            <TouchableOpacity style={styles.button} onPress={onDelete}>
                                 <Text style={{color: 'white', fontFamily: 'open-sans-bold'}}>Delete</Text>
                             </TouchableOpacity>
                         </View>
-                    }
+                    
                 </ScrollView>
             </LinearGradient>
         </View>
     )
 };
 
-SpeechBoard.navigationOptions = navData => {
+DeleteUserWordScreen.navigationOptions = navData => {
     return {
-        headerTitle: 'Speech Board',
+        headerTitle: 'Delete A User Word',
         headerBackTitle: ' '
     }
 }
@@ -193,4 +170,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SpeechBoard;
+export default DeleteUserWordScreen;

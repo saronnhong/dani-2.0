@@ -16,7 +16,7 @@ const SpeechMenu = (props) => {
         {
             id: 1,
             cat: "Talk",
-            url: require('../assets/images/speechboard/menu/message.png'),
+            url: null,
         },
         {
             id: 2,
@@ -64,25 +64,16 @@ const SpeechMenu = (props) => {
         },
     ];
 
-
     addNewWord = () => {
         props.navigation.navigate({
             routeName: 'AddNewWord'
         });
     }
 
-    // if (!isLoading) {
-    //     return (
-    //       <View style={styles.screen}>
-    //         <ActivityIndicator size='large' color={Colors.primaryColor} />
-    //       </View>
-    //     )
-    //   }
-
     return (
 
         <View style={styles.screen}>
-            <LinearGradient colors={['#00b4f0', '#048abf', '#00498c']} style={styles.gradient}>
+            <LinearGradient colors={Colors.gradientOrange} start={[.2,.2]} end={[.8,.8]} style={styles.gradient}>
                 <View style={styles.wordRow}>
                     {categories.map(word =>
                         <TouchableOpacity key={word.id} onPress={() => {
@@ -105,16 +96,15 @@ const SpeechMenu = (props) => {
                         </TouchableOpacity>
                     )}
                     <TouchableOpacity onPress={addNewWord}>
-                        <View style={{...styles.btnContainer,  backgroundColor: Colors.sesameRed}} >
-
-                            <Text style={styles.btnText}>Add New Word</Text>
-                        </View>
+                       
+                            <View style={{ ...styles.btnContainer, backgroundColor: Colors.sesameRed }} >
+                                <Text style={styles.btnText}>Add New Word</Text>
+                            </View>
+                        
                     </TouchableOpacity>
                 </View>
             </LinearGradient>
         </View>
-
-
     )
 };
 
@@ -170,7 +160,7 @@ const styles = StyleSheet.create({
         // backgroundColor: 'rgba(0,0,0,.4)',
         // overflow: 'hidden',
         color: 'white'
-        
+
     },
     wordRow: {
         flexDirection: 'row',

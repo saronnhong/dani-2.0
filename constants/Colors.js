@@ -6,5 +6,7 @@ export default {
     sesameOrange: '#F79741',
     sesameYellow: '#FCD000',
     sesameRed: '#D6292D',
-    sesameRedOrange: '#F65138'
+    sesameRedOrange: '#F65138',
+    gradientBlue: ['#00b4f0', '#048abf', '#00498c'],
+    gradientOrange: ['#f25c5c', '#ffb940']
 }

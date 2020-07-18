@@ -1,5 +1,5 @@
 import WORDS from '../../data/words';
-import { CREATE_WORDS, SET_WORDS } from '../actions/newCards';
+import { CREATE_WORD, SET_WORDS, DELETE_WORD } from '../actions/newCards';
 import Word from '../../models/words';
 
 const initialState = {
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
         // availableWords: action.words,
         userWords: action.userWords
       };
-    case CREATE_WORDS:
+    case CREATE_WORD:
       const newWord = new Word(
         action.wordData.id,
         action.wordData.categoryId,
@@ -54,16 +54,16 @@ export default (state = initialState, action) => {
     //     availableProducts: updatedAvailableProducts,
     //     userProducts: updatedUserProducts
     //   };
-    // case DELETE_PRODUCT:
-    //   return {
-    //     ...state,
-    //     userProducts: state.userProducts.filter(
-    //       product => product.id !== action.pid
-    //     ),
-    //     availableProducts: state.availableProducts.filter(
-    //       product => product.id !== action.pid
-    //     )
-    //   };
+    case DELETE_WORD:
+      return {
+        ...state,
+        userWords: state.userWords.filter(
+          word => word.id !== action.wid
+        )
+        // availableWords: state.availableWords.filter(
+        //   word => word.id !== action.wid
+        // )
+      };
   }
   return state;
 };
