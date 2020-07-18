@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
@@ -16,7 +16,7 @@ const SpeechMenu = (props) => {
         {
             id: 1,
             cat: "Talk",
-            url: null,
+            url: require('../assets/images/speechboard/menu/message.png'),
         },
         {
             id: 2,
@@ -99,20 +99,21 @@ const SpeechMenu = (props) => {
                                 }
                             });
                         }}>
-                            <View style={styles.btnContainer}>
+                            <View style={styles.btnContainer} >
                                 <Text style={styles.btnText}>{word.cat}</Text>
                             </View>
                         </TouchableOpacity>
                     )}
                     <TouchableOpacity onPress={addNewWord}>
-                        <View style={styles.btnContainer} >
-                            <Text style={{ ...styles.btnText, backgroundColor: Colors.sesameRed }}>Add New Word</Text>
+                        <View style={{...styles.btnContainer,  backgroundColor: Colors.sesameRed}} >
+
+                            <Text style={styles.btnText}>Add New Word</Text>
                         </View>
                     </TouchableOpacity>
                 </View>
-                </LinearGradient>
+            </LinearGradient>
         </View>
-        
+
 
     )
 };
@@ -132,11 +133,9 @@ SpeechMenu.navigationOptions = navData => {
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1,
+        flex: 1
     },
     btnContainer: {
-        justifyContent: 'center',
-        alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -144,38 +143,42 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
-
         elevation: 6,
 
+        borderWidth: 2,
+        borderRadius: 30,
+        borderColor: Colors.border,
+        height: 110,
+        width: 110,
+        margin: 3,
+        backgroundColor: 'rgba(0,0,0,.4)',
+        overflow: 'hidden',
+        color: 'white',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     btnText: {
         fontSize: 14,
         fontFamily: 'open-sans-bold',
-        borderWidth: 1,
-        borderRadius: 20,
-        height: 110,
-        width: 110,
-        margin: 3,
-        paddingHorizontal: 12,
-        paddingTop: 40,
-        backgroundColor: 'rgba(0,0,0,.4)',
-        overflow: 'hidden',
-        color: 'white',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-        elevation: 6
+        // borderWidth: 1,
+        // borderRadius: 55,
+        // height: 110,
+        // width: 110,
+        // margin: 4,
+        paddingHorizontal: 6,
+        // paddingTop: 40,
+        // backgroundColor: 'rgba(0,0,0,.4)',
+        // overflow: 'hidden',
+        color: 'white'
+        
     },
     wordRow: {
         flexDirection: 'row',
         width: '100%',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        paddingTop: 10
+        paddingTop: 30,
+        flex: 1
     },
     categoryTitle: {
         fontSize: 20,
