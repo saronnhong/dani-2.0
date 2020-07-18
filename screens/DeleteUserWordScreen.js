@@ -16,9 +16,9 @@ const DeleteUserWordScreen = (props) => {
     const color = "#ED67AE";
     const dispatch = useDispatch();
 
-    const addToState = (word) => {
-        dispatch(wordActions.addToBar(word));
-    }
+    // const addToState = (word) => {
+    //     dispatch(wordActions.addToBar(word));
+    // }
 
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
@@ -81,11 +81,11 @@ const DeleteUserWordScreen = (props) => {
                         </View>
                     </View>
                     
-                        <View style={{ flex: 1, alignItems: 'center'}}>
+                        {/* <View style={{ flex: 1, alignItems: 'center'}}>
                             <TouchableOpacity style={styles.button} onPress={onDelete}>
                                 <Text style={{color: 'white', fontFamily: 'open-sans-bold'}}>Delete</Text>
                             </TouchableOpacity>
-                        </View>
+                        </View> */}
                     
                 </ScrollView>
             </LinearGradient>

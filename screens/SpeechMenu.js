@@ -64,11 +64,11 @@ const SpeechMenu = (props) => {
         },
     ];
 
-    addNewWord = () => {
-        props.navigation.navigate({
-            routeName: 'AddNewWord'
-        });
-    }
+    // addNewWord = () => {
+    //     props.navigation.navigate({
+    //         routeName: 'AddNewWord'
+    //     });
+    // }
 
     return (
 
@@ -95,13 +95,13 @@ const SpeechMenu = (props) => {
                             </View>
                         </TouchableOpacity>
                     )}
-                    <TouchableOpacity onPress={addNewWord}>
+                    {/* <TouchableOpacity onPress={addNewWord}>
                        
                             <View style={{ ...styles.btnContainer, backgroundColor: Colors.sesameRed }} >
                                 <Text style={styles.btnText}>Add New Word</Text>
                             </View>
                         
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                 </View>
             </LinearGradient>
         </View>
@@ -115,6 +115,13 @@ SpeechMenu.navigationOptions = navData => {
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName='ios-menu' onPress={() => {
                     navData.navigation.toggleDrawer();
+                }} />
+            </HeaderButtons>
+        ),
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Edit" iconName='ios-add' onPress={() => {
+                    navData.navigation.navigate('AddNewWord');
                 }} />
             </HeaderButtons>
         )
