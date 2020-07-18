@@ -9,6 +9,9 @@ import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as newWordActions from '../store/actions/newCards';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
@@ -54,10 +57,6 @@ const SpeechBoard = (props) => {
 
     }, [loadWords]);
 
-    
-
-
-
     return (
         <View>
             <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}>
@@ -99,17 +98,6 @@ const SpeechBoard = (props) => {
                             )}
                         </View>
                     </View>
-                    {catId === "user words" &&
-                        <View style={{ flex: 1, alignItems: 'center'}}>
-                            <TouchableOpacity style={styles.button} onPress={()=> {
-                                props.navigation.navigate({
-                                    routeName: 'DeleteUserWord',
-                                });
-                            }}>
-                                <Text style={{color: 'white', fontFamily: 'open-sans-bold'}}>Delete</Text>
-                            </TouchableOpacity>
-                        </View>
-                    }
                 </ScrollView>
             </LinearGradient>
         </View>
@@ -119,7 +107,17 @@ const SpeechBoard = (props) => {
 SpeechBoard.navigationOptions = navData => {
     return {
         headerTitle: 'Speech Board',
-        headerBackTitle: ' '
+        headerBackTitle: ' ',
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Edit" iconName='ios-create' onPress={() => {
+                    navData.navigation.navigate('DeleteUserWord');
+                    // props.navigation.navigate({
+                    //     routeName: 'DeleteUserWord',
+                    // });
+                }} />
+            </HeaderButtons>
+        )
     }
 }
 
