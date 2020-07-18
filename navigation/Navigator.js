@@ -14,6 +14,7 @@ import SoundScreen from './../screens/SoundScreen';
 import SpeechBoard from './../screens/SpeechBoard';
 import SpeechMenu from './../screens/SpeechMenu';
 import AddNewWord from './../screens/AddNewWordScreen';
+import DeleteUserWord from './../screens/DeleteUserWordScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import Colors from './../constants/Colors';
@@ -42,12 +43,13 @@ const DaniStackNavigator = createStackNavigator({
 const SpeechBoardNavigator = createStackNavigator({
     SpeechMenu: SpeechMenu,
     SpeechBoard: SpeechBoard,
-    AddNewWord: AddNewWord
+    AddNewWord: AddNewWord,
+    DeleteUserWord: DeleteUserWord
 },
     {
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: "#00b4f0",
+                backgroundColor: '#f25c5c',
             },
             headerTintColor: "white",
             headerTitle: ''
@@ -64,7 +66,7 @@ const tabScreenConfig = {
             },
             tabBarColor: Colors.primaryColor,
             style: {
-                backgroundColor: '#00498c',
+                backgroundColor: '#ffb940',
             },
         }
     },
@@ -77,9 +79,9 @@ const tabScreenConfig = {
             },
             tabBarColor: Colors.accentColor,
             tabBarOptions: {
-                activeTintColor: Colors.sesameYellow,
+                activeTintColor: Colors.sesameRed,
                 style: {
-                    backgroundColor: '#00498c',
+                    backgroundColor: '#ffb940',
                 },
             },
         }
@@ -88,7 +90,7 @@ const tabScreenConfig = {
 
 const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
     tabBarOptions: {
-        activeTintColor: Colors.sesameYellow
+        activeTintColor: Colors.sesameRed
     }
 });
 
@@ -130,7 +132,7 @@ const AuthNavigator = createStackNavigator({
 }, {
     defaultNavigationOptions: {
         headerStyle: {
-            backgroundColor: "#00b4f0",
+            backgroundColor: '#00b4f0',
         },
         headerTintColor: "white",
         headerTitle: ''
