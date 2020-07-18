@@ -76,7 +76,7 @@ const AuthScreen = props => {
         setIsLoading(true);
         try {
             await dispatch(action);
-            props.navigation.navigate('MainMenu');
+            props.navigation.navigate('SpeechMenu');
         } catch (err) {
             setError(err.message);
             setIsLoading(false);

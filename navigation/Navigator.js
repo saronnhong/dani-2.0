@@ -45,7 +45,13 @@ const SpeechBoardNavigator = createStackNavigator({
     AddNewWord: AddNewWord
 },
     {
-        defaultNavigationOptions: defaultStackNavOptions
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: "#00b4f0",
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
     }
 )
 const tabScreenConfig = {
@@ -56,7 +62,10 @@ const tabScreenConfig = {
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.primaryColor
+            tabBarColor: Colors.primaryColor,
+            style: {
+                backgroundColor: '#00498c',
+            },
         }
     },
     Tab1: {
@@ -66,14 +75,20 @@ const tabScreenConfig = {
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-chatbubbles' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.accentColor
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: Colors.sesameYellow,
+                style: {
+                    backgroundColor: '#00498c',
+                },
+            },
         }
     }
 }
 
 const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
     tabBarOptions: {
-        activeTintColor: Colors.accentColor
+        activeTintColor: Colors.sesameYellow
     }
 });
 
@@ -85,47 +100,47 @@ const MainNavigator = createDrawerNavigator({
     Settings: TabNavigator,
     Filters: FiltersNavigator
 },
-{
-    contentOptions: {
-      activeTintColor: Colors.primary
-    },
-    contentComponent: props => {
-      const dispatch = useDispatch();
-      return (
-        <View style={{ flex: 1, paddingTop: 20 }}>
-          <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
-            <DrawerItems  {...props}/>
-            <Button
-              title="Logout"
-              color={Colors.primary}
-              onPress={() => {
-                dispatch(authActions.logout());
-                // props.navigation.navigate('Auth');
-              }}
-            />
-          </SafeAreaView>
-        </View>
-      );
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        },
+        contentComponent: props => {
+            const dispatch = useDispatch();
+            return (
+                <View style={{ flex: 1, paddingTop: 20 }}>
+                    <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+                        <DrawerItems  {...props} />
+                        <Button
+                            title="Logout"
+                            color={Colors.primary}
+                            onPress={() => {
+                                dispatch(authActions.logout());
+                                // props.navigation.navigate('Auth');
+                            }}
+                        />
+                    </SafeAreaView>
+                </View>
+            );
+        }
     }
-  }
 );
 
 const AuthNavigator = createStackNavigator({
     Auth: AuthScreen
-  }, {
+}, {
     defaultNavigationOptions: {
-      headerStyle: {
-          backgroundColor: "#00b4f0",
-      },
-      headerTintColor: "white",
-      headerTitle: ''
-  }
-  })
-  
-  const Main2Navigator = createSwitchNavigator({
+        headerStyle: {
+            backgroundColor: "#00b4f0",
+        },
+        headerTintColor: "white",
+        headerTitle: ''
+    }
+})
+
+const Main2Navigator = createSwitchNavigator({
     Startup: StartupScreen,
     Auth: AuthNavigator,
     Main: MainNavigator
-  })
+})
 
 export default createAppContainer(Main2Navigator);
