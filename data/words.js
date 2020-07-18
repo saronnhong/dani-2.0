@@ -17,7 +17,7 @@ export const WORDS = [
         't3',
         'talk',
         'Thank You',
-        require('../assets/images/speechboard/talk/thank_you.png')
+        require('../assets/images/speechboard/talk/thankyou.png')
     ),
     // new Word(
     //     't4',
@@ -41,13 +41,13 @@ export const WORDS = [
         't7',
         'talk',
         'Okay',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/talk/okay.png')
     ),
     new Word(
         't8',
         'talk',
         'How Are You?',
-        null
+        require('../assets/images/speechboard/talk/how_are_you.png')
     ),
     new Word(
         't9',
@@ -59,7 +59,7 @@ export const WORDS = [
         't10',
         'talk',
         'What',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/talk/what.png')
     ),
     new Word(
         't11',
@@ -71,7 +71,7 @@ export const WORDS = [
         't12',
         'talk',
         'When',
-        require('../assets/images/speechboard/talk/when.png')
+        null
     ),
     new Word(
         't13',

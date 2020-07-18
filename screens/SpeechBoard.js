@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
 import SentenceBar from '../components/SentenceBar';
 import * as Speech from 'expo-speech';
 import * as wordActions from '../store/actions/sentenceBar'
 import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
+import * as newWordActions from '../store/actions/newCards';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
@@ -21,26 +20,41 @@ const SpeechBoard = (props) => {
         "activities": Colors.sesameOrange, //sesame street yellow
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
-        "colors": "#ED67AE"
+        "colors": "#ED67AE",
+        "user words": "#f2c063"
     }
     const color = colorPicker[catId];
-    // const [wordBoard, setWordBoard] = useState([]);
-    // const [imageBoard, setImageBoard] = useState([]);
 
-    // const onDelete = () => {
-    //     const temp = wordBoard.splice(0, wordBoard.length - 1);
-    //     const temp2 = imageBoard.splice(0, imageBoard.length - 1);
-    //     setWordBoard(temp);
-    //     setImageBoard(temp2);
-    // }
     const dispatch = useDispatch();
+
     const addToState = (word) => {
         dispatch(wordActions.addToBar(word));
-        
     }
-    // const orders = useSelector(state => state.words);
-    // const currState = useSelector(state => state.bar.words);
-    // console.log(currState);
+
+    const [isLoading, setIsLoading] = useState(false);
+    // const [isRefreshing, setIsRefreshing] = useState(false);
+    const [error, setError] = useState()
+
+    let userWords = useSelector(state => state.word.userWords);
+
+    const loadWords = useCallback(async () => {
+        setError(null);
+        try {
+            dispatch(newWordActions.fetchWords());
+        } catch (err) {
+            setError(err.message);
+        }
+    }, [dispatch, setError]);
+    
+    useEffect(() => {
+        setIsLoading(true);
+        loadWords().then(() => {
+            setIsLoading(false);
+        });
+        
+    }, [loadWords]);
+
+    
 
     return (
         <View>
@@ -56,14 +70,26 @@ const SpeechBoard = (props) => {
                                     rate: 1,
                                     voice: Voices.nicky
                                 });
-                                // setWordBoard(sentence => sentence.concat(word.word));
-                                // setImageBoard(sentence => sentence.concat(word.imageUrl));
                                 addToState(word);
                             }}>
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />} */}
                                     {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
-
+                                    {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+                                </View>
+                            </TouchableOpacity>
+                        )}
+                        {catId === "user words" && userWords.map(word =>
+                            <TouchableOpacity key={word.id} onPress={() => {
+                                Speech.speak(word.word, {
+                                    language: 'en',
+                                    pitch: 1,
+                                    rate: 1,
+                                    voice: Voices.nicky
+                                });
+                                addToState(word);
+                            }}>
+                                <View style={{ ...styles.btnContainer, backgroundColor: color }}>
+                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
                             </TouchableOpacity>

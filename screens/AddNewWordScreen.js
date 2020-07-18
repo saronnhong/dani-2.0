@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as wordsActions from '../store/actions/newCards';
-
 import Colors from '../constants/Colors';
 
 
@@ -10,32 +9,15 @@ const AddNewWordScreen = props => {
     const dispatch = useDispatch();
 
     addNewWord = async () => {
-        // const token = getState().auth.token;
-        // const userId = getState().auth.userId;
-
-        // const response = await fetch(
-        //     `https://dani-2.firebaseio.com/words.json`,
-        //     {
-        //         method: 'POST',
-        //         headers: {
-        //             'Content-Type': 'application/json'
-        //         },
-        //         body: JSON.stringify({
-        //             word: "Mr Manager",
-        //             ownerId: 'saron'
-        //         })
-        //     });
-        // const id= "1234"
-        const imageUrl = "https://i.pinimg.com/originals/31/dd/96/31dd961371211e1f04e333a772277153.jpg";
+        const imageUrl = "https://i.pinimg.com/originals/3c/fe/2c/3cfe2ca3268ddb6d8f0d6e5e61571591.jpg";
         const word = "Fantastic";
         const phonetic = "fantastic four"
-        const voiceRecord = "dummy text";
+        const voiceRecord = "dummy text voice recorder";
         const color = "#03ADE9";
-        const category = "talk";
+        const categoryId = "user words";
         
-        dispatch(wordsActions.createWord(category, word, phonetic, voiceRecord, color, imageUrl));
+        dispatch(wordsActions.createWord(categoryId, word, imageUrl, phonetic, color, voiceRecord ));
         Alert.alert("New word added. Check the Database for results." )
-        // console.log(response);
     }
 
     return (
@@ -62,7 +44,6 @@ AddNewWordScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        // justifyContent: 'center',
         alignItems: 'center'
     },
     addImage: {
