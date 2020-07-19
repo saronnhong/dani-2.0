@@ -49,7 +49,7 @@ const SpeechBoardNavigator = createStackNavigator({
     {
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: Colors.gradientOrangeTop,
+                backgroundColor: Colors.orange,
             },
             headerTintColor: "white",
             headerTitle: ''
@@ -57,29 +57,81 @@ const SpeechBoardNavigator = createStackNavigator({
     }
 )
 const tabScreenConfig = {
-    Main: {
-        screen: DaniStackNavigator,
+    // Main: {
+    //     screen: DaniStackNavigator,
+    //     navigationOptions: {
+    //         tabBarLabel: 'Main',
+    //         tabBarIcon: (tabInfo) => {
+    //             return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
+    //         },
+    //         tabBarColor: Colors.primaryColor,
+    //         style: {
+    //             backgroundColor: Colors.orange,
+    //         },
+    //     }
+    // },
+    Tab0: {
+        screen: SpeechBoardNavigator,
         navigationOptions: {
-            tabBarLabel: 'Main',
+            tabBarLabel: 'Menu',
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
+                return <Ionicons name='ios-apps' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.primaryColor,
-            style: {
-                backgroundColor: Colors.gradientOrangeBottom,
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'white',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
             },
         }
     },
     Tab1: {
         screen: SpeechBoardNavigator,
         navigationOptions: {
-            tabBarLabel: 'Speech Menu',
+            tabBarLabel: 'Search',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-search' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
+        }
+    },
+    Tab2: {
+        screen: SpeechBoardNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Speech Board',
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-chatbubbles' size={25} color={tabInfo.tintColor} />
             },
             tabBarColor: Colors.accentColor,
             tabBarOptions: {
-                activeTintColor: Colors.sesameRed,
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
+        }
+    },
+    Tab3: {
+        screen: SpeechBoardNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Edit',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-create' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
                 style: {
                     backgroundColor: Colors.gradientOrangeBottom,
                 },
@@ -89,6 +141,7 @@ const tabScreenConfig = {
 }
 
 const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
+    initialRouteName: "Tab2",
     tabBarOptions: {
         activeTintColor: Colors.sesameRed
     }
@@ -99,8 +152,9 @@ const FiltersNavigator = createStackNavigator({
 });
 
 const MainNavigator = createDrawerNavigator({
-    Settings: TabNavigator,
-    Filters: FiltersNavigator
+    Tab: TabNavigator,
+    Filters: FiltersNavigator,
+    Sound: DaniStackNavigator
 },
     {
         contentOptions: {
@@ -132,7 +186,7 @@ const AuthNavigator = createStackNavigator({
 }, {
     defaultNavigationOptions: {
         headerStyle: {
-            backgroundColor: '#00b4f0',
+            backgroundColor: Colors.orange,
         },
         headerTintColor: "white", 
         headerTitle: ''
@@ -142,7 +196,8 @@ const AuthNavigator = createStackNavigator({
 const Main2Navigator = createSwitchNavigator({
     Startup: StartupScreen,
     Auth: AuthNavigator,
-    Main: MainNavigator
+    Tab2: MainNavigator
+    // Main: MainNavigator
 })
 
 export default createAppContainer(Main2Navigator);

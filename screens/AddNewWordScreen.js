@@ -36,7 +36,7 @@ const AddNewWordScreen = props => {
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={30} style={styles.screen}>
-                <LinearGradient colors={Colors.gradientOrange} start={[.2,.2]} end={[.8,.8]}style={styles.gradient}>
+                {/* <LinearGradient colors={Colors.gradientOrange} start={[.2,.2]} end={[.8,.8]} style={styles.gradient}> */}
                     <Card style={styles.authContainer}>
                         <Text style={styles.addImage}>Add Image</Text>
                         <Text style={styles.label}>Word</Text>
@@ -86,7 +86,7 @@ const AddNewWordScreen = props => {
                         </TouchableOpacity>
 
                     </Card>
-                </LinearGradient>
+                {/* </LinearGradient> */}
             
         </KeyboardAvoidingView>
     )
@@ -100,15 +100,20 @@ AddNewWordScreen.navigationOptions = navData => {
 
 const styles = StyleSheet.create({
     screen: {
-        flex: 1
-    },
-    gradient: {
-        // justifyContent: 'center',
+        flex: 1,
+        backgroundColor: 'rgba(255, 185, 64, .2)',
         alignItems: 'center',
-        paddingTop: 50,
+        justifyContent: 'center',
+        // paddingTop: 50,
         height: '100%'
-
     },
+    // gradient: {
+    //     // justifyContent: 'center',
+    //     alignItems: 'center',
+    //     paddingTop: 50,
+    //     height: '100%'
+
+    // },
     authContainer: {
         width: '85%',
         maxWidth: 400,
@@ -145,7 +150,7 @@ const styles = StyleSheet.create({
         // paddingHorizontal: 80,
         paddingVertical: 20,
         backgroundColor: Colors.sesameYellow,
-        marginTop: 20,
+        marginTop: 50,
         justifyContent: 'center',
         alignItems: 'center'
     }

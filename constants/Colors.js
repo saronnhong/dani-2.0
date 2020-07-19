@@ -13,5 +13,9 @@ export default {
     gradientOrangeBottom: '#ffb940',
     gradientGreenBlue: ['#4bbf52','#39bf99','#45b70','#2bc7d9'],
     gradientGreenBlueTop: '#4bbf52',
-    gradientGreenBlueBottom: '#2bc7d9'
+    gradientGreenBlueBottom: '#2bc7d9',
+    peach: '#f25c5c',
+    orange: '#ffb940'
+
+
 }

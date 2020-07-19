@@ -59,8 +59,8 @@ const SpeechBoard = (props) => {
 
     return (
         <View>
-            <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}>
-                <ScrollView >
+            {/* <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}> */}
+                <ScrollView style={styles.overall}>
                     <SentenceBar />
                     <View style={styles.screen}>
                         <View style={styles.wordRow}>
@@ -99,7 +99,7 @@ const SpeechBoard = (props) => {
                         </View>
                     </View>
                 </ScrollView>
-            </LinearGradient>
+            {/* </LinearGradient> */}
         </View>
     )
 };
@@ -124,7 +124,7 @@ SpeechBoard.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     btnContainer: {
         justifyContent: 'center',
@@ -168,15 +168,17 @@ const styles = StyleSheet.create({
         width: '100%',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        paddingTop: 10
+        paddingTop: 10,
+        
     },
     categoryTitle: {
         fontSize: 20,
         fontFamily: "open-sans-bold",
         marginVertical: 15,
     },
-    gradient: {
-        height: "100%"
+    overall: {
+        height: "100%",
+        backgroundColor: 'rgba(255, 185, 64, .2)'
     },
     button: {
         width: '50%',

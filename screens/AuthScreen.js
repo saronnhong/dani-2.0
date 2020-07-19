@@ -96,7 +96,7 @@ const AuthScreen = props => {
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
-            <LinearGradient colors={['#00b4f0', '#048abf', '#00498c']} style={styles.gradient}>
+            {/* <LinearGradient colors={[Colors.orange , 'rgba(255, 185, 64, .2)',]} start={[.5,-.5]} end={[.5,2]} style={styles.gradient}> */}
                 <Card style={styles.authContainer}>
                     <ScrollView keyboardShouldPersistTaps={'handled'} >
                         <Input
@@ -152,7 +152,7 @@ const AuthScreen = props => {
 
                     </ScrollView>
                 </Card>
-            </LinearGradient>
+            {/* </LinearGradient> */}
         </KeyboardAvoidingView>
     )
 };
@@ -164,6 +164,9 @@ AuthScreen.navigationOptions = {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
+        backgroundColor: 'rgba(255, 185, 64, .2)',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     authContainer: {
         width: '80%',
@@ -173,11 +176,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0, 0.15)',
         marginBottom: '40%'
     },
-    gradient: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
+    // gradient: {
+    //     flex: 1,
+    //     justifyContent: 'center',
+    //     alignItems: 'center'
+    // },
     buttonContainer: {
         marginTop: 10
     },

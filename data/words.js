@@ -71,7 +71,7 @@ export const WORDS = [
         't12',
         'talk',
         'When',
-        null
+        require('../assets/images/speechboard/talk/when-min.png')
     ),
     new Word(
         't13',

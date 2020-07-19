@@ -73,7 +73,7 @@ const SpeechMenu = (props) => {
     return (
 
         <View style={styles.screen}>
-            <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}>
+            {/* <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}> */}
                 <View style={styles.wordRow}>
                     {categories.map(word =>
                         <TouchableOpacity key={word.id} onPress={() => {
@@ -104,7 +104,7 @@ const SpeechMenu = (props) => {
                         
                     </TouchableOpacity> */}
                 </View>
-            </LinearGradient>
+            {/* </LinearGradient> */}
         </View>
     )
 };
@@ -168,7 +168,8 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
         paddingTop: 30,
-        flex: 1
+        flex: 1,
+        backgroundColor: 'rgba(255, 185, 64, .2)'
     },
     categoryTitle: {
         fontSize: 20,
