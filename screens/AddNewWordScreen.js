@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as wordsActions from '../store/actions/newCards';
 import Colors from '../constants/Colors';
+import { LinearGradient } from 'expo-linear-gradient';
+import Card from '../components/Card';
 
 
 const AddNewWordScreen = props => {
@@ -23,38 +25,63 @@ const AddNewWordScreen = props => {
     }
 
     return (
-        <KeyboardAvoidingView behavior='position' keyboardVerticalOffset={50} style={styles.screen}>
-            <View style={styles.screenContainer}>
-                <Text style={styles.addImage}>Add Image</Text>
-                <TextInput
-                    onChangeText={text => setState({ ...state, word: text })}
-                    placeholder="Word"
-                    style={styles.wordInput}
-                />
-                <TextInput
-                    onChangeText={text => setState({ ...state, phonetic: text })}
-                    placeholder="Phonetic"
-                    style={styles.wordInput}
-                />
-                <TextInput
-                    placeholder="Record Voice"
-                    style={styles.wordInput}
-                />
-                <TextInput
-                    onChangeText={text => setState({ ...state, color: text })}
-                    placeholder="Color"
-                    style={styles.wordInput}
-                />
-                <TextInput
-                    onChangeText={text => setState({ ...state, categoryId: text })}
-                    placeholder="Category"
-                    style={styles.wordInput}
-                />
-                <TouchableOpacity style={styles.button} onPress={addNewWord}>
-                    <Text>Add Word</Text>
-                </TouchableOpacity>
-            </View>
-        </KeyboardAvoidingView >
+        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={50} style={styles.screen}>
+            <ScrollView  >
+            <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}>
+                <Card style={styles.authContainer}>
+                    
+                        <Text style={styles.addImage}>Add Image</Text>
+                        <Text style={styles.label}>Word</Text>
+                        <TextInput
+                            onChangeText={text => setState({ ...state, word: text })}
+                            // placeholder="Word"
+                            style={styles.wordInput}
+                            selectionColor='rgba(250,250,250,.6)'
+                            color= 'white'
+                            
+                        />
+                        <Text style={styles.label}>Phonetic</Text>
+                        <TextInput
+                            onChangeText={text => setState({ ...state, phonetic: text })}
+                            // placeholder="Phonetic"
+                            style={styles.wordInput}
+                            selectionColor='rgba(250,250,250,.6)'
+                            color= 'white'
+                        />
+                        <Text style={styles.label}>Recorded Voice</Text>
+                        <TextInput
+                            // placeholder="Record Voice"
+                            style={styles.wordInput}
+                            selectionColor='rgba(250,250,250,.6)'
+                            color= 'white'
+                        />
+                        <Text style={styles.label}>Color</Text>
+                        <TextInput
+                            onChangeText={text => setState({ ...state, color: text })}
+                            // placeholder="Color"
+                            style={styles.wordInput}
+                            selectionColor='rgba(250,250,250,.6)'
+                            color= 'white'
+                        />
+                        <Text style={styles.label}>Category</Text>
+                        <TextInput
+                            onChangeText={text => setState({ ...state, categoryId: text })}
+                            // placeholder="Category"
+                            style={styles.wordInput}
+                            selectionColor='rgba(250,250,250,.6)'
+                            color= 'white'
+                        />
+                        <TouchableOpacity  onPress={addNewWord}>
+                            <View style={styles.button}>
+                            <Text>Add Word</Text>
+                            </View>
+                            
+                        </TouchableOpacity>
+                    
+                </Card>
+            </LinearGradient>
+            </ScrollView>
+        </KeyboardAvoidingView>
     )
 };
 AddNewWordScreen.navigationOptions = navData => {
@@ -67,34 +94,69 @@ AddNewWordScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-
     },
-    screenContainer: {
+    gradient: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingVertical: 15,
+        height: '105%'
+    },
+    authContainer: {
+        width: '85%',
+        maxWidth: 400,
+        height: '98%',
+        maxHeight: 600,
+        padding: 20,
+        backgroundColor: 'rgba(0,0,0, 0.15)',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderRadius: 20,
     },
     addImage: {
-        height: 200,
-        width: 200,
+        height: 100,
+        width: 100,
         borderWidth: 2,
         borderColor: Colors.border,
-        margin: 10,
+        marginTop: 10,
+    },
+    label: {
+        fontFamily: 'open-sans-bold',
+        marginVertical: 5,
+        color: 'rgba(250,250,250,.6)'
     },
     wordInput: {
-        borderWidth: 1,
-        borderRadius: 5,
-        width: '90%',
-        height: 40,
-        margin: 5,
-        paddingLeft: 15
+        width: '100%',
+        height: 25,
+        paddingHorizontal: 2,
+        borderBottomColor: 'rgba(250,250,250,.3)',
+        borderBottomWidth: 1,
     },
     button: {
         borderWidth: 4,
         borderRadius: 30,
         borderColor: Colors.border,
-        paddingHorizontal: 100,
+        // paddingHorizontal: 80,
         paddingVertical: 20,
-        backgroundColor: Colors.sesameYellow
-    }
+        backgroundColor: Colors.sesameYellow,
+        marginTop: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    screenContainer: {
+        alignItems: 'center',
+        width: '80%',
+        height: '100%',
+        backgroundColor: 'rgba(50,50,50,.4)',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+        borderRadius: 20,
+    },
+    
+
+    
+    
+    
+    
+    
 });
 export default AddNewWordScreen;

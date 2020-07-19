@@ -110,6 +110,7 @@ const AuthScreen = props => {
                             onInputChange={inputChangeHandler}
                             initialValue=""
                             color='white'
+                            useValidation= {true}
                         />
                         <Input
                             id='password'
@@ -124,6 +125,7 @@ const AuthScreen = props => {
                             initialValue=""
                             color='white'
                             clearTextOnFocus={true}
+                            useValidation= {true}
                             
                         />
                         
