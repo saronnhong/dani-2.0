@@ -27,8 +27,8 @@ export const fetchWords = () => {
           resData[key].word,
           resData[key].imageUrl,
           resData[key].phonetic,
-          resData[key].color,
-          resData[key].voiceRecord,
+          // resData[key].color,
+          // resData[key].voiceRecord,
           resData[key].ownerId
         ));
       }
@@ -60,8 +60,8 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
           word,
           imageUrl,
           phonetic,
-          color,
-          voiceRecord,
+          // color,
+          // voiceRecord,
           ownerId: userId
         })
       });
@@ -76,8 +76,8 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
         word,
         imageUrl,
         phonetic,
-        color,
-        voiceRecord,
+        // color,
+        // voiceRecord,
         ownerId: userId
       }
     });

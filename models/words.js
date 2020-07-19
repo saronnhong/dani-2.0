@@ -1,16 +1,12 @@
 class Word {
     constructor(
-        // id,
-        // categoryId,
-        // word,
-        // imageUrl
         id,
         categoryId,
         word,
         imageUrl,
         phonetic,
-        color,
-        voiceRecord,
+        // color,
+        // voiceRecord,
         ownerId
 
     ) {
@@ -19,8 +15,8 @@ class Word {
         this.word = word;
         this.imageUrl = imageUrl;
         this.phonetic = phonetic;
-        this.color = color;
-        this.voiceRecord = voiceRecord;
+        // this.color = color;
+        // this.voiceRecord = voiceRecord;
         this.ownerId = ownerId;
     }
 }

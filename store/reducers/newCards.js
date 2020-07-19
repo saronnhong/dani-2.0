@@ -21,8 +21,8 @@ export default (state = initialState, action) => {
         action.wordData.word,
         action.wordData.imageUrl,
         action.wordData.phonetic,
-        action.wordData.color,
-        action.wordData.voiceRecord,
+        // action.wordData.color,
+        // action.wordData.voiceRecord,
         action.wordData.ownerId,
       );
       return {
