@@ -49,7 +49,7 @@ const SpeechBoardNavigator = createStackNavigator({
     {
         defaultNavigationOptions: {
             headerStyle: {
-                backgroundColor: '#f25c5c',
+                backgroundColor: Colors.gradientOrangeTop,
             },
             headerTintColor: "white",
             headerTitle: ''
@@ -66,7 +66,7 @@ const tabScreenConfig = {
             },
             tabBarColor: Colors.primaryColor,
             style: {
-                backgroundColor: '#ffb940',
+                backgroundColor: Colors.gradientOrangeBottom,
             },
         }
     },
@@ -81,7 +81,7 @@ const tabScreenConfig = {
             tabBarOptions: {
                 activeTintColor: Colors.sesameRed,
                 style: {
-                    backgroundColor: '#ffb940',
+                    backgroundColor: Colors.gradientOrangeBottom,
                 },
             },
         }
@@ -134,7 +134,7 @@ const AuthNavigator = createStackNavigator({
         headerStyle: {
             backgroundColor: '#00b4f0',
         },
-        headerTintColor: "white",
+        headerTintColor: "white", 
         headerTitle: ''
     }
 })
