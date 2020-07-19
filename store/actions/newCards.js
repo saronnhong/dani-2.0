@@ -70,7 +70,7 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
 
     dispatch({
       type: CREATE_WORD,
-      productData: {
+      wordData: {
         id: resData.name,
         categoryId,
         word,

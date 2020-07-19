@@ -5,14 +5,14 @@ import Colors from '../constants/Colors';
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const INPUT_BLUR = 'INPUT_BLUR';
 
-const inputReducer = (state, action) => { 
+const inputReducer = (state, action) => {
     switch (action.type) {
-        case INPUT_CHANGE: 
+        case INPUT_CHANGE:
             return {
                 ...state,
                 value: action.value,
                 isValid: action.isValid
-                
+
             };
         case INPUT_BLUR:
             return {
@@ -35,10 +35,10 @@ const Input = props => {
     const { onInputChange, id } = props;
 
     useEffect(() => {
-        if (inputState.isValid){
+        if (inputState.isValid) {
             onInputChange(id, inputState.value, inputState.isValid);
         }
-        
+
     }, [inputState, onInputChange, id]);
 
     const textChangeHandler = text => {
@@ -67,7 +67,7 @@ const Input = props => {
     const lostFocusHandler = () => {
         dispatch({ type: INPUT_BLUR })
     }
-    
+
     return (
         <View style={styles.formControl}>
             <Text style={styles.label}>{props.label}</Text>
@@ -78,9 +78,13 @@ const Input = props => {
                 onChangeText={textChangeHandler}
                 onBlur={lostFocusHandler}
                 selectionColor='rgba(250,250,250,.6)'
-                onEndEditing={()=> lostFocusHandler()}
+                onEndEditing={() => lostFocusHandler()}
             />
-            {!inputState.isValid && inputState.touched && <View style={styles.errorContainer}><Text style={styles.errorText}>{props.errorText}</Text></View>}
+
+            
+                {!inputState.isValid && inputState.touched && <View style={styles.errorContainer}><Text style={styles.errorText}>{props.errorText}</Text></View>}
+            
+
         </View>
     );
 };
