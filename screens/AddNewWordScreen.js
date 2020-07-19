@@ -8,7 +8,7 @@ import Card from '../components/Card';
 
 
 const AddNewWordScreen = props => {
-    const [state, setState] = useState({})
+    const [state, setState] = useState({word: null, phonetic: null, color: null, categoryId: null})
     const dispatch = useDispatch();
 
     addNewWord = async () => {
@@ -19,9 +19,17 @@ const AddNewWordScreen = props => {
         const color = state.color;
         const categoryId = state.categoryId;
 
-        dispatch(wordsActions.createWord(categoryId, word, imageUrl, phonetic, color, voiceRecord));
-        console.log(state);
-        Alert.alert("New word added. Check the Database for results.")
+        if(state.word === null || state.phonetic === null || state.color === null || state.categoryId === null){
+            Alert.alert("Missing item in the form!")
+        }else{
+            dispatch(wordsActions.createWord(categoryId, word, imageUrl, phonetic, color, voiceRecord));
+            console.log(state);
+            Alert.alert("New word added. Check the Database for results.")
+            props.navigation.navigate({
+                routeName: 'SpeechMenu'
+            })
+        }
+        
     }
 
     return (
