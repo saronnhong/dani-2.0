@@ -16,51 +16,51 @@ const SpeechMenu = (props) => {
         {
             id: 1,
             cat: "Talk",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/chat-min.png'),
         },
         {
             id: 2,
             cat: "I Feel",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/feelings-min.png'),
         },
         {
             id: 3,
             cat: "About Me",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/self-min.png'),
         }, {
             id: 4,
             cat: "Activities",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/activities-min.png'),
         },
         {
             id: 5,
             cat: "Food & Drink",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/food-min.png'),
         },
         {
             id: 6,
             cat: "Numbers",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/numbers-min.png'),
         },
         {
             id: 7,
             cat: "Places",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/places-min.png'),
         },
         {
             id: 8,
             cat: "Colors",
-            url: null,
+            imageUrl: require('../assets/images/speechboard/menu/colors-min.png'),
         },
         {
             id: 9,
             cat: "Core Basic",
-            url: null,
+            imageUrl: null,
         },
         {
             id: 10,
             cat: "User Words",
-            url: null,
+            imageUrl: null,
         },
     ];
 
@@ -91,6 +91,7 @@ const SpeechMenu = (props) => {
                             });
                         }}>
                             <View style={styles.btnContainer} >
+                                {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
                                 <Text style={styles.btnText}>{word.cat}</Text>
                             </View>
                         </TouchableOpacity>
@@ -179,7 +180,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%'
-    }
+    },
+    imageBtn: {
+        width: '90%',
+        height: '72%'
+    },
 });
 
 export default SpeechMenu;
