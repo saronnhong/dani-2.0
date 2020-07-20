@@ -8,10 +8,6 @@ import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as newWordActions from '../store/actions/newCards';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
@@ -24,7 +20,7 @@ const SpeechBoard = (props) => {
         "activities": Colors.sesameOrange, //sesame street yellow
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
-        "colors": "#ED67AE",
+        "colors": "grey",
         "user words": "#f2c063"
     }
     const color = colorPicker[catId];
@@ -59,8 +55,7 @@ const SpeechBoard = (props) => {
 
     return (
         <View>
-            <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}>
-                <ScrollView >
+                <ScrollView style={styles.overall}>
                     <SentenceBar />
                     <View style={styles.screen}>
                         <View style={styles.wordRow}>
@@ -99,7 +94,6 @@ const SpeechBoard = (props) => {
                         </View>
                     </View>
                 </ScrollView>
-            </LinearGradient>
         </View>
     )
 };
@@ -108,23 +102,23 @@ SpeechBoard.navigationOptions = navData => {
     return {
         headerTitle: 'Speech Board',
         headerBackTitle: ' ',
-        headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Edit" iconName='ios-create' onPress={() => {
-                    navData.navigation.navigate('DeleteUserWord');
-                    // props.navigation.navigate({
-                    //     routeName: 'DeleteUserWord',
-                    // });
-                }} />
-            </HeaderButtons>
-        )
+        // headerRight: () => (
+        //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        //         <Item title="Edit" iconName='ios-create' onPress={() => {
+        //             navData.navigation.navigate('DeleteUserWord');
+        //             // props.navigation.navigate({
+        //             //     routeName: 'DeleteUserWord',
+        //             // });
+        //         }} />
+        //     </HeaderButtons>
+        // )
     }
 }
 
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
     },
     btnContainer: {
         justifyContent: 'center',
@@ -136,7 +130,6 @@ const styles = StyleSheet.create({
         width: 80,
         margin: 3,
         paddingHorizontal: 3,
-        // backgroundColor: '#1976D2',
         overflow: 'hidden',
         paddingVertical: 3,
 
@@ -168,15 +161,17 @@ const styles = StyleSheet.create({
         width: '100%',
         flexWrap: 'wrap',
         justifyContent: 'center',
-        paddingTop: 10
+        paddingTop: 10,
+        
     },
     categoryTitle: {
         fontSize: 20,
         fontFamily: "open-sans-bold",
         marginVertical: 15,
     },
-    gradient: {
-        height: "100%"
+    overall: {
+        height: "100%",
+        backgroundColor: 'rgba(255, 185, 64, .2)'
     },
     button: {
         width: '50%',

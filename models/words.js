@@ -5,8 +5,6 @@ class Word {
         word,
         imageUrl,
         phonetic,
-        // color,
-        // voiceRecord,
         ownerId
 
     ) {
@@ -15,8 +13,6 @@ class Word {
         this.word = word;
         this.imageUrl = imageUrl;
         this.phonetic = phonetic;
-        // this.color = color;
-        // this.voiceRecord = voiceRecord;
         this.ownerId = ownerId;
     }
 }
