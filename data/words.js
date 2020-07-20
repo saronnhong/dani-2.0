@@ -443,13 +443,13 @@ export const WORDS = [
         'p5',
         'places',
         'home',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/home-min.png')
     ),
     new Word(
         'p6',
         'places',
         'the car',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/car-min.png')
     ),
     new Word(
         'p7',
@@ -467,37 +467,37 @@ export const WORDS = [
         'p9',
         'places',
         'pool',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/pool-min.png')
     ),
     new Word(
         'p10',
         'places',
         'playground',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/playground-min.png')
     ),
     new Word(
         'p11',
         'places',
         'store',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/store-min.png')
     ),
     new Word(
         'p12',
         'places',
         'park',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/park-min.png')
     ),
     new Word(
         'p13',
         'places',
         'library',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/library-min.png')
     ),
     new Word(
         'p14',
         'places',
         'school',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/places/school-min.png')
     ),
     new Word(
         'c1',

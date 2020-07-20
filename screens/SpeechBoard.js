@@ -8,10 +8,6 @@ import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as newWordActions from '../store/actions/newCards';
-import { LinearGradient } from 'expo-linear-gradient';
-import { Ionicons } from '@expo/vector-icons';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;

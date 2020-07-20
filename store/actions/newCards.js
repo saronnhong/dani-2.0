@@ -1,7 +1,7 @@
 import Word from "../../models/words";
 export const DELETE_WORD = 'DELETE_WORD';
 export const CREATE_WORD = 'CREATE_WORD';
-// export const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
+export const UPDATE_WORD = 'UPDATE_WORD';
 export const SET_WORDS = 'SET_WORDS';
 
 export const fetchWords = () => {
@@ -9,7 +9,7 @@ export const fetchWords = () => {
     const userId = getState().auth.userId;
     try {
       //any async code you want!
-      
+
       const response = await fetch('https://dani-2.firebaseio.com/words.json');
 
       if (!response.ok) {
@@ -17,9 +17,10 @@ export const fetchWords = () => {
       }
 
       const resData = await response.json();
-      
+      console.log(resData);
+
       const loadedWords = [];
- 
+
       for (const key in resData) {
         loadedWords.push(new Word(
           key,
@@ -100,36 +101,43 @@ export const deleteWord = wordId => {
     dispatch({ type: DELETE_WORD, wid: wordId });
   }
 };
-// export const updateProduct = (id, title, description, imageUrl) => {
-//   return async (dispatch, getState) => {
-//     const token = getState().auth.token;
-//     const response = await fetch(
-//       `https://myshop-5025e.firebaseio.com/products/${id}.json?auth=${token}`,
-//       {
-//         method: 'PATCH',
-//         headers: {
-//           'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify({
-//           title,
-//           description,
-//           imageUrl
-//         })
-//       });
+export const updateWord = (id, categoryId, word, imageUrl, phonetic) => {
+  return async (dispatch, getState) => {
+    const userId = getState().auth.userId;
+    const token = getState().auth.token;
+    const response = await fetch(
+      `https://dani-2.firebaseio.com/words/${id}.json?auth=${token}`,
+      {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id: id,
+          categoryId: categoryId,
+          word: word,
+          imageUrl: imageUrl,
+          phonetic: phonetic,
+          ownerId: userId
+        })
+      });
 
-//     if (!response.ok) {
-//       throw new Error('Something went wrong!');
-//     }
+    if (!response.ok) {
+      throw new Error('Something went wrong!');
+    }
 
-//     dispatch({
-//       type: UPDATE_PRODUCT,
-//       pid: id,
-//       productData: {
-//         title,
-//         description,
-//         imageUrl,
-//       }
-//     });
-//   }
+    dispatch({
+      type: UPDATE_WORD,
+      wid: id,
+      wordData: {
+        id: id,
+        categoryId: categoryId,
+        word: word,
+        imageUrl: imageUrl,
+        phonetic: phonetic,
+        ownerId: userId
+      }
+    });
+  }
 
-// };
+};

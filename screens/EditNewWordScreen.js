@@ -7,7 +7,6 @@ import Card from '../components/Card';
 
 
 const windowHeight = Dimensions.get('window').height;
-console.log(windowHeight);
 
 const EditNewWordScreen = props => {
     const [state, setState] = useState({
@@ -19,10 +18,16 @@ const EditNewWordScreen = props => {
     })
     const dispatch = useDispatch();
     const editWord = props.navigation.state.params.editWord;
-    console.log(editWord);
+    // console.log(editWord);
 
     useEffect(() => {
-        setState({ id: editWord.id, word: editWord.word, phonetic: editWord.phonetic, categoryId: editWord.categoryId, imageUrl: editWord.imageUrl });
+        setState({
+            id: editWord.id,
+            word: editWord.word,
+            phonetic: editWord.phonetic,
+            categoryId: editWord.categoryId,
+            imageUrl: editWord.imageUrl
+        });
     }, [setState]);
 
 
@@ -59,7 +64,25 @@ const EditNewWordScreen = props => {
                     value={state.categoryId}
                 />
                 <View style={styles.btnRow}>
-                    <TouchableOpacity >
+                    <TouchableOpacity onPress={() => {
+                        Alert.alert('Are you sure?', 'Do you really want to update this item?', [
+                            { text: 'No', style: 'default' },
+                            {
+                                text: 'Yes',
+                                style: 'destructive',
+                                onPress: () => {
+                                    dispatch(wordsCardActions.updateWord(
+                                        state.id,
+                                        state.categoryId,
+                                        state.word,
+                                        state.imageUrl,
+                                        state.phonetic,
+                                    ))
+                                    props.navigation.navigate('Select');
+                                }
+                            }
+                        ]);
+                    }}>
                         <View style={{ ...styles.button, backgroundColor: Colors.sesameGreen }}>
                             <Text style={{ color: 'white' }}>Update</Text>
                         </View>
@@ -69,14 +92,14 @@ const EditNewWordScreen = props => {
                             Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
                                 { text: 'No', style: 'default' },
                                 {
-                                  text: 'Yes',
-                                  style: 'destructive',
-                                  onPress: () => {
-                                    dispatch(wordsCardActions.deleteWord(state.id));
-                                    props.navigation.navigate('Select');
-                                  }
+                                    text: 'Yes',
+                                    style: 'destructive',
+                                    onPress: () => {
+                                        dispatch(wordsCardActions.deleteWord(state.id));
+                                        props.navigation.navigate('Select');
+                                    }
                                 }
-                              ]);
+                            ]);
                         }}>
                         <View style={{ ...styles.button, backgroundColor: Colors.sesameRedOrange }}>
                             <Text style={{ color: 'white' }}>Delete</Text>

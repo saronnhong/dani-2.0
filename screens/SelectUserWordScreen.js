@@ -8,8 +8,6 @@ import Voices from '../constants/Voices';
 import { WORDS } from '../data/words';
 import Colors from '../constants/Colors';
 import * as newWordActions from '../store/actions/newCards';
-import { LinearGradient } from 'expo-linear-gradient';
-import * as wordsCardActions from '../store/actions/newCards'
 import AddNewWordScreen from '../screens/AddNewWordScreen';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
@@ -17,19 +15,17 @@ import HeaderButton from '../components/HeaderButton';
 const windowWidth = Dimensions.get('window').width;
 
 const SelectUserWordScreen = (props) => {
-
-    const color = 'red';
     const dispatch = useDispatch();
-
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
-
+    
     let userWords = useSelector(state => state.word.userWords);
 
     const loadWords = useCallback(async () => {
         setError(null);
         try {
             dispatch(newWordActions.fetchWords());
+            
         } catch (err) {
             setError(err.message);
         }
@@ -40,7 +36,6 @@ const SelectUserWordScreen = (props) => {
         loadWords().then(() => {
             setIsLoading(false);
         });
-
     }, [loadWords]);
 
     return (
@@ -55,8 +50,12 @@ const SelectUserWordScreen = (props) => {
                                 })
                         }}>
                             <View style={styles.btnContainer}>
-                                {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
-                                {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+                                <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
+                                {(word.word.length < 7 || (word.word).includes(char => char === " ")
+                                ) ? (
+                                        <Text style={styles.btnText} >{word.word}</Text>
+                                    ) : (
+                                        <Text style={styles.btnTextSmall} >{word.word}</Text>)}
                             </View>
                         </TouchableOpacity>
                     )}
