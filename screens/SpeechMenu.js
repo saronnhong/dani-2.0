@@ -64,16 +64,9 @@ const SpeechMenu = (props) => {
         },
     ];
 
-    // addNewWord = () => {
-    //     props.navigation.navigate({
-    //         routeName: 'AddNewWord'
-    //     });
-    // }
-
     return (
 
         <View style={styles.screen}>
-            {/* <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}> */}
                 <View style={styles.wordRow}>
                     {categories.map(word =>
                         <TouchableOpacity key={word.id} onPress={() => {
@@ -96,15 +89,7 @@ const SpeechMenu = (props) => {
                             </View>
                         </TouchableOpacity>
                     )}
-                    {/* <TouchableOpacity onPress={addNewWord}>
-                       
-                            <View style={{ ...styles.btnContainer, backgroundColor: Colors.sesameRed }} >
-                                <Text style={styles.btnText}>Add New Word</Text>
-                            </View>
-                        
-                    </TouchableOpacity> */}
                 </View>
-            {/* </LinearGradient> */}
         </View>
     )
 };
@@ -160,7 +145,6 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-bold',
         paddingHorizontal: 6,
         color: 'white'
-
     },
     wordRow: {
         flexDirection: 'row',

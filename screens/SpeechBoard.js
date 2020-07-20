@@ -24,7 +24,7 @@ const SpeechBoard = (props) => {
         "activities": Colors.sesameOrange, //sesame street yellow
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
-        "colors": "#ED67AE",
+        "colors": "grey",
         "user words": "#f2c063"
     }
     const color = colorPicker[catId];
@@ -59,7 +59,6 @@ const SpeechBoard = (props) => {
 
     return (
         <View>
-            {/* <LinearGradient colors={Colors.gradientOrange} style={styles.gradient}> */}
                 <ScrollView style={styles.overall}>
                     <SentenceBar />
                     <View style={styles.screen}>
@@ -99,7 +98,6 @@ const SpeechBoard = (props) => {
                         </View>
                     </View>
                 </ScrollView>
-            {/* </LinearGradient> */}
         </View>
     )
 };
@@ -108,16 +106,16 @@ SpeechBoard.navigationOptions = navData => {
     return {
         headerTitle: 'Speech Board',
         headerBackTitle: ' ',
-        headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Edit" iconName='ios-create' onPress={() => {
-                    navData.navigation.navigate('DeleteUserWord');
-                    // props.navigation.navigate({
-                    //     routeName: 'DeleteUserWord',
-                    // });
-                }} />
-            </HeaderButtons>
-        )
+        // headerRight: () => (
+        //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        //         <Item title="Edit" iconName='ios-create' onPress={() => {
+        //             navData.navigation.navigate('DeleteUserWord');
+        //             // props.navigation.navigate({
+        //             //     routeName: 'DeleteUserWord',
+        //             // });
+        //         }} />
+        //     </HeaderButtons>
+        // )
     }
 }
 
@@ -136,7 +134,6 @@ const styles = StyleSheet.create({
         width: 80,
         margin: 3,
         paddingHorizontal: 3,
-        // backgroundColor: '#1976D2',
         overflow: 'hidden',
         paddingVertical: 3,
 

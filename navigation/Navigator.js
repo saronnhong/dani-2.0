@@ -15,6 +15,8 @@ import SpeechBoard from './../screens/SpeechBoard';
 import SpeechMenu from './../screens/SpeechMenu';
 import AddNewWord from './../screens/AddNewWordScreen';
 import DeleteUserWord from './../screens/DeleteUserWordScreen';
+import SelectUserWord from './../screens/SelectUserWordScreen';
+import EditUserWord from './../screens/EditNewWordScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import Colors from './../constants/Colors';
@@ -45,6 +47,21 @@ const SpeechBoardNavigator = createStackNavigator({
     SpeechBoard: SpeechBoard,
     AddNewWord: AddNewWord,
     DeleteUserWord: DeleteUserWord
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
+    }
+)
+const EditNavigator = createStackNavigator({
+    Select: SelectUserWord,
+    Edit: EditUserWord
+    
 },
     {
         defaultNavigationOptions: {
@@ -122,7 +139,7 @@ const tabScreenConfig = {
         }
     },
     Tab3: {
-        screen: SpeechBoardNavigator,
+        screen: EditNavigator,
         navigationOptions: {
             tabBarLabel: 'Edit',
             tabBarIcon: (tabInfo) => {

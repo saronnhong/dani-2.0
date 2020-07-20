@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as wordsActions from '../store/actions/newCards';
 import Colors from '../constants/Colors';
-import { LinearGradient } from 'expo-linear-gradient';
 import Card from '../components/Card';
 
 const windowHeight = Dimensions.get('window').height;
@@ -36,13 +35,11 @@ const AddNewWordScreen = props => {
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={30} style={styles.screen}>
-                {/* <LinearGradient colors={Colors.gradientOrange} start={[.2,.2]} end={[.8,.8]} style={styles.gradient}> */}
                     <Card style={styles.authContainer}>
                         <Text style={styles.addImage}>Add Image</Text>
                         <Text style={styles.label}>Word</Text>
                         <TextInput
                             onChangeText={text => setState({ ...state, word: text })}
-                            // placeholder="Word"
                             style={styles.wordInput}
                             selectionColor='rgba(250,250,250,.6)'
                             color='white'
@@ -50,7 +47,6 @@ const AddNewWordScreen = props => {
                         <Text style={styles.label}>Phonetic</Text>
                         <TextInput
                             onChangeText={text => setState({ ...state, phonetic: text })}
-                            // placeholder="Phonetic"
                             style={styles.wordInput}
                             selectionColor='rgba(250,250,250,.6)'
                             color='white'
@@ -73,7 +69,6 @@ const AddNewWordScreen = props => {
                         <Text style={styles.label}>Category</Text>
                         <TextInput
                             onChangeText={text => setState({ ...state, categoryId: text })}
-                            // placeholder="Category"
                             style={styles.wordInput}
                             selectionColor='rgba(250,250,250,.6)'
                             color='white'
@@ -82,18 +77,14 @@ const AddNewWordScreen = props => {
                             <View style={styles.button}>
                                 <Text>Add Word</Text>
                             </View>
-
                         </TouchableOpacity>
-
                     </Card>
-                {/* </LinearGradient> */}
-            
         </KeyboardAvoidingView>
     )
 };
 AddNewWordScreen.navigationOptions = navData => {
     return {
-        headerTitle: 'New Word',
+        headerTitle: 'Create A New Word',
         headerBackTitle: 'Cancel'
     }
 }
@@ -104,16 +95,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 185, 64, .2)',
         alignItems: 'center',
         justifyContent: 'center',
-        // paddingTop: 50,
         height: '100%'
     },
-    // gradient: {
-    //     // justifyContent: 'center',
-    //     alignItems: 'center',
-    //     paddingTop: 50,
-    //     height: '100%'
-
-    // },
     authContainer: {
         width: '85%',
         maxWidth: 400,
@@ -144,13 +127,12 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     button: {
-        borderWidth: 4,
+        borderWidth: 2,
         borderRadius: 30,
         borderColor: Colors.border,
-        // paddingHorizontal: 80,
         paddingVertical: 20,
         backgroundColor: Colors.sesameYellow,
-        marginTop: 50,
+        marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center'
     }
