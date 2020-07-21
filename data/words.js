@@ -215,55 +215,55 @@ export const WORDS = [
         'a5',
         'activities',
         'With toys',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/toys-min.png')
     ),
     new Word(
         'a6',
         'activities',
         'With puzzles',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/puzzles-min.png')
     ),
     new Word(
         'a7',
         'activities',
         'Swim',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/swim-min.png')
     ),
     new Word(
         'a8',
         'activities',
         'Color',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/color-min.png')
     ),
     new Word(
         'a9',
         'activities',
         'Paint',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/paint-min.png')
     ),
     new Word(
         'a10',
         'activities',
         'Draw',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/draw-min.png')
     ),
     new Word(
         'a11',
         'activities',
         'Run',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/run-min.png')
     ),
     new Word(
         'a12',
         'activities',
         'Jump',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/jump-min.png')
     ),
     new Word(
         'a13',
         'activities',
         'Tickle',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/activities/tickle-min.png')
     ),
     new Word(
         'f1',
