@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, Keyb
 import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import * as FileSystem from 'expo-file-system';
 import * as wordsCardActions from '../store/actions/newCards';
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
@@ -17,7 +18,7 @@ const EditNewWordScreen = props => {
         imageUrl: 'something',
         id: ''
     })
-    // const [pickedImage, setPickedImage] = useState();
+    const [pickedImage, setPickedImage] = useState();
     const dispatch = useDispatch();
     const editWord = props.navigation.state.params.editWord;
 
@@ -44,9 +45,28 @@ const EditNewWordScreen = props => {
             aspect: [16, 9],
             quality: 0.5
         });
-        // setPickedImage(image.uri);
+        setPickedImage(image.uri);
         setState({ ...state, imageUrl: image.uri })
     };
+    const onUpdateWord = () => {
+        const fileName = pickedImage.split('/').pop();
+        const newPath = FileSystem.documentDirectory + fileName;
+        setState({ ...state, imageUrl: newPath });
+
+        dispatch(wordsCardActions.updateWord(
+            state.id,
+            state.categoryId,
+            state.word,
+            state.imageUrl,
+            state.phonetic,
+        ))
+        props.navigation.navigate('Select');
+    }
+
+    const onDeleteWord = () => {
+        dispatch(wordsCardActions.deleteWord(state.id));
+        props.navigation.navigate('Select');
+    }
 
     useEffect(() => {
         setState({
@@ -59,7 +79,7 @@ const EditNewWordScreen = props => {
     }, [setState]);
 
     return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={30} style={styles.screen}>
+        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={styles.screen}>
             <Card style={styles.authContainer}>
                 <TouchableOpacity style={styles.imagePreview} onPress={takeImageHandler}>
                     <Image style={styles.image} source={{ uri: state.imageUrl }} />
@@ -95,16 +115,7 @@ const EditNewWordScreen = props => {
                             {
                                 text: 'Yes',
                                 style: 'destructive',
-                                onPress: () => {
-                                    dispatch(wordsCardActions.updateWord(
-                                        state.id,
-                                        state.categoryId,
-                                        state.word,
-                                        state.imageUrl,
-                                        state.phonetic,
-                                    ))
-                                    props.navigation.navigate('Select');
-                                }
+                                onPress: onUpdateWord
                             }
                         ]);
                     }}>
@@ -119,10 +130,7 @@ const EditNewWordScreen = props => {
                                 {
                                     text: 'Yes',
                                     style: 'destructive',
-                                    onPress: () => {
-                                        dispatch(wordsCardActions.deleteWord(state.id));
-                                        props.navigation.navigate('Select');
-                                    }
+                                    onPress: onDeleteWord
                                 }
                             ]);
                         }}>

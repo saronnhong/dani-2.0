@@ -103,14 +103,14 @@ SpeechMenu.navigationOptions = navData => {
                     navData.navigation.toggleDrawer();
                 }} />
             </HeaderButtons>
-        ),
-        headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Edit" iconName='ios-add' onPress={() => {
-                    navData.navigation.navigate('AddNewWord');
-                }} />
-            </HeaderButtons>
         )
+        // headerRight: () => (
+        //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
+        //         <Item title="Edit" iconName='ios-add' onPress={() => {
+        //             navData.navigation.navigate('AddNewWord');
+        //         }} />
+        //     </HeaderButtons>
+        // )
     }
 }
 
