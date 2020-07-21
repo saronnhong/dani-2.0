@@ -20,6 +20,7 @@ const SelectUserWordScreen = (props) => {
     const [error, setError] = useState();
     
     let userWords = useSelector(state => state.word.userWords);
+    console.log(userWords);
 
     const loadWords = useCallback(async () => {
         setError(null);

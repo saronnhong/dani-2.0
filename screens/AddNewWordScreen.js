@@ -1,19 +1,52 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions } from 'react-native';
 import { useDispatch } from 'react-redux';
+import * as ImagePicker from 'expo-image-picker';
+import * as Permissions from 'expo-permissions';
+
 import * as wordsActions from '../store/actions/newCards';
+
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
 
 const windowHeight = Dimensions.get('window').height;
-console.log( windowHeight);
+console.log(windowHeight);
 
 const AddNewWordScreen = props => {
-    const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null })
+    const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null });
+    const [pickedImage, setPickedImage] = useState();
     const dispatch = useDispatch();
 
+    const verifyPermissions = async () => {
+        const result = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
+        if (result.status !== 'granted') {
+            Alert.alert(
+                'Insufficient permissions!',
+                'You need to grant camera perissions to use this app.',
+                [{ text: 'Okay' }]
+            );
+            return false;
+        }
+        return true;
+    };
+
+    const takeImageHandler = async () => {
+        const hasPermission = await verifyPermissions();
+        if (!hasPermission) {
+            return;
+        }
+        const image = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [16, 9],
+            quality: 0.5
+        });
+        setPickedImage(image.uri);
+        // props.onImageTaken(image.uri)
+    };
+
     addNewWord = async () => {
-        const imageUrl = "https://i.pinimg.com/originals/3c/fe/2c/3cfe2ca3268ddb6d8f0d6e5e61571591.jpg";
+        const imageUrl = pickedImage;
+
         const word = state.word;
         const phonetic = state.phonetic
         // const voiceRecord = "dummy text voice recorder";
@@ -30,35 +63,37 @@ const AddNewWordScreen = props => {
                 routeName: 'SpeechMenu'
             })
         }
-
     }
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={30} style={styles.screen}>
-                    <Card style={styles.authContainer}>
-                        <Text style={styles.addImage}>Add Image</Text>
-                        <Text style={styles.label}>Word</Text>
-                        <TextInput
-                            onChangeText={text => setState({ ...state, word: text })}
-                            style={styles.wordInput}
-                            selectionColor='rgba(250,250,250,.6)'
-                            color='white'
-                        />
-                        <Text style={styles.label}>Phonetic</Text>
-                        <TextInput
-                            onChangeText={text => setState({ ...state, phonetic: text })}
-                            style={styles.wordInput}
-                            selectionColor='rgba(250,250,250,.6)'
-                            color='white'
-                        />
-                        {/* <Text style={styles.label}>Recorded Voice</Text>
+            <Card style={styles.authContainer}>
+                <TouchableOpacity style={styles.imagePreview} onPress={takeImageHandler}>
+                    {!pickedImage ? <Text>No Image was picked yet.</Text> :
+                        <Image style={styles.image} source={{ uri: pickedImage }} />}
+                </TouchableOpacity>
+                <Text style={styles.label}>Word</Text>
+                <TextInput
+                    onChangeText={text => setState({ ...state, word: text })}
+                    style={styles.wordInput}
+                    selectionColor='rgba(250,250,250,.6)'
+                    color='white'
+                />
+                <Text style={styles.label}>Phonetic</Text>
+                <TextInput
+                    onChangeText={text => setState({ ...state, phonetic: text })}
+                    style={styles.wordInput}
+                    selectionColor='rgba(250,250,250,.6)'
+                    color='white'
+                />
+                {/* <Text style={styles.label}>Recorded Voice</Text>
                         <TextInput
                             // placeholder="Record Voice"
                             style={styles.wordInput}
                             selectionColor='rgba(250,250,250,.6)'
                             color= 'white' 
                          /> */}
-                        {/* <Text style={styles.label}>Color</Text>
+                {/* <Text style={styles.label}>Color</Text>
                         <TextInput
                             onChangeText={text => setState({ ...state, color: text })}
                             // placeholder="Color"
@@ -66,19 +101,19 @@ const AddNewWordScreen = props => {
                             selectionColor='rgba(250,250,250,.6)'
                             color= 'white'
                         /> */}
-                        <Text style={styles.label}>Category</Text>
-                        <TextInput
-                            onChangeText={text => setState({ ...state, categoryId: text })}
-                            style={styles.wordInput}
-                            selectionColor='rgba(250,250,250,.6)'
-                            color='white'
-                        />
-                        <TouchableOpacity onPress={addNewWord}>
-                            <View style={styles.button}>
-                                <Text>Add Word</Text>
-                            </View>
-                        </TouchableOpacity>
-                    </Card>
+                <Text style={styles.label}>Category</Text>
+                <TextInput
+                    onChangeText={text => setState({ ...state, categoryId: text })}
+                    style={styles.wordInput}
+                    selectionColor='rgba(250,250,250,.6)'
+                    color='white'
+                />
+                <TouchableOpacity onPress={addNewWord}>
+                    <View style={styles.button}>
+                        <Text>Add Word</Text>
+                    </View>
+                </TouchableOpacity>
+            </Card>
         </KeyboardAvoidingView>
     )
 };
@@ -135,6 +170,19 @@ const styles = StyleSheet.create({
         marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    imagePreview: {
+        width: '100%',
+        height: 200,
+        marginBottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderColor: '#ccc',
+        borderWidth: 1
+    },
+    image: {
+        width: "100%",
+        height: "100%"
     }
 });
 export default AddNewWordScreen;
