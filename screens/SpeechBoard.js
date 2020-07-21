@@ -34,6 +34,7 @@ const SpeechBoard = (props) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
 
+    let userId = useSelector(state => state.auth.userId);
     let userWords = useSelector(state => state.word.userWords);
 
     const loadWords = useCallback(async () => {
@@ -55,45 +56,45 @@ const SpeechBoard = (props) => {
 
     return (
         <View>
-                <ScrollView style={styles.overall}>
-                    <SentenceBar />
-                    <View style={styles.screen}>
-                        <View style={styles.wordRow}>
-                            {filteredList.map(word =>
-                                <TouchableOpacity key={word.id} onPress={() => {
-                                    Speech.speak(word.word, {
-                                        language: 'en',
-                                        pitch: 1,
-                                        rate: 1,
-                                        voice: Voices.nicky
-                                    });
-                                    addToState(word);
-                                }}>
-                                    <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                        {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
-                                        {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
-                                    </View>
-                                </TouchableOpacity>
-                            )}
-                            {catId === "user words" && userWords.map(word =>
-                                <TouchableOpacity key={word.id} onPress={() => {
-                                    Speech.speak(word.word, {
-                                        language: 'en',
-                                        pitch: 1,
-                                        rate: 1,
-                                        voice: Voices.nicky
-                                    });
-                                    addToState(word);
-                                }}>
-                                    <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                        {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
-                                        {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
-                                    </View>
-                                </TouchableOpacity>
-                            )}
-                        </View>
+            <ScrollView style={styles.overall}>
+                <SentenceBar />
+                <View style={styles.screen}>
+                    <View style={styles.wordRow}>
+                        {filteredList.map(word =>
+                            <TouchableOpacity key={word.id} onPress={() => {
+                                Speech.speak(word.word, {
+                                    language: 'en',
+                                    pitch: 1,
+                                    rate: 1,
+                                    voice: Voices.nicky
+                                });
+                                addToState(word);
+                            }}>
+                                <View style={{ ...styles.btnContainer, backgroundColor: color }}>
+                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
+                                    {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+                                </View>
+                            </TouchableOpacity>
+                        )}
+                        {catId === "user words" && userWords.map(word =>
+                            <TouchableOpacity key={word.id} onPress={() => {
+                                Speech.speak(word.word, {
+                                    language: 'en',
+                                    pitch: 1,
+                                    rate: 1,
+                                    voice: Voices.nicky
+                                });
+                                addToState(word);
+                            }}>
+                                <View style={{ ...styles.btnContainer, backgroundColor: color }}>
+                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
+                                    {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+                                </View>
+                            </TouchableOpacity>
+                        )}
                     </View>
-                </ScrollView>
+                </View>
+            </ScrollView>
         </View>
     )
 };
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
         justifyContent: 'center',
         paddingTop: 10,
-        
+
     },
     categoryTitle: {
         fontSize: 20,
