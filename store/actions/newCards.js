@@ -36,7 +36,7 @@ export const fetchWords = () => {
       dispatch({
         type: SET_WORDS,
         // words: loadedWords,
-        userWords: loadedWords
+        userWords: loadedWords.filter(prod => prod.ownerId === userId)
       });
     } catch (err) {
       throw err;
