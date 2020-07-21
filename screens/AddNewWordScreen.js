@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Alert, Keyb
 import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
+import * as FileSystem from 'expo-file-system';
 
 import * as wordsActions from '../store/actions/newCards';
 
@@ -45,28 +46,39 @@ const AddNewWordScreen = props => {
     };
 
     addNewWord = async () => {
-        const imageUrl = pickedImage;
+        const fileName = pickedImage.split('/').pop();
+        const newPath = FileSystem.documentDirectory + fileName;
+        console.log("old path: " + pickedImage);
+        console.log("new path: " + newPath);
+
+        try {
+            await FileSystem.moveAsync({
+              from: pickedImage,
+              to: newPath
+            });
+          } catch (err) {
+            console.log(err);
+            throw err;
+          }
 
         const word = state.word;
         const phonetic = state.phonetic
-        // const voiceRecord = "dummy text voice recorder";
-        // const color = state.color;
         const categoryId = state.categoryId;
 
         if (state.word === null || state.phonetic === null || state.categoryId === null) {
             Alert.alert("Missing item in the form!")
         } else {
-            dispatch(wordsActions.createWord(categoryId, word, imageUrl, phonetic));
-            console.log(state);
+            dispatch(wordsActions.createWord(categoryId, word, newPath, phonetic));
+            // console.log(state);
             Alert.alert("New word added. Check the Database for results.")
             props.navigation.navigate({
-                routeName: 'SpeechMenu'
+                routeName: 'Select'
             })
         }
     }
 
     return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={30} style={styles.screen}>
+        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={styles.screen}>
             <Card style={styles.authContainer}>
                 <TouchableOpacity style={styles.imagePreview} onPress={takeImageHandler}>
                     {!pickedImage ? <Text>No Image was picked yet.</Text> :
