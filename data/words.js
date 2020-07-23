@@ -113,7 +113,7 @@ export const WORDS = [
         'f3',
         'i feel',
         'Happy',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/feelings/happy-min.png')
     ),
     new Word(
         'f4',
@@ -125,7 +125,7 @@ export const WORDS = [
         'f5',
         'i feel',
         'Angry',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/feelings/angry-min.png')
     ),
     new Word(
         'f6',
@@ -137,13 +137,13 @@ export const WORDS = [
         'f7',
         'i feel',
         'Tired',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/feelings/tired-min.png')
     ),
     new Word(
         'f8',
         'i feel',
         'Scared',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/feelings/scared-min.png')
     ),
     new Word(
         'f9',
