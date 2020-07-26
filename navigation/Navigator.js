@@ -14,7 +14,6 @@ import SoundScreen from './../screens/SoundScreen';
 import SpeechBoard from './../screens/SpeechBoard';
 import SpeechMenu from './../screens/SpeechMenu';
 import AddNewWord from './../screens/AddNewWordScreen';
-import DeleteUserWord from './../screens/DeleteUserWordScreen';
 import SelectUserWord from './../screens/SelectUserWordScreen';
 import EditUserWord from './../screens/EditNewWordScreen';
 import FiltersScreen from './../screens/FiltersScreen';
@@ -45,8 +44,7 @@ const DaniStackNavigator = createStackNavigator({
 const SpeechBoardNavigator = createStackNavigator({
     SpeechMenu: SpeechMenu,
     SpeechBoard: SpeechBoard,
-    AddNewWord: AddNewWord,
-    DeleteUserWord: DeleteUserWord
+    AddNewWord: AddNewWord
 },
     {
         defaultNavigationOptions: {

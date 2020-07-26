@@ -11,7 +11,7 @@ import * as newWordActions from '../store/actions/newCards';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
-    const filteredList = WORDS.filter(word => word.categoryId == catId);
+    let filteredList = WORDS.filter(word => word.categoryId == catId);
 
     const colorPicker = {
         "talk": Colors.sesameGreen, //sesame street green
@@ -36,6 +36,8 @@ const SpeechBoard = (props) => {
 
     let userId = useSelector(state => state.auth.userId);
     let userWords = useSelector(state => state.word.userWords);
+    let filteredUserWords = userWords.filter(word => word.categoryId.toLowerCase() == catId);
+    filteredList = filteredList.concat(filteredUserWords);
 
     const loadWords = useCallback(async () => {
         setError(null);
@@ -62,7 +64,7 @@ const SpeechBoard = (props) => {
                     <View style={styles.wordRow}>
                         {filteredList.map(word =>
                             <TouchableOpacity key={word.id} onPress={() => {
-                                Speech.speak(word.word, {
+                                Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
                                     pitch: 1,
                                     rate: 1,
@@ -71,14 +73,17 @@ const SpeechBoard = (props) => {
                                 addToState(word);
                             }}>
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
+                                {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />}
+
+                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
+                                
                             </TouchableOpacity>
                         )}
                         {catId === "user words" && userWords.map(word =>
                             <TouchableOpacity key={word.id} onPress={() => {
-                                Speech.speak(word.word, {
+                                Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
                                     pitch: 1,
                                     rate: 1,
@@ -87,7 +92,9 @@ const SpeechBoard = (props) => {
                                 addToState(word);
                             }}>
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />}
+                                {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />}
+
+                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />} */}
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
                             </TouchableOpacity>
