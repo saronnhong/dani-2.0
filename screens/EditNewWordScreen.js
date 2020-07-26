@@ -5,6 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
 import * as wordsCardActions from '../store/actions/newCards';
+import DropDownPicker from 'react-native-dropdown-picker';
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
 
@@ -76,6 +77,7 @@ const EditNewWordScreen = props => {
             categoryId: editWord.categoryId,
             imageUrl: editWord.imageUrl
         });
+        setPickedImage(editWord.imageUrl);
     }, [setState]);
 
     return (
@@ -84,6 +86,31 @@ const EditNewWordScreen = props => {
                 <TouchableOpacity style={styles.imagePreview} onPress={takeImageHandler}>
                     <Image style={styles.image} source={{ uri: state.imageUrl }} />
                 </TouchableOpacity>
+                <DropDownPicker
+                    items={[
+                        { label: 'Talk', value: 'Talk' },
+                        { label: 'I Feel', value: 'I Feel' },
+                        { label: 'About Me', value: 'About Me' },
+                        { label: 'Activities', value: 'Activities' },
+                        { label: 'Food & Drink', value: 'Food & Drink' },
+                        { label: 'Places', value: 'Places' },
+                        { label: 'Colors', value: 'Colors' },
+                        { label: 'Core Basic', value: 'Core Basic' }
+                    ]}
+                    containerStyle={{ height: 40, marginVertical: 5 }}
+                    style={{ backgroundColor: 'rgba(0,0,0, 0.15)' }}
+                    itemStyle={{
+                        justifyContent: 'flex-start'
+                    }}
+                    dropDownStyle={{backgroundColor: 'rgba(0,0,0, 0.75)'}}
+                    placeholder={state.categoryId}
+                    labelStyle={{
+                        fontSize: 14,
+                        textAlign: 'left',
+                        color: 'white'
+                    }}
+                    onChangeItem={item => setState({ ...state, categoryId: item.value})}
+                />
                 <Text style={styles.label}>Word</Text>
                 <TextInput
                     onChangeText={text => setState({ ...state, word: text })}
@@ -100,14 +127,14 @@ const EditNewWordScreen = props => {
                     color={Colors.sesameRedOrange}
                     value={state.phonetic}
                 />
-                <Text style={styles.label}>Category</Text>
+                {/* <Text style={styles.label}>Category</Text>
                 <TextInput
                     onChangeText={text => setState({ ...state, categoryId: text })}
                     style={styles.wordInput}
                     selectionColor='rgba(250,250,250,.6)'
                     color={Colors.sesameRedOrange}
                     value={state.categoryId}
-                />
+                /> */}
                 <View style={styles.btnRow}>
                     <TouchableOpacity onPress={() => {
                         Alert.alert('Are you sure?', 'Do you really want to update this item?', [

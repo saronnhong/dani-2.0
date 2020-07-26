@@ -4,14 +4,12 @@ import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
-
+import DropDownPicker from 'react-native-dropdown-picker';
 import * as wordsActions from '../store/actions/newCards';
-
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
 
 const windowHeight = Dimensions.get('window').height;
-console.log(windowHeight);
 
 const AddNewWordScreen = props => {
     const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null });
@@ -48,18 +46,16 @@ const AddNewWordScreen = props => {
     addNewWord = async () => {
         const fileName = pickedImage.split('/').pop();
         const newPath = FileSystem.documentDirectory + fileName;
-        console.log("old path: " + pickedImage);
-        console.log("new path: " + newPath);
 
         try {
             await FileSystem.moveAsync({
-              from: pickedImage,
-              to: newPath
+                from: pickedImage,
+                to: newPath
             });
-          } catch (err) {
+        } catch (err) {
             console.log(err);
             throw err;
-          }
+        }
 
         const word = state.word;
         const phonetic = state.phonetic
@@ -69,11 +65,10 @@ const AddNewWordScreen = props => {
             Alert.alert("Missing item in the form!")
         } else {
             dispatch(wordsActions.createWord(categoryId, word, newPath, phonetic));
-            // console.log(state);
             Alert.alert("New word added. Check the Database for results.")
             props.navigation.navigate({
                 routeName: 'Select'
-            })
+            });
         }
     }
 
@@ -84,6 +79,32 @@ const AddNewWordScreen = props => {
                     {!pickedImage ? <Text>No Image was picked yet.</Text> :
                         <Image style={styles.image} source={{ uri: pickedImage }} />}
                 </TouchableOpacity>
+                <Text style={styles.label}>Category</Text>
+                <DropDownPicker
+                    items={[
+                        { label: 'Talk', value: 'Talk' },
+                        { label: 'I Feel', value: 'I Feel' },
+                        { label: 'About Me', value: 'About Me' },
+                        { label: 'Activities', value: 'Activities' },
+                        { label: 'Food & Drink', value: 'Food & Drink' },
+                        { label: 'Places', value: 'Places' },
+                        { label: 'Colors', value: 'Colors' },
+                        { label: 'Core Basic', value: 'Core Basic' }
+                    ]}
+                    containerStyle={{ height: 40, marginVertical: 5 }}
+                    style={{ backgroundColor: 'rgba(0,0,0, 0.15)' }}
+                    itemStyle={{
+                        justifyContent: 'flex-start'
+                    }}
+                    dropDownStyle={{backgroundColor: 'rgba(0,0,0, 0.75)'}}
+                    placeholder="Select an Item"
+                    labelStyle={{
+                        fontSize: 14,
+                        textAlign: 'left',
+                        color: 'white'
+                    }}
+                    onChangeItem={item => setState({ ...state, categoryId: item.value})}
+                />
                 <Text style={styles.label}>Word</Text>
                 <TextInput
                     onChangeText={text => setState({ ...state, word: text })}
@@ -113,13 +134,7 @@ const AddNewWordScreen = props => {
                             selectionColor='rgba(250,250,250,.6)'
                             color= 'white'
                         /> */}
-                <Text style={styles.label}>Category</Text>
-                <TextInput
-                    onChangeText={text => setState({ ...state, categoryId: text })}
-                    style={styles.wordInput}
-                    selectionColor='rgba(250,250,250,.6)'
-                    color='white'
-                />
+                
                 <TouchableOpacity onPress={addNewWord}>
                     <View style={styles.button}>
                         <Text>Add Word</Text>

@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
             const addedWord = action.word;
 
             let updatedOrNewSentenceItem;
-            updatedOrNewSentenceItem = new wordItem(addedWord.id, addedWord.categoryId, addedWord.word, addedWord.imageUrl);
+            updatedOrNewSentenceItem = new wordItem(addedWord.id, addedWord.categoryId, addedWord.word, addedWord.imageUrl, addedWord.phonetic);
             return {
                 ...state,
                 words: state.words.concat(updatedOrNewSentenceItem)

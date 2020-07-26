@@ -104,13 +104,6 @@ SpeechMenu.navigationOptions = navData => {
                 }} />
             </HeaderButtons>
         )
-        // headerRight: () => (
-        //     <HeaderButtons HeaderButtonComponent={HeaderButton}>
-        //         <Item title="Edit" iconName='ios-add' onPress={() => {
-        //             navData.navigation.navigate('AddNewWord');
-        //         }} />
-        //     </HeaderButtons>
-        // )
     }
 }
 

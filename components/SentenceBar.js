@@ -12,7 +12,8 @@ const SentenceBar = props => {
 
     let currState = useSelector(state => state.bar.words);
 
-    let wordArr=[];
+    console.log(currState);
+    let wordArr = [];
     for (let i = 0; i < currState.length; i++) {
         wordArr.push(currState[i].word);
     }
@@ -46,7 +47,8 @@ const SentenceBar = props => {
                     <View style={styles.wordBoard}>
                         {currState.map((word, index) =>
                             <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
-                                {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
+                                {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />}
+                                {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
                                 {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                             </View>
                         )}
