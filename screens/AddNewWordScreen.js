@@ -77,7 +77,7 @@ const AddNewWordScreen = props => {
         const phonetic = state.phonetic
         const categoryId = state.categoryId;
 
-        if (state.word === null || state.phonetic === null || state.categoryId === null) {
+        if (state.word === null || state.categoryId === null) {
             Alert.alert("Missing item in the form!")
         } else {
             dispatch(wordsActions.createWord(categoryId, word, newPath, phonetic));
@@ -96,7 +96,6 @@ const AddNewWordScreen = props => {
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => {
-                    // setModalVisible(!modalVisible);
                     Alert.alert("Modal has been closed.");
                 }}
             >
@@ -105,35 +104,20 @@ const AddNewWordScreen = props => {
                         <View style={styles.modalView}>
                             <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeGalleryHandler}>
                                 <Ionicons name='ios-phone-portrait' size={25} color={'grey'} style={styles.icon} />
-                                <Text style={styles.modalText}> Open From Device</Text>
+                                <Text style={styles.modalText}>Open From Device</Text>
                             </TouchableOpacity>
 
                             <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeCameraHandler}>
                                 <Ionicons name='ios-camera' size={25} color={'grey'} style={styles.icon} />
-                                <Text style={styles.modalText}> Camera</Text>
+                                <Text style={styles.modalText}>Camera</Text>
                             </TouchableOpacity>
 
-                            {/* <TouchableOpacity
-                                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                                onPress={() => {
-                                    setModalVisible(!modalVisible);
-                                }}
-                            >
-                                <Text style={styles.textStyle}>Hide Modal</Text>
-                            </TouchableOpacity> */}
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
 
             </Modal>
-            {/* <TouchableOpacity
-                style={styles.openButton}
-                onPress={() => {
-                    setModalVisible(true);
-                }}
-            >
-                <Text style={styles.textStyle}>Show Modal</Text>
-            </TouchableOpacity> */}
+            
             <Card style={styles.authContainer}>
                 <TouchableOpacity style={styles.imagePreview} onPress={() => {
                     setModalVisible(true);
@@ -275,6 +259,7 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
     },
     modalView: {
+        
         // margin: 20,
         backgroundColor: "white",
         borderRadius: 5,
@@ -288,17 +273,17 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
-        alignItems: 'flex-start',
+        alignItems: 'flex-start'
     },
     modalText: {
         paddingVertical: 15,
         fontFamily: 'open-sans',
         fontSize: 14,
-
     },
     icon: {
         paddingVertical: 15,
-        paddingHorizontal: 25
+        paddingHorizontal: 25,
+        width: 75
     }
 });
 export default AddNewWordScreen;
