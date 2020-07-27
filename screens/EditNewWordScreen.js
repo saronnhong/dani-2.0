@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
@@ -8,6 +8,7 @@ import * as wordsCardActions from '../store/actions/newCards';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Colors from '../constants/Colors';
 import Card from '../components/Card';
+import { Ionicons } from '@expo/vector-icons';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -18,7 +19,8 @@ const EditNewWordScreen = props => {
         categoryId: 'this cat',
         imageUrl: 'something',
         id: ''
-    })
+    });
+    const [modalVisible, setModalVisible] = useState(false);
     const [pickedImage, setPickedImage] = useState();
     const dispatch = useDispatch();
     const editWord = props.navigation.state.params.editWord;
@@ -36,18 +38,48 @@ const EditNewWordScreen = props => {
         return true;
     };
 
-    const takeImageHandler = async () => {
+    // const takeImageHandler = async () => {
+    //     const hasPermission = await verifyPermissions();
+    //     if (!hasPermission) {
+    //         return;
+    //     }
+    //     const image = await ImagePicker.launchCameraAsync({
+    //         allowsEditing: true,
+    //         aspect: [16, 9],
+    //         quality: 0.5
+    //     });
+    //     setPickedImage(image.uri);
+    //     setState({ ...state, imageUrl: image.uri })
+    // };
+
+    const takeGalleryHandler = async () => {
         const hasPermission = await verifyPermissions();
         if (!hasPermission) {
             return;
         }
-        const image = await ImagePicker.launchCameraAsync({
+        
+        const gallery = await ImagePicker.launchImageLibraryAsync({
             allowsEditing: true,
             aspect: [16, 9],
             quality: 0.5
         });
-        setPickedImage(image.uri);
-        setState({ ...state, imageUrl: image.uri })
+        setModalVisible(!modalVisible);
+        setPickedImage(gallery.uri);  
+        setState({ ...state, imageUrl: gallery.uri })
+    };
+    const takeCameraHandler = async () => {
+        const hasPermission = await verifyPermissions();
+        if (!hasPermission) {
+            return;
+        }
+        const camera = await ImagePicker.launchCameraAsync({
+            allowsEditing: true,
+            aspect: [16, 9],
+            quality: 0.5
+        });
+        setModalVisible(!modalVisible);
+        setPickedImage(camera.uri);
+        setState({ ...state, imageUrl: camera.uri })
     };
     const onUpdateWord = () => {
         const fileName = pickedImage.split('/').pop();
@@ -82,8 +114,35 @@ const EditNewWordScreen = props => {
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={styles.screen}>
+            <Modal
+                style={styles.modalContainer}
+                animationType="slide"
+                transparent={true}
+                visible={modalVisible}
+                onRequestClose={() => {
+                    Alert.alert("Modal has been closed.");
+                }}
+            >
+                <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeGalleryHandler}>
+                                <Ionicons name='ios-phone-portrait' size={25} color={'grey'} style={styles.icon} />
+                                <Text style={styles.modalText}>Open From Device</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeCameraHandler}>
+                                <Ionicons name='ios-camera' size={25} color={'grey'} style={styles.icon} />
+                                <Text style={styles.modalText}>Camera</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+                </TouchableWithoutFeedback>
+
+            </Modal>
             <Card style={styles.authContainer}>
-                <TouchableOpacity style={styles.imagePreview} onPress={takeImageHandler}>
+                <TouchableOpacity style={styles.imagePreview} onPress={() => setModalVisible(true)}>
                     <Image style={styles.image} source={{ uri: state.imageUrl }} />
                 </TouchableOpacity>
                 <DropDownPicker
@@ -241,6 +300,38 @@ const styles = StyleSheet.create({
     image: {
         width: "100%",
         height: "100%"
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'stretch',
+    },
+    modalView: {
+        
+        // margin: 20,
+        backgroundColor: "white",
+        borderRadius: 5,
+        // paddingHorizontal: 100,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+        alignItems: 'flex-start'
+    },
+    modalText: {
+        paddingVertical: 15,
+        fontFamily: 'open-sans',
+        fontSize: 14,
+    },
+    icon: {
+        paddingVertical: 15,
+        paddingHorizontal: 25,
+        width: 75
     }
 });
 export default EditNewWordScreen;
