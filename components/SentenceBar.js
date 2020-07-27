@@ -15,7 +15,12 @@ const SentenceBar = props => {
     console.log(currState);
     let wordArr = [];
     for (let i = 0; i < currState.length; i++) {
-        wordArr.push(currState[i].word);
+        if(currState[i].phonetic){
+            wordArr.push(currState[i].phonetic);
+        }else{
+            wordArr.push(currState[i].word);
+        }
+        
     }
     let newSentence = wordArr.join(" ");
 
@@ -27,6 +32,14 @@ const SentenceBar = props => {
         dispatch(wordActions.removeFromBar());
 
     }, [dispatch, barStatus]);
+
+    renderWordImageUrl = (word) => {
+        if (word.phonetic) {
+            return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
+        } else {
+            return <Image style={styles.imageBtn} source={word.imageUrl} />
+        }
+    }
 
     return (
         <View style={styles.overAll}>
@@ -47,7 +60,8 @@ const SentenceBar = props => {
                     <View style={styles.wordBoard}>
                         {currState.map((word, index) =>
                             <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
-                                {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />}
+                                {word.imageUrl != null && renderWordImageUrl(word)}
+                                {/* {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />} */}
                                 {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
                                 {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                             </View>
