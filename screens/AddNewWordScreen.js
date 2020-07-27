@@ -119,9 +119,7 @@ const AddNewWordScreen = props => {
             </Modal>
             
             <Card style={styles.authContainer}>
-                <TouchableOpacity style={styles.imagePreview} onPress={() => {
-                    setModalVisible(true);
-                }}>
+                <TouchableOpacity style={styles.imagePreview} onPress={() => setModalVisible(true)} >
                     {!pickedImage ? <Text>No Image was picked yet.</Text> :
                         <Image style={styles.image} source={{ uri: pickedImage }} />}
                 </TouchableOpacity>
