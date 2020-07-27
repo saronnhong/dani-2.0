@@ -56,6 +56,14 @@ const SpeechBoard = (props) => {
 
     }, [loadWords]);
 
+    renderWordImageUrl = (word) => {
+        if (word.phonetic) {
+            return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
+        } else {
+            return <Image style={styles.imageBtn} source={word.imageUrl} />
+        }
+    }
+
     return (
         <View>
             <ScrollView style={styles.overall}>
@@ -73,12 +81,12 @@ const SpeechBoard = (props) => {
                                 addToState(word);
                             }}>
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />}
 
-                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
+                                    {word.imageUrl != null && renderWordImageUrl(word)}
+
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
-                                
+
                             </TouchableOpacity>
                         )}
                         {catId === "user words" && userWords.map(word =>
@@ -92,9 +100,9 @@ const SpeechBoard = (props) => {
                                 addToState(word);
                             }}>
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
-                                {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />}
 
-                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />} */}
+                                    {word.imageUrl != null && renderWordImageUrl(word)}
+
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                                 </View>
                             </TouchableOpacity>
