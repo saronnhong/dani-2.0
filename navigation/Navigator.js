@@ -18,6 +18,8 @@ import SelectUserWord from './../screens/SelectUserWordScreen';
 import EditUserWord from './../screens/EditNewWordScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
+import SearchScreen from '../screens/SearchScreen';
+
 import Colors from './../constants/Colors';
 
 const defaultStackNavOptions = {
@@ -103,7 +105,7 @@ const tabScreenConfig = {
         }
     },
     Tab1: {
-        screen: SpeechBoardNavigator,
+        screen: SearchScreen,
         navigationOptions: {
             tabBarLabel: 'Search',
             tabBarIcon: (tabInfo) => {
