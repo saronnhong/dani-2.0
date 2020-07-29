@@ -20,10 +20,10 @@ const SpeechBoard = (props) => {
         "activities": Colors.sesameOrange, //sesame street yellow
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
-        "colors": "grey",
+        "colors": Colors.sesameGreen,
         "user words": "#f2c063",
         'numbers': Colors.sesameRedOrange,
-        'core words': Colors.sesameGreen
+        'core words': Colors.sesamePurple
     }
     const color = colorPicker[catId];
 

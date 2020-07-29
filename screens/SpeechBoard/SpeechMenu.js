@@ -55,7 +55,7 @@ const SpeechMenu = (props) => {
         {
             id: 9,
             cat: "Core Words",
-            imageUrl: null,
+            imageUrl: require('../../assets/images/speechboard/menu/0_corewords.png'),
         },
         {
             id: 10,
