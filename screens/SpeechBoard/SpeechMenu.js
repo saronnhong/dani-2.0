@@ -2,12 +2,12 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
+import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
-import Voices from '../constants/Voices';
-import { WORDS } from '../data/words';
-import Colors from '../constants/Colors';
-import * as wordActions from '../store/actions/newCards'
+import Voices from '../../constants/Voices';
+import { WORDS } from '../../data/words';
+import Colors from '../../constants/Colors';
+import * as wordActions from '../../store/actions/newCards'
 import { LinearGradient } from 'expo-linear-gradient';
 
 
@@ -15,46 +15,46 @@ const SpeechMenu = (props) => {
     const categories = [
         {
             id: 1,
-            cat: "Talk",
-            imageUrl: require('../assets/images/speechboard/menu/chat-min.png'),
+            cat: "Chat",
+            imageUrl: require('../../assets/images/speechboard/menu/chat-min.png'),
         },
         {
             id: 2,
             cat: "I Feel",
-            imageUrl: require('../assets/images/speechboard/menu/feelings-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/feelings-min.png'),
         },
         {
             id: 3,
             cat: "About Me",
-            imageUrl: require('../assets/images/speechboard/menu/self-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/self-min.png'),
         }, {
             id: 4,
             cat: "Activities",
-            imageUrl: require('../assets/images/speechboard/menu/activities-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/activities-min.png'),
         },
         {
             id: 5,
             cat: "Food & Drink",
-            imageUrl: require('../assets/images/speechboard/menu/food-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/food-min.png'),
         },
         {
             id: 6,
             cat: "Numbers",
-            imageUrl: require('../assets/images/speechboard/menu/numbers-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/numbers-min.png'),
         },
         {
             id: 7,
             cat: "Places",
-            imageUrl: require('../assets/images/speechboard/menu/places-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/places-min.png'),
         },
         {
             id: 8,
             cat: "Colors",
-            imageUrl: require('../assets/images/speechboard/menu/colors-min.png'),
+            imageUrl: require('../../assets/images/speechboard/menu/colors-min.png'),
         },
         {
             id: 9,
-            cat: "Core Basic",
+            cat: "Core Words",
             imageUrl: null,
         },
         {
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         paddingTop: 30,
         flex: 1,
-        backgroundColor: 'rgba(255, 185, 64, .2)'
+        backgroundColor: 'rgba(255, 185, 64, .3)'
     },
     categoryTitle: {
         fontSize: 20,

@@ -3,99 +3,99 @@ import Word from '../models/words';
 export const WORDS = [
     new Word(
         't1',
-        'talk',
+        'chat',
         'Hello',
-        require('../assets/images/speechboard/talk/hello.png')
+        require('../assets/images/speechboard/chat/hello.png')
     ),
     new Word(
         't2',
-        'talk',
+        'chat',
         'Goodbye',
-        require('../assets/images/speechboard/talk/goodbye.png')
+        require('../assets/images/speechboard/chat/goodbye.png')
     ),
     new Word(
         't3',
-        'talk',
+        'chat',
         'Thank You',
-        require('../assets/images/speechboard/talk/thankyou.png')
+        require('../assets/images/speechboard/chat/thankyou.png')
     ),
     // new Word(
     //     't4',
-    //     'talk',
+    //     'chat',
     //     'No Thank You',
-    //     require('../assets/images/speechboard/talk/cow.png')
+    //     require('../assets/images/speechboard/chat/cow.png')
     // ),
     new Word(
         't5',
-        'talk',
+        'chat',
         'No',
-        require('../assets/images/speechboard/talk/no.png')
+        require('../assets/images/speechboard/chat/no.png')
     ),
     new Word(
         't6',
-        'talk',
+        'chat',
         'Yes',
-        require('../assets/images/speechboard/talk/yes.png')
+        require('../assets/images/speechboard/chat/yes.png')
     ),
     new Word(
         't7',
-        'talk',
+        'chat',
         'Okay',
-        require('../assets/images/speechboard/talk/okay.png')
+        require('../assets/images/speechboard/chat/okay.png')
     ),
     new Word(
         't8',
-        'talk',
+        'chat',
         'How Are You?',
-        require('../assets/images/speechboard/talk/how_are_you.png')
+        require('../assets/images/speechboard/chat/how_are_you.png')
     ),
     new Word(
         't9',
-        'talk',
+        'chat',
         'Who',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         't10',
-        'talk',
+        'chat',
         'What',
-        require('../assets/images/speechboard/talk/what.png')
+        require('../assets/images/speechboard/chat/what.png')
     ),
     new Word(
         't11',
-        'talk',
+        'chat',
         'Where',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         't12',
-        'talk',
+        'chat',
         'When',
-        require('../assets/images/speechboard/talk/when-min.png')
+        require('../assets/images/speechboard/chat/when-min.png')
     ),
     new Word(
         't13',
-        'talk',
+        'chat',
         'Why',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         't14',
-        'talk',
+        'chat',
         'How',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         't15',
-        'talk',
+        'chat',
         'Bad',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         't16',
-        'talk',
+        'chat',
         'Good',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'f1',
@@ -119,7 +119,7 @@ export const WORDS = [
         'f4',
         'i feel',
         'Sad',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'f5',
@@ -131,7 +131,7 @@ export const WORDS = [
         'f6',
         'i feel',
         'Excited',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'f7',
@@ -149,19 +149,19 @@ export const WORDS = [
         'f9',
         'i feel',
         'Hungry',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'f10',
         'i feel',
         'Thirsty',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'f11',
         'i feel',
         'Bored',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'am1',
@@ -203,13 +203,13 @@ export const WORDS = [
         'a3',
         'activities',
         'All done',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'a4',
         'activities',
         'Play',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'a5',
@@ -287,133 +287,133 @@ export const WORDS = [
         'fd4',
         'food & drink',
         'Food',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd5',
         'food & drink',
         'Fruit',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd6',
         'food & drink',
         'Vegetable',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd7',
         'food & drink',
         'Drink',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd8',
         'food & drink',
         'Water',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd9',
         'food & drink',
         'Juice',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd10',
         'food & drink',
         'Milk',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd11',
         'food & drink',
         'Apple',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd12',
         'food & drink',
         'Orange',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd13',
         'food & drink',
         'Banana',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd14',
         'food & drink',
         'Chips',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd15',
         'food & drink',
         'Pasta',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd16',
         'food & drink',
         'Pizza',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd17',
         'food & drink',
         'Burger',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd18',
         'food & drink',
         'Sandwich',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd19',
         'food & drink',
         'Soup',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd20',
         'food & drink',
         'Mac and Cheese',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd21',
         'food & drink',
         'Crackers',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd22',
         'food & drink',
         'Dinner',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd23',
         'food & drink',
         'Breakfast',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd24',
         'food & drink',
         'Lunch',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'fd25',
         'food & drink',
         'Dessert',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'p1',
@@ -455,13 +455,13 @@ export const WORDS = [
         'p7',
         'places',
         'inside',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'p8',
         'places',
         'outside',
-        require('../assets/images/speechboard/talk/cow.png')
+        require('../assets/images/speechboard/chat/cow.png')
     ),
     new Word(
         'p9',
@@ -570,5 +570,353 @@ export const WORDS = [
         'colors',
         'Brown',
         require('../assets/images/speechboard/colors/brown.png')
+    ),
+    new Word(
+        'num1',
+        'numbers',
+        'One',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num2',
+        'numbers',
+        'Two',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num3',
+        'numbers',
+        'Three',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num4',
+        'numbers',
+        'Four',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num5',
+        'numbers',
+        'Five',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num6',
+        'numbers',
+        'Six',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num7',
+        'numbers',
+        'Seven',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num8',
+        'numbers',
+        'Eight',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num9',
+        'numbers',
+        'Nine',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num10',
+        'numbers',
+        'Ten',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num11',
+        'numbers',
+        'Eleven',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num12',
+        'numbers',
+        'Twelve',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num13',
+        'numbers',
+        'Thirteen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num14',
+        'numbers',
+        'Fourteen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num15',
+        'numbers',
+        'Fifteen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num16',
+        'numbers',
+        'Sixteen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num17',
+        'numbers',
+        'Seventeen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num18',
+        'numbers',
+        'Eighteen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num19',
+        'numbers',
+        'Nineteen',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'num20',
+        'numbers',
+        'Twenty',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw1',
+        'core words',
+        'I',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw2',
+        'core words',
+        'Me',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw3',
+        'core words',
+        'You',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw4',
+        'core words',
+        'he',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw5',
+        'core words',
+        'She',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw6',
+        'core words',
+        'We',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw7',
+        'core words',
+        'They',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw8',
+        'core words',
+        'That',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw9',
+        'core words',
+        'It',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw10',
+        'core words',
+        'See',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw11',
+        'core words',
+        'Think',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw12',
+        'core words',
+        'Want',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw13',
+        'core words',
+        'Need',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw14',
+        'core words',
+        'Like',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw15',
+        'core words',
+        'Look',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw16',
+        'core words',
+        'Help',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw17',
+        'core words',
+        'Go',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw18',
+        'core words',
+        'Stop',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw19',
+        'core words',
+        'All',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw20',
+        'core words',
+        'Do',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw21',
+        'core words',
+        'Can',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw22',
+        'core words',
+        "Can't",
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw23',
+        'core words',
+        'Make',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw24',
+        'core words',
+        'Open',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw25',
+        'core words',
+        'Close',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw26',
+        'core words',
+        'Get',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw27',
+        'core words',
+        'Hold',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw28',
+        'core words',
+        'All Done',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw29',
+        'core words',
+        'Same',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw30',
+        'core words',
+        'Different',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw31',
+        'core words',
+        'More',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw32',
+        'core words',
+        'Some',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw33',
+        'core words',
+        'Here',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw34',
+        'core words',
+        'There',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw35',
+        'core words',
+        'Up',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw36',
+        'core words',
+        'Down',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw37',
+        'core words',
+        'In',
+        require('../assets/images/speechboard/places/park-min.png')
+    ),
+    new Word(
+        'cw38',
+        'core words',
+        'Out',
+        require('../assets/images/speechboard/places/park-min.png')
     ),
 ];
