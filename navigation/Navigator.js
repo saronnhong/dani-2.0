@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, SafeAreaView, Button, View } from 'react-native';
+import { SafeAreaView, Button, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
@@ -8,17 +8,18 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import AuthScreen from './../screens/AuthScreen';
-import MainMenuScreen from './../screens/MainMenuScreen';
-import SoundsMenuScreen from './../screens/SoundsMenuScreen';
-import SoundScreen from './../screens/SoundScreen';
-import SpeechBoard from './../screens/SpeechBoard';
-import SpeechMenu from './../screens/SpeechMenu';
-import AddNewWord from './../screens/AddNewWordScreen';
-import SelectUserWord from './../screens/SelectUserWordScreen';
-import EditUserWord from './../screens/EditNewWordScreen';
+import MainMenuScreen from './../screens/Sounds/MainMenuScreen';
+import SoundsMenuScreen from './../screens/Sounds/SoundsMenuScreen';
+import SoundScreen from './../screens/Sounds/SoundScreen';
+import SpeechBoard from './../screens/SpeechBoard/SpeechBoard';
+import SpeechMenu from './../screens/SpeechBoard/SpeechMenu';
+import AddNewWord from './../screens/SpeechBoard/AddNewWordScreen';
+import SelectUserWord from './../screens/SpeechBoard/SelectUserWordScreen';
+import EditUserWord from './../screens/SpeechBoard/EditNewWordScreen';
+import SearchScreen from '../screens/SpeechBoard/SearchScreen';
 import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
-import SearchScreen from '../screens/SearchScreen';
+
 
 import Colors from './../constants/Colors';
 
@@ -45,8 +46,7 @@ const DaniStackNavigator = createStackNavigator({
 
 const SpeechBoardNavigator = createStackNavigator({
     SpeechMenu: SpeechMenu,
-    SpeechBoard: SpeechBoard,
-    AddNewWord: AddNewWord
+    SpeechBoard: SpeechBoard
 },
     {
         defaultNavigationOptions: {
@@ -60,8 +60,22 @@ const SpeechBoardNavigator = createStackNavigator({
 )
 const EditNavigator = createStackNavigator({
     Select: SelectUserWord,
-    Edit: EditUserWord
+    Edit: EditUserWord,
+    AddNewWord: AddNewWord
     
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
+    }
+)
+const SearchNavigator = createStackNavigator({
+    Search: SearchScreen,
 },
     {
         defaultNavigationOptions: {
@@ -105,7 +119,7 @@ const tabScreenConfig = {
         }
     },
     Tab1: {
-        screen: SearchScreen,
+        screen: SearchNavigator,
         navigationOptions: {
             tabBarLabel: 'Search',
             tabBarIcon: (tabInfo) => {

@@ -1,11 +1,13 @@
-import React, { useRef, useCallback, useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import React, { useRef, useCallback, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
 import * as wordActions from '../store/actions/sentenceBar';
+
+const windowWidth = Dimensions.get('window').width;
 
 const SentenceBar = props => {
     const [barStatus, setBarStatus] = useState(false);
@@ -20,7 +22,6 @@ const SentenceBar = props => {
         }else{
             wordArr.push(currState[i].word);
         }
-        
     }
     let newSentence = wordArr.join(" ");
 
@@ -30,7 +31,6 @@ const SentenceBar = props => {
     onDelete = useCallback(async () => {
         setBarStatus(!barStatus);
         dispatch(wordActions.removeFromBar());
-
     }, [dispatch, barStatus]);
 
     renderWordImageUrl = (word) => {
@@ -58,11 +58,10 @@ const SentenceBar = props => {
                     });
                 }}>
                     <View style={styles.wordBoard}>
+                    
                         {currState.map((word, index) =>
                             <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
                                 {word.imageUrl != null && renderWordImageUrl(word)}
-                                {/* {word.phonetic ? <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} /> : <Image style={styles.imageBtn} source={word.imageUrl} />} */}
-                                {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
                                 {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
                             </View>
                         )}
@@ -77,12 +76,24 @@ const SentenceBar = props => {
 };
 
 const styles = StyleSheet.create({
-    content: {
-        flex: 1
-    },
     overAll: {
+        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgba(250,250,250, .3)',
+    },
+    content: {
+        flex: 1,
+        height: 100
+    },
+    wordBoard: {
+        height: 100,
+        flexDirection: 'row',
+        paddingTop: 10,
+        minWidth: windowWidth*.95,
+        // backgroundColor: 'purple',
+        paddingRight: 35
+        
     },
     btnContainer: {
         justifyContent: 'center',
@@ -120,20 +131,16 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-bold',
         color: 'white',
     },
-    wordBoard: {
-        height: 100,
+    deleteContainer: {
         flexDirection: 'row',
-        paddingTop: 10
+        position: 'absolute',
+        right: 0,
+        top: 25
     },
     deleteBtn: {
         marginRight: 3,
         color: "#d32f2f"
     },
-    deleteContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'flex-end'
-    }
 });
 
 export default SentenceBar;

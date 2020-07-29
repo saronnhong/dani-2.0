@@ -1,27 +1,29 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import SentenceBar from '../components/SentenceBar';
+import SentenceBar from '../../components/SentenceBar';
 import * as Speech from 'expo-speech';
-import * as wordActions from '../store/actions/sentenceBar'
-import Voices from '../constants/Voices';
-import { WORDS } from '../data/words';
-import Colors from '../constants/Colors';
-import * as newWordActions from '../store/actions/newCards';
+import * as wordActions from '../../store/actions/sentenceBar'
+import Voices from '../../constants/Voices';
+import { WORDS } from '../../data/words';
+import Colors from '../../constants/Colors';
+import * as newWordActions from '../../store/actions/newCards';
 
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
     let filteredList = WORDS.filter(word => word.categoryId == catId);
 
     const colorPicker = {
-        "talk": Colors.sesameGreen, //sesame street green
+        "chat": Colors.sesameGreen, //sesame street green
         "i feel": Colors.sesameYellow, //sesame street orange
         "about me": "#B63136",
         "activities": Colors.sesameOrange, //sesame street yellow
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
         "colors": "grey",
-        "user words": "#f2c063"
+        "user words": "#f2c063",
+        'numbers': Colors.sesameRedOrange,
+        'core words': Colors.sesameGreen
     }
     const color = colorPicker[catId];
 
@@ -187,7 +189,8 @@ const styles = StyleSheet.create({
     },
     overall: {
         height: "100%",
-        backgroundColor: 'rgba(255, 185, 64, .2)'
+        // backgroundColor: 'rgba(255, 185, 64, .2)'
+        backgroundColor: 'rgba(255, 185, 64, .3)',
     },
     button: {
         width: '50%',

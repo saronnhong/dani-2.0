@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, Alert, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import SentenceBar from '../components/SentenceBar';
+import SentenceBar from '../../components/SentenceBar';
 import * as Speech from 'expo-speech';
 // import * as wordActions from '../store/actions/sentenceBar'
-import Voices from '../constants/Voices';
-import { WORDS } from '../data/words';
-import Colors from '../constants/Colors';
-import * as newWordActions from '../store/actions/newCards';
-import AddNewWordScreen from '../screens/AddNewWordScreen';
+import Voices from '../../constants/Voices';
+import { WORDS } from '../../data/words';
+import Colors from '../../constants/Colors';
+import * as newWordActions from '../../store/actions/newCards';
+import AddNewWordScreen from './AddNewWordScreen';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
+import HeaderButton from '../../components/HeaderButton';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -20,7 +20,7 @@ const SelectUserWordScreen = (props) => {
     const [error, setError] = useState();
     
     let userWords = useSelector(state => state.word.userWords);
-    console.log(userWords);
+    // console.log(userWords);
 
     const loadWords = useCallback(async () => {
         setError(null);

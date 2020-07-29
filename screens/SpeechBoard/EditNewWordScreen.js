@@ -1,22 +1,29 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert, KeyboardAvoidingView, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
+import * as wordsCardActions from '../../store/actions/newCards';
 import DropDownPicker from 'react-native-dropdown-picker';
-import * as wordsActions from '../store/actions/newCards';
-import Colors from '../constants/Colors';
-import Card from '../components/Card';
+import Colors from '../../constants/Colors';
+import Card from '../../components/Card';
 import { Ionicons } from '@expo/vector-icons';
 
 const windowHeight = Dimensions.get('window').height;
 
-const AddNewWordScreen = props => {
+const EditNewWordScreen = props => {
+    const [state, setState] = useState({
+        word: 'this word',
+        phonetic: 'this phonetic',
+        categoryId: 'this cat',
+        imageUrl: 'something',
+        id: ''
+    });
     const [modalVisible, setModalVisible] = useState(false);
-    const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null });
     const [pickedImage, setPickedImage] = useState();
     const dispatch = useDispatch();
+    const editWord = props.navigation.state.params.editWord;
 
     const verifyPermissions = async () => {
         const result = await Permissions.askAsync(Permissions.CAMERA, Permissions.CAMERA_ROLL);
@@ -31,6 +38,20 @@ const AddNewWordScreen = props => {
         return true;
     };
 
+    // const takeImageHandler = async () => {
+    //     const hasPermission = await verifyPermissions();
+    //     if (!hasPermission) {
+    //         return;
+    //     }
+    //     const image = await ImagePicker.launchCameraAsync({
+    //         allowsEditing: true,
+    //         aspect: [16, 9],
+    //         quality: 0.5
+    //     });
+    //     setPickedImage(image.uri);
+    //     setState({ ...state, imageUrl: image.uri })
+    // };
+
     const takeGalleryHandler = async () => {
         const hasPermission = await verifyPermissions();
         if (!hasPermission) {
@@ -44,6 +65,7 @@ const AddNewWordScreen = props => {
         });
         setModalVisible(!modalVisible);
         setPickedImage(gallery.uri);  
+        setState({ ...state, imageUrl: gallery.uri })
     };
     const takeCameraHandler = async () => {
         const hasPermission = await verifyPermissions();
@@ -57,36 +79,38 @@ const AddNewWordScreen = props => {
         });
         setModalVisible(!modalVisible);
         setPickedImage(camera.uri);
+        setState({ ...state, imageUrl: camera.uri })
     };
-
-    addNewWord = async () => {
+    const onUpdateWord = () => {
         const fileName = pickedImage.split('/').pop();
         const newPath = FileSystem.documentDirectory + fileName;
+        setState({ ...state, imageUrl: newPath });
 
-        try {
-            await FileSystem.moveAsync({
-                from: pickedImage,
-                to: newPath
-            });
-        } catch (err) {
-            console.log(err);
-            throw err;
-        }
-
-        const word = state.word;
-        const phonetic = state.phonetic
-        const categoryId = state.categoryId;
-
-        if (state.word === null || state.categoryId === null) {
-            Alert.alert("Missing item in the form!")
-        } else {
-            dispatch(wordsActions.createWord(categoryId, word, newPath, phonetic));
-            Alert.alert("New word added. Check the Database for results.")
-            props.navigation.navigate({
-                routeName: 'Select'
-            });
-        }
+        dispatch(wordsCardActions.updateWord(
+            state.id,
+            state.categoryId,
+            state.word,
+            state.imageUrl,
+            state.phonetic,
+        ))
+        props.navigation.navigate('Select');
     }
+
+    const onDeleteWord = () => {
+        dispatch(wordsCardActions.deleteWord(state.id));
+        props.navigation.navigate('Select');
+    }
+
+    useEffect(() => {
+        setState({
+            id: editWord.id,
+            word: editWord.word,
+            phonetic: editWord.phonetic,
+            categoryId: editWord.categoryId,
+            imageUrl: editWord.imageUrl
+        });
+        setPickedImage(editWord.imageUrl);
+    }, [setState]);
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={styles.screen}>
@@ -117,13 +141,10 @@ const AddNewWordScreen = props => {
                 </TouchableWithoutFeedback>
 
             </Modal>
-            
             <Card style={styles.authContainer}>
-                <TouchableOpacity style={styles.imagePreview} onPress={() => setModalVisible(true)} >
-                    {!pickedImage ? <Text>No Image was picked yet.</Text> :
-                        <Image style={styles.image} source={{ uri: pickedImage }} />}
+                <TouchableOpacity style={styles.imagePreview} onPress={() => setModalVisible(true)}>
+                    <Image style={styles.image} source={{ uri: state.imageUrl }} />
                 </TouchableOpacity>
-                <Text style={styles.label}>Category</Text>
                 <DropDownPicker
                     items={[
                         { label: 'Talk', value: 'Talk' },
@@ -140,49 +161,78 @@ const AddNewWordScreen = props => {
                     itemStyle={{
                         justifyContent: 'flex-start'
                     }}
-                    dropDownStyle={{ backgroundColor: 'rgba(0,0,0, 0.75)' }}
-                    placeholder="Select an Item"
+                    dropDownStyle={{backgroundColor: 'rgba(0,0,0, 0.75)'}}
+                    placeholder={state.categoryId}
                     labelStyle={{
                         fontSize: 14,
                         textAlign: 'left',
                         color: 'white'
                     }}
-                    onChangeItem={item => setState({ ...state, categoryId: item.value })}
+                    onChangeItem={item => setState({ ...state, categoryId: item.value})}
                 />
                 <Text style={styles.label}>Word</Text>
                 <TextInput
                     onChangeText={text => setState({ ...state, word: text })}
                     style={styles.wordInput}
                     selectionColor='rgba(250,250,250,.6)'
-                    color='white'
+                    color={Colors.sesameRedOrange}
+                    value={state.word}
                 />
                 <Text style={styles.label}>Phonetic</Text>
                 <TextInput
                     onChangeText={text => setState({ ...state, phonetic: text })}
                     style={styles.wordInput}
                     selectionColor='rgba(250,250,250,.6)'
-                    color='white'
+                    color={Colors.sesameRedOrange}
+                    value={state.phonetic}
                 />
-                {/* <Text style={styles.label}>Recorded Voice</Text>
-                        <TextInput
-                            // placeholder="Record Voice"
-                            style={styles.wordInput}
-                            selectionColor='rgba(250,250,250,.6)'
-                            color= 'white' 
-                         /> */}
+                {/* <Text style={styles.label}>Category</Text>
+                <TextInput
+                    onChangeText={text => setState({ ...state, categoryId: text })}
+                    style={styles.wordInput}
+                    selectionColor='rgba(250,250,250,.6)'
+                    color={Colors.sesameRedOrange}
+                    value={state.categoryId}
+                /> */}
+                <View style={styles.btnRow}>
+                    <TouchableOpacity onPress={() => {
+                        Alert.alert('Are you sure?', 'Do you really want to update this item?', [
+                            { text: 'No', style: 'default' },
+                            {
+                                text: 'Yes',
+                                style: 'destructive',
+                                onPress: onUpdateWord
+                            }
+                        ]);
+                    }}>
+                        <View style={{ ...styles.button, backgroundColor: Colors.sesameGreen }}>
+                            <Text style={{ color: 'white' }}>Update</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={() => {
+                            Alert.alert('Are you sure?', 'Do you really want to delete this item?', [
+                                { text: 'No', style: 'default' },
+                                {
+                                    text: 'Yes',
+                                    style: 'destructive',
+                                    onPress: onDeleteWord
+                                }
+                            ]);
+                        }}>
+                        <View style={{ ...styles.button, backgroundColor: Colors.sesameRedOrange }}>
+                            <Text style={{ color: 'white' }}>Delete</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
 
-                <TouchableOpacity onPress={addNewWord}>
-                    <View style={styles.button}>
-                        <Text>Add Word</Text>
-                    </View>
-                </TouchableOpacity>
             </Card>
         </KeyboardAvoidingView>
     )
 };
-AddNewWordScreen.navigationOptions = navData => {
+EditNewWordScreen.navigationOptions = navData => {
     return {
-        headerTitle: 'Create A New Word',
+        headerTitle: 'Edit Word',
         headerBackTitle: 'Cancel'
     }
 }
@@ -228,11 +278,15 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 30,
         borderColor: Colors.border,
+        paddingHorizontal: 40,
         paddingVertical: 20,
-        backgroundColor: Colors.sesameYellow,
         marginTop: 20,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    btnRow: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     imagePreview: {
         width: '100%',
@@ -247,10 +301,6 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%"
     },
-    // modalContainer: {
-    //     flex: 1,
-    //     width: 200
-    // },
     centeredView: {
         flex: 1,
         justifyContent: 'flex-end',
@@ -284,4 +334,4 @@ const styles = StyleSheet.create({
         width: 75
     }
 });
-export default AddNewWordScreen;
+export default EditNewWordScreen;
