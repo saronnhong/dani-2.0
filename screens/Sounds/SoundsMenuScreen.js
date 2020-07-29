@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
-import { SOUNDS } from '../data/animals';
+import { SOUNDS } from '../../data/animals';
 
 const SoundsMenuScreen = props => {
 

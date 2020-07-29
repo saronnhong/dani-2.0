@@ -1,17 +1,26 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { SafeAreaView, Button, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createMaterialBottomTabNavigator } from 'react-navigation-material-bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import { createAppContainer } from 'react-navigation';
-import LoginScreen from './../screens/LoginScreen';
-import MainMenuScreen from './../screens/MainMenuScreen';
-import SoundsMenuScreen from './../screens/SoundsMenuScreen';
-import SoundScreen from './../screens/SoundScreen';
-import SpeechBoard from './../screens/SpeechBoard';
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { useDispatch } from 'react-redux';
+import * as authActions from '../store/actions/auth';
+import AuthScreen from './../screens/AuthScreen';
+import MainMenuScreen from './../screens/Sounds/MainMenuScreen';
+import SoundsMenuScreen from './../screens/Sounds/SoundsMenuScreen';
+import SoundScreen from './../screens/Sounds/SoundScreen';
+import SpeechBoard from './../screens/SpeechBoard/SpeechBoard';
+import SpeechMenu from './../screens/SpeechBoard/SpeechMenu';
+import AddNewWord from './../screens/SpeechBoard/AddNewWordScreen';
+import SelectUserWord from './../screens/SpeechBoard/SelectUserWordScreen';
+import EditUserWord from './../screens/SpeechBoard/EditNewWordScreen';
+import SearchScreen from '../screens/SpeechBoard/SearchScreen';
 import FiltersScreen from './../screens/FiltersScreen';
+import StartupScreen from '../screens/StartUpScreen';
+
+
 import Colors from './../constants/Colors';
 
 const defaultStackNavOptions = {
@@ -25,7 +34,7 @@ const defaultStackNavOptions = {
 }
 
 const DaniStackNavigator = createStackNavigator({
-    Login: LoginScreen,
+    // Auth: AuthScreen,
     MainMenu: MainMenuScreen,
     SoundMenu: SoundsMenuScreen,
     SoundScreen: SoundScreen
@@ -36,38 +45,136 @@ const DaniStackNavigator = createStackNavigator({
 )
 
 const SpeechBoardNavigator = createStackNavigator({
+    SpeechMenu: SpeechMenu,
     SpeechBoard: SpeechBoard
 },
     {
-        defaultNavigationOptions: defaultStackNavOptions
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
+    }
+)
+const EditNavigator = createStackNavigator({
+    Select: SelectUserWord,
+    Edit: EditUserWord,
+    AddNewWord: AddNewWord
+    
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
+    }
+)
+const SearchNavigator = createStackNavigator({
+    Search: SearchScreen,
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
     }
 )
 const tabScreenConfig = {
-    Main: {
-        screen: DaniStackNavigator,
+    // Main: {
+    //     screen: DaniStackNavigator,
+    //     navigationOptions: {
+    //         tabBarLabel: 'Main',
+    //         tabBarIcon: (tabInfo) => {
+    //             return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
+    //         },
+    //         tabBarColor: Colors.primaryColor,
+    //         style: {
+    //             backgroundColor: Colors.orange,
+    //         },
+    //     }
+    // },
+    Tab0: {
+        screen: SpeechBoardNavigator,
         navigationOptions: {
-            tabBarLabel: 'Main',
+            tabBarLabel: 'Menu',
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
+                return <Ionicons name='ios-apps' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.primaryColor
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'white',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
         }
     },
     Tab1: {
+        screen: SearchNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Search',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-search' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
+        }
+    },
+    Tab2: {
         screen: SpeechBoardNavigator,
         navigationOptions: {
             tabBarLabel: 'Speech Board',
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-chatbubbles' size={25} color={tabInfo.tintColor} />
             },
-            tabBarColor: Colors.accentColor
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
+        }
+    },
+    Tab3: {
+        screen: EditNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Edit',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-create' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
         }
     }
 }
 
 const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
+    initialRouteName: "Tab2",
     tabBarOptions: {
-        activeTintColor: Colors.accentColor
+        activeTintColor: Colors.sesameRed
     }
 });
 
@@ -76,8 +183,52 @@ const FiltersNavigator = createStackNavigator({
 });
 
 const MainNavigator = createDrawerNavigator({
-    Settings: TabNavigator,
-    Filters: FiltersNavigator
-});
+    Tab: TabNavigator,
+    Filters: FiltersNavigator,
+    Sound: DaniStackNavigator
+},
+    {
+        contentOptions: {
+            activeTintColor: Colors.primary
+        },
+        contentComponent: props => {
+            const dispatch = useDispatch();
+            return (
+                <View style={{ flex: 1, paddingTop: 20 }}>
+                    <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
+                        <DrawerItems  {...props} />
+                        <Button
+                            title="Logout"
+                            color={Colors.primary}
+                            onPress={() => {
+                                dispatch(authActions.logout());
+                                // props.navigation.navigate('Auth');
+                            }}
+                        />
+                    </SafeAreaView>
+                </View>
+            );
+        }
+    }
+);
 
-export default createAppContainer(MainNavigator);
+const AuthNavigator = createStackNavigator({
+    Auth: AuthScreen
+}, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Colors.orange,
+        },
+        headerTintColor: "white", 
+        headerTitle: ''
+    }
+})
+
+const Main2Navigator = createSwitchNavigator({
+    Startup: StartupScreen,
+    Auth: AuthNavigator,
+    Tab2: MainNavigator
+    // Main: MainNavigator
+})
+
+export default createAppContainer(Main2Navigator);

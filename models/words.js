@@ -3,13 +3,17 @@ class Word {
         id,
         categoryId,
         word,
-        imageUrl
+        imageUrl,
+        phonetic,
+        ownerId
 
     ) {
         this.id = id;
         this.categoryId = categoryId;
         this.word = word;
         this.imageUrl = imageUrl;
+        this.phonetic = phonetic;
+        this.ownerId = ownerId;
     }
 }
 

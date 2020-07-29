@@ -1,7 +1,16 @@
-### Starting a React Native App
-## Steps
-1. expo init `<name of app>`
-2. Install Navigators
-    - `npm install --save react-navigation-stack`
-    - `npm install --save react-navigation-tabs`
-    - `npm install --save react-navigation-drawer`
+### DANI (Developing And Nurturing Interface)
+
+## Overview
+
+## Usage
+
+## Examples
+
+## Technologies
+DANI uses the following technologies
+* React Native
+* Expo
+* Redux
+* Firebase for Authentication and Database
+
+## GitHub

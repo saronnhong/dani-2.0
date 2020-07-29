@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import CustomButton from '../components/CustomButton';
+import CustomButton from '../../components/CustomButton';
 import * as Speech from 'expo-speech';
-import Voices from '../constants/Voices';
-import { SOUNDS } from '../data/animals';
-import HeaderButton from '../components/HeaderButton';
+import Voices from '../../constants/Voices';
+import { SOUNDS } from '../../data/animals';
+import HeaderButton from '../../components/HeaderButton';
 
 const SoundScreen = props => {
     const soundId = props.navigation.state.params.id;

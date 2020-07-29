@@ -1,13 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
+
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
 import Navigator from './navigation/Navigator';
 import { enableScreens } from 'react-native-screens';
+import authReducer from './store/reducers/auth';
+import sentenceReducer from './store/reducers/sentenceBar';
+import newWordsReducer from './store/reducers/newCards';
+import NavigationContainer from './navigation/NavigationContainer';
 
 //Optimizes memory usage for screens for each native platform (UIViewController for iOS, and FragmentActivity for Android)
 enableScreens();
+
+const rootReducer = combineReducers({
+  word: newWordsReducer,
+  bar: sentenceReducer,
+  auth: authReducer
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 //Loads custom fonts
 const fetchFonts = () => {
@@ -20,24 +34,19 @@ const fetchFonts = () => {
 export default function App() {
   const [fontLoaded, setFontLoaded] = useState(false);
 
-  if(!fontLoaded) {
+  if (!fontLoaded) {
     return (
       <AppLoading
-      startAsync={fetchFonts}
-      onFinish={() => setFontLoaded(true)}
+        startAsync={fetchFonts}
+        onFinish={() => setFontLoaded(true)}
       />
     );
   }
   return (
-    <Navigator />
+    <Provider store={store}>
+      <NavigationContainer />
+    </Provider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
