@@ -1,11 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, Alert, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import SentenceBar from '../../components/SentenceBar';
-import * as Speech from 'expo-speech';
-// import * as wordActions from '../store/actions/sentenceBar'
-import Voices from '../../constants/Voices';
-import { WORDS } from '../../data/words';
 import Colors from '../../constants/Colors';
 import * as newWordActions from '../../store/actions/newCards';
 import AddNewWordScreen from './AddNewWordScreen';

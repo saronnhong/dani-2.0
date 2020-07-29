@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
@@ -11,6 +11,7 @@ import * as wordActions from '../../store/actions/sentenceBar'
 const SearchScreen = props => {
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    let userWords = useSelector(state => state.word.userWords);
 
     const dispatch = useDispatch();
 
@@ -26,6 +27,7 @@ const SearchScreen = props => {
             return;
         }
         let filteredArr = [];
+        let filteredUserWordsArr = [];
         const newText = text.toLowerCase();
 
         for (let i = 0; i < WORDS.length; i++) {
@@ -33,7 +35,21 @@ const SearchScreen = props => {
                 filteredArr.push(WORDS[i]);
             }
         }
+        for (let i = 0; i < userWords.length; i++) {
+            if (userWords[i].word.toLowerCase().includes(newText)) {
+                filteredUserWordsArr.push(userWords[i]);
+            }
+        }
+        filteredArr = filteredArr.concat(filteredUserWordsArr);
         setSearchResults(filteredArr);
+    }
+
+    renderWordImageUrl = (word) => {
+        if (word.phonetic) {
+            return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
+        } else {
+            return <Image style={styles.imageBtn} source={word.imageUrl} />
+        }
     }
 
     return (
@@ -70,8 +86,11 @@ const SearchScreen = props => {
                                 addToState(word);
                             }}>
                                 <View style={styles.btnContainer} >
-                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
-                                    <Text style={styles.btnText}>{word.word}</Text>
+                                    {word.imageUrl != null && renderWordImageUrl(word)}
+                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
+                                    {/* <Text style={styles.btnText}>{word.word}</Text> */}
+                                    {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+
                                 </View>
                             </TouchableOpacity>
                         )}
@@ -146,6 +165,16 @@ const styles = StyleSheet.create({
     imageBtn: {
         width: '90%',
         height: '72%'
+    },
+    btnText: {
+        fontSize: 14,
+        fontFamily: 'open-sans-bold',
+        color: 'white',
+    },
+    btnTextSmall: {
+        fontSize: 11,
+        fontFamily: 'open-sans-bold',
+        color: 'white',
     },
 });
 export default SearchScreen;
