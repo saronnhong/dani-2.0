@@ -5,6 +5,7 @@ import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import Colors from '../../constants/Colors';
+import { Audio } from 'expo-av';
 
 
 const SpeechMenu = (props) => {
@@ -56,9 +57,18 @@ const SpeechMenu = (props) => {
         {
             id: 10,
             cat: "User Words",
-            imageUrl: null,
+            imageUrl: require('../../assets/images/speechboard/menu/userwords-min.png'),
         },
     ];
+
+    const enableSound = async ()=> {
+        const emptySound = new Audio.Sound();
+        Audio.setAudioModeAsync({playsInSilentModeIOS: true});
+        await emptySound.loadAsync(require("../../assets/sound/emptySoundFile.mp3"));
+        await emptySound.playAsync();
+    }
+    
+    enableSound();
 
     return (
 

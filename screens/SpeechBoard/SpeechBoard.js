@@ -9,6 +9,7 @@ import { WORDS } from '../../data/words';
 import Colors from '../../constants/Colors';
 import * as newWordActions from '../../store/actions/newCards';
 
+
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
     let filteredList = WORDS.filter(word => word.categoryId == catId);
@@ -65,6 +66,8 @@ const SpeechBoard = (props) => {
             return <Image style={styles.imageBtn} source={word.imageUrl} />
         }
     }
+
+    
 
     return (
         <View>

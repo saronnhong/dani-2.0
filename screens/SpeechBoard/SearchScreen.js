@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
@@ -12,6 +12,7 @@ import * as wordActions from '../../store/actions/sentenceBar'
 
 const SearchScreen = props => {
     const [search, setSearch] = useState('');
+    const [listen, setListen] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     let userWords = useSelector(state => state.word.userWords);
 
@@ -45,6 +46,7 @@ const SearchScreen = props => {
         filteredArr = filteredArr.concat(filteredUserWordsArr);
         setSearchResults(filteredArr);
     }
+    
 
     renderWordImageUrl = (word) => {
         if (word.phonetic) {
@@ -53,6 +55,8 @@ const SearchScreen = props => {
             return <Image style={styles.imageBtn} source={word.imageUrl} />
         }
     }
+    
+    
 
     return (
         <View style={styles.screen}>

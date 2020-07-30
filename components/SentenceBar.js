@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
@@ -11,15 +11,13 @@ const windowWidth = Dimensions.get('window').width;
 
 const SentenceBar = props => {
     const [barStatus, setBarStatus] = useState(false);
-
     let currState = useSelector(state => state.bar.words);
 
-    console.log(currState);
     let wordArr = [];
     for (let i = 0; i < currState.length; i++) {
-        if(currState[i].phonetic){
+        if (currState[i].phonetic) {
             wordArr.push(currState[i].phonetic);
-        }else{
+        } else {
             wordArr.push(currState[i].word);
         }
     }
@@ -28,10 +26,10 @@ const SentenceBar = props => {
     const scrollViewRef = useRef();
     const dispatch = useDispatch();
 
-    onDelete = useCallback(async () => {
-        setBarStatus(!barStatus);
+    onDelete = async () => {
         dispatch(wordActions.removeFromBar());
-    }, [dispatch, barStatus]);
+        setBarStatus(!barStatus);
+    };
 
     renderWordImageUrl = (word) => {
         if (word.phonetic) {
@@ -58,7 +56,7 @@ const SentenceBar = props => {
                     });
                 }}>
                     <View style={styles.wordBoard}>
-                    
+
                         {currState.map((word, index) =>
                             <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
                                 {word.imageUrl != null && renderWordImageUrl(word)}
@@ -90,10 +88,10 @@ const styles = StyleSheet.create({
         height: 100,
         flexDirection: 'row',
         paddingTop: 10,
-        minWidth: windowWidth*.95,
+        minWidth: windowWidth * .95,
         // backgroundColor: 'purple',
         paddingRight: 35
-        
+
     },
     btnContainer: {
         justifyContent: 'center',

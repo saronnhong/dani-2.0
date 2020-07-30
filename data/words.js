@@ -274,7 +274,7 @@ export const WORDS = [
     new Word(
         'fd2',
         'food & drink',
-        'I want to eat...',
+        'I want to drink...',
         null
     ),
     new Word(
@@ -287,31 +287,31 @@ export const WORDS = [
         'fd4',
         'food & drink',
         'Food',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/food1-min.png')
     ),
     new Word(
         'fd5',
         'food & drink',
         'Fruit',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/fruits-min.png')
     ),
     new Word(
         'fd6',
         'food & drink',
         'Vegetable',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/vegetables-min.png')
     ),
     new Word(
         'fd7',
         'food & drink',
         'Drink',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/drink-min.png')
     ),
     new Word(
         'fd8',
         'food & drink',
         'Water',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/water-min.png')
     ),
     new Word(
         'fd9',
@@ -391,29 +391,30 @@ export const WORDS = [
         'Crackers',
         require('../assets/images/speechboard/foodanddrink/cracker-min.png')
     ),
-    new Word(
-        'fd22',
-        'food & drink',
-        'Dinner',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
-    ),
+    
     new Word(
         'fd23',
         'food & drink',
         'Breakfast',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/breakfast-min.png')
     ),
     new Word(
         'fd24',
         'food & drink',
         'Lunch',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/lunch-min.png')
+    ),
+    new Word(
+        'fd22',
+        'food & drink',
+        'Dinner',
+        require('../assets/images/speechboard/foodanddrink/dinner-min.png')
     ),
     new Word(
         'fd25',
         'food & drink',
         'Dessert',
-        require('../assets/images/speechboard/foodanddrink/juice-min.png')
+        require('../assets/images/speechboard/foodanddrink/dessert-min.png')
     ),
     new Word(
         'p1',
