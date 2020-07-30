@@ -17,9 +17,9 @@ import AddNewWord from './../screens/SpeechBoard/AddNewWordScreen';
 import SelectUserWord from './../screens/SpeechBoard/SelectUserWordScreen';
 import EditUserWord from './../screens/SpeechBoard/EditNewWordScreen';
 import SearchScreen from '../screens/SpeechBoard/SearchScreen';
-import FiltersScreen from './../screens/FiltersScreen';
 import StartupScreen from '../screens/StartUpScreen';
-
+import SettingsScreen from '../screens/SettingsScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 import Colors from './../constants/Colors';
 
@@ -101,23 +101,23 @@ const tabScreenConfig = {
     //         },
     //     }
     // },
-    Tab0: {
-        screen: SpeechBoardNavigator,
-        navigationOptions: {
-            tabBarLabel: 'Menu',
-            tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-apps' size={25} color={tabInfo.tintColor} />
-            },
-            tabBarColor: Colors.accentColor,
-            tabBarOptions: {
-                activeTintColor: 'white',
-                inactiveTintColor: Colors.border,
-                style: {
-                    backgroundColor: Colors.gradientOrangeBottom,
-                },
-            },
-        }
-    },
+    // Tab0: {
+    //     screen: SpeechBoardNavigator,
+    //     navigationOptions: {
+    //         tabBarLabel: 'Menu',
+    //         tabBarIcon: (tabInfo) => {
+    //             return <Ionicons name='ios-apps' size={25} color={tabInfo.tintColor} />
+    //         },
+    //         tabBarColor: Colors.accentColor,
+    //         tabBarOptions: {
+    //             activeTintColor: 'white',
+    //             inactiveTintColor: Colors.border,
+    //             style: {
+    //                 backgroundColor: Colors.gradientOrangeBottom,
+    //             },
+    //         },
+    //     }
+    // },
     Tab1: {
         screen: SearchNavigator,
         navigationOptions: {
@@ -178,14 +178,36 @@ const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
     }
 });
 
-const FiltersNavigator = createStackNavigator({
-    Filters: FiltersScreen
-});
+
+const SettingsNavigator = createStackNavigator({
+    Settings: SettingsScreen
+}, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Colors.orange,
+        },
+        headerTintColor: "white", 
+        headerTitle: ''
+    }
+})
+
+const ProfileNavigator = createStackNavigator({
+    Profile: ProfileScreen
+}, {
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: Colors.orange,
+        },
+        headerTintColor: "white", 
+        headerTitle: ''
+    }
+})
 
 const MainNavigator = createDrawerNavigator({
-    Tab: TabNavigator,
-    Filters: FiltersNavigator,
-    Sound: DaniStackNavigator
+    "Speech Board": TabNavigator,
+    Profile: ProfileNavigator,
+    Sound: DaniStackNavigator,
+    Settings: SettingsNavigator
 },
     {
         contentOptions: {
@@ -202,7 +224,6 @@ const MainNavigator = createDrawerNavigator({
                             color={Colors.primary}
                             onPress={() => {
                                 dispatch(authActions.logout());
-                                // props.navigation.navigate('Auth');
                             }}
                         />
                     </SafeAreaView>

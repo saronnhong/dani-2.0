@@ -1,14 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
-import { WORDS } from '../../data/words';
 import Colors from '../../constants/Colors';
-import * as wordActions from '../../store/actions/newCards'
-import { LinearGradient } from 'expo-linear-gradient';
 
 
 const SpeechMenu = (props) => {
