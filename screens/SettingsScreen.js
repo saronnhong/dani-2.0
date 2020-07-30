@@ -1,24 +1,38 @@
-import React, {useState} from 'react';
-import { View, Text, StyleSheet, Button, ScrollView, Switch } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Button, ScrollView, Switch, TouchableHighlight } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 
 const SettingsScreen = props => {
-    const [login, setLogin]= useState(true);
-    const [backup, setBackup]= useState(true);
+    const [cardSize, setCardSize] = useState('Large');
+    const [textSize, setTextSize] = useState('Medium');
+    const [speechVoice, setSpeechVoice] = useState('Nicky');
+    const [speechPitch, setSpeechPitch] = useState();
+    const [speechRate, setSpeechRate] = useState();
+    const [font, setFont] = useState('Roboto');
+    const [backup, setBackup] = useState(false);
+    const [login, setLogin] = useState(true);
+    const [silentmode, setSilentmode] = useState(true);
+
     return (
         <ScrollView style={styles.screen}>
             <Text style={styles.label}>VIEWING SIZE</Text>
             <View style={styles.settingsContainer}>
-                <View style={styles.itemContainer}>
-                    <Text style={styles.item}>Card </Text>
-                    <Text style={styles.item}>Medium <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
-                </View>
+                <TouchableHighlight
+                    activeOpacity={0.9}
+                    underlayColor={"#e5e5ea"}
+                    onPress={()=>{}}
+                >
+                    <View style={styles.itemContainer}>
+                        <Text style={styles.item}>Card </Text>
+                        <Text style={styles.item}>{cardSize} <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
+                    </View>
+                </TouchableHighlight>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Text</Text>
-                    <Text style={styles.item}>Medium <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
+                    <Text style={styles.item}>{textSize} <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
                 </View>
             </View>
 
@@ -27,15 +41,15 @@ const SettingsScreen = props => {
             <View style={styles.settingsContainer}>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Voice</Text>
-                    <Text style={styles.item}>Nicky <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
+                    <Text style={styles.item}>{speechVoice} <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
                 </View>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Pitch</Text>
-                    <Text style={styles.item}>High <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
+                    <Text style={styles.item}>{speechPitch} <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
                 </View>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Rate</Text>
-                    <Text style={styles.item}>Fast <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
+                    <Text style={styles.item}>{speechRate} <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
                 </View>
             </View>
 
@@ -43,20 +57,7 @@ const SettingsScreen = props => {
             <View style={styles.settingsContainer}>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Font</Text>
-                    <Text style={styles.item}>Open Sans <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
-                </View>
-            </View>
-
-            <Text style={styles.label}>BACKUP</Text>
-            <View style={styles.settingsContainer}>
-                <View style={styles.itemContainer}>
-                    <Text style={styles.item}>Backup User Words</Text>
-                    <Switch
-                        trackColor={{ true: Colors.sesameGreen }}
-                        value={backup}
-                        onValueChange={()=> setBackup(!backup)}
-                    />
-                    {/* <Text style={styles.item}>Yes <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text> */}
+                    <Text style={styles.item}>{font} <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text>
                 </View>
             </View>
 
@@ -67,9 +68,33 @@ const SettingsScreen = props => {
                     <Switch
                         trackColor={{ true: Colors.sesameGreen }}
                         value={login}
-                        onValueChange={()=> setLogin(!login)}
+                        onValueChange={() => setLogin(!login)}
                     />
-                    {/* <Text style={styles.item}>No <Ionicons name='ios-arrow-forward' size={18} color='grey' /></Text> */}
+                </View>
+            </View>
+
+            <Text style={styles.label}>SILENT MODE</Text>
+            <View style={styles.settingsContainer}>
+                <View style={styles.itemContainer}>
+                    <Text style={styles.item}>Speech Heard in Silent Mode</Text>
+                    <Switch
+                        trackColor={{ true: Colors.sesameGreen }}
+                        value={silentmode}
+                        onValueChange={() => setSilentMode(!silentmode)}
+                    />
+                </View>
+            </View>
+
+
+            <Text style={styles.label}>BACKUP</Text>
+            <View style={styles.settingsContainer}>
+                <View style={styles.itemContainer}>
+                    <Text style={styles.item}>Backup User Words</Text>
+                    <Switch
+                        trackColor={{ true: Colors.sesameGreen }}
+                        value={backup}
+                        onValueChange={() => setBackup(!backup)}
+                    />
                 </View>
             </View>
 
