@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity, Image, Scr
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import { WORDS } from '../../data/words';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import SentenceBar from '../../components/SentenceBar';
@@ -54,7 +56,7 @@ const SearchScreen = props => {
 
     return (
         <View style={styles.screen}>
-            <View style={{ height: 100 }}>
+            <View style={{ height: 100, backgroundColor: 'rgba(255, 185, 64, .2)' }}>
                 <SentenceBar />
             </View>
 
@@ -75,6 +77,7 @@ const SearchScreen = props => {
 
                 <View >
                     <View style={styles.scrollContainer}>
+                        {!searchResults.length && <Text style={styles.emptySearch}>No search results found.</Text>}
                         {searchResults.map(word =>
                             <TouchableOpacity key={word.id} onPress={() => {
                                 Speech.speak(word.word, {
@@ -105,7 +108,13 @@ const SearchScreen = props => {
 SearchScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Search',
-        headerBackTitle: 'Cancel'
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Menu" iconName='ios-menu' onPress={() => {
+                    navData.navigation.toggleDrawer();
+                }} />
+            </HeaderButtons>
+        )
     }
 }
 
@@ -125,6 +134,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap',
         marginBottom: 40,
+        flex: 1
     },
     wordInput: {
         width: '90%',
@@ -176,5 +186,8 @@ const styles = StyleSheet.create({
         fontFamily: 'open-sans-bold',
         color: 'white',
     },
+    emptySearch: {
+        marginTop: 100
+    }
 });
 export default SearchScreen;
