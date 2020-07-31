@@ -5,6 +5,7 @@ import HeaderButton from '../components/HeaderButton';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
+import * as profileActions from '../store/actions/profile';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -19,6 +20,9 @@ const ProfileScreen = props => {
     // const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null});
     const [pickedImage, setPickedImage] = useState();
     const dispatch = useDispatch();
+
+    dispatch(profileActions.createProfile('Rebecca', '22', 'san diego', 'image', 'today'))
+
 
     const verifyPermissions = async (permissionType) => {
         const result = await Permissions.askAsync(Permissions[permissionType]);
@@ -60,43 +64,68 @@ const ProfileScreen = props => {
         setModalVisible(!modalVisible);
         setPickedImage(camera.uri);
     };
-    return (
-    <View>
-        <Modal
-                style={styles.modalContainer}
-                animationType="slide"
-                transparent={true}
-                visible={modalVisible}
-                onRequestClose={() => {
-                    Alert.alert("Modal has been closed.");
-                }}
-            >
-                <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeGalleryHandler}>
-                                <Ionicons name='ios-phone-portrait' size={25} color={'grey'} style={styles.icon} />
-                                <Text style={styles.modalText}>Open From Device</Text>
-                            </TouchableOpacity>
 
-                            <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeCameraHandler}>
-                                <Ionicons name='ios-camera' size={25} color={'grey'} style={styles.icon} />
-                                <Text style={styles.modalText}>Camera</Text>
-                            </TouchableOpacity>
+    addNewProfile = async () => {
+        const fileName = pickedImage.split('/').pop();
+        const newPath = FileSystem.documentDirectory + fileName;
 
+        try {
+            await FileSystem.moveAsync({
+                from: pickedImage,
+                to: newPath
+            });
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+
+        const name = state.name;
+        const age = state.age;
+
+        return (
+            <View>
+                <Modal
+                    style={styles.modalContainer}
+                    animationType="slide"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                    }}
+                >
+                    <TouchableWithoutFeedback onPress={() => setModalVisible(!modalVisible)}>
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeGalleryHandler}>
+                                    <Ionicons name='ios-phone-portrait' size={25} color={'grey'} style={styles.icon} />
+                                    <Text style={styles.modalText}>Open From Device</Text>
+                                </TouchableOpacity>
+
+                                <TouchableOpacity style={{ flexDirection: 'row' }} onPress={takeCameraHandler}>
+                                    <Ionicons name='ios-camera' size={25} color={'grey'} style={styles.icon} />
+                                    <Text style={styles.modalText}>Camera</Text>
+                                </TouchableOpacity>
+
+                            </View>
                         </View>
-                    </View>
-                </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback>
 
-            </Modal>
-            
-            
-        <View style={styles.authContainer}>
-              <TouchableOpacity style={styles.imagePreview} onPress={() => setModalVisible(true)} >
-                  {!pickedImage ? <Text>No Image was picked yet.</Text> :
-                      <Image style={styles.image} source={{ uri: pickedImage }} />}
-              </TouchableOpacity>
-              {/* <Text style={styles.label}>Category</Text>
+                </Modal>
+
+
+                <View style={styles.authContainer}>
+                    <TouchableOpacity style={styles.imagePreview} onPress={() => setModalVisible(true)} >
+                        {!pickedImage ? <Text>No Image was picked yet.</Text> :
+                            <Image style={styles.image} source={{ uri: pickedImage }} />}
+                    </TouchableOpacity>
+
+                    <TextInput
+                        onChangeText={text => setState({ ...state, phonetic: text })}
+                        style={styles.wordInput}
+                        selectionColor='rgba(250,250,250,.6)'
+                        color='white'
+                    />
+                    {/* <Text style={styles.label}>Category</Text>
               <DropDownPicker
                   items={[
                       { label: 'Chat', value: 'Chat' },
@@ -142,118 +171,120 @@ const ProfileScreen = props => {
                       <Text>Add Word</Text>
                   </View>
               </TouchableOpacity> */}
-        </View>
-        {/* // <View style={styles.screen}>
+                </View>
+                {/* // <View style={styles.screen}>
         //     <Text>This is the Profile Screen.</Text>
             
         // </View> */}
-    </View>
-    )
-
-};
-ProfileScreen.navigationOptions = navData => {
-    return {
-        headerTitle: 'Profile',
-        headerLeft: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Menu" iconName='ios-menu' onPress={() => {
-                    navData.navigation.toggleDrawer();
-                }} />
-            </HeaderButtons>
+            </View>
         )
-    }
-}
 
-const styles = StyleSheet.create({
-    screen: {
-        flex: 1,
-        backgroundColor: 'rgba(255, 185, 64, .2)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%'
-    },
-    authContainer: {
-        width: '85%',
-        maxWidth: 400,
-        maxHeight: windowHeight,
-        padding: 20,
-        backgroundColor: 'rgba(0,0,0, 0.15)',
-        paddingVertical: 15,
-        paddingHorizontal: 20,
-        borderRadius: 20,
-    },
-    addImage: {
-        height: 100,
-        width: 100,
-        borderWidth: 2,
-        borderColor: Colors.border,
-        marginTop: 10,
-    },
-    label: {
-        fontFamily: 'open-sans-bold',
-        marginVertical: 5,
-        color: 'rgba(250,250,250,.6)'
-    },
-    wordInput: {
-        width: '100%',
-        height: 25,
-        paddingHorizontal: 2,
-        borderBottomColor: 'rgba(250,250,250,.3)',
-        borderBottomWidth: 1,
-    },
-    button: {
-        borderWidth: 2,
-        borderRadius: 30,
-        borderColor: Colors.border,
-        paddingVertical: 20,
-        backgroundColor: Colors.sesameYellow,
-        marginTop: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    imagePreview: {
-        width: '100%',
-        height: 200,
-        marginBottom: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#ccc',
-        borderWidth: 1
-    },
-    image: {
-        width: "100%",
-        height: "100%"
-    },
-    centeredView: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'stretch',
-    },
-    modalView: {
-        // margin: 20,
-        backgroundColor: "white",
-        borderRadius: 5,
-        // paddingHorizontal: 100,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        alignItems: 'flex-start'
-    },
-    modalText: {
-        paddingVertical: 15,
-        fontFamily: 'open-sans',
-        fontSize: 14,
-    },
-    icon: {
-        paddingVertical: 15,
-        paddingHorizontal: 25,
-        width: 75
+    };
+
+
+    ProfileScreen.navigationOptions = navData => {
+        return {
+            headerTitle: 'Profile',
+            headerLeft: () => (
+                <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                    <Item title="Menu" iconName='ios-menu' onPress={() => {
+                        navData.navigation.toggleDrawer();
+                    }} />
+                </HeaderButtons>
+            )
+        }
     }
-});
-export default ProfileScreen;
+
+    const styles = StyleSheet.create({
+        screen: {
+            flex: 1,
+            backgroundColor: 'rgba(255, 185, 64, .2)',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '100%'
+        },
+        authContainer: {
+            width: '85%',
+            maxWidth: 400,
+            maxHeight: windowHeight,
+            padding: 20,
+            backgroundColor: 'rgba(0,0,0, 0.15)',
+            paddingVertical: 15,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+        },
+        addImage: {
+            height: 100,
+            width: 100,
+            borderWidth: 2,
+            borderColor: Colors.border,
+            marginTop: 10,
+        },
+        label: {
+            fontFamily: 'open-sans-bold',
+            marginVertical: 5,
+            color: 'rgba(250,250,250,.6)'
+        },
+        wordInput: {
+            width: '100%',
+            height: 25,
+            paddingHorizontal: 2,
+            borderBottomColor: 'rgba(250,250,250,.3)',
+            borderBottomWidth: 1,
+        },
+        button: {
+            borderWidth: 2,
+            borderRadius: 30,
+            borderColor: Colors.border,
+            paddingVertical: 20,
+            backgroundColor: Colors.sesameYellow,
+            marginTop: 10,
+            justifyContent: 'center',
+            alignItems: 'center'
+        },
+        imagePreview: {
+            width: '100%',
+            height: 200,
+            marginBottom: 10,
+            justifyContent: 'center',
+            alignItems: 'center',
+            borderColor: '#ccc',
+            borderWidth: 1
+        },
+        image: {
+            width: "100%",
+            height: "100%"
+        },
+        centeredView: {
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignItems: 'stretch',
+        },
+        modalView: {
+            // margin: 20,
+            backgroundColor: "white",
+            borderRadius: 5,
+            // paddingHorizontal: 100,
+            alignItems: "center",
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+            alignItems: 'flex-start'
+        },
+        modalText: {
+            paddingVertical: 15,
+            fontFamily: 'open-sans',
+            fontSize: 14,
+        },
+        icon: {
+            paddingVertical: 15,
+            paddingHorizontal: 25,
+            width: 75
+        }
+    });
+    export default ProfileScreen;

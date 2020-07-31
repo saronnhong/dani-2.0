@@ -75,6 +75,8 @@ SelectUserWordScreen.navigationOptions = navData => {
     }
 }
 
+
+
 const styles = StyleSheet.create({
     editContainer: {
         flex: 1,
