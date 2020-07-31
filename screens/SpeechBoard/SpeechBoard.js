@@ -9,6 +9,7 @@ import { WORDS } from '../../data/words';
 import Colors from '../../constants/Colors';
 import * as newWordActions from '../../store/actions/newCards';
 
+
 const SpeechBoard = (props) => {
     const catId = props.navigation.state.params.categoryId;
     let filteredList = WORDS.filter(word => word.categoryId == catId);
@@ -20,10 +21,10 @@ const SpeechBoard = (props) => {
         "activities": Colors.sesameOrange, //sesame street yellow
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
-        "colors": "grey",
+        "colors": Colors.sesameGreen,
         "user words": "#f2c063",
         'numbers': Colors.sesameRedOrange,
-        'core words': Colors.sesameGreen
+        'core words': Colors.sesamePurple
     }
     const color = colorPicker[catId];
 
@@ -65,6 +66,8 @@ const SpeechBoard = (props) => {
             return <Image style={styles.imageBtn} source={word.imageUrl} />
         }
     }
+
+    
 
     return (
         <View>

@@ -113,7 +113,7 @@ const EditNewWordScreen = props => {
     }, [setState]);
 
     return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={80} style={styles.screen}>
+        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={150} style={styles.screen}>
             <Modal
                 style={styles.modalContainer}
                 animationType="slide"
@@ -147,7 +147,7 @@ const EditNewWordScreen = props => {
                 </TouchableOpacity>
                 <DropDownPicker
                     items={[
-                        { label: 'Talk', value: 'Talk' },
+                        { label: 'Chat', value: 'Chat' },
                         { label: 'I Feel', value: 'I Feel' },
                         { label: 'About Me', value: 'About Me' },
                         { label: 'Activities', value: 'Activities' },

@@ -1,8 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import { WORDS } from '../../data/words';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import SentenceBar from '../../components/SentenceBar';
@@ -10,7 +12,9 @@ import * as wordActions from '../../store/actions/sentenceBar'
 
 const SearchScreen = props => {
     const [search, setSearch] = useState('');
+    const [listen, setListen] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
+    let userWords = useSelector(state => state.word.userWords);
 
     const dispatch = useDispatch();
 
@@ -26,6 +30,7 @@ const SearchScreen = props => {
             return;
         }
         let filteredArr = [];
+        let filteredUserWordsArr = [];
         const newText = text.toLowerCase();
 
         for (let i = 0; i < WORDS.length; i++) {
@@ -33,12 +38,29 @@ const SearchScreen = props => {
                 filteredArr.push(WORDS[i]);
             }
         }
+        for (let i = 0; i < userWords.length; i++) {
+            if (userWords[i].word.toLowerCase().includes(newText)) {
+                filteredUserWordsArr.push(userWords[i]);
+            }
+        }
+        filteredArr = filteredArr.concat(filteredUserWordsArr);
         setSearchResults(filteredArr);
     }
+    
+
+    renderWordImageUrl = (word) => {
+        if (word.phonetic) {
+            return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
+        } else {
+            return <Image style={styles.imageBtn} source={word.imageUrl} />
+        }
+    }
+    
+    
 
     return (
         <View style={styles.screen}>
-            <View style={{ height: 100 }}>
+            <View style={{ height: 100, backgroundColor: 'rgba(255, 185, 64, .2)' }}>
                 <SentenceBar />
             </View>
 
@@ -59,6 +81,7 @@ const SearchScreen = props => {
 
                 <View >
                     <View style={styles.scrollContainer}>
+                        {!searchResults.length && <Text style={styles.emptySearch}>No search results found.</Text>}
                         {searchResults.map(word =>
                             <TouchableOpacity key={word.id} onPress={() => {
                                 Speech.speak(word.word, {
@@ -70,8 +93,11 @@ const SearchScreen = props => {
                                 addToState(word);
                             }}>
                                 <View style={styles.btnContainer} >
-                                    {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
-                                    <Text style={styles.btnText}>{word.word}</Text>
+                                    {word.imageUrl != null && renderWordImageUrl(word)}
+                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
+                                    {/* <Text style={styles.btnText}>{word.word}</Text> */}
+                                    {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+
                                 </View>
                             </TouchableOpacity>
                         )}
@@ -86,7 +112,13 @@ const SearchScreen = props => {
 SearchScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Search',
-        headerBackTitle: 'Cancel'
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Menu" iconName='ios-menu' onPress={() => {
+                    navData.navigation.toggleDrawer();
+                }} />
+            </HeaderButtons>
+        )
     }
 }
 
@@ -106,6 +138,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexWrap: 'wrap',
         marginBottom: 40,
+        flex: 1
     },
     wordInput: {
         width: '90%',
@@ -147,5 +180,18 @@ const styles = StyleSheet.create({
         width: '90%',
         height: '72%'
     },
+    btnText: {
+        fontSize: 14,
+        fontFamily: 'open-sans-bold',
+        color: 'white',
+    },
+    btnTextSmall: {
+        fontSize: 11,
+        fontFamily: 'open-sans-bold',
+        color: 'white',
+    },
+    emptySearch: {
+        marginTop: 100
+    }
 });
 export default SearchScreen;

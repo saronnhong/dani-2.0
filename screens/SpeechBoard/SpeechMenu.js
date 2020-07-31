@@ -1,14 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react';
-import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, ActivityIndicator, ImageBackground } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
-import { WORDS } from '../../data/words';
 import Colors from '../../constants/Colors';
-import * as wordActions from '../../store/actions/newCards'
-import { LinearGradient } from 'expo-linear-gradient';
+import { Audio } from 'expo-av';
 
 
 const SpeechMenu = (props) => {
@@ -55,14 +52,23 @@ const SpeechMenu = (props) => {
         {
             id: 9,
             cat: "Core Words",
-            imageUrl: null,
+            imageUrl: require('../../assets/images/speechboard/menu/0_corewords.png'),
         },
         {
             id: 10,
             cat: "User Words",
-            imageUrl: null,
+            imageUrl: require('../../assets/images/speechboard/menu/userwords-min.png'),
         },
     ];
+
+    const enableSound = async ()=> {
+        const emptySound = new Audio.Sound();
+        Audio.setAudioModeAsync({playsInSilentModeIOS: true});
+        await emptySound.loadAsync(require("../../assets/sound/emptySoundFile.mp3"));
+        await emptySound.playAsync();
+    }
+    
+    enableSound();
 
     return (
 
