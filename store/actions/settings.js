@@ -6,7 +6,6 @@ export const fetchSettings = () => {
     const userId = getState().auth.userId;
     try {
       //any async code you want!
-
       const response = await fetch(`https://dani-2.firebaseio.com/settings/${userId}.json`);
 
       if (!response.ok) {

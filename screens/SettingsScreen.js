@@ -9,11 +9,6 @@ import * as settingsActions from '../store/actions/settings';
 
 const SettingsScreen = props => {
     let userSettings = useSelector(state => state.setting.userSetting);
-    
-    // setCardSize(userSettings.cardSize);
-    // setSpeechPitch(userSettings.pitch);
-    // setSpeechRate(userSettings.rate);
-    // setSpeechVoice(userSettings.voice);
 
     const [cardSize, setCardSize] = useState(userSettings.cardSize);
     const [speechVoice, setSpeechVoice] = useState(userSettings.voice);
@@ -23,7 +18,6 @@ const SettingsScreen = props => {
     const [backup, setBackup] = useState(false);
     const [login, setLogin] = useState(true);
     const [silentMode, setSilentMode] = useState(true);
-    const [initialLaunch, setInitialLaunch] = useState(false)
 
     const optionsItemsCardSize = [
         { id: '1', value: 'Small', cat: 'cardSize' },
