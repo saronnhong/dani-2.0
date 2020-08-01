@@ -16,7 +16,7 @@ console.log(windowHeight);
 
 const AddNewWordScreen = props => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null});
+    const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null });
     const [pickedImage, setPickedImage] = useState();
     const dispatch = useDispatch();
 
@@ -91,7 +91,7 @@ const AddNewWordScreen = props => {
             });
         }
     }
-    
+
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={150} style={styles.screen}>
@@ -138,7 +138,7 @@ const AddNewWordScreen = props => {
                         { label: 'Food & Drink', value: 'Food & Drink' },
                         { label: 'Places', value: 'Places' },
                         { label: 'Colors', value: 'Colors' },
-                        { label: 'Core Basic', value: 'Core Basic' }
+                        { label: 'Core Words', value: 'Core Words' }
                     ]}
                     containerStyle={{ height: 40, marginVertical: 5 }}
                     style={{ backgroundColor: 'rgba(0,0,0, 0.15)' }}

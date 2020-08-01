@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
@@ -6,6 +6,8 @@ import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import Colors from '../../constants/Colors';
 import { Audio } from 'expo-av';
+import { useSelector, useDispatch } from 'react-redux';
+import * as settingsActions from '../../store/actions/settings';
 
 
 const SpeechMenu = (props) => {
@@ -67,8 +69,12 @@ const SpeechMenu = (props) => {
         await emptySound.loadAsync(require("../../assets/sound/emptySoundFile.mp3"));
         await emptySound.playAsync();
     }
-    
     enableSound();
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(settingsActions.fetchSettings());
+    }, [dispatch])
 
     return (
 

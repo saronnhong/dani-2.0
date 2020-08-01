@@ -154,7 +154,7 @@ const EditNewWordScreen = props => {
                         { label: 'Food & Drink', value: 'Food & Drink' },
                         { label: 'Places', value: 'Places' },
                         { label: 'Colors', value: 'Colors' },
-                        { label: 'Core Basic', value: 'Core Basic' }
+                        { label: 'Core Words', value: 'Core Words' }
                     ]}
                     containerStyle={{ height: 40, marginVertical: 5 }}
                     style={{ backgroundColor: 'rgba(0,0,0, 0.15)' }}
