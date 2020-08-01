@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
       };
     case UPDATE_SETTING:
       return {
-        
         userSetting: action.settingData
       };
   }

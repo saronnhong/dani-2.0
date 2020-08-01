@@ -8,10 +8,12 @@ import Colors from '../constants/Colors';
 import * as settingsActions from '../store/actions/settings';
 
 const SettingsScreen = props => {
-    const [cardSize, setCardSize] = useState('Large');
-    const [speechVoice, setSpeechVoice] = useState('Nicky');
-    const [speechPitch, setSpeechPitch] = useState('1');
-    const [speechRate, setSpeechRate] = useState('1');
+    let userSettings = useSelector(state => state.setting.userSetting);
+
+    const [cardSize, setCardSize] = useState(userSettings.cardSize);
+    const [speechVoice, setSpeechVoice] = useState(userSettings.voice);
+    const [speechPitch, setSpeechPitch] = useState(userSettings.pitch);
+    const [speechRate, setSpeechRate] = useState(userSettings.rate);
     const [font, setFont] = useState('Roboto');
     const [backup, setBackup] = useState(false);
     const [login, setLogin] = useState(true);
@@ -50,10 +52,7 @@ const SettingsScreen = props => {
     let data1 = props.navigation.state.params;
     const dispatch = useDispatch();
 
-    let userSettings = useSelector(state => state.setting.userSetting);
-    console.log(userSettings);
-
-
+    
 
 
     const getSettings = () => {
