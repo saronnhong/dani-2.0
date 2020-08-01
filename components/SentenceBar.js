@@ -31,6 +31,8 @@ const SentenceBar = props => {
         setBarStatus(!barStatus);
     };
 
+    let userSettings = useSelector(state => state.setting.userSetting);
+
     renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
@@ -50,9 +52,9 @@ const SentenceBar = props => {
                 <TouchableOpacity onPress={() => {
                     Speech.speak(newSentence, {
                         language: 'en',
-                        pitch: 1,
-                        rate: 1,
-                        voice: Voices.nicky
+                        pitch: userSettings.pitch,
+                        rate: userSettings.rate,
+                        voice: Voices[userSettings.voice]
                     });
                 }}>
                     <View style={styles.wordBoard}>

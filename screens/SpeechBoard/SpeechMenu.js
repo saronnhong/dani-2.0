@@ -76,6 +76,9 @@ const SpeechMenu = (props) => {
         dispatch(settingsActions.fetchSettings());
     }, [dispatch])
 
+    let userSettings = useSelector(state => state.setting.userSetting);
+    console.log(userSettings);
+
     return (
 
         <View style={styles.screen}>
@@ -84,9 +87,9 @@ const SpeechMenu = (props) => {
                         <TouchableOpacity key={word.id} onPress={() => {
                             Speech.speak(word.cat, {
                                 language: 'en',
-                                pitch: 1,
-                                rate: 1,
-                                voice: Voices.nicky
+                                pitch: userSettings.pitch,
+                                rate: userSettings.rate,
+                                voice: Voices[userSettings.voice]
                             });
                             props.navigation.navigate({
                                 routeName: 'SpeechBoard',
