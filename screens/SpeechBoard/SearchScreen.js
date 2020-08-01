@@ -12,8 +12,9 @@ import * as wordActions from '../../store/actions/sentenceBar'
 
 const SearchScreen = props => {
     const [search, setSearch] = useState('');
-    const [listen, setListen] = useState(false);
+    // const [listen, setListen] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
+    const [showSentenceBar, setShowSentenceBar] = useState(false);
     let userWords = useSelector(state => state.word.userWords);
 
     const dispatch = useDispatch();
@@ -21,6 +22,12 @@ const SearchScreen = props => {
     const addToState = (word) => {
         dispatch(wordActions.addToBar(word));
     }
+    // useEffect(() => {
+    //     props.navigation.reset;
+
+    // }, [props]);
+    
+    
 
     const searchForWord = async (text) => {
 
@@ -60,9 +67,9 @@ const SearchScreen = props => {
 
     return (
         <View style={styles.screen}>
-            <View style={{ height: 100, backgroundColor: 'rgba(255, 185, 64, .2)' }}>
+            {showSentenceBar && <View style={{ height: 100, backgroundColor: 'rgba(255, 185, 64, .2)' }}>
                 <SentenceBar />
-            </View>
+            </View>}
 
             <ScrollView style={styles.scrollViewContainer}>
                 <View style={styles.searchContainer}>
@@ -91,6 +98,7 @@ const SearchScreen = props => {
                                     voice: Voices.nicky
                                 });
                                 addToState(word);
+                                setShowSentenceBar(true);
                             }}>
                                 <View style={styles.btnContainer} >
                                     {word.imageUrl != null && renderWordImageUrl(word)}

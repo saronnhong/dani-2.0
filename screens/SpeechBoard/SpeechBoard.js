@@ -80,7 +80,7 @@ const SpeechBoard = (props) => {
                                 Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
                                     pitch: 1,
-                                    rate: 1,
+                                    rate: 1.2,
                                     voice: Voices.nicky
                                 });
                                 addToState(word);
