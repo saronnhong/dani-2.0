@@ -6,6 +6,7 @@ import HeaderButton from '../components/HeaderButton';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import * as settingsActions from '../store/actions/settings';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const SettingsScreen = props => {
     let userSettings = useSelector(state => state.setting.userSetting);
@@ -49,18 +50,14 @@ const SettingsScreen = props => {
         { id: '5', value: '1.5', cat: 'rate' }
     ]
 
-    let data1 = props.navigation.state.params;
+    let data = props.navigation.state.params;
     const dispatch = useDispatch();
 
-    
-
-
     const getSettings = () => {
-        let data = props.navigation.state.params;
+        // let data = props.navigation.state.params;
         console.log(data);
         if (data.settingType === 'cardSize') {
             setCardSize(data.value);
-            // dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate));
         } else if (data.settingType === 'voice') {
             setSpeechVoice(data.value);
         } else if (data.settingType === 'pitch') {
@@ -69,25 +66,25 @@ const SettingsScreen = props => {
             setSpeechRate(data.value);
         }
         console.log('no match');
-
-        // dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate));
     }
-    alertFunc = () => {
+    const saveSettings = useCallback(() => {
         dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate));
-        Alert.alert("settings has been saved!")
-    }
-
+        Alert.alert("Settings has been saved!");
+        props.navigation.navigate({routeName: "SpeechMenu"});
+    }, [dispatch]);
 
     useEffect(() => {
-        if (data1) {
+        if (data) {
             getSettings();
         }
     }, [getSettings]);
 
+    useEffect(()=>{
+        props.navigation.setParams({ Save: saveSettings });
+    }, [saveSettings])
 
     return (
         <ScrollView style={styles.screen}>
-            <Button title='save' onPress={()=> alertFunc()}/>
             <Text style={styles.label}>VIEWING SIZE</Text>
             <View style={styles.settingsContainer}>
                 <TouchableHighlight
@@ -191,6 +188,8 @@ const SettingsScreen = props => {
     )
 };
 SettingsScreen.navigationOptions = navData => {
+    const saveFunction = navData.navigation.getParam('Save');
+
     return {
         headerTitle: 'Settings',
         headerLeft: () => (
@@ -199,8 +198,12 @@ SettingsScreen.navigationOptions = navData => {
                     navData.navigation.toggleDrawer();
                 }} />
             </HeaderButtons>
+        ),
+        headerRight: () => (
+            <TouchableOpacity  onPress={saveFunction}>
+                <Text style={{marginRight: 10, color: 'white', fontSize: 16}}>Save</Text>
+            </TouchableOpacity>
         )
-
     }
 }
 
@@ -211,7 +214,7 @@ const styles = StyleSheet.create({
     },
     label: {
         fontFamily: 'open-sans-bold',
-        fontSize: 12,
+        fontSize: 13,
         color: 'rgba(20,20,20,.35)',
         marginTop: 20,
         marginBottom: 5,
