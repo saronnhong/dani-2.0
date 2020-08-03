@@ -59,7 +59,7 @@ const SpeechBoard = (props) => {
 
     }, [loadWords]);
 
-    let userSettings = useSelector(state => state.setting.userSetting);
+    let userSettings = useSelector(state => state.setting);
 
     renderWordImageUrl = (word) => {
         if (word.phonetic) {

@@ -1,24 +1,23 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { View, Text, StyleSheet, Button, ScrollView, Switch, TouchableHighlight, Alert } from 'react-native';
+import { View, Text, StyleSheet, Button, ScrollView, Switch, TouchableHighlight, Alert, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import * as settingsActions from '../store/actions/settings';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import * as Updates from 'expo-updates';
 
 const SettingsScreen = props => {
-    let userSettings = useSelector(state => state.setting.userSetting);
 
+    let userSettings = useSelector(state => state.setting);
+    console.log(userSettings.silentMode);
     const [cardSize, setCardSize] = useState(userSettings.cardSize);
     const [speechVoice, setSpeechVoice] = useState(userSettings.voice);
     const [speechPitch, setSpeechPitch] = useState(userSettings.pitch);
     const [speechRate, setSpeechRate] = useState(userSettings.rate);
     const [font, setFont] = useState('Roboto');
-    const [backup, setBackup] = useState(false);
-    const [login, setLogin] = useState(true);
-    const [silentMode, setSilentMode] = useState(true);
+    const [silentMode, setSilentMode] = useState(userSettings.silentMode);
 
     const optionsItemsCardSize = [
         { id: '1', value: 'Small', cat: 'cardSize' },
@@ -54,24 +53,45 @@ const SettingsScreen = props => {
     const dispatch = useDispatch();
 
     const getSettings = () => {
-        // let data = props.navigation.state.params;
-        console.log(data);
         if (data.settingType === 'cardSize') {
             setCardSize(data.value);
         } else if (data.settingType === 'voice') {
             setSpeechVoice(data.value);
+            console.log(speechVoice);
         } else if (data.settingType === 'pitch') {
             setSpeechPitch(data.value);
         } else if (data.settingType === 'rate') {
             setSpeechRate(data.value);
         }
-        console.log('no match');
     }
-    const saveSettings = useCallback(() => {
-        dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate));
-        Alert.alert("Settings has been saved!");
-        props.navigation.navigate({routeName: "SpeechMenu"});
-    }, [dispatch]);
+    const saveSettings = useCallback(async () => {
+        if (silentMode !== userSettings.silentMode) {
+            Alert.alert(
+                "Do you want to restart now?",
+                "App needs to restart in order for changes to be applied.",
+                [
+                    {
+                        text: "Yes",
+                        onPress: () => {
+                            dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate, silentMode));
+                            Updates.reloadAsync();
+                        }
+                    },
+                    {
+                        text: "Cancel",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    }
+                ],
+                { cancelable: false }
+            );
+        } else {
+            dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate, silentMode));
+            Alert.alert("Settings has been saved!");
+            props.navigation.navigate({ routeName: "SpeechMenu" });
+        }
+
+    }, [speechVoice, cardSize, speechPitch, speechRate, silentMode]);
 
     useEffect(() => {
         if (data) {
@@ -79,7 +99,7 @@ const SettingsScreen = props => {
         }
     }, [getSettings]);
 
-    useEffect(()=>{
+    useEffect(() => {
         props.navigation.setParams({ Save: saveSettings });
     }, [saveSettings])
 
@@ -149,7 +169,7 @@ const SettingsScreen = props => {
                 </View>
             </View>
 
-            <Text style={styles.label}>LOGIN</Text>
+            {/* <Text style={styles.label}>LOGIN</Text>
             <View style={styles.settingsContainer}>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Keep User Logged In</Text>
@@ -159,7 +179,7 @@ const SettingsScreen = props => {
                         onValueChange={() => setLogin(!login)}
                     />
                 </View>
-            </View>
+            </View> */}
 
             <Text style={styles.label}>SILENT MODE</Text>
             <View style={styles.settingsContainer}>
@@ -173,7 +193,7 @@ const SettingsScreen = props => {
                 </View>
             </View>
 
-            <Text style={styles.label}>BACKUP</Text>
+            {/* <Text style={styles.label}>BACKUP</Text>
             <View style={styles.settingsContainer}>
                 <View style={styles.itemContainer}>
                     <Text style={styles.item}>Backup User Words</Text>
@@ -183,7 +203,7 @@ const SettingsScreen = props => {
                         onValueChange={() => setBackup(!backup)}
                     />
                 </View>
-            </View>
+            </View> */}
         </ScrollView>
     )
 };
@@ -200,8 +220,8 @@ SettingsScreen.navigationOptions = navData => {
             </HeaderButtons>
         ),
         headerRight: () => (
-            <TouchableOpacity  onPress={saveFunction}>
-                <Text style={{marginRight: 10, color: 'white', fontSize: 16}}>Save</Text>
+            <TouchableOpacity onPress={saveFunction}>
+                <Text style={{ marginRight: 10, color: 'white', fontSize: 16 }}>Save</Text>
             </TouchableOpacity>
         )
     }
