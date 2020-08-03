@@ -17,7 +17,7 @@ export const fetchWords = () => {
       }
 
       const resData = await response.json();
-      console.log(resData);
+      // console.log(resData);
 
       const loadedWords = [];
 
@@ -50,7 +50,7 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
     const userId = getState().auth.userId;
     //any async code you want!
     const response = await fetch(
-      `https://dani-2.firebaseio.com/words.json?auth=${token}`,
+      `https://dani-2.firebaseio.com/words/words.json?auth=${token}`,
       {
         method: 'POST',
         headers: {
