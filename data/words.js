@@ -573,124 +573,70 @@ export const WORDS = [
         require('../assets/images/speechboard/colors/brown-min.png')
     ),
     new Word(
+        'num0',
+        'numbers',
+        'Zero',
+        require('../assets/images/speechboard/numbers/zero-min.png')
+    ),
+    new Word(
         'num1',
         'numbers',
         'One',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/one-min.png')
     ),
     new Word(
         'num2',
         'numbers',
         'Two',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/two-min.png')
     ),
     new Word(
         'num3',
         'numbers',
         'Three',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/three-min.png')
     ),
     new Word(
         'num4',
         'numbers',
         'Four',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/four-min.png')
     ),
     new Word(
         'num5',
         'numbers',
         'Five',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/five-min.png')
     ),
     new Word(
         'num6',
         'numbers',
         'Six',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/six-min.png')
     ),
     new Word(
         'num7',
         'numbers',
         'Seven',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/seven-min.png')
     ),
     new Word(
         'num8',
         'numbers',
         'Eight',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/eight-min.png')
     ),
     new Word(
         'num9',
         'numbers',
         'Nine',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/nine-min.png')
     ),
     new Word(
         'num10',
         'numbers',
         'Ten',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num11',
-        'numbers',
-        'Eleven',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num12',
-        'numbers',
-        'Twelve',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num13',
-        'numbers',
-        'Thirteen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num14',
-        'numbers',
-        'Fourteen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num15',
-        'numbers',
-        'Fifteen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num16',
-        'numbers',
-        'Sixteen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num17',
-        'numbers',
-        'Seventeen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num18',
-        'numbers',
-        'Eighteen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num19',
-        'numbers',
-        'Nineteen',
-        require('../assets/images/speechboard/places/park-min.png')
-    ),
-    new Word(
-        'num20',
-        'numbers',
-        'Twenty',
-        require('../assets/images/speechboard/places/park-min.png')
+        require('../assets/images/speechboard/numbers/ten-min.png')
     ),
     new Word(
         'cw1',
