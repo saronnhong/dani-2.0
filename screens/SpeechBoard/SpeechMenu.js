@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
@@ -6,6 +6,8 @@ import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import Colors from '../../constants/Colors';
 import { Audio } from 'expo-av';
+import { useSelector, useDispatch } from 'react-redux';
+import * as settingsActions from '../../store/actions/settings';
 
 
 const SpeechMenu = (props) => {
@@ -61,41 +63,57 @@ const SpeechMenu = (props) => {
         },
     ];
 
-    const enableSound = async ()=> {
+    let userSettings = useSelector(state => state.setting);
+
+    const enableSound = async () => {
         const emptySound = new Audio.Sound();
-        Audio.setAudioModeAsync({playsInSilentModeIOS: true});
+        Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
         await emptySound.loadAsync(require("../../assets/sound/emptySoundFile.mp3"));
         await emptySound.playAsync();
     }
-    
-    enableSound();
+    if (userSettings.silentMode) {
+        enableSound();
+    }
+
+
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     dispatch(settingsActions.fetchSettings());
+    // }, [dispatch])
+
+
+    if (userSettings.voice === null) {
+        dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));
+    }
+    console.log(userSettings);
 
     return (
 
         <View style={styles.screen}>
-                <View style={styles.wordRow}>
-                    {categories.map(word =>
-                        <TouchableOpacity key={word.id} onPress={() => {
-                            Speech.speak(word.cat, {
-                                language: 'en',
-                                pitch: 1,
-                                rate: 1,
-                                voice: Voices.nicky
-                            });
-                            props.navigation.navigate({
-                                routeName: 'SpeechBoard',
-                                params: {
-                                    categoryId: word.cat.toLowerCase()
-                                }
-                            });
-                        }}>
-                            <View style={styles.btnContainer} >
-                                {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
-                                <Text style={styles.btnText}>{word.cat}</Text>
-                            </View>
-                        </TouchableOpacity>
-                    )}
-                </View>
+            <View style={styles.wordRow}>
+                {categories.map(word =>
+                    <TouchableOpacity key={word.id} onPress={() => {
+                        Speech.speak(word.cat, {
+                            language: 'en',
+                            pitch: userSettings.pitch,
+                            rate: userSettings.rate,
+                            voice: Voices[userSettings.voice]
+                        });
+                        props.navigation.navigate({
+                            routeName: 'SpeechBoard',
+                            params: {
+                                categoryId: word.cat.toLowerCase()
+                            }
+                        });
+                    }}>
+                        <View style={styles.btnContainer} >
+                            {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />}
+                            <Text style={styles.btnText}>{word.cat}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
+            </View>
         </View>
     )
 };

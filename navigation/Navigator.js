@@ -20,6 +20,7 @@ import SearchScreen from '../screens/SpeechBoard/SearchScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import Options from '../components/Options';
 
 import Colors from './../constants/Colors';
 
@@ -133,6 +134,9 @@ const tabScreenConfig = {
                     backgroundColor: Colors.gradientOrangeBottom,
                 },
             },
+            // tabBarOnPress: () => {
+            //     console.log("search has been pressed");
+            // }
         }
     },
     Tab2: {
@@ -180,7 +184,8 @@ const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
 
 
 const SettingsNavigator = createStackNavigator({
-    Settings: SettingsScreen
+    Settings: SettingsScreen,
+    Options: Options
 }, {
     defaultNavigationOptions: {
         headerStyle: {

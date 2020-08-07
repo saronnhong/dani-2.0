@@ -59,6 +59,8 @@ const SpeechBoard = (props) => {
 
     }, [loadWords]);
 
+    let userSettings = useSelector(state => state.setting);
+
     renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
@@ -79,9 +81,9 @@ const SpeechBoard = (props) => {
                             <TouchableOpacity key={word.id} onPress={() => {
                                 Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
-                                    pitch: 1,
-                                    rate: 1,
-                                    voice: Voices.nicky
+                                    pitch: userSettings.pitch,
+                                    rate: userSettings.rate,
+                                    voice: Voices[userSettings.voice]
                                 });
                                 addToState(word);
                             }}>
@@ -98,9 +100,9 @@ const SpeechBoard = (props) => {
                             <TouchableOpacity key={word.id} onPress={() => {
                                 Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
-                                    pitch: 1,
-                                    rate: 1,
-                                    voice: Voices.nicky
+                                    pitch: userSettings.pitch,
+                                    rate: userSettings.rate,
+                                    voice: Voices[userSettings.voice]
                                 });
                                 addToState(word);
                             }}>
