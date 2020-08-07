@@ -683,185 +683,191 @@ export const WORDS = [
     new Word(
         'cw8',
         'core words',
+        'This',
+        require('../assets/images/speechboard/corewords/this.png')
+    ),
+    new Word(
+        'cw9',
+        'core words',
         'That',
         require('../assets/images/speechboard/corewords/that.png')
     ),
     new Word(
-        'cw9',
+        'cw10',
         'core words',
         'It',
         require('../assets/images/speechboard/corewords/it.png')
     ),
     new Word(
-        'cw10',
+        'cw11',
         'core words',
         'See',
         require('../assets/images/speechboard/corewords/see.png')
     ),
     new Word(
-        'cw11',
+        'cw12',
         'core words',
         'Think',
         require('../assets/images/speechboard/corewords/think.png')
     ),
     new Word(
-        'cw12',
+        'cw13',
         'core words',
         'Want',
         require('../assets/images/speechboard/corewords/want.png')
     ),
     new Word(
-        'cw13',
+        'cw14',
         'core words',
         'Need',
         require('../assets/images/speechboard/corewords/need.png')
     ),
     new Word(
-        'cw14',
+        'cw15',
         'core words',
         'Like',
         require('../assets/images/speechboard/corewords/like.png')
     ),
     new Word(
-        'cw15',
+        'cw16',
         'core words',
         'Look',
         // require('../assets/images/speechboard/corewords/look.png')
     ),
     new Word(
-        'cw16',
+        'cw17',
         'core words',
         'Help',
         require('../assets/images/speechboard/corewords/help.png')
     ),
     new Word(
-        'cw17',
+        'cw18',
         'core words',
         'Go',
         require('../assets/images/speechboard/corewords/go.png')
     ),
     new Word(
-        'cw18',
+        'cw19',
         'core words',
         'Stop',
         require('../assets/images/speechboard/corewords/stop.png')
     ),
     new Word(
-        'cw19',
+        'cw20',
         'core words',
         'All',
         require('../assets/images/speechboard/corewords/all.png')
     ),
     new Word(
-        'cw20',
+        'cw21',
         'core words',
         'Do',
         // require('../assets/images/speechboard/corewords/do.png')
     ),
     new Word(
-        'cw21',
+        'cw22',
         'core words',
         'Can',
         require('../assets/images/speechboard/corewords/can.png')
     ),
     new Word(
-        'cw22',
+        'cw23',
         'core words',
         "Can't",
         require('../assets/images/speechboard/corewords/cannot.png')
     ),
     new Word(
-        'cw23',
+        'cw24',
         'core words',
         'Make',
         require('../assets/images/speechboard/corewords/make.png')
     ),
     new Word(
-        'cw24',
+        'cw25',
         'core words',
         'Open',
         require('../assets/images/speechboard/corewords/open.png')
     ),
     new Word(
-        'cw25',
+        'cw26',
         'core words',
         'Close',
         require('../assets/images/speechboard/corewords/close.png')
     ),
     new Word(
-        'cw26',
+        'cw27',
         'core words',
         'Get',
         // require('../assets/images/speechboard/corewords/get.png')
     ),
     new Word(
-        'cw27',
+        'cw28',
         'core words',
         'Hold',
         require('../assets/images/speechboard/corewords/hold.png')
     ),
     new Word(
-        'cw28',
+        'cw29',
         'core words',
         'All Done',
         require('../assets/images/speechboard/corewords/all_done.png')
     ),
     new Word(
-        'cw29',
+        'cw30',
         'core words',
         'Same',
         require('../assets/images/speechboard/corewords/same.png')
     ),
     new Word(
-        'cw30',
+        'cw31',
         'core words',
         'Different',
         require('../assets/images/speechboard/corewords/different.png')
     ),
     new Word(
-        'cw31',
+        'cw32',
         'core words',
         'More',
         require('../assets/images/speechboard/corewords/more.png')
     ),
     new Word(
-        'cw32',
+        'cw33',
         'core words',
         'Some',
         require('../assets/images/speechboard/corewords/some.png')
     ),
     new Word(
-        'cw33',
+        'cw34',
         'core words',
         'Here',
         require('../assets/images/speechboard/corewords/here.png')
     ),
     new Word(
-        'cw34',
+        'cw35',
         'core words',
         'There',
         require('../assets/images/speechboard/corewords/there.png')
     ),
     new Word(
-        'cw35',
+        'cw36',
         'core words',
         'Up',
         require('../assets/images/speechboard/corewords/up.png')
     ),
     new Word(
-        'cw36',
+        'cw37',
         'core words',
         'Down',
         require('../assets/images/speechboard/corewords/down.png')
     ),
     new Word(
-        'cw37',
+        'cw38',
         'core words',
         'In',
         require('../assets/images/speechboard/corewords/in.png')
     ),
     new Word(
-        'cw38',
+        'cw39',
         'core words',
         'Out',
         require('../assets/images/speechboard/corewords/out.png')
