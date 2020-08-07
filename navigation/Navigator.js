@@ -21,7 +21,7 @@ import StartupScreen from '../screens/StartUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import Options from '../components/Options';
-
+import EditProfileScreen from '../screens/EditProfileScreen';
 import Colors from './../constants/Colors';
 
 const defaultStackNavOptions = {
@@ -197,7 +197,8 @@ const SettingsNavigator = createStackNavigator({
 })
 
 const ProfileNavigator = createStackNavigator({
-    Profile: ProfileScreen
+    Profile: ProfileScreen,
+    EditProfile: EditProfileScreen
 }, {
     defaultNavigationOptions: {
         headerStyle: {

@@ -11,6 +11,7 @@ import authReducer from './store/reducers/auth';
 import sentenceReducer from './store/reducers/sentenceBar';
 import newWordsReducer from './store/reducers/newCards';
 import settingReducer from './store/reducers/settings';
+import profileReducer from './store/reducers/profile';
 import NavigationContainer from './navigation/NavigationContainer';
 
 //Optimizes memory usage for screens for each native platform (UIViewController for iOS, and FragmentActivity for Android)
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   word: newWordsReducer,
   bar: sentenceReducer,
   auth: authReducer,
-  setting: settingReducer
+  setting: settingReducer,
+  profile: profileReducer
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
