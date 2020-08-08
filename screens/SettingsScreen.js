@@ -11,7 +11,7 @@ import * as Updates from 'expo-updates';
 const SettingsScreen = props => {
 
     let userSettings = useSelector(state => state.setting);
-    console.log(userSettings.silentMode);
+    // console.log(userSettings.silentMode);
     const [cardSize, setCardSize] = useState(userSettings.cardSize);
     const [speechVoice, setSpeechVoice] = useState(userSettings.voice);
     const [speechPitch, setSpeechPitch] = useState(userSettings.pitch);

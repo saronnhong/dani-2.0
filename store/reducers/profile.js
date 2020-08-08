@@ -4,28 +4,24 @@ import { UPDATE_PROFILE } from '../actions/profile';
 
 
 const initialState = {
-  name: null,
-  age: null,
-  imageUrl: null,
-  location: null,
-  dateJoined: null
+  profileInfo: {}
 };
-  
-  export default (state = initialState, action) => {
-    switch (action.type) {
-      case UPDATE_PROFILE:
-        return {
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case UPDATE_PROFILE:
+      return {
+        profileInfo: {
           name: action.profileData.name,
           age: action.profileData.age,
-          imageUrl: action.profileData.imageUrl,
-          location: action.profileData.location,
-          dateJoined: action.profileData.dateJoined
-        
-        };
+          imageUrl: action.profileData.imageUrl
+        }
 
-      default:
-        return state;
-    }
-   
-  };
+      };
+
+    default:
+      return state;
+  }
+
+};
 

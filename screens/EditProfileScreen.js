@@ -1,37 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, Image, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
 import * as profileActions from '../store/actions/profile';
-import DropDownPicker from 'react-native-dropdown-picker';
-import Card from '../components/Card';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
-import { useDispatch } from 'react-redux';
-
-
-
 
 const windowHeight = Dimensions.get('window').height;
 
 const EditProfileScreen = props => {
     const [state, setState] = useState({});
-
-    let profileUpdate = useSelector(state => state.profile)
-
-    // console.log(state);
-
     const [modalVisible, setModalVisible] = useState(false);
-    // const [state, setState] = useState({ word: null, phonetic: null, color: null, categoryId: null});
     const [pickedImage, setPickedImage] = useState();
+
+    let profileUpdate = useSelector(state => state.profile.profileInfo)
     const dispatch = useDispatch();
-
-    // dispatch(profileActions.createProfile('Rebecca', '22', 'san diego', 'image', 'today'))
-
 
     const verifyPermissions = async (permissionType) => {
         const result = await Permissions.askAsync(Permissions[permissionType]);
@@ -74,33 +59,34 @@ const EditProfileScreen = props => {
         setPickedImage(camera.uri);
     };
 
-    const onUpdateProfile = () => {
-        const fileName = pickedImage.split('/').pop();
-        const newPath = FileSystem.documentDirectory + fileName;
+    // const { name, age, imageUrl } = state;
+    // console.log(state.imageUrl);
+
+    onUpdateProfile = () => {
+        let fileName = pickedImage.split('/').pop();
+        let newPath = FileSystem.documentDirectory + fileName;
         setState({ ...state, imageUrl: newPath });
 
         dispatch(profileActions.updateProfile(
             state.name,
             state.age,
-            state.imageUrl,
-            state.location,
-            state.dateJoined,
+            newPath
         ))
         props.navigation.navigate('Profile');
+        console.log(state);
+        console.log(profileUpdate);
     }
 
     useEffect(() => {
         setState({
             name: profileUpdate.name,
             age: profileUpdate.age,
-            imageUrl: profileUpdate.imageUrl,
-            location: profileUpdate.location,
-            dateJoined: profileUpdate.dateJoined
+            imageUrl: profileUpdate.imageUrl
         });
     }, [setState]);
 
     return (
-        <View>
+        <View style={styles.screen}>
             <Modal
                 style={styles.modalContainer}
                 animationType="slide"
@@ -122,11 +108,9 @@ const EditProfileScreen = props => {
                                 <Ionicons name='ios-camera' size={25} color={'grey'} style={styles.icon} />
                                 <Text style={styles.modalText}>Camera</Text>
                             </TouchableOpacity>
-
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-
             </Modal>
 
             <View style={styles.authContainer}>
@@ -134,13 +118,6 @@ const EditProfileScreen = props => {
                     {!pickedImage ? <Text>No Image was picked yet.</Text> :
                         <Image style={styles.image} source={{ uri: pickedImage }} />}
                 </TouchableOpacity>
-
-                {/* <TextInput
-                    onChangeText={text => setState({ ...state, phonetic: text })}
-                    style={styles.wordInput}
-                    selectionColor='rgba(250,250,250,.6)'
-                    color='white'
-                /> */}
 
                 <Text style={styles.label}>Name</Text>
                 <TextInput
@@ -160,7 +137,7 @@ const EditProfileScreen = props => {
                     value={state.age}
                 />
             </View>
-            <Button title='Save' onPress={onUpdateProfile}/>
+            <Button title='Save' onPress={onUpdateProfile} />
         </View>
     )
 
