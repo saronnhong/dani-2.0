@@ -64,13 +64,15 @@ const EditProfileScreen = props => {
 
     onUpdateProfile = () => {
         let fileName = pickedImage.split('/').pop();
+        console.log(fileName);
         let newPath = FileSystem.documentDirectory + fileName;
+        console.log(newPath);
         setState({ ...state, imageUrl: newPath });
 
         dispatch(profileActions.updateProfile(
             state.name,
             state.age,
-            newPath
+            state.imageUrl
         ))
         props.navigation.navigate('Profile');
         console.log(state);

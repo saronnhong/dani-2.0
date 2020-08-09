@@ -6,12 +6,13 @@ import HeaderButton from '../components/HeaderButton';
 
 const ProfileScreen = props => {
     let profileState = useSelector(state => state.profile.profileInfo);
-    const [pickedImage, setPickedImage] = useState();
+    const [pickedImage, setPickedImage] = useState(profileState.imageUrl);
     console.log(profileState);
 
     useEffect(() => {
         setPickedImage(profileState.imageUrl);
-    }, [setPickedImage, profileState.imageUrl, pickedImage])
+        console.log("hello")
+    }, [setPickedImage, profileState])
 
     return (
         <View style={styles.screen}>
@@ -19,15 +20,16 @@ const ProfileScreen = props => {
             <Text>{profileState.age}</Text>
             <Text>{profileState.imageUrl}</Text>
             <TouchableOpacity style={styles.imagePreview} >
-                {!pickedImage && <Image style={styles.image} source={{ uri: pickedImage }} />}
+                {!pickedImage && <Image style={{width: 300, height: 200}} source={{ uri: profileState.imageUrl }} />}
+                {/* <Image style={{width: 300, height: 200}} source={{uri: "https://pbs.twimg.com/media/D21KsLPUwAAe2aE.png"}} /> */}
             </TouchableOpacity>
 
-            <Button title="Edit Profile"
+            {/* <Button title="Edit Profile"
                 onPress={() => {
                     props.navigation.navigate({
                         routeName: 'EditProfile'
                     })
-                }} />
+                }} /> */}
         </View>
     )
 };
