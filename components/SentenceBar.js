@@ -12,7 +12,7 @@ const windowWidth = Dimensions.get('window').width;
 const SentenceBar = props => {
     const [barStatus, setBarStatus] = useState(false);
     let currState = useSelector(state => state.bar.words);
-    console.log(currState);
+    // console.log(currState);
     let wordArr = [];
     for (let i = 0; i < currState.length; i++) {
         if (currState[i].phonetic) {
