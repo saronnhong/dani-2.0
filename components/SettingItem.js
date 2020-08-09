@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 
     },
     item: {
-        fontFamily: 'open-sans',
+        fontFamily: 'roboto',
         fontSize: 17,
         color: 'rgba(20,20,20,.7)',
         marginHorizontal: 10,

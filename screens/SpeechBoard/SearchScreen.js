@@ -15,6 +15,7 @@ const SearchScreen = props => {
     const [searchResults, setSearchResults] = useState([]);
     const [showSentenceBar, setShowSentenceBar] = useState(false);
     let userWords = useSelector(state => state.word.userWords);
+    let userSettings = useSelector(state => state.setting);
 
     const dispatch = useDispatch();
 
@@ -85,7 +86,7 @@ const SearchScreen = props => {
                                     language: 'en',
                                     pitch: 1,
                                     rate: 1,
-                                    voice: Voices.nicky
+                                    voice: Voices[userSettings.voice]
                                 });
                                 addToState(word);
                                 setShowSentenceBar(true);
@@ -180,12 +181,12 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 14,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         color: 'white',
     },
     btnTextSmall: {
         fontSize: 11,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         color: 'white',
     },
     emptySearch: {

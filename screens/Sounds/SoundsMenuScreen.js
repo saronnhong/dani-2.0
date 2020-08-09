@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     },
     categoryTitle: {
         fontSize: 20,
-        fontFamily: "open-sans-bold",
+        fontFamily: "roboto-bold",
         marginVertical: 15
 
     },
