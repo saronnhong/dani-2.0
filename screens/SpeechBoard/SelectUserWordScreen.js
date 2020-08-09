@@ -101,12 +101,12 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 18,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         color: 'white',
     },
     btnTextSmall: {
         fontSize: 18,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         color: 'white',
     },
     wordRow: {

@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     label: {
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         marginVertical: 5,
         color: 'rgba(250,250,250,.6)'
     },
@@ -235,7 +235,7 @@ const styles = StyleSheet.create({
     },
     modalText: {
         paddingVertical: 15,
-        fontFamily: 'open-sans',
+        fontFamily: 'roboto',
         fontSize: 14,
     },
     icon: {

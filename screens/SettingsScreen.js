@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(200,200,200,.5)'
     },
     label: {
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         fontSize: 13,
         color: 'rgba(20,20,20,.35)',
         marginTop: 20,
@@ -251,7 +251,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between'
     },
     item: {
-        fontFamily: 'open-sans',
+        fontFamily: 'roboto',
         fontSize: 17,
         color: 'rgba(20,20,20,.7)',
         marginHorizontal: 10,

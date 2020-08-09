@@ -120,7 +120,7 @@ const SpeechMenu = (props) => {
 
 SpeechMenu.navigationOptions = navData => {
     return {
-        headerTitle: 'Speech Menu',
+        headerTitle: 'Speech Board',
         headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Menu" iconName='ios-menu' onPress={() => {
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 14,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         paddingHorizontal: 6,
         color: 'white'
     },
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     },
     categoryTitle: {
         fontSize: 20,
-        fontFamily: "open-sans-bold",
+        fontFamily: "roboto-bold",
         marginVertical: 15,
 
     },

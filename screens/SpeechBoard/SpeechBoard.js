@@ -171,12 +171,12 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontSize: 14,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         color: 'white',
     },
     btnTextSmall: {
         fontSize: 11,
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         color: 'white',
     },
     wordRow: {
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     },
     categoryTitle: {
         fontSize: 20,
-        fontFamily: "open-sans-bold",
+        fontFamily: "roboto-bold",
         marginVertical: 15,
     },
     overall: {

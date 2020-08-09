@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     label: {
-        fontFamily: 'open-sans-bold',
+        fontFamily: 'roboto-bold',
         marginVertical: 8,
         color: 'rgba(250,250,250,.6)'
     },
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
         marginVertical: 5
     },
     errorText: {
-        fontFamily: 'open-sans',
+        fontFamily: 'roboto',
         color: Colors.sesameRedOrange,
         fontSize: 12
     }
