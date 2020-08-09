@@ -12,7 +12,6 @@ import * as wordActions from '../../store/actions/sentenceBar'
 
 const SearchScreen = props => {
     const [search, setSearch] = useState('');
-    // const [listen, setListen] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [showSentenceBar, setShowSentenceBar] = useState(false);
     let userWords = useSelector(state => state.word.userWords);
@@ -22,13 +21,7 @@ const SearchScreen = props => {
     const addToState = (word) => {
         dispatch(wordActions.addToBar(word));
     }
-    // useEffect(() => {
-    //     props.navigation.reset;
-
-    // }, [props]);
-    
-    
-
+   
     const searchForWord = async (text) => {
 
         if (text.length <= 0) {
@@ -54,7 +47,6 @@ const SearchScreen = props => {
         setSearchResults(filteredArr);
     }
     
-
     renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
@@ -62,8 +54,6 @@ const SearchScreen = props => {
             return <Image style={styles.imageBtn} source={word.imageUrl} />
         }
     }
-    
-    
 
     return (
         <View style={styles.screen}>

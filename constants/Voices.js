@@ -1,9 +1,9 @@
 export default {
-    aaron: 'com.apple.ttsbundle.siri_male_en-US_compact',
-    fred: 'com.apple.speech.synthesis.voice.Fred',
-    nicky: 'com.apple.ttsbundle.siri_female_en-US_compact',
-    samantha: 'com.apple.ttsbundle.Samantha-compact',
-    alex: 'com.apple.speech.voice.Alex'
+    Aaron: 'com.apple.ttsbundle.siri_male_en-US_compact',
+    Fred: 'com.apple.speech.synthesis.voice.Fred',
+    Nicky: 'com.apple.ttsbundle.siri_female_en-US_compact',
+    Samantha: 'com.apple.ttsbundle.Samantha-compact',
+    Alex: 'com.apple.speech.voice.Alex'
     
 }
 

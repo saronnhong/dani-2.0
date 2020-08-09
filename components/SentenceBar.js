@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState, useEffect } from 'react';
+import React, { useRef, useState, } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Dimensions } from 'react-native';
 import * as Speech from 'expo-speech';
 import Voices from '../constants/Voices';
@@ -11,47 +11,35 @@ const windowWidth = Dimensions.get('window').width;
 
 const SentenceBar = props => {
     const [barStatus, setBarStatus] = useState(false);
-    const [borderColor, setBorderColor] = useState(false)
     let currState = useSelector(state => state.bar.words);
     console.log(currState);
-    // let wordArr = [];
-    // for (let i = 0; i < currState.length; i++) {
-    //     if (currState[i].phonetic) {
-    //         wordArr.push(currState[i].phonetic);
-    //     } else {
-    //         wordArr.push(currState[i].word);
-    //     }
-    // }
-    // let newSentence = wordArr.join(" ");
+    let wordArr = [];
+    for (let i = 0; i < currState.length; i++) {
+        if (currState[i].phonetic) {
+            wordArr.push(currState[i].phonetic);
+        } else {
+            wordArr.push(currState[i].word);
+        }
+    }
+    let newSentence = wordArr.join(" ");
 
     const scrollViewRef = useRef();
     const dispatch = useDispatch();
     let userSettings = useSelector(state => state.setting);
-    console.log(userSettings);
 
     readSentence = async () => {
-        let sentenceArr = currState;
-
-        for (let i = 0; i < sentenceArr.length; i++) {
-            
-            Speech.speak(sentenceArr[i].word, {
-                language: 'en',
-                pitch: userSettings.pitch,
-                rate: userSettings.rate,
-                voice: Voices[userSettings.voice],
-                onStart: setBorderColor(true),
-                onDone: ()=> setBorderColor(false)
-            })
-            
-        }
+        Speech.speak(newSentence, {
+            language: 'en',
+            pitch: userSettings.pitch,
+            rate: userSettings.rate,
+            voice: Voices[userSettings.voice]
+        })
     }
 
     onDelete = async () => {
         dispatch(wordActions.removeFromBar());
         setBarStatus(!barStatus);
     };
-
-    
 
     renderWordImageUrl = (word) => {
         if (word.phonetic) {
@@ -72,10 +60,10 @@ const SentenceBar = props => {
                 <TouchableOpacity onPress={readSentence}>
                     <View style={styles.wordBoard}>
                         {currState.map((word, index) =>
-                            <View key={index} style={{ ...styles.btnContainer, backgroundColor: !borderColor  ? "#26c6da":'red'}} >
+                            <View key={index} style={{ ...styles.btnContainer, backgroundColor: "#26c6da" }} >
                                 {word.imageUrl != null && renderWordImageUrl(word)}
-                                {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}  
-                            </View>  
+                                {(word.word.length < 7 || word.word.includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
+                            </View>
                         )}
                         {currState.length > 0 && <TouchableOpacity style={styles.deleteContainer} onPress={onDelete}>
                             <Ionicons style={styles.deleteBtn} name='ios-backspace' size={35} />
@@ -103,7 +91,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         paddingTop: 10,
         minWidth: windowWidth * .95,
-        // backgroundColor: 'purple',
         paddingRight: 35
 
     },
