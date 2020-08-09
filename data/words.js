@@ -5,7 +5,7 @@ export const WORDS = [
         't1',
         'chat',
         'Hello',
-        require('../assets/images/speechboard/chat/hello.png')
+        require('../assets/images/speechboard/chat/hello-min.png')
     ),
     new Word(
         't2',
@@ -29,19 +29,19 @@ export const WORDS = [
         't5',
         'chat',
         'No',
-        require('../assets/images/speechboard/chat/no.png')
+        require('../assets/images/speechboard/chat/no-min.png')
     ),
     new Word(
         't6',
         'chat',
         'Yes',
-        require('../assets/images/speechboard/chat/yes.png')
+        require('../assets/images/speechboard/chat/yes-min.png')
     ),
     new Word(
         't7',
         'chat',
         'Okay',
-        require('../assets/images/speechboard/chat/okay.png')
+        require('../assets/images/speechboard/chat/okay-min.png')
     ),
     new Word(
         't8',
@@ -53,7 +53,7 @@ export const WORDS = [
         't9',
         'chat',
         'Who',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/chat/who-min.png')
     ),
     new Word(
         't10',
@@ -65,7 +65,7 @@ export const WORDS = [
         't11',
         'chat',
         'Where',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/chat/where-min.png')
     ),
     new Word(
         't12',
@@ -77,25 +77,25 @@ export const WORDS = [
         't13',
         'chat',
         'Why',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/chat/why-min.png')
     ),
     new Word(
         't14',
         'chat',
         'How',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/chat/how-min.png')
     ),
     new Word(
         't15',
         'chat',
         'Bad',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/chat/bad-min.png')
     ),
     new Word(
         't16',
         'chat',
         'Good',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/chat/good-min.png')
     ),
     new Word(
         'f1',
@@ -119,7 +119,7 @@ export const WORDS = [
         'f4',
         'i feel',
         'Sad',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/feelings/sad-min.png')
     ),
     new Word(
         'f5',
@@ -131,7 +131,7 @@ export const WORDS = [
         'f6',
         'i feel',
         'Excited',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/feelings/excited-min.png')
     ),
     new Word(
         'f7',
@@ -149,19 +149,19 @@ export const WORDS = [
         'f9',
         'i feel',
         'Hungry',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/feelings/hungry-min.png')
     ),
     new Word(
         'f10',
         'i feel',
         'Thirsty',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/feelings/thirsty-min.png')
     ),
     new Word(
         'f11',
         'i feel',
         'Bored',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/feelings/bored-min.png')
     ),
     new Word(
         'am1',
@@ -203,13 +203,13 @@ export const WORDS = [
         'a3',
         'activities',
         'All done',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/corewords/all_done.png')
     ),
     new Word(
         'a4',
         'activities',
         'Play',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/activities/play-min.png')
     ),
     new Word(
         'a5',
@@ -456,13 +456,13 @@ export const WORDS = [
         'p7',
         'places',
         'inside',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/places/inside-min.png')
     ),
     new Word(
         'p8',
         'places',
         'outside',
-        require('../assets/images/speechboard/chat/cow.png')
+        require('../assets/images/speechboard/places/outside-min.png')
     ),
     new Word(
         'p9',
