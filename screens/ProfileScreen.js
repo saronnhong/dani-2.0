@@ -11,7 +11,6 @@ const ProfileScreen = props => {
 
     useEffect(() => {
         setPickedImage(profileState.imageUrl);
-        console.log("hello")
     }, [setPickedImage, profileState])
 
     return (

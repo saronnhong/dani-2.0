@@ -91,68 +91,70 @@ const AuthScreen = props => {
                 isValid: inputValidity,
                 input: inputIdentifier
             });
-            
+
         }, [dispatchFormState]);
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
-            {/* <LinearGradient colors={[Colors.orange , 'rgba(255, 185, 64, .2)',]} start={[.5,-.5]} end={[.5,2]} style={styles.gradient}> */}
-                <Card style={styles.authContainer}>
-                    <ScrollView keyboardShouldPersistTaps={'handled'} >
-                        <Input
-                            id='email'
-                            label='E-Mail'
-                            keyboardType='email-address'
-                            required
-                            email
-                            autoCapitalize='none'
-                            errorText="Please enter a valid email address"
-                            onInputChange={inputChangeHandler}
-                            initialValue=""
-                            color='white'
-                            useValidation= {true}
-                        />
-                        <Input
-                            id='password'
-                            label='Password'
-                            keyboardType='default'
-                            secureTextEntry
-                            required
-                            minLength={5}
-                            autoCapitalize='none'
-                            errorText="Please enter a valid password"
-                            onInputChange={inputChangeHandler}
-                            initialValue=""
-                            color='white'
-                            clearTextOnFocus={true}
-                            useValidation= {true}
-                            
-                        />
-                        
-                        <View style={styles.buttonRow}>
-                            <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
-                                {isLoading ? (
-                                    <ActivityIndicator size="small" color={Colors.primary} />
-                                ) : (
-                                        <Button
-                                            title={isSignup ? 'Sign Up' : 'Login'}
-                                            color='white'
-                                        />
-                                    )}
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                                setIsSignup(prevState => !prevState)
-                            }}>
-                                <Button
-                                    title={`${isSignup ? 'Login' : 'Sign Up'}`}
-                                    color={Colors.sesameYellow}
-                                />
-                            </TouchableOpacity>
-                        </View>
+            <View style={styles.titleContainer}>
+                <Text style={styles.title}>Speech Board</Text>
+            </View>
 
-                    </ScrollView>
-                </Card>
-            {/* </LinearGradient> */}
+            <Card style={styles.authContainer}>
+                <ScrollView keyboardShouldPersistTaps={'handled'} >
+                    <Input
+                        id='email'
+                        label='E-Mail'
+                        keyboardType='email-address'
+                        required
+                        email
+                        autoCapitalize='none'
+                        errorText="Please enter a valid email address"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        useValidation={true}
+                    />
+                    <Input
+                        id='password'
+                        label='Password'
+                        keyboardType='default'
+                        secureTextEntry
+                        required
+                        minLength={5}
+                        autoCapitalize='none'
+                        errorText="Please enter a valid password"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        clearTextOnFocus={true}
+                        useValidation={true}
+
+                    />
+
+                    <View style={styles.buttonRow}>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
+                            {isLoading ? (
+                                <ActivityIndicator size="small" color={Colors.primary} />
+                            ) : (
+                                    <Button
+                                        title={isSignup ? 'Sign Up' : 'Login'}
+                                        color='white'
+                                    />
+                                )}
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                            setIsSignup(prevState => !prevState)
+                        }}>
+                            <Button
+                                title={`${isSignup ? 'Login' : 'Sign Up'}`}
+                                color={Colors.sesameYellow}
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                </ScrollView>
+            </Card>
         </KeyboardAvoidingView>
     )
 };
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         backgroundColor: 'rgba(255, 185, 64, .2)',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center'
     },
     authContainer: {
@@ -176,11 +178,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0, 0.15)',
         marginBottom: '40%'
     },
-    // gradient: {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center'
-    // },
+    titleContainer:{
+        marginVertical: 35
+    },
+    title: {
+        fontFamily: 'honeybee',
+        fontSize: 60,
+        color: Colors.sesameGreen
+    },
     buttonContainer: {
         marginTop: 10
     },
