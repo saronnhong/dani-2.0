@@ -89,36 +89,6 @@ const SearchNavigator = createStackNavigator({
     }
 )
 const tabScreenConfig = {
-    // Main: {
-    //     screen: DaniStackNavigator,
-    //     navigationOptions: {
-    //         tabBarLabel: 'Main',
-    //         tabBarIcon: (tabInfo) => {
-    //             return <Ionicons name='ios-easel' size={25} color={tabInfo.tintColor} />
-    //         },
-    //         tabBarColor: Colors.primaryColor,
-    //         style: {
-    //             backgroundColor: Colors.orange,
-    //         },
-    //     }
-    // },
-    // Tab0: {
-    //     screen: SpeechBoardNavigator,
-    //     navigationOptions: {
-    //         tabBarLabel: 'Menu',
-    //         tabBarIcon: (tabInfo) => {
-    //             return <Ionicons name='ios-apps' size={25} color={tabInfo.tintColor} />
-    //         },
-    //         tabBarColor: Colors.accentColor,
-    //         tabBarOptions: {
-    //             activeTintColor: 'white',
-    //             inactiveTintColor: Colors.border,
-    //             style: {
-    //                 backgroundColor: Colors.gradientOrangeBottom,
-    //             },
-    //         },
-    //     }
-    // },
     Tab1: {
         screen: SearchNavigator,
         navigationOptions: {
@@ -133,10 +103,7 @@ const tabScreenConfig = {
                 style: {
                     backgroundColor: Colors.gradientOrangeBottom,
                 },
-            },
-            // tabBarOnPress: () => {
-            //     console.log("search has been pressed");
-            // }
+            }
         }
     },
     Tab2: {
@@ -217,12 +184,12 @@ const MainNavigator = createDrawerNavigator({
 },
     {
         contentOptions: {
-            activeTintColor: Colors.primary
+            activeTintColor: Colors.border
         },
         contentComponent: props => {
             const dispatch = useDispatch();
             return (
-                <View style={{ flex: 1, paddingTop: 20 }}>
+                <View style={{ flex: 1, paddingTop: 20, backgroundColor: 'rgba(255, 185, 64, .1)' }}>
                     <SafeAreaView forceInset={{ top: 'always', horizontal: 'never' }}>
                         <DrawerItems  {...props} />
                         <Button
