@@ -197,7 +197,7 @@ export const WORDS = [
         'a2',
         'activities',
         'Can we...',
-        null
+        require('../assets/images/speechboard/activities/can_we.png')
     ),
     new Word(
         'a3',
@@ -420,13 +420,13 @@ export const WORDS = [
         'p1',
         'places',
         'Where are we going?',
-        null
+        require('../assets/images/speechboard/places/wherearewegoing.png')
     ),
     new Word(
         'p2',
         'places',
         'Can we go...',
-        null
+        require('../assets/images/speechboard/places/canwegoto.png')
     ),
     new Word(
         'p3',
@@ -438,7 +438,7 @@ export const WORDS = [
         'p4',
         'places',
         'Where is...',
-        null
+        require('../assets/images/speechboard/places/where is_.png')
     ),
     new Word(
         'p5',
@@ -467,31 +467,31 @@ export const WORDS = [
     new Word(
         'p9',
         'places',
-        'pool',
+        'the pool',
         require('../assets/images/speechboard/places/pool-min.png')
     ),
     new Word(
         'p10',
         'places',
-        'playground',
+        'the playground',
         require('../assets/images/speechboard/places/playground-min.png')
     ),
     new Word(
         'p11',
         'places',
-        'store',
+        'the store',
         require('../assets/images/speechboard/places/store-min.png')
     ),
     new Word(
         'p12',
         'places',
-        'park',
+        'the park',
         require('../assets/images/speechboard/places/park-min.png')
     ),
     new Word(
         'p13',
         'places',
-        'library',
+        'the library',
         require('../assets/images/speechboard/places/library-min.png')
     ),
     new Word(
