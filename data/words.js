@@ -5,7 +5,7 @@ export const WORDS = [
         't1',
         'chat',
         'Hello',
-        require('../assets/images/speechboard/chat/hello-min.png')
+        require('../assets/images/speechboard/chat/hello.png')
     ),
     new Word(
         't2',
@@ -15,6 +15,12 @@ export const WORDS = [
     ),
     new Word(
         't3',
+        'chat',
+        'Nice to Meet You',
+        require('../assets/images/speechboard/chat/nicetomeetyou.png')
+    ),
+    new Word(
+        't4',
         'chat',
         'Thank You',
         require('../assets/images/speechboard/chat/thankyou.png')
@@ -29,19 +35,19 @@ export const WORDS = [
         't5',
         'chat',
         'No',
-        require('../assets/images/speechboard/chat/no-min.png')
+        require('../assets/images/speechboard/chat/no.png')
     ),
     new Word(
         't6',
         'chat',
         'Yes',
-        require('../assets/images/speechboard/chat/yes-min.png')
+        require('../assets/images/speechboard/chat/yes.png')
     ),
     new Word(
         't7',
         'chat',
         'Okay',
-        require('../assets/images/speechboard/chat/okay-min.png')
+        require('../assets/images/speechboard/chat/okay.png')
     ),
     new Word(
         't8',
@@ -53,115 +59,109 @@ export const WORDS = [
         't9',
         'chat',
         'Who',
-        require('../assets/images/speechboard/chat/who-min.png')
+        require('../assets/images/speechboard/chat/q_who.png')
     ),
     new Word(
         't10',
         'chat',
         'What',
-        require('../assets/images/speechboard/chat/what.png')
+        require('../assets/images/speechboard/chat/q_what.png')
     ),
     new Word(
         't11',
         'chat',
         'Where',
-        require('../assets/images/speechboard/chat/where-min.png')
+        require('../assets/images/speechboard/chat/q_where.png')
     ),
     new Word(
         't12',
         'chat',
         'When',
-        require('../assets/images/speechboard/chat/when-min.png')
+        require('../assets/images/speechboard/chat/q_when.png')
     ),
     new Word(
         't13',
         'chat',
         'Why',
-        require('../assets/images/speechboard/chat/why-min.png')
+        require('../assets/images/speechboard/chat/q_why.png')
     ),
     new Word(
         't14',
         'chat',
         'How',
-        require('../assets/images/speechboard/chat/how-min.png')
+        require('../assets/images/speechboard/chat/q_how.png')
     ),
     new Word(
         't15',
         'chat',
         'Bad',
-        require('../assets/images/speechboard/chat/bad-min.png')
+        require('../assets/images/speechboard/chat/bad.png')
     ),
     new Word(
         't16',
         'chat',
         'Good',
-        require('../assets/images/speechboard/chat/good-min.png')
+        require('../assets/images/speechboard/chat/good.png')
     ),
     new Word(
         'f1',
         'i feel',
         'I feel...',
-        null
-    ),
-    new Word(
-        'f2',
-        'i feel',
-        'I am...',
-        null
+        require('../assets/images/speechboard/feelings/Ifeel.png')
     ),
     new Word(
         'f3',
         'i feel',
         'Happy',
-        require('../assets/images/speechboard/feelings/happy-min.png')
+        require('../assets/images/speechboard/feelings/happy.png')
     ),
     new Word(
         'f4',
         'i feel',
         'Sad',
-        require('../assets/images/speechboard/feelings/sad-min.png')
+        require('../assets/images/speechboard/feelings/sad.png')
     ),
     new Word(
         'f5',
         'i feel',
-        'Angry',
-        require('../assets/images/speechboard/feelings/angry-min.png')
+        'Mad',
+        require('../assets/images/speechboard/feelings/mad.png')
     ),
     new Word(
         'f6',
         'i feel',
         'Excited',
-        require('../assets/images/speechboard/feelings/excited-min.png')
+        require('../assets/images/speechboard/feelings/excited.png')
     ),
     new Word(
         'f7',
         'i feel',
         'Tired',
-        require('../assets/images/speechboard/feelings/tired-min.png')
+        require('../assets/images/speechboard/feelings/tired.png')
     ),
     new Word(
         'f8',
         'i feel',
         'Scared',
-        require('../assets/images/speechboard/feelings/scared-min.png')
+        require('../assets/images/speechboard/feelings/scared.png')
     ),
     new Word(
         'f9',
         'i feel',
         'Hungry',
-        require('../assets/images/speechboard/feelings/hungry-min.png')
+        require('../assets/images/speechboard/feelings/hungry.png')
     ),
     new Word(
         'f10',
         'i feel',
         'Thirsty',
-        require('../assets/images/speechboard/feelings/thirsty-min.png')
+        require('../assets/images/speechboard/feelings/thirsty.png')
     ),
     new Word(
         'f11',
         'i feel',
         'Bored',
-        require('../assets/images/speechboard/feelings/bored-min.png')
+        require('../assets/images/speechboard/feelings/bored.png')
     ),
     new Word(
         'am1',
