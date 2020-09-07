@@ -185,13 +185,13 @@ export const WORDS = [
         'a0',
         'activities',
         'I want to...',
-        null
+        require('../assets/images/speechboard/corewords/want.png')
     ),
     new Word(
         'a1',
         'activities',
         'I like to...',
-        null
+        require('../assets/images/speechboard/corewords/like.png')
     ),
     new Word(
         'a2',
@@ -226,41 +226,77 @@ export const WORDS = [
     new Word(
         'a7',
         'activities',
-        'Swim',
-        require('../assets/images/speechboard/activities/swim-min.png')
+        'Read',
+        require('../assets/images/speechboard/activities/read-min.png')
     ),
     new Word(
         'a8',
+        'activities',
+        'Watch TV',
+        require('../assets/images/speechboard/activities/watchtv-min.png')
+    ),
+    new Word(
+        'a9',
+        'activities',
+        'Listen to Music',
+        require('../assets/images/speechboard/activities/listentomusic-min.png')
+    ),
+    new Word(
+        'a10',
         'activities',
         'Color',
         require('../assets/images/speechboard/activities/color-min.png')
     ),
     new Word(
-        'a9',
+        'a11',
         'activities',
         'Paint',
         require('../assets/images/speechboard/activities/paint-min.png')
     ),
     new Word(
-        'a10',
+        'a12',
         'activities',
         'Draw',
         require('../assets/images/speechboard/activities/draw-min.png')
     ),
     new Word(
-        'a11',
+        'a13',
         'activities',
         'Run',
         require('../assets/images/speechboard/activities/run-min.png')
     ),
     new Word(
-        'a12',
+        'a14',
+        'activities',
+        'Go for a walk',
+        require('../assets/images/speechboard/activities/walk-min.png')
+    ),
+    new Word(
+        'a15',
+        'activities',
+        'Swim',
+        require('../assets/images/speechboard/activities/swim-min.png')
+    ),
+    new Word(
+        'a16',
         'activities',
         'Jump',
         require('../assets/images/speechboard/activities/jump-min.png')
     ),
     new Word(
-        'a13',
+        'a17',
+        'activities',
+        'Hike',
+        require('../assets/images/speechboard/activities/hike-min.png')
+    ),
+    new Word(
+        'a18',
+        'activities',
+        'Dance',
+        require('../assets/images/speechboard/activities/dance-min.png')
+    ),
+    new Word(
+        'a19',
         'activities',
         'Tickle',
         require('../assets/images/speechboard/activities/tickle-min.png')
