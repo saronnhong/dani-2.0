@@ -296,7 +296,7 @@ export const WORDS = [
         require('../assets/images/speechboard/activities/dance-min.png')
     ),
     new Word(
-        'a19',
+        'a19git',
         'activities',
         'Tickle',
         require('../assets/images/speechboard/activities/tickle-min.png')
