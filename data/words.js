@@ -334,13 +334,13 @@ export const WORDS = [
     new Word(
         'fd6',
         'food & drink',
-        'Vegetable',
+        'Vegetables',
         require('../assets/images/speechboard/foodanddrink/vegetables-min.png')
     ),
     new Word(
         'fd7',
         'food & drink',
-        'Drink',
+        'Beverage',
         require('../assets/images/speechboard/foodanddrink/drink-min.png')
     ),
     new Word(
@@ -370,84 +370,102 @@ export const WORDS = [
     new Word(
         'fd12',
         'food & drink',
-        'Orange',
-        require('../assets/images/speechboard/foodanddrink/orange-min.png')
-    ),
-    new Word(
-        'fd13',
-        'food & drink',
         'Banana',
         require('../assets/images/speechboard/foodanddrink/banana-min.png')
     ),
     new Word(
+        'fd13',
+        'food & drink',
+        'Grapes',
+        require('../assets/images/speechboard/foodanddrink/grapes-min.png')
+    ),
+    new Word(
         'fd14',
+        'food & drink',
+        'Orange',
+        require('../assets/images/speechboard/foodanddrink/orange-min.png')
+    ),
+    new Word(
+        'fd15',
+        'food & drink',
+        'Broccoli',
+        require('../assets/images/speechboard/foodanddrink/broccoli-min.png')
+    ),
+    new Word(
+        'fd16',
+        'food & drink',
+        'Carrot',
+        require('../assets/images/speechboard/foodanddrink/carrot-min.png')
+    ),
+    new Word(
+        'fd17',
         'food & drink',
         'Chips',
         require('../assets/images/speechboard/foodanddrink/chips-min.png')
     ),
     new Word(
-        'fd15',
+        'fd18',
         'food & drink',
         'Pasta',
         require('../assets/images/speechboard/foodanddrink/pasta-min.png')
     ),
     new Word(
-        'fd16',
+        'fd19',
         'food & drink',
         'Pizza',
         require('../assets/images/speechboard/foodanddrink/pizza-min.png')
     ),
     new Word(
-        'fd17',
+        'fd20',
         'food & drink',
         'Burger',
         require('../assets/images/speechboard/foodanddrink/burger-min.png')
     ),
     new Word(
-        'fd18',
+        'fd21',
         'food & drink',
         'Sandwich',
         require('../assets/images/speechboard/foodanddrink/sandwich-min.png')
     ),
     new Word(
-        'fd19',
+        'fd22',
         'food & drink',
         'Soup',
         require('../assets/images/speechboard/foodanddrink/soup-min.png')
     ),
     new Word(
-        'fd20',
+        'fd23',
         'food & drink',
         'Mac and Cheese',
         require('../assets/images/speechboard/foodanddrink/mac-min.png')
     ),
     new Word(
-        'fd21',
+        'fd24',
         'food & drink',
         'Crackers',
         require('../assets/images/speechboard/foodanddrink/cracker-min.png')
     ),
     
     new Word(
-        'fd23',
+        'fd25',
         'food & drink',
         'Breakfast',
         require('../assets/images/speechboard/foodanddrink/breakfast-min.png')
     ),
     new Word(
-        'fd24',
+        'fd26',
         'food & drink',
         'Lunch',
         require('../assets/images/speechboard/foodanddrink/lunch-min.png')
     ),
     new Word(
-        'fd22',
+        'fd27',
         'food & drink',
         'Dinner',
         require('../assets/images/speechboard/foodanddrink/dinner-min.png')
     ),
     new Word(
-        'fd25',
+        'fd28',
         'food & drink',
         'Dessert',
         require('../assets/images/speechboard/foodanddrink/dessert-min.png')
@@ -768,7 +786,7 @@ export const WORDS = [
         'cw16',
         'core words',
         'Look',
-        // require('../assets/images/speechboard/corewords/look.png')
+        require('../assets/images/speechboard/corewords/look.png')
     ),
     new Word(
         'cw17',
@@ -791,80 +809,80 @@ export const WORDS = [
     new Word(
         'cw20',
         'core words',
-        'All',
-        require('../assets/images/speechboard/corewords/all.png')
-    ),
-    new Word(
-        'cw21',
-        'core words',
         'Do',
         // require('../assets/images/speechboard/corewords/do.png')
     ),
     new Word(
-        'cw22',
+        'cw21',
         'core words',
         'Can',
         require('../assets/images/speechboard/corewords/can.png')
     ),
     new Word(
-        'cw23',
+        'cw22',
         'core words',
-        "Can't",
+        "Cannot",
         require('../assets/images/speechboard/corewords/cannot.png')
     ),
     new Word(
-        'cw24',
+        'cw23',
         'core words',
         'Make',
         require('../assets/images/speechboard/corewords/make.png')
     ),
     new Word(
-        'cw25',
+        'cw24',
         'core words',
         'Open',
         require('../assets/images/speechboard/corewords/open.png')
     ),
     new Word(
-        'cw26',
+        'cw25',
         'core words',
         'Close',
         require('../assets/images/speechboard/corewords/close.png')
     ),
     new Word(
-        'cw27',
+        'cw26',
         'core words',
         'Get',
         // require('../assets/images/speechboard/corewords/get.png')
     ),
     new Word(
-        'cw28',
+        'cw27',
         'core words',
         'Hold',
         require('../assets/images/speechboard/corewords/hold.png')
     ),
     new Word(
-        'cw29',
+        'cw28',
         'core words',
         'All Done',
         require('../assets/images/speechboard/corewords/all_done.png')
     ),
     new Word(
-        'cw30',
+        'cw29',
         'core words',
         'Same',
         require('../assets/images/speechboard/corewords/same.png')
     ),
     new Word(
-        'cw31',
+        'cw30',
         'core words',
         'Different',
         require('../assets/images/speechboard/corewords/different.png')
     ),
     new Word(
-        'cw32',
+        'cw31',
         'core words',
         'More',
         require('../assets/images/speechboard/corewords/more.png')
+    ),
+    new Word(
+        'cw32',
+        'core words',
+        'All',
+        require('../assets/images/speechboard/corewords/all.png')
     ),
     new Word(
         'cw33',
