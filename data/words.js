@@ -582,13 +582,13 @@ export const WORDS = [
         'c5',
         'colors',
         'Yellow',
-        require('../assets/images/speechboard/colors/yellow.png')
+        require('../assets/images/speechboard/colors/yellow-min.png')
     ),
     new Word(
         'c6',
         'colors',
         'Blue',
-        require('../assets/images/speechboard/colors/blue.png')
+        require('../assets/images/speechboard/colors/blue-min.png')
     ),
     new Word(
         'c7',
@@ -600,28 +600,34 @@ export const WORDS = [
         'c8',
         'colors',
         'Purple',
-        require('../assets/images/speechboard/colors/purple.png')
+        require('../assets/images/speechboard/colors/purple-min.png')
     ),
     new Word(
         'c9',
         'colors',
-        'White',
-        require('../assets/images/speechboard/colors/white.png')
+        'Pink',
+        require('../assets/images/speechboard/colors/pink-min.png')
     ),
     new Word(
         'c10',
+        'colors',
+        'White',
+        require('../assets/images/speechboard/colors/white-min.png')
+    ),
+    new Word(
+        'c11',
         'colors',
         'Black',
         require('../assets/images/speechboard/colors/black.png')
     ),
     new Word(
-        'c11',
+        'c12',
         'colors',
         'Grey',
-        require('../assets/images/speechboard/colors/grey.png')
+        require('../assets/images/speechboard/colors/gray-min.png')
     ),
     new Word(
-        'c12',
+        'c13',
         'colors',
         'Brown',
         require('../assets/images/speechboard/colors/brown-min.png')
