@@ -1,34 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
+import Colors from '../constants/Colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 
 const ProfileScreen = props => {
-    let profileState = useSelector(state => state.profile.profileInfo);
-    const [pickedImage, setPickedImage] = useState(profileState.imageUrl);
-    console.log(profileState);
-
-    useEffect(() => {
-        setPickedImage(profileState.imageUrl);
-    }, [setPickedImage, profileState])
 
     return (
         <View style={styles.screen}>
-            <Text>{profileState.name}</Text>
-            <Text>{profileState.age}</Text>
-            <Text>{profileState.imageUrl}</Text>
-            <TouchableOpacity style={styles.imagePreview} >
-                {!pickedImage && <Image style={{width: 300, height: 200}} source={{ uri: profileState.imageUrl }} />}
-                {/* <Image style={{width: 300, height: 200}} source={{uri: "https://pbs.twimg.com/media/D21KsLPUwAAe2aE.png"}} /> */}
+            <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
+            <Image style={styles.profileimage} source={require('../assets/images/profileimages/butterfly.png')} />
+            <Text style={styles.name}>Jeremy</Text>
+            <Text style={styles.age}>10 years old</Text>
+            <TouchableOpacity onPress={() => {
+                props.navigation.navigate('EditProfile')
+            }}>
+                <View style={styles.button}>
+                    <Text>Edit Profile</Text>
+                </View>
             </TouchableOpacity>
-
-            {/* <Button title="Edit Profile"
-                onPress={() => {
-                    props.navigation.navigate({
-                        routeName: 'EditProfile'
-                    })
-                }} /> */}
         </View>
     )
 };
@@ -58,21 +49,43 @@ ProfileScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center'
     },
-    imagePreview: {
+    cover: {
         width: '100%',
-        height: 200,
-        marginBottom: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: '#ccc',
-        borderWidth: 1
+        height: '20%',
+
     },
-    image: {
-        width: "100%",
-        height: "100%"
+    profileimage: {
+        width: 100,
+        height: 100,
+        backgroundColor: Colors.sesameGreen,
+        borderRadius: 100,
+        padding: 10,
+        marginTop: -50,
+        borderColor: 'white',
+        borderWidth: 3
+    },
+    name: {
+        fontSize: 20,
+        fontFamily: 'roboto-bold'
+    },
+    age: {
+        fontSize: 14,
+        fontFamily: 'roboto'
+    },
+    button: {
+        borderWidth: 2,
+        borderRadius: 5,
+        borderColor: Colors.border,
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        backgroundColor: Colors.sesameGreen,
+        marginTop: 10,
+        fontFamily: 'roboto',
+        justifyContent: 'center',
+        alignItems: 'center'
     },
 });
 export default ProfileScreen;

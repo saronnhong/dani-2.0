@@ -20,6 +20,7 @@ import SearchScreen from '../screens/SpeechBoard/SearchScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import SelectImageScreen from '../screens/SelectImageScreen';
 import Options from '../components/Options';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import Colors from './../constants/Colors';
@@ -165,7 +166,8 @@ const SettingsNavigator = createStackNavigator({
 
 const ProfileNavigator = createStackNavigator({
     Profile: ProfileScreen,
-    EditProfile: EditProfileScreen
+    EditProfile: EditProfileScreen,
+    SelectImage: SelectImageScreen
 }, {
     defaultNavigationOptions: {
         headerStyle: {
@@ -173,7 +175,8 @@ const ProfileNavigator = createStackNavigator({
         },
         headerTintColor: "white", 
         headerTitle: ''
-    }
+    },
+    
 })
 
 const MainNavigator = createDrawerNavigator({

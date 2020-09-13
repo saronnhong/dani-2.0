@@ -492,7 +492,7 @@ export const WORDS = [
         'p4',
         'places',
         'Where is...',
-        require('../assets/images/speechboard/places/where is_.png')
+        require('../assets/images/speechboard/places/whereis.png')
     ),
     new Word(
         'p5',
