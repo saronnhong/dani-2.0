@@ -5,6 +5,8 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
 import * as profileActions from '../store/actions/profile';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import HeaderButton from '../components/HeaderButton';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
 import { IMAGES } from '../data/profileimg.js';
@@ -13,29 +15,23 @@ const windowHeight = Dimensions.get('window').height;
 
 const EditProfileScreen = props => {
 
-let newImage = null;
- console.log(props);
-  if (props.navigation.state.params != undefined){
-      console.log(props.navigation.state.params.image)
-      newImage = props.navigation.state.params.image;
-  }
-    // if (props.navigation.state.params.imageId){
-    //     const newImage = props.navigation.state.params.imageId;
-    // }
-    // // const newImage = props.navigation.state.params.imageId;
-    // console.log(props.navigation.state.params.imageId);
+    let newImage = null;
+    // console.log(props);
+    if (props.navigation.state.params != undefined) {
+        console.log(props.navigation.state.params.image)
+        newImage = props.navigation.state.params.image;
+    }
 
-    console.log(newImage);
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
             <TouchableOpacity style={styles.imageContainer} onPress={() => {
-                 props.navigation.navigate('SelectImage',
-                 {
-                     userImage: 'profileImage'
-                 })
+                props.navigation.navigate('SelectImage',
+                    {
+                        userImage: 'profileImage'
+                    })
             }}>
-                <Image style={styles.profileImage} source = { newImage != null ? newImage : require('../assets/images/profileimages/butterfly.png') } />
+                <Image style={styles.profileImage} source={newImage != null ? newImage.imageUrl : require('../assets/images/profileimages/butterfly.png')} />
             </TouchableOpacity>
             <View style={styles.firstField}>
                 <Text style={styles.fieldName}>Name:</Text>
@@ -66,6 +62,13 @@ let newImage = null;
 EditProfileScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Edit Profile',
+        headerRight: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Save" iconName='ios-add' onPress={() => {
+                    navData.navigation.navigate('Profile');
+                }} />
+            </HeaderButtons>
+        )
     }
 }
 
@@ -114,7 +117,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     fieldName: {
-        marginRight:10,
+        marginRight: 10,
         marginLeft: 10
         // flex: 1
     },
