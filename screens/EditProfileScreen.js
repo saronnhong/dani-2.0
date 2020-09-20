@@ -7,12 +7,25 @@ import * as FileSystem from 'expo-file-system';
 import * as profileActions from '../store/actions/profile';
 import Colors from '../constants/Colors';
 import { Ionicons } from '@expo/vector-icons';
+import { IMAGES } from '../data/profileimg.js';
 
 const windowHeight = Dimensions.get('window').height;
 
 const EditProfileScreen = props => {
 
+let newImage = null;
+ console.log(props);
+  if (props.navigation.state.params != undefined){
+      console.log(props.navigation.state.params.image)
+      newImage = props.navigation.state.params.image;
+  }
+    // if (props.navigation.state.params.imageId){
+    //     const newImage = props.navigation.state.params.imageId;
+    // }
+    // // const newImage = props.navigation.state.params.imageId;
+    // console.log(props.navigation.state.params.imageId);
 
+    console.log(newImage);
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
@@ -22,7 +35,7 @@ const EditProfileScreen = props => {
                      userImage: 'profileImage'
                  })
             }}>
-                <Image style={styles.profileImage} source={require('../assets/images/profileimages/butterfly.png')} />
+                <Image style={styles.profileImage} source = { newImage != null ? newImage : require('../assets/images/profileimages/butterfly.png') } />
             </TouchableOpacity>
             <View style={styles.firstField}>
                 <Text style={styles.fieldName}>Name:</Text>
