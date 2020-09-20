@@ -64,6 +64,11 @@ const SelectImageScreen = props => {
             cat: "Sunflower",
             imageUrl: require('../assets/images/profileimages/sunflower.png'),
         },
+        {
+            id: 12,
+            cat: "Sunrise",
+            imageUrl: require('../assets/images/profileimages/sunrise.png'),
+        },
     ];
 
 
