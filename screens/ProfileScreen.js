@@ -6,13 +6,14 @@ import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../components/HeaderButton';
 
 const ProfileScreen = props => {
-
+    let currentProfile = useSelector(state => state.profile);
+    // console.log(profile);
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
-            <Image style={styles.profileimage} source={require('../assets/images/profileimages/butterfly.png')} />
-            <Text style={styles.name}>Jeremy</Text>
-            <Text style={styles.age}>10 years old</Text>
+            <Image style={styles.profileimage} source={currentProfile.imageUrl} />
+    <Text style={styles.name}>{currentProfile.name}</Text>
+            <Text style={styles.age}>Age: {currentProfile.age}</Text>
             <TouchableOpacity onPress={() => {
                 props.navigation.navigate('EditProfile')
             }}>
