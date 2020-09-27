@@ -8,6 +8,7 @@ import Colors from '../../constants/Colors';
 import { Audio } from 'expo-av';
 import { useSelector, useDispatch } from 'react-redux';
 import * as settingsActions from '../../store/actions/settings';
+import * as profileActions from '../../store/actions/profile';
 
 
 const SpeechMenu = (props) => {
@@ -64,6 +65,8 @@ const SpeechMenu = (props) => {
     ];
 
     let userSettings = useSelector(state => state.setting);
+    let profile = useSelector(state => state.profile);
+    console.log(profile);
 
     const enableSound = async () => {
         const emptySound = new Audio.Sound();
@@ -81,7 +84,11 @@ const SpeechMenu = (props) => {
     // useEffect(() => {
     //     dispatch(settingsActions.fetchSettings());
     // }, [dispatch])
-
+    if (profile.name === null) {
+        dispatch(profileActions.createProfile("Username", "0", require('../../assets/images/profileimages/rainbow.png')))
+        // let profile = useSelector(state => state.profile);
+        // console.log('created profile' + profile)
+    }
 
     if (userSettings.voice === null) {
         dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));

@@ -13,44 +13,65 @@ import { IMAGES } from '../data/profileimg.js';
 
 const windowHeight = Dimensions.get('window').height;
 
+
 const EditProfileScreen = props => {
+    const dispatch = useDispatch();
+    let currentProfile = useSelector(state => state.profile);
 
     let newImage = null;
     // console.log(props);
     if (props.navigation.state.params != undefined) {
-        console.log(props.navigation.state.params.image)
+        // console.log(props.navigation.state.params.image)
         newImage = props.navigation.state.params.image;
     }
 
+    const [state, setState] = useState({
+        name: currentProfile.name,
+        age: currentProfile.age,
+        imageUrl: '',
+        coverUrl: require('../assets/images/profileimages/coverphoto.jpg')
+    });
+
+    const saveProfile = useCallback(async () => {
+            dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl));
+            Alert.alert("Profile has been saved!");
+            props.navigation.navigate({ routeName: "Profile" });
+            // console.log(state)
+    }, [state.name, state.age, state.imageUrl, state.coverUrl]);
+
+   
+    useEffect(() => {
+        props.navigation.setParams({ Save: saveProfile });
+        console.log(state.imageUrl)
+    }, [saveProfile, state.imageUrl])
+
     return (
         <View style={styles.screen}>
-            <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
+            <Image style={styles.cover} source={state.coverUrl} />
             <TouchableOpacity style={styles.imageContainer} onPress={() => {
                 props.navigation.navigate('SelectImage',
                     {
                         userImage: 'profileImage'
                     })
             }}>
-                <Image style={styles.profileImage} source={newImage != null ? newImage.imageUrl : require('../assets/images/profileimages/butterfly.png')} />
+                <Image style={styles.profileImage} source = {state.imageUrl} />
             </TouchableOpacity>
             <View style={styles.firstField}>
                 <Text style={styles.fieldName}>Name:</Text>
-                <TextInput
-                    // onChangeText={text => setState({ ...state, phonetic: text })}
+                <TextInput 
+                    onChangeText={text => setState({ ...state, name: text })}
                     style={styles.userInput}
-                    selectionColor='rgba(250,250,250,.6)'
                     color={Colors.sesameBlue}
-                    value='Jeremy'
+                    value={state.name}
                 />
             </View>
             <View style={styles.firstField}>
                 <Text style={styles.fieldName}>Age:</Text>
                 <TextInput
-                    // onChangeText={text => setState({ ...state, phonetic: text })}
+                    onChangeText={text => setState({ ...state, age: text })}
                     style={styles.userInput}
-                    selectionColor='rgba(250,250,250,.6)'
                     color={Colors.sesameBlue}
-                    value='10'
+                    value={state.age}
                 />
             </View>
         </View>
@@ -60,14 +81,13 @@ const EditProfileScreen = props => {
 
 
 EditProfileScreen.navigationOptions = navData => {
+    const saveFunction = navData.navigation.getParam('Save');
     return {
         headerTitle: 'Edit Profile',
         headerRight: () => (
-            <HeaderButtons HeaderButtonComponent={HeaderButton}>
-                <Item title="Save" iconName='ios-add' onPress={() => {
-                    navData.navigation.navigate('Profile');
-                }} />
-            </HeaderButtons>
+            <TouchableOpacity onPress={saveFunction}>
+                <Text style={{ marginRight: 10, color: 'white', fontSize: 16 }}>Save</Text>
+            </TouchableOpacity>
         )
     }
 }
