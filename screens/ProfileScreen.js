@@ -12,10 +12,15 @@ const ProfileScreen = props => {
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
             <Image style={styles.profileimage} source={currentProfile.imageUrl} />
-    <Text style={styles.name}>{currentProfile.name}</Text>
+            <Text style={styles.name}>{currentProfile.name}</Text>
             <Text style={styles.age}>Age: {currentProfile.age}</Text>
             <TouchableOpacity onPress={() => {
-                props.navigation.navigate('EditProfile')
+                props.navigation.navigate({
+                    routeName: 'EditProfile',
+                    params: {
+                        image: currentProfile.imageUrl
+                    }
+                })
             }}>
                 <View style={styles.button}>
                     <Text>Edit Profile</Text>

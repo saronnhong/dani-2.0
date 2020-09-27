@@ -3,13 +3,16 @@ export const CREATE_PROFILE = 'CREATE_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
 
 export const updateProfile = (name, age, imageUrl) => {
-    return async dispatch => {
+    
+    return async (dispatch, getState) => {
+        const userId = getState().auth.userId;
         dispatch({
             type: UPDATE_PROFILE,
             profileData: {
-                name: name,
-                age: age,
-                imageUrl: imageUrl
+                name,
+                age,
+                imageUrl,
+                ownerId: userId
             }
         });
     }
