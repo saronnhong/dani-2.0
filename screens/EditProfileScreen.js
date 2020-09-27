@@ -1,15 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, Image, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
-import * as FileSystem from 'expo-file-system';
 import * as profileActions from '../store/actions/profile';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
 import Colors from '../constants/Colors';
-import { Ionicons } from '@expo/vector-icons';
-import { IMAGES } from '../data/profileimg.js';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -18,32 +11,30 @@ const EditProfileScreen = props => {
     const dispatch = useDispatch();
     let currentProfile = useSelector(state => state.profile);
 
-    let newImage = null;
-    // console.log(props);
-    if (props.navigation.state.params != undefined) {
-        // console.log(props.navigation.state.params.image)
-        newImage = props.navigation.state.params.image;
-    }
-
     const [state, setState] = useState({
         name: currentProfile.name,
         age: currentProfile.age,
-        imageUrl: '',
+        imageUrl: props.navigation.state.params.image,
         coverUrl: require('../assets/images/profileimages/coverphoto.jpg')
     });
+    
+    useEffect(() => { 
+        setState({ ...state, imageUrl: props.navigation.state.params.image })
+    }, [props.navigation.state.params.image]);
 
     const saveProfile = useCallback(async () => {
-            dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl));
-            Alert.alert("Profile has been saved!");
-            props.navigation.navigate({ routeName: "Profile" });
-            // console.log(state)
-    }, [state.name, state.age, state.imageUrl, state.coverUrl]);
+        dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl));
+        Alert.alert("Profile has been saved!");
+        props.navigation.navigate({ routeName: "Profile" });
+    }, [state.name, state.age, state.imageUrl]);
 
-   
+    useEffect(() => { 
+        setState({ ...state, imageUrl: props.navigation.state.params.image })
+    }, [props.navigation.state.params.image]);
+
     useEffect(() => {
         props.navigation.setParams({ Save: saveProfile });
-        console.log(state.imageUrl)
-    }, [saveProfile, state.imageUrl])
+    }, [saveProfile])
 
     return (
         <View style={styles.screen}>
@@ -54,11 +45,11 @@ const EditProfileScreen = props => {
                         userImage: 'profileImage'
                     })
             }}>
-                <Image style={styles.profileImage} source = {state.imageUrl} />
+                <Image style={styles.profileImage} source={state.imageUrl} />
             </TouchableOpacity>
             <View style={styles.firstField}>
                 <Text style={styles.fieldName}>Name:</Text>
-                <TextInput 
+                <TextInput
                     onChangeText={text => setState({ ...state, name: text })}
                     style={styles.userInput}
                     color={Colors.sesameBlue}

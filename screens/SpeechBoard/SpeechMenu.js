@@ -66,7 +66,7 @@ const SpeechMenu = (props) => {
 
     let userSettings = useSelector(state => state.setting);
     let profile = useSelector(state => state.profile);
-    console.log(profile);
+    // console.log(profile);
 
     const enableSound = async () => {
         const emptySound = new Audio.Sound();
@@ -93,7 +93,7 @@ const SpeechMenu = (props) => {
     if (userSettings.voice === null) {
         dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));
     }
-    console.log(userSettings);
+    // console.log(userSettings);
 
     return (
 
