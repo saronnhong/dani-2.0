@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
+import Axios from 'axios';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import Colors from '../../constants/Colors';
@@ -81,9 +82,22 @@ const SpeechMenu = (props) => {
 
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(settingsActions.fetchSettings());
-    // }, [dispatch])
+    Axios.get('https://dani-2.firebaseio.com/profile/profile.json').then(function (response)
+    {
+        console.log(response.data)
+        // const userId = getState().auth.userId;
+        //Need to use useSelector here instead of getState
+        const responseData = response.data
+        for (var i in responseData) {
+            console.log('here')
+            console.log(responseData)
+            // need to access the key for each user profile 
+            // search through ownerId's and when ownerId matches and when one does override 
+        }
+        
+    });
+
+    
     if (profile.name === null) {
         dispatch(profileActions.createProfile("Username", "0", require('../../assets/images/profileimages/rainbow.png')))
         // let profile = useSelector(state => state.profile);
@@ -92,6 +106,7 @@ const SpeechMenu = (props) => {
 
     if (userSettings.voice === null) {
         dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));
+        
     }
     // console.log(userSettings);
 
