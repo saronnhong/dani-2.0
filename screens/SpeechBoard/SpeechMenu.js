@@ -92,6 +92,7 @@ const SpeechMenu = (props) => {
             console.log('here')
             console.log(responseData)
             // need to access the key for each user profile 
+            // search through ownerId's and when ownerId matches and when one does override 
         }
         
     });
