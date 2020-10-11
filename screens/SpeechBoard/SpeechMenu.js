@@ -79,7 +79,6 @@ const SpeechMenu = (props) => {
         enableSound();
     }
 
-
     const dispatch = useDispatch();
 
     Axios.get('https://dani-2.firebaseio.com/profile/profile.json').then(function (response)
@@ -92,7 +91,7 @@ const SpeechMenu = (props) => {
             console.log('here')
             console.log(responseData)
             // need to access the key for each user profile 
-            // search through ownerId's and when ownerId matches and when one does override 
+            // search through ownerId's and when ownerId matches and when one does, override (run update instead of create)
         }
         
     });
