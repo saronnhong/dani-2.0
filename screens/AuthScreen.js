@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
-
+import * as profileActions from '../store/actions/profile';
 import Input from '../components/Input';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -76,6 +75,9 @@ const AuthScreen = props => {
         setIsLoading(true);
         try {
             await dispatch(action);
+            if (isSignup){
+                dispatch(profileActions.createProfile("Username", "0", require('../assets/images/profileimages/rainbow.png')))
+            }
             props.navigation.navigate('SpeechMenu');
         } catch (err) {
             setError(err.message);

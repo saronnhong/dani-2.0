@@ -79,34 +79,19 @@ const SpeechMenu = (props) => {
         enableSound();
     }
 
-
     const dispatch = useDispatch();
+    let userId = useSelector(state => state.auth.userId);
 
-    Axios.get('https://dani-2.firebaseio.com/profile/profile.json').then(function (response)
-    {
-        console.log(response.data)
-        // const userId = getState().auth.userId;
-        //Need to use useSelector here instead of getState
-        const responseData = response.data
-        for (var i in responseData) {
-            console.log('here')
-            console.log(responseData)
-            // need to access the key for each user profile 
-            // search through ownerId's and when ownerId matches and when one does override 
-        }
-        
+    Axios.get(`https://dani-2.firebaseio.com/profile/${userId}.json`).then(function (response) {
+        // console.log(response.data)
+        let newUser = new Object(response.data)
+        console.log(newUser)
     });
 
-    
-    if (profile.name === null) {
-        dispatch(profileActions.createProfile("Username", "0", require('../../assets/images/profileimages/rainbow.png')))
-        // let profile = useSelector(state => state.profile);
-        // console.log('created profile' + profile)
-    }
 
     if (userSettings.voice === null) {
         dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));
-        
+
     }
     // console.log(userSettings);
 
