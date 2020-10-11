@@ -53,7 +53,7 @@ export const createProfile = (name, age, imageUrl) => {
         const userId = getState().auth.userId;
         //any async code you want!
         const response = await fetch(
-            `https://dani-2.firebaseio.com/profile.json?auth=${token}`,
+            `https://dani-2.firebaseio.com/profile/${userId}.json?auth=${token}`,
             {
                 method: 'POST',
                 headers: {
