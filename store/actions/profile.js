@@ -47,34 +47,29 @@ export const fetchProfile = () => {
     }
   }
 
-export const createProfile = (name, age, imageUrl) => {
+export const createProfile = (email) => {
     return async (dispatch, getState) => {
-        const token = getState().auth.token;
+        // const token = getState().auth.token;
         const userId = getState().auth.userId;
         //any async code you want!
         const response = await fetch(
-            `https://dani-2.firebaseio.com/profile/${userId}.json?auth=${token}`,
+            'https://speechboard-api.herokuapp.com/profiles/',
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name,
-                    age,
-                    imageUrl,
-                    ownerId: userId
+                    email: email,
+                    userId: userId
                 })
             });
-
-        const resData = await response.json();
+        // const resData = await response.json();
 
         dispatch({
             type: CREATE_PROFILE,
             profileData: {
-                name,
-                age,
-                imageUrl,
+                email,
                 ownerId: userId
             }
         });
