@@ -76,7 +76,7 @@ const AuthScreen = props => {
         try {
             await dispatch(action);
             if (isSignup){
-                dispatch(profileActions.createProfile("Username", "0", require('../assets/images/profileimages/rainbow.png')))
+                dispatch(profileActions.createProfile(formState.inputValues.email))
             }
             props.navigation.navigate('SpeechMenu');
         } catch (err) {
