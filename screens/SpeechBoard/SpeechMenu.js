@@ -66,8 +66,7 @@ const SpeechMenu = (props) => {
     ];
 
     let userSettings = useSelector(state => state.setting);
-    let profile = useSelector(state => state.profile);
-    // console.log(profile);
+    // let profile = useSelector(state => state.profile);
 
     const enableSound = async () => {
         const emptySound = new Audio.Sound();
@@ -80,23 +79,17 @@ const SpeechMenu = (props) => {
     }
 
     const dispatch = useDispatch();
-    let userId = useSelector(state => state.auth.userId);
-
-    Axios.get(`https://dani-2.firebaseio.com/profile/${userId}.json`).then(function (response) {
-        // console.log(response.data)
-        let newUser = new Object(response.data)
-        console.log(newUser)
-    });
+    // let userId = useSelector(state => state.auth.userId);
+    // Axios.get(`https://dani-2.firebaseio.com/profile/${userId}.json`).then(function (response) {
+    //     let newUser = new Object(response.data)
+    // });
 
 
     if (userSettings.voice === null) {
         dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));
-
     }
-    // console.log(userSettings);
 
     return (
-
         <View style={styles.screen}>
             <View style={styles.wordRow}>
                 {categories.map(word =>
@@ -183,7 +176,6 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontFamily: "roboto-bold",
         marginVertical: 15,
-
     },
     gradient: {
         justifyContent: 'center',
