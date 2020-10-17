@@ -23,7 +23,7 @@ const EditProfileScreen = props => {
     }, [props.navigation.state.params.image]);
 
     const saveProfile = useCallback(async () => {
-        dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl));
+        dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
         Alert.alert("Profile has been saved!");
         props.navigation.navigate({ routeName: "Profile" });
     }, [state.name, state.age, state.imageUrl]);

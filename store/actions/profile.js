@@ -2,16 +2,35 @@ export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const CREATE_PROFILE = 'CREATE_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
 
-export const updateProfile = (name, age, imageUrl) => {
+export const updateProfile = (name, age, imageUrl, coverImageUrl) => {
     
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
+        const userEmail = getState().profile.email;
+
+        const response = await fetch(
+            `https://speechboard-api.herokuapp.com/profiles/${userId}`,
+            {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: userEmail,
+                    name,
+                    age,
+                    imageUrl,
+                    coverImageUrl
+                })
+            });
+
         dispatch({
             type: UPDATE_PROFILE,
             profileData: {
                 name,
                 age,
                 imageUrl,
+                coverImageUrl,
                 ownerId: userId
             }
         });

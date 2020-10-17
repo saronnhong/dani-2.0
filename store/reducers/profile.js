@@ -20,9 +20,11 @@ export default (state = initialState, action) => {
     //   };
     case UPDATE_PROFILE:
       return {
+        email: action.profileData.email,
         name: action.profileData.name,
         age: action.profileData.age,
-        imageUrl: action.profileData.imageUrl
+        imageUrl: action.profileData.imageUrl,
+        coverImageUrl: action.profileData.coverImageUrl
       };
     case CREATE_PROFILE:
       return {
