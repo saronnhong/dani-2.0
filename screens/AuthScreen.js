@@ -75,8 +75,9 @@ const AuthScreen = props => {
         setIsLoading(true);
         try {
             await dispatch(action);
-            if (isSignup){
+            if (isSignup) {
                 dispatch(profileActions.createProfile(formState.inputValues.email))
+                dispatch(profileActions.updateProfile('Sarah', '22', 'blah', 'blah'));
             }
             props.navigation.navigate('SpeechMenu');
         } catch (err) {
@@ -103,7 +104,7 @@ const AuthScreen = props => {
             </View>
 
             <Card style={styles.authContainer}>
-                <ScrollView keyboardShouldPersistTaps={'handled'} >
+                {!isSignup ? <ScrollView keyboardShouldPersistTaps={'handled'} >
                     <Input
                         id='email'
                         label='E-Mail'
@@ -140,7 +141,7 @@ const AuthScreen = props => {
                                 <ActivityIndicator size="small" color={Colors.primary} />
                             ) : (
                                     <Button
-                                        title={isSignup ? 'Sign Up' : 'Login'}
+                                        title={`${isSignup ? 'Sign Up' : 'Login'}`}
                                         color='white'
                                     />
                                 )}
@@ -155,7 +156,99 @@ const AuthScreen = props => {
                         </TouchableOpacity>
                     </View>
 
-                </ScrollView>
+                </ScrollView> :
+                <ScrollView keyboardShouldPersistTaps={'handled'} >
+                     {/* <Input
+                        id='name'
+                        label='Name'
+                        keyboardType='default'
+                        required
+                        autoCapitalize='words'
+                        errorText="Please enter your name"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        // useValidation={true}
+                    />
+                     <Input
+                        id='age'
+                        label='Age'
+                        keyboardType='numeric'
+                        required
+                        autoCapitalize='none'
+                        errorText="Please enter your name"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        // useValidation={true}
+                    /> */}
+                    <Input
+                        id='email'
+                        label='E-Mail'
+                        keyboardType='email-address'
+                        required
+                        email
+                        autoCapitalize='none'
+                        errorText="Please enter a valid email address"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        useValidation={true}
+                    />
+                    <Input
+                        id='password'
+                        label='Password'
+                        keyboardType='default'
+                        secureTextEntry
+                        required
+                        minLength={5}
+                        autoCapitalize='none'
+                        errorText="Please enter a valid password"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        clearTextOnFocus={true}
+                        useValidation={true}
+
+                    />
+                    {/* <Input
+                        id='password'
+                        label='Confirm Password'
+                        keyboardType='default'
+                        secureTextEntry
+                        required
+                        minLength={5}
+                        autoCapitalize='none'
+                        errorText="Please enter a valid password"
+                        onInputChange={inputChangeHandler}
+                        initialValue=""
+                        color='white'
+                        clearTextOnFocus={true}
+                        useValidation={true}
+                    /> */}
+
+                    <View style={styles.buttonRow}>
+                    <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
+                            {isLoading ? (
+                                <ActivityIndicator size="small" color={Colors.primary} />
+                            ) : (
+                                    <Button
+                                        title={`${isSignup ? 'Sign Up' : 'Login'}`}
+                                        color='white'
+                                    />
+                                )}
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.buttonContainer} onPress={() => {
+                            setIsSignup(prevState => !prevState)
+                        }}>
+                            <Button
+                                title={`${isSignup ? 'Login' : 'Sign Up'}`}
+                                color={Colors.sesameYellow}
+                            />
+                        </TouchableOpacity>
+                    </View>
+
+                </ScrollView>}
             </Card>
         </KeyboardAvoidingView>
     )
@@ -180,7 +273,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0, 0.15)',
         marginBottom: '40%'
     },
-    titleContainer:{
+    titleContainer: {
         marginVertical: 35
     },
     title: {

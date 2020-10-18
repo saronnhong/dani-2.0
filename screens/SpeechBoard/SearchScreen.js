@@ -48,7 +48,7 @@ const SearchScreen = props => {
         setSearchResults(filteredArr);
     }
     
-    renderWordImageUrl = (word) => {
+    let renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
         } else {
@@ -81,7 +81,7 @@ const SearchScreen = props => {
                     <View style={styles.scrollContainer}>
                         {!searchResults.length && <Text style={styles.emptySearch}>No search results found.</Text>}
                         {searchResults.map(word =>
-                            <TouchableOpacity key={word.id} onPress={() => {
+                            <TouchableOpacity key={word._id} onPress={() => {
                                 Speech.speak(word.word, {
                                     language: 'en',
                                     pitch: 1,

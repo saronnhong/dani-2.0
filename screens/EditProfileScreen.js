@@ -63,6 +63,7 @@ const EditProfileScreen = props => {
                     style={styles.userInput}
                     color={Colors.sesameBlue}
                     value={state.age}
+                    keyboardType="number-pad"
                 />
             </View>
         </View>
