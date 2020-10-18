@@ -1,6 +1,6 @@
 class Word {
     constructor(
-        id,
+        _id,
         categoryId,
         word,
         imageUrl,
@@ -8,7 +8,7 @@ class Word {
         ownerId
 
     ) {
-        this.id = id;
+        this._id = _id;
         this.categoryId = categoryId;
         this.word = word;
         this.imageUrl = imageUrl;

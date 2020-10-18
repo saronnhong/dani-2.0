@@ -1,5 +1,5 @@
 import WORDS from '../../data/words';
-import { CREATE_WORD, SET_WORDS, DELETE_WORD, UPDATE_WORD } from '../actions/newCards';
+import { CREATE_WORD, SET_WORDS, DELETE_WORD, UPDATE_WORD } from '../actions/word';
 import Word from '../../models/words';
 
 const initialState = {
@@ -14,7 +14,7 @@ export default (state = initialState, action) => {
       };
     case CREATE_WORD:
       const newWord = new Word(
-        action.wordData.id,
+        action.wordData._id,
         action.wordData.categoryId,
         action.wordData.word,
         action.wordData.imageUrl,
@@ -30,7 +30,7 @@ export default (state = initialState, action) => {
         prod => prod.id === action.wid
       );
       const updatedWord = new Word(
-        action.wordData.id,
+        action.wordData._id,
         action.wordData.categoryId,
         action.wordData.word,
         action.wordData.imageUrl,

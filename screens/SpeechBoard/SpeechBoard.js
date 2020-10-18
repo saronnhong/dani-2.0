@@ -7,7 +7,7 @@ import * as wordActions from '../../store/actions/sentenceBar'
 import Voices from '../../constants/Voices';
 import { WORDS } from '../../data/words';
 import Colors from '../../constants/Colors';
-import * as newWordActions from '../../store/actions/newCards';
+import * as newWordActions from '../../store/actions/word';
 
 
 const SpeechBoard = (props) => {
@@ -22,7 +22,7 @@ const SpeechBoard = (props) => {
         "food & drink": Colors.sesameGreen,
         "places": "#638F54",
         "colors": Colors.sesameGreen,
-        "user words": "#f2c063",
+        "my words": "#f2c063",
         'numbers': Colors.sesameRedOrange,
         'core words': Colors.sesamePurple
     }
@@ -61,7 +61,7 @@ const SpeechBoard = (props) => {
 
     let userSettings = useSelector(state => state.setting);
 
-    renderWordImageUrl = (word) => {
+    let renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
         } else {
@@ -78,7 +78,7 @@ const SpeechBoard = (props) => {
                 <View style={styles.screen}>
                     <View style={styles.wordRow}>
                         {filteredList.map(word =>
-                            <TouchableOpacity key={word.id} onPress={() => {
+                            <TouchableOpacity key={word._id} onPress={() => {
                                 Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
                                     pitch: userSettings.pitch,
@@ -96,8 +96,8 @@ const SpeechBoard = (props) => {
 
                             </TouchableOpacity>
                         )}
-                        {catId === "user words" && userWords.map(word =>
-                            <TouchableOpacity key={word.id} onPress={() => {
+                        {catId === "my words" && userWords.map(word =>
+                            <TouchableOpacity key={word._id} onPress={() => {
                                 Speech.speak(word.phonetic ? word.phonetic : word.word, {
                                     language: 'en',
                                     pitch: userSettings.pitch,

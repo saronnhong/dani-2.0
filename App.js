@@ -9,7 +9,7 @@ import Navigator from './navigation/Navigator';
 import { enableScreens } from 'react-native-screens';
 import authReducer from './store/reducers/auth';
 import sentenceReducer from './store/reducers/sentenceBar';
-import newWordsReducer from './store/reducers/newCards';
+import newWordsReducer from './store/reducers/word';
 import settingReducer from './store/reducers/settings';
 import profileReducer from './store/reducers/profile';
 import NavigationContainer from './navigation/NavigationContainer';
