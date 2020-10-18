@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, Button, TouchableOpacity, ScrollView, Alert, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
-import * as newWordActions from '../../store/actions/newCards';
+import * as newWordActions from '../../store/actions/word';
 import AddNewWordScreen from './AddNewWordScreen';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
@@ -15,7 +15,6 @@ const SelectUserWordScreen = (props) => {
     const [error, setError] = useState();
     
     let userWords = useSelector(state => state.word.userWords);
-    // console.log(userWords);
 
     const loadWords = useCallback(async () => {
         setError(null);
@@ -39,7 +38,7 @@ const SelectUserWordScreen = (props) => {
             <ScrollView >
                 <View style={styles.wordRow}>
                     {userWords.map(word =>
-                        <TouchableOpacity key={word.id} onPress={() => {
+                        <TouchableOpacity key={word._id} onPress={() => {
                             props.navigation.navigate('Edit',
                                 {
                                     editWord: word

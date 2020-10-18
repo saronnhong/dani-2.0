@@ -5,7 +5,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
 import DropDownPicker from 'react-native-dropdown-picker';
-import * as wordsActions from '../../store/actions/newCards';
+import * as wordsActions from '../../store/actions/word';
 import Colors from '../../constants/Colors';
 import Card from '../../components/Card';
 import { Ionicons } from '@expo/vector-icons';
@@ -62,7 +62,7 @@ const AddNewWordScreen = props => {
     };
 
 
-    addNewWord = async () => {
+    let addNewWord = async () => {
         const fileName = pickedImage.split('/').pop();
         const newPath = FileSystem.documentDirectory + fileName;
 

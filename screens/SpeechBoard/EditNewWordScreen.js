@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import * as FileSystem from 'expo-file-system';
-import * as wordsCardActions from '../../store/actions/newCards';
+import * as wordsCardActions from '../../store/actions/word';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Colors from '../../constants/Colors';
 import Card from '../../components/Card';
@@ -18,7 +18,7 @@ const EditNewWordScreen = props => {
         phonetic: 'this phonetic',
         categoryId: 'this cat',
         imageUrl: 'something',
-        id: ''
+        _id: ''
     });
     const [modalVisible, setModalVisible] = useState(false);
     const [pickedImage, setPickedImage] = useState();
@@ -37,20 +37,6 @@ const EditNewWordScreen = props => {
         }
         return true;
     };
-
-    // const takeImageHandler = async () => {
-    //     const hasPermission = await verifyPermissions();
-    //     if (!hasPermission) {
-    //         return;
-    //     }
-    //     const image = await ImagePicker.launchCameraAsync({
-    //         allowsEditing: true,
-    //         aspect: [16, 9],
-    //         quality: 0.5
-    //     });
-    //     setPickedImage(image.uri);
-    //     setState({ ...state, imageUrl: image.uri })
-    // };
 
     const takeGalleryHandler = async () => {
         const hasPermission = await verifyPermissions();
@@ -87,7 +73,7 @@ const EditNewWordScreen = props => {
         setState({ ...state, imageUrl: newPath });
 
         dispatch(wordsCardActions.updateWord(
-            state.id,
+            state._id,
             state.categoryId,
             state.word,
             state.imageUrl,
@@ -97,13 +83,13 @@ const EditNewWordScreen = props => {
     }
 
     const onDeleteWord = () => {
-        dispatch(wordsCardActions.deleteWord(state.id));
+        dispatch(wordsCardActions.deleteWord(state._id));
         props.navigation.navigate('Select');
     }
 
     useEffect(() => {
         setState({
-            id: editWord.id,
+            _id: editWord._id,
             word: editWord.word,
             phonetic: editWord.phonetic,
             categoryId: editWord.categoryId,

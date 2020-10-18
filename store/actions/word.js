@@ -8,49 +8,44 @@ export const fetchWords = () => {
   return async (dispatch, getState) => {
     const userId = getState().auth.userId;
     try {
-      //any async code you want!
-
-      const response = await fetch('https://dani-2.firebaseio.com/words.json');
+      const response = await fetch(`https://speechboard-api.herokuapp.com/words/`);
 
       if (!response.ok) {
         throw new Error('Something went wrong');
       }
 
       const resData = await response.json();
-      // console.log(resData);
 
       const loadedWords = [];
 
       for (const key in resData) {
         loadedWords.push(new Word(
-          key,
+          resData[key]._id,
           resData[key].categoryId,
           resData[key].word,
           resData[key].imageUrl,
           resData[key].phonetic,
-          // resData[key].color,
-          // resData[key].voiceRecord,
           resData[key].ownerId
         ));
       }
       dispatch({
         type: SET_WORDS,
-        // words: loadedWords,
         userWords: loadedWords.filter(prod => prod.ownerId === userId)
       });
     } catch (err) {
+      console.log(err);
       throw err;
     }
   }
 }
 
-export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRecord) => {
+export const createWord = (categoryId, word, imageUrl, phonetic) => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
+    // const token = getState().auth.token;
     const userId = getState().auth.userId;
     //any async code you want!
     const response = await fetch(
-      `https://dani-2.firebaseio.com/words/words.json?auth=${token}`,
+      `https://speechboard-api.herokuapp.com/words/`,
       {
         method: 'POST',
         headers: {
@@ -61,24 +56,21 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
           word,
           imageUrl,
           phonetic,
-          // color,
-          // voiceRecord,
           ownerId: userId
         })
       });
 
     const resData = await response.json();
+    console.log(resData);
 
     dispatch({
       type: CREATE_WORD,
       wordData: {
-        id: resData.name,
+        _id: resData._id,
         categoryId,
         word,
         imageUrl,
         phonetic,
-        // color,
-        // voiceRecord,
         ownerId: userId
       }
     });
@@ -86,9 +78,9 @@ export const createWord = (categoryId, word, imageUrl, phonetic, color, voiceRec
 };
 export const deleteWord = wordId => {
   return async (dispatch, getState) => {
-    const token = getState().auth.token;
+    // const token = getState().auth.token;
     const response = await fetch(
-      `https://dani-2.firebaseio.com/words/${wordId}.json?auth=${token}`,
+      `https://speechboard-api.herokuapp.com/words/${wordId}`,
       {
         method: 'DELETE',
       }
@@ -104,16 +96,16 @@ export const deleteWord = wordId => {
 export const updateWord = (id, categoryId, word, imageUrl, phonetic) => {
   return async (dispatch, getState) => {
     const userId = getState().auth.userId;
-    const token = getState().auth.token;
+    // const token = getState().auth.token;
     const response = await fetch(
-      `https://dani-2.firebaseio.com/words/${id}.json?auth=${token}`,
+      `https://speechboard-api.herokuapp.com/words/${id}`,
       {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          id: id,
+          _id: id,
           categoryId: categoryId,
           word: word,
           imageUrl: imageUrl,
@@ -130,7 +122,7 @@ export const updateWord = (id, categoryId, word, imageUrl, phonetic) => {
       type: UPDATE_WORD,
       wid: id,
       wordData: {
-        id: id,
+        _id: id,
         categoryId: categoryId,
         word: word,
         imageUrl: imageUrl,
