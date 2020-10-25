@@ -76,8 +76,8 @@ const AuthScreen = props => {
         try {
             await dispatch(action);
             if (isSignup) {
-                dispatch(profileActions.createProfile(formState.inputValues.email))
-                dispatch(profileActions.updateProfile('Sarah', '22', 'blah', 'blah'));
+                dispatch(profileActions.createProfile(formState.inputValues.email));
+                // dispatch(profileActions.updateProfile('Sarah', '22', 'blah', 'blah'));
             }
             props.navigation.navigate('SpeechMenu');
         } catch (err) {
