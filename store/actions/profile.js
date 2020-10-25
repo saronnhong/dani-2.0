@@ -27,6 +27,7 @@ export const updateProfile = (name, age, imageUrl, coverImageUrl) => {
         dispatch({
             type: UPDATE_PROFILE,
             profileData: {
+                email: userEmail,
                 name,
                 age,
                 imageUrl,

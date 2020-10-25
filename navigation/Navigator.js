@@ -8,6 +8,7 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import AuthScreen from './../screens/AuthScreen';
+import UserInfo from './../screens/UserInfo';
 import MainMenuScreen from './../screens/Sounds/MainMenuScreen';
 import SoundsMenuScreen from './../screens/Sounds/SoundsMenuScreen';
 import SoundScreen from './../screens/Sounds/SoundScreen';
@@ -210,7 +211,8 @@ const MainNavigator = createDrawerNavigator({
 );
 
 const AuthNavigator = createStackNavigator({
-    Auth: AuthScreen
+    Auth: AuthScreen,
+    UserInfo: UserInfo
 }, {
     defaultNavigationOptions: {
         headerStyle: {
