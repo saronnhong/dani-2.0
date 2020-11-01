@@ -25,6 +25,9 @@ import SelectImageScreen from '../screens/SelectImageScreen';
 import Options from '../components/Options';
 import EditProfileScreen from '../screens/EditProfileScreen';
 import Colors from './../constants/Colors';
+import CreateAccountScreen from '../screens/SignUp/CreateAccountScreen';
+import EnterPasswordScreen from '../screens/SignUp/EnterPasswordScreen';
+import SelectProfileImageScreen from '../screens/SignUp/SelectProfileImageScreen';
 
 const defaultStackNavOptions = {
     defaultNavigationOptions: {
@@ -212,7 +215,10 @@ const MainNavigator = createDrawerNavigator({
 
 const AuthNavigator = createStackNavigator({
     Auth: AuthScreen,
-    UserInfo: UserInfo
+    CreateAccountScreen: CreateAccountScreen,
+    EnterPasswordScreen: EnterPasswordScreen,
+    SelectProfileImageScreen: SelectProfileImageScreen
+
 }, {
     defaultNavigationOptions: {
         headerStyle: {
