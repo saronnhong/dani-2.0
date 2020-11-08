@@ -9,7 +9,7 @@ import * as profileActions from '../store/actions/profile';
 const windowWidth = Dimensions.get('window').width;
 
 const SelectImageScreen = props => {
-    const dispatch = useDispatch();
+    const previousPage = props.navigation.state.params.previousPage;
 
     return (
         <View style={styles.screen}>
@@ -18,7 +18,8 @@ const SelectImageScreen = props => {
                     <TouchableOpacity key={icon.id} onPress={async () => {
                         // dispatch(profileActions.updateProfile(icon.cat, "33", icon.imageUrl));
                         props.navigation.navigate({
-                            routeName: 'EditProfile',
+                            // routeName:{(previousPage === 'createProfile') ? 'SelectProfileImageScreen' : 'EditProfile'},
+                            routName: '',
                             params: {
                                 image: icon.imageUrl
                             }
