@@ -2,9 +2,22 @@ import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
+import * as authActions from '../../store/actions/auth';
 
 
 const EnterPasswordScreen = props => {
+    const [state, setState] = useState({
+        password: ''
+    });
+    const accountInfo = props.navigation.state.params.accountInfo;
+    const [reveal, setReveal] = useState(true)
+    const dispatch = useDispatch();
+    const authHandler = () => {
+        dispatch(authActions.signup(accountInfo.email, state.password))
+        props.navigation.navigate('SelectProfileImageScreen')
+    }
+    
+
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <Text style={styles.title}>
@@ -12,15 +25,17 @@ const EnterPasswordScreen = props => {
             </Text>
             <Text style={styles.reminder}>Make sure it is 8 characters or more.</Text>
             <TextInput
-                // onChangeText={text => setState({ ...state, name: text })}
                 style={styles.userInput}
-                value="Password"
+                onChangeText={text => setState({ ...state, password: text })}
+                placeholder='Password'
+                keyboardType='default'
+                secureTextEntry={reveal}
             // value={state.name}
             />
-                <Text style={styles.revealPassword}>Reveal password</Text>
-            <TouchableOpacity style={styles.nextButton} onPress={() => {
-                props.navigation.navigate('SelectProfileImageScreen')
-            }}>
+            <TouchableOpacity onPress={() => setReveal(!reveal)}>
+                <Text style={styles.revealPassword}>{reveal ? 'Reveal password' : 'Hide password'}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.nextButton} onPress={authHandler}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
 
