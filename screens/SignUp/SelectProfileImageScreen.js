@@ -11,7 +11,14 @@ const SelectProfileImageScreen = props => {
                 Choose your profile picture
             </Text>
             <Text style={styles.reminder}>Have a favorite photo?</Text>
-            <Image style={styles.profile} source={require('../../assets/images/profileimages/rainbow.png')} />
+            <TouchableOpacity onPress={() => {
+                props.navigation.navigate('SelectImage',
+                    {
+                        previousPage: 'createProfile'
+                    })
+            }}>
+            <Image style={styles.profile} source={require('../../assets/images/profileimages/rainbow.png')}/>
+            </TouchableOpacity>
             <TouchableOpacity style={styles.nextButton} onPress={() => {
                 props.navigation.navigate('EnterPassword')
             }}>
