@@ -18,8 +18,7 @@ const SelectImageScreen = props => {
                     <TouchableOpacity key={icon.id} onPress={async () => {
                         // dispatch(profileActions.updateProfile(icon.cat, "33", icon.imageUrl));
                         props.navigation.navigate({
-                            // routeName:{(previousPage === 'createProfile') ? 'SelectProfileImageScreen' : 'EditProfile'},
-                            routName: '',
+                            routeName:(previousPage === 'createProfile') ? 'SelectProfileImageScreen' : 'EditProfile',
                             params: {
                                 image: icon.imageUrl
                             }
