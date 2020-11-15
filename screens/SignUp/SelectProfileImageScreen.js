@@ -1,10 +1,29 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity, Image } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Colors from '../../constants/Colors';
-
+import * as profileActions from '../../store/actions/profile';
 
 const SelectProfileImageScreen = props => {
+    const selectedImage = props.navigation.state.params.image;
+
+    let userProfile = useSelector(state => state.profile);
+    console.log(userProfile)
+
+    const [state, setState] = useState({
+        name: userProfile.name,
+        age: userProfile.age,
+        imageUrl: props.navigation.state.params.image,
+        coverUrl: require('../../assets/images/profileimages/coverphoto.jpg')
+    });
+
+    const dispatch = useDispatch();
+    const saveProfile = useCallback(() => {
+        dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
+        props.navigation.navigate({ routeName: "SpeechMenu" });
+    }, [state.name, state.age, state.imageUrl]);
+
+
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <Text style={styles.title}>
@@ -17,12 +36,14 @@ const SelectProfileImageScreen = props => {
                         previousPage: 'createProfile'
                     })
             }}>
-            <Image style={styles.profile} source={require('../../assets/images/profileimages/rainbow.png')}/>
+            {(selectedImage === 'newAccount') ? 
+             <Image style={styles.profile} source={require('../../assets/images/profileimages/rainbow.png')}/> : 
+              <Image style={styles.profile} source={selectedImage}/>
+            } 
+           
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={() => {
-                props.navigation.navigate('EnterPassword')
-            }}>
-                <Text style={styles.buttonText}>Next</Text>
+            <TouchableOpacity style={styles.nextButton} onPress={saveProfile}>
+                <Text style={styles.buttonText}>Save Profile</Text>
             </TouchableOpacity>
 
         </KeyboardAvoidingView>

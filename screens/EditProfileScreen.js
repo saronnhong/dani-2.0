@@ -22,6 +22,7 @@ const EditProfileScreen = props => {
         setState({ ...state, imageUrl: props.navigation.state.params.image })
     }, [props.navigation.state.params.image]);
 
+    
     const saveProfile = useCallback(async () => {
         dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
         Alert.alert("Profile has been saved!");
