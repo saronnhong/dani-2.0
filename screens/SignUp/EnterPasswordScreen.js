@@ -3,7 +3,7 @@ import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, Activ
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import * as authActions from '../../store/actions/auth';
-
+import * as profileActions from '../../store/actions/profile';
 
 const EnterPasswordScreen = props => {
     const [state, setState] = useState({
@@ -14,10 +14,19 @@ const EnterPasswordScreen = props => {
     const dispatch = useDispatch();
     const authHandler = () => {
         dispatch(authActions.signup(accountInfo.email, state.password))
-        props.navigation.navigate('SelectProfileImageScreen')
+        dispatch(profileActions.createProfile(accountInfo.email))
+        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.dateOfBirth, 'imageUrl', 'coverUrl'))
+        props.navigation.navigate({
+            routeName: 'SelectProfileImageScreen',
+            params: {
+                image: 'newAccount',
+                name: accountInfo.name,
+                dateOfBirth: accountInfo.dateOfBirth
+            }
+        });
     }
     
-
+   
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <Text style={styles.title}>

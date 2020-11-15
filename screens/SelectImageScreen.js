@@ -11,6 +11,21 @@ const windowWidth = Dimensions.get('window').width;
 const SelectImageScreen = props => {
     const previousPage = props.navigation.state.params.previousPage;
 
+    // const [state, setState] = useState({
+    //     name: currentProfile.name,
+    //     age: currentProfile.age,
+    //     imageUrl: props.navigation.state.params.image,
+    //     coverUrl: require('../assets/images/profileimages/coverphoto.jpg')
+    // });
+
+
+    // const dispatch = useDispatch();
+    // const saveProfile = useCallback(async () => {
+    //     dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
+    //     props.navigation.navigate({ routeName: "SpeechMenu" });
+    // }, [state.name, state.age, state.imageUrl]);
+
+
     return (
         <View style={styles.screen}>
             <View style={styles.imagesRow}>
@@ -18,8 +33,8 @@ const SelectImageScreen = props => {
                     <TouchableOpacity key={icon.id} onPress={async () => {
                         // dispatch(profileActions.updateProfile(icon.cat, "33", icon.imageUrl));
                         props.navigation.navigate({
-                            // routeName:{(previousPage === 'createProfile') ? 'SelectProfileImageScreen' : 'EditProfile'},
-                            routName: '',
+                            routeName:(previousPage === 'createProfile') ? 'SelectProfileImageScreen' : 'EditProfile',
+                            // routeName: '',
                             params: {
                                 image: icon.imageUrl
                             }
