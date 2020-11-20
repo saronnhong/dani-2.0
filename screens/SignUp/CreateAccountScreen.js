@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity, Dimensions} from 'react-native';
+import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -18,11 +18,14 @@ const CreateAccountScreen = props => {
     const [show, setShow] = useState(false);
 
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date;
-        setShow(Platform.OS === 'ios');
-        setDate(currentDate);
-        convertDate(date);
+    const onPickDate = (event, selectedDate) => {
+        setDate(selectedDate);
+        var newDate = new Date(selectedDate)
+        let mm = newDate.getMonth() + 1;
+        let dd = newDate.getDate();
+        let year = newDate.getFullYear()
+        let formatedDate = mm + "/" + dd + "/" + year;
+        setState({ ...state, dateOfBirth: formatedDate })
     };
 
 
@@ -35,21 +38,10 @@ const CreateAccountScreen = props => {
         showMode('date');
     };
 
-    const showTimepicker = () => {
-        showMode('time');
-    };
     const hideDatepicker = () => {
         setShow(false);
     }
 
-    const convertDate = (date) => {
-        let day = date.getDate()
-        let month = date.getMonth()
-        let year = date.getYear()
-        let dateFormat = day + month + year
-        console.log(month)
-    }
-    
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
@@ -70,18 +62,13 @@ const CreateAccountScreen = props => {
                 keyboardType='email-address'
             />
             <View>
-                {/* <View> */}
-
-                    <TextInput
-                        style={styles.datePicker}
-                        placeholder='Date of Birth'
-                        onFocus={() => showDatepicker()}
-                        onBlur={() => hideDatepicker()}
-                        value={date.toString()}
-                        // value={convertDate(date)}
-                    />
-                    {/* <Button onPress={showDatepicker} title="Choose your date of birth" /> */}
-                
+                <TextInput
+                    style={styles.datePicker}
+                    placeholder='Date of Birth'
+                    onFocus={() => showDatepicker()}
+                    onBlur={() => hideDatepicker()}
+                    value={state.dateOfBirth}
+                />
                 <View>
                     {show && (
                         <DateTimePicker
@@ -90,17 +77,11 @@ const CreateAccountScreen = props => {
                             mode='date'
                             is24Hour={true}
                             display="default"
-                            onChange={onChange}
+                            onChange={onPickDate}
                         />
                     )}
                 </View>
             </View>
-
-            {/* <TextInput
-                onChangeText={text => setState({ ...state, dateOfBirth: text })}
-                style={styles.userInput}
-                value={state.dateOfBirth}
-            /> */}
 
             <TouchableOpacity style={styles.nextButton} onPress={() => {
                 props.navigation.navigate({
@@ -156,12 +137,12 @@ const styles = StyleSheet.create({
         fontFamily: 'roboto-bold'
     },
     datePicker: {
-       width: windowWidth * 0.85,
-       height: 50,
-       paddingHorizontal: 2,
-       borderBottomColor: Colors.border,
-       borderBottomWidth: 0.5,
-       color: Colors.border
+        width: windowWidth * 0.85,
+        height: 50,
+        paddingHorizontal: 2,
+        borderBottomColor: Colors.border,
+        borderBottomWidth: 0.5,
+        color: Colors.border
     }
 });
 
