@@ -15,7 +15,7 @@ const EnterPasswordScreen = props => {
     const authHandler = () => {
         dispatch(authActions.signup(accountInfo.email, state.password))
         dispatch(profileActions.createProfile(accountInfo.email))
-        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.dateOfBirth, 'imageUrl', 'coverUrl'))
+        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, 'imageUrl', 'coverUrl'))
         props.navigation.navigate({
             routeName: 'SelectProfileImageScreen',
             params: {

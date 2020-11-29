@@ -10,13 +10,14 @@ const CreateAccountScreen = props => {
     const [state, setState] = useState({
         name: '',
         email: '',
-        dateOfBirth: '',
+        age: '',
+        dateOfBirth: ''
     });
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-
+    
 
     const onPickDate = (event, selectedDate) => {
         setDate(selectedDate);
@@ -25,7 +26,19 @@ const CreateAccountScreen = props => {
         let dd = newDate.getDate();
         let year = newDate.getFullYear()
         let formatedDate = mm + "/" + dd + "/" + year;
-        setState({ ...state, dateOfBirth: formatedDate })
+
+        var currentDate = new Date();
+        var age = currentDate.getFullYear() - newDate.getFullYear()
+        var m = currentDate.getMonth() - newDate.getMonth();
+        if (m < 0 || (m === 0 && currentDate.getDate() < newDate.getDate())) {
+            age--;
+        }
+        console.log(age);
+        setState({ 
+            ...state, 
+            dateOfBirth: formatedDate, 
+            age: age
+        })
     };
 
 

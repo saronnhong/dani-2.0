@@ -8,20 +8,44 @@ const SelectProfileImageScreen = props => {
     const selectedImage = props.navigation.state.params.image;
 
     let userProfile = useSelector(state => state.profile);
-    console.log(userProfile)
+    console.log(selectedImage)
+
 
     const [state, setState] = useState({
         name: userProfile.name,
         age: userProfile.age,
+        dateOfBirth: userProfile.dateOfBirth,
         imageUrl: props.navigation.state.params.image,
         coverUrl: require('../../assets/images/profileimages/coverphoto.jpg')
     });
 
     const dispatch = useDispatch();
     const saveProfile = useCallback(() => {
-        dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
+        dispatch(profileActions.updateProfile(state.name, state.age, state.dateOfBirth, state.imageUrl, state.coverUrl));
         props.navigation.navigate({ routeName: "SpeechMenu" });
     }, [state.name, state.age, state.imageUrl]);
+
+   useEffect(() => {
+    if(selectedImage === 'newAccount'){
+        setState({ 
+            name: userProfile.name,
+            age: userProfile.age,
+            imageUrl: require('../../assets/images/profileimages/default.png')
+        })
+    }
+    else{
+        setState({
+            name: userProfile.name,
+            age: userProfile.age, 
+            imageUrl: selectedImage
+        })
+    }
+    console.log('here')
+},[selectedImage, userProfile])
+       
+    
+
+
 
 
     return (
@@ -31,13 +55,13 @@ const SelectProfileImageScreen = props => {
             </Text>
             <Text style={styles.reminder}>Have a favorite photo?</Text>
             <TouchableOpacity onPress={() => {
-                props.navigation.navigate('SelectImage',
+                props.navigation.navigate('SelectImageScreenSU',
                     {
                         previousPage: 'createProfile'
                     })
             }}>
             {(selectedImage === 'newAccount') ? 
-             <Image style={styles.profile} source={require('../../assets/images/profileimages/rainbow.png')}/> : 
+             <Image style={styles.profile} source={require('../../assets/images/profileimages/default.png')}/> : 
               <Image style={styles.profile} source={selectedImage}/>
             } 
            

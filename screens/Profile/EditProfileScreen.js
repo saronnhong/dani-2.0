@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Button, StyleSheet, TextInput, Image, TouchableOpacity, Alert, KeyboardAvoidingView, Dimensions, Modal, TouchableWithoutFeedback } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import * as profileActions from '../store/actions/profile';
-import Colors from '../constants/Colors';
+import * as profileActions from '../../store/actions/profile';
+import Colors from '../../constants/Colors';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -15,7 +15,7 @@ const EditProfileScreen = props => {
         name: currentProfile.name,
         age: currentProfile.age,
         imageUrl: props.navigation.state.params.image,
-        coverUrl: require('../assets/images/profileimages/coverphoto.jpg')
+        coverUrl: require('../../assets/images/profileimages/coverphoto.jpg')
     });
     
     useEffect(() => { 

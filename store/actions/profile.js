@@ -2,7 +2,7 @@ export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const CREATE_PROFILE = 'CREATE_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
 
-export const updateProfile = (name, age, imageUrl, coverImageUrl) => {
+export const updateProfile = (name, age, dateOfBirth, imageUrl, coverImageUrl) => {
     
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
@@ -19,6 +19,7 @@ export const updateProfile = (name, age, imageUrl, coverImageUrl) => {
                     email: userEmail,
                     name,
                     age,
+                    dateOfBirth,
                     imageUrl,
                     coverImageUrl
                 })
@@ -30,6 +31,7 @@ export const updateProfile = (name, age, imageUrl, coverImageUrl) => {
                 email: userEmail,
                 name,
                 age,
+                dateOfBirth,
                 imageUrl,
                 coverImageUrl,
                 ownerId: userId
@@ -57,6 +59,7 @@ export const fetchProfile = () => {
             profileData: {
                 name,
                 age,
+                dateOfBirth,
                 imageUrl,
                 ownerId: userId
             }
