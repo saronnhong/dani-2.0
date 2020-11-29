@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
-import Colors from '../constants/Colors'
+import Colors from '../../constants/Colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import HeaderButton from '../components/HeaderButton';
+import HeaderButton from '../../components/HeaderButton';
+
 
 const ProfileScreen = props => {
     let currentProfile = useSelector(state => state.profile);
-    // console.log(profile);
+    console.log(currentProfile);
     return (
         <View style={styles.screen}>
-            <Image style={styles.cover} source={require('../assets/images/profileimages/coverphoto.jpg')} />
+            <Image style={styles.cover} source={require('../../assets/images/profileimages/coverphoto.jpg')} />
             <Image style={styles.profileimage} source={currentProfile.imageUrl} />
             <Text style={styles.name}>{currentProfile.name}</Text>
             <Text style={styles.age}>Age: {currentProfile.age}</Text>

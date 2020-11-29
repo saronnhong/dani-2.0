@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import Colors from '../constants/Colors'
-import { IMAGES } from '../data/profileimg.js';
-import * as profileActions from '../store/actions/profile';
+import Colors from '../../constants/Colors'
+import { IMAGES } from '../../data/profileimg.js';
+import * as profileActions from '../../store/actions/profile';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -33,7 +33,7 @@ const SelectImageScreen = props => {
                     <TouchableOpacity key={icon.id} onPress={async () => {
                         // dispatch(profileActions.updateProfile(icon.cat, "33", icon.imageUrl));
                         props.navigation.navigate({
-                            routeName:(previousPage === 'createProfile') ? 'SelectProfileImageScreen' : 'EditProfile',
+                            routeName: 'EditProfile',
                             // routeName: '',
                             params: {
                                 image: icon.imageUrl

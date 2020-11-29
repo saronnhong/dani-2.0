@@ -20,10 +20,11 @@ import EditUserWord from './../screens/SpeechBoard/EditNewWordScreen';
 import SearchScreen from '../screens/SpeechBoard/SearchScreen';
 import StartupScreen from '../screens/StartUpScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import SelectImageScreen from '../screens/SelectImageScreen';
+import ProfileScreen from '../screens/Profile/ProfileScreen';
+import SelectImageScreenSU from '../screens/SignUp/SelectImageScreenSU';
+import SelectImageScreenP from '../screens/Profile/SelectImageScreenP';
 import Options from '../components/Options';
-import EditProfileScreen from '../screens/EditProfileScreen';
+import EditProfileScreen from '../screens/Profile/EditProfileScreen';
 import Colors from './../constants/Colors';
 import CreateAccountScreen from '../screens/SignUp/CreateAccountScreen';
 import EnterPasswordScreen from '../screens/SignUp/EnterPasswordScreen';
@@ -171,7 +172,7 @@ const SettingsNavigator = createStackNavigator({
 const ProfileNavigator = createStackNavigator({
     Profile: ProfileScreen,
     EditProfile: EditProfileScreen,
-    SelectImage: SelectImageScreen
+    SelectImageP: SelectImageScreenP
 }, {
     defaultNavigationOptions: {
         headerStyle: {
@@ -217,8 +218,8 @@ const AuthNavigator = createStackNavigator({
     Auth: AuthScreen,
     CreateAccountScreen: CreateAccountScreen,
     EnterPasswordScreen: EnterPasswordScreen,
-    SelectProfileImageScreen: SelectProfileImageScreen
-
+    SelectProfileImageScreen: SelectProfileImageScreen,
+    SelectImageScreenSU: SelectImageScreenSU
 }, {
     defaultNavigationOptions: {
         headerStyle: {
