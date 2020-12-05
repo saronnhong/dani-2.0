@@ -10,16 +10,17 @@ const EnterPasswordScreen = props => {
         password: ''
     });
     const accountInfo = props.navigation.state.params.accountInfo;
+    // console.log(accountInfo);
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = () => {
         dispatch(authActions.signup(accountInfo.email, state.password))
         dispatch(profileActions.createProfile(accountInfo.email))
-        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, 'imageUrl', 'coverUrl'))
+        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'))
         props.navigation.navigate({
             routeName: 'SelectProfileImageScreen',
             params: {
-                image: 'newAccount',
+                image: require('../../assets/images/profileimages/default.png'),
                 name: accountInfo.name,
                 dateOfBirth: accountInfo.dateOfBirth
             }

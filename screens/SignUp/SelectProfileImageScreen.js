@@ -6,10 +6,10 @@ import * as profileActions from '../../store/actions/profile';
 
 const SelectProfileImageScreen = props => {
     const selectedImage = props.navigation.state.params.image;
+    console.log(selectedImage);
 
-    let userProfile = useSelector(state => state.profile);
-    console.log(selectedImage)
-
+    let userProfile = useSelector(sel => sel.profile);
+    console.log(userProfile);
 
     const [state, setState] = useState({
         name: userProfile.name,
@@ -23,25 +23,33 @@ const SelectProfileImageScreen = props => {
     const saveProfile = useCallback(() => {
         dispatch(profileActions.updateProfile(state.name, state.age, state.dateOfBirth, state.imageUrl, state.coverUrl));
         props.navigation.navigate({ routeName: "SpeechMenu" });
-    }, [state.name, state.age, state.imageUrl]);
+    }, [state.imageUrl]);
 
-   useEffect(() => {
-    if(selectedImage === 'newAccount'){
-        setState({ 
-            name: userProfile.name,
-            age: userProfile.age,
-            imageUrl: require('../../assets/images/profileimages/default.png')
-        })
-    }
-    else{
+    useEffect(() => {
         setState({
-            name: userProfile.name,
-            age: userProfile.age, 
+            ...state,
             imageUrl: selectedImage
         })
-    }
-    console.log('here')
-},[selectedImage, userProfile])
+    }, [selectedImage]);
+//    useEffect(() => {
+//     if(selectedImage === 'newAccount'){
+//         setState({ 
+//             ...state,
+//             name: userProfile.name,
+//             age: userProfile.age,
+//             imageUrl: require('../../assets/images/profileimages/default.png')
+//         })
+//     }
+//     else{
+//         setState({
+//             ...state,
+//             name: userProfile.name,
+//             age: userProfile.age, 
+//             imageUrl: selectedImage
+//         })
+//     }
+//     console.log('here')
+// },[selectedImage, userProfile])
        
     
 

@@ -9,11 +9,12 @@ const windowHeight = Dimensions.get('window').height;
 
 const EditProfileScreen = props => {
     const dispatch = useDispatch();
-    let currentProfile = useSelector(state => state.profile);
+    let currentProfile = useSelector(sel => sel.profile);
 
     const [state, setState] = useState({
         name: currentProfile.name,
-        age: currentProfile.age,
+        age: currentProfile.age.toString(),
+        dateOfBirth: currentProfile.dateOfBirth,
         imageUrl: props.navigation.state.params.image,
         coverUrl: require('../../assets/images/profileimages/coverphoto.jpg')
     });
@@ -24,7 +25,8 @@ const EditProfileScreen = props => {
 
     
     const saveProfile = useCallback(async () => {
-        dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
+        dispatch(profileActions.updateProfile(state.name, state.age, state.dateOfBirth, state.imageUrl, state.coverUrl));
+        // dispatch(profileActions.updateProfile(state.name, state.age, state.imageUrl, state.coverUrl));
         Alert.alert("Profile has been saved!");
         props.navigation.navigate({ routeName: "Profile" });
     }, [state.name, state.age, state.imageUrl]);
@@ -41,7 +43,7 @@ const EditProfileScreen = props => {
         <View style={styles.screen}>
             <Image style={styles.cover} source={state.coverUrl} />
             <TouchableOpacity style={styles.imageContainer} onPress={() => {
-                props.navigation.navigate('SelectImage',
+                props.navigation.navigate('SelectImageP',
                     {
                         userImage: 'profileImage'
                     })
