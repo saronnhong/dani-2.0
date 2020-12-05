@@ -79,6 +79,8 @@ const AuthScreen = props => {
                 dispatch(profileActions.createProfile(formState.inputValues.email)).then(()=> {props.navigation.navigate('UserInfo')});
             }
             else{
+                dispatch(profileActions.fetchProfile());
+                console.log("send the fetch!");
                 props.navigation.navigate('SpeechMenu');
             }
         } catch (err) {

@@ -15,10 +15,11 @@ const EnterPasswordScreen = props => {
     const dispatch = useDispatch();
     const authHandler = () => {
         dispatch(authActions.signup(accountInfo.email, state.password));
-        dispatch(profileActions.createProfile(accountInfo.email));
-        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'));
+        dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'));
+        // dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'));
         props.navigation.navigate({
-            routeName: 'SelectProfileImageScreen',
+            // routeName: 'SelectProfileImageScreen',
+            routeName: 'SpeechMenu',
             params: {
                 image: require('../../assets/images/profileimages/default.png'),
                 name: accountInfo.name,

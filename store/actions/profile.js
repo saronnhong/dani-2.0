@@ -3,7 +3,7 @@ export const CREATE_PROFILE = 'CREATE_PROFILE'
 export const SET_PROFILE = 'SET_PROFILE'
 
 export const updateProfile = (name, age, dateOfBirth, imageUrl, coverImageUrl) => {
-    
+
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
         const userEmail = getState().profile.email;
@@ -16,13 +16,12 @@ export const updateProfile = (name, age, dateOfBirth, imageUrl, coverImageUrl) =
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: userEmail,
                     name,
+                    email: userEmail,
                     age,
                     dateOfBirth,
                     imageUrl,
-                    coverImageUrl,
-                    ownerId: userId
+                    coverImageUrl
                 })
             });
 
@@ -41,34 +40,44 @@ export const updateProfile = (name, age, dateOfBirth, imageUrl, coverImageUrl) =
 
 export const fetchProfile = () => {
     return async (dispatch, getState) => {
-      const userId = getState().auth.userId;
-      try {
-  
-        const response = await fetch(`https://speechboard-api.herokuapp.com/profiles/${userId}`);
-  
-        if (!response.ok) {
-          throw new Error('Something went wrong');
-        }
-  
-        const resData = await response.json();
-        
-        dispatch({
-            type: SET_PROFILE,
-            profileData: {
-                name,
-                age,
-                dateOfBirth,
-                imageUrl,
-                ownerId: userId
-            }
-        });
-      } catch (err) {
-        throw err;
-      }
-    }
-  }
+        const userId = getState().auth.userId;
+        try {
 
-export const createProfile = (email) => {
+            const response = await fetch(`https://speechboard-api.herokuapp.com/profiles/${userId}`,
+                {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+            if (!response.ok) {
+                throw new Error('Something went wrong');
+            }
+
+            const resData = await response.json();
+            console.log("from the fetch here: ");
+            console.log(resData);
+
+            dispatch({
+                type: SET_PROFILE,
+                profileData: {
+                    email: "some email",
+                    name: "some name",
+                    age: "9",
+                    dateOfBirth: "some string",
+                    imageUrl: null,
+                    coverImageUrl: null,
+                    userId: userId
+                }
+            });
+        } catch (err) {
+            throw err;
+        }
+    }
+}
+
+export const createProfile = (email, name, age, dateOfBirth, imageUrl, coverImageUrl) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
         console.log(userId);
@@ -80,8 +89,14 @@ export const createProfile = (email) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
+                    name: name,
                     email: email,
-                    userId: userId
+                    age: age,
+                    dateOfBirth: dateOfBirth,
+                    imageUrl: imageUrl,
+                    coverImageUrl: coverImageUrl,
+                    userId: userId,
+
                 })
             });
         const resData = await response.json();
@@ -89,8 +104,13 @@ export const createProfile = (email) => {
         dispatch({
             type: CREATE_PROFILE,
             profileData: {
-                email,
-                ownerId: userId
+                name: name,
+                email: email,
+                age: age,
+                imageUrl: imageUrl,
+                coverImageUrl: coverImageUrl,
+                dateOfBirth,
+                userId: userId
             }
         });
     };
