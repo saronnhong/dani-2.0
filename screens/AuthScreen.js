@@ -66,7 +66,6 @@ const AuthScreen = props => {
                     props.navigation.navigate('SpeechMenu');
                 })
             setIsLoading(false);
-
         } catch (err) {
             setError(err.message);
             setIsLoading(false);
