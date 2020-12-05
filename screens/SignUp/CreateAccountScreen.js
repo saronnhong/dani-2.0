@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity, Dimensions } from 'react-native';
-import { useDispatch } from 'react-redux';
+import React, { useState, } from 'react';
+import { Text,  View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import Colors from '../../constants/Colors';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { set } from 'lodash';
 
 const windowWidth = Dimensions.get('window').width;
+
 const CreateAccountScreen = props => {
     const [state, setState] = useState({
         name: '',
@@ -127,9 +126,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
     },
     userInput: {
-        // flex: 1,
         width: '85%',
-        // backgroundColor: Colors.sesameGreen,
         height: 50,
         paddingHorizontal: 2,
         borderBottomColor: Colors.border,

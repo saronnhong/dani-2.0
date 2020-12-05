@@ -1,20 +1,18 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Text, KeyboardAvoidingView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import Colors from '../../constants/Colors';
 import * as profileActions from '../../store/actions/profile';
 
 const SelectProfileImageScreen = props => {
     const selectedImage = props.navigation.state.params.image;
-    console.log(selectedImage);
-
     let userProfile = useSelector(sel => sel.profile);
-    console.log(userProfile);
+    
 
     const [state, setState] = useState({
-        name: userProfile.name,
-        age: userProfile.age,
-        dateOfBirth: userProfile.dateOfBirth,
+        name: "",
+        age: "",
+        dateOfBirth: "",
         imageUrl: props.navigation.state.params.image,
         coverUrl: require('../../assets/images/profileimages/coverphoto.jpg')
     });
@@ -23,13 +21,17 @@ const SelectProfileImageScreen = props => {
     const saveProfile = useCallback(() => {
         dispatch(profileActions.updateProfile(state.name, state.age, state.dateOfBirth, state.imageUrl, state.coverUrl));
         props.navigation.navigate({ routeName: "SpeechMenu" });
-    }, [state.imageUrl]);
+    }, [state.name, state.age, state.dateOfBirth, state.imageUrl, state.coverUrl]);
 
     useEffect(() => {
         setState({
             ...state,
+            name: userProfile.name,
+            age: userProfile.age,
+            dateOfBirth: userProfile.dateOfBirth,
             imageUrl: selectedImage
         })
+        // console.log(state);
     }, [selectedImage]);
 //    useEffect(() => {
 //     if(selectedImage === 'newAccount'){
@@ -50,11 +52,6 @@ const SelectProfileImageScreen = props => {
 //     }
 //     console.log('here')
 // },[selectedImage, userProfile])
-       
-    
-
-
-
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
