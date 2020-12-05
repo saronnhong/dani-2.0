@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { Text, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import * as authActions from '../../store/actions/auth';
@@ -10,13 +10,13 @@ const EnterPasswordScreen = props => {
         password: ''
     });
     const accountInfo = props.navigation.state.params.accountInfo;
-    // console.log(accountInfo);
+    
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = () => {
-        dispatch(authActions.signup(accountInfo.email, state.password))
-        dispatch(profileActions.createProfile(accountInfo.email))
-        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'))
+        dispatch(authActions.signup(accountInfo.email, state.password));
+        dispatch(profileActions.createProfile(accountInfo.email));
+        dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'));
         props.navigation.navigate({
             routeName: 'SelectProfileImageScreen',
             params: {
@@ -40,7 +40,6 @@ const EnterPasswordScreen = props => {
                 placeholder='Password'
                 keyboardType='default'
                 secureTextEntry={reveal}
-            // value={state.name}
             />
             <TouchableOpacity onPress={() => setReveal(!reveal)}>
                 <Text style={styles.revealPassword}>{reveal ? 'Reveal password' : 'Hide password'}</Text>
@@ -48,7 +47,6 @@ const EnterPasswordScreen = props => {
             <TouchableOpacity style={styles.nextButton} onPress={authHandler}>
                 <Text style={styles.buttonText}>Next</Text>
             </TouchableOpacity>
-
         </KeyboardAvoidingView>
     )
 };

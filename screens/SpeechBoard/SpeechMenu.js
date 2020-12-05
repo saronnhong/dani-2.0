@@ -66,7 +66,8 @@ const SpeechMenu = (props) => {
     ];
 
     let userSettings = useSelector(state => state.setting);
-    // let profile = useSelector(state => state.profile);
+    let authSetting = useSelector(state => state.auth);
+    console.log(authSetting);
 
     const enableSound = async () => {
         const emptySound = new Audio.Sound();

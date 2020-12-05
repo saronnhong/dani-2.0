@@ -29,13 +29,11 @@ export const updateProfile = (name, age, dateOfBirth, imageUrl, coverImageUrl) =
         dispatch({
             type: UPDATE_PROFILE,
             profileData: {
-                // email: userEmail,
                 name,
                 age,
                 dateOfBirth,
                 imageUrl,
-                coverImageUrl,
-                // ownerId: userId
+                coverImageUrl
             }
         });
     }
@@ -45,7 +43,6 @@ export const fetchProfile = () => {
     return async (dispatch, getState) => {
       const userId = getState().auth.userId;
       try {
-        //any async code you want!
   
         const response = await fetch(`https://speechboard-api.herokuapp.com/profiles/${userId}`);
   
@@ -73,10 +70,8 @@ export const fetchProfile = () => {
 
 export const createProfile = (email) => {
     return async (dispatch, getState) => {
-        // const token = getState().auth.token;
         const userId = getState().auth.userId;
         console.log(userId);
-        //any async code you want!
         const response = await fetch(
             'https://speechboard-api.herokuapp.com/profiles/',
             {
@@ -89,8 +84,8 @@ export const createProfile = (email) => {
                     userId: userId
                 })
             });
-        // const resData = await response.json();
-
+        const resData = await response.json();
+        console.log(resData);
         dispatch({
             type: CREATE_PROFILE,
             profileData: {

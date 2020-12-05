@@ -16,22 +16,16 @@ export default (state = initialState, action) => {
     case UPDATE_PROFILE:
       return {
         ...state,
-        // email: action.profileData.email,
         name: action.profileData.name,
         age: action.profileData.age,
         dateOfBirth: action.profileData.dateOfBirth,
         imageUrl: action.profileData.imageUrl,
-        coverImageUrl: action.profileData.coverImageUrl,
-        // userId: action.profileData.userId
+        coverImageUrl: action.profileData.coverImageUrl
       };
     case CREATE_PROFILE:
       return {
         ...state,
         email: action.profileData.email,
-        // age: action.profileData.age,
-        // dateOfBirth: action.profileData.dateOfBirth,
-        // imageUrl: require('../../assets/images/profileimages/starfish.png'),
-        // coverImageUrl: require('../../assets/images/profileimages/coverphoto.jpg'),
         userId: action.profileData.userId
       }
 
