@@ -1,4 +1,4 @@
-import { UPDATE_PROFILE, CREATE_PROFILE, SET_PROFILE } from '../actions/profile';
+import { UPDATE_PROFILE, CREATE_PROFILE } from '../actions/profile';
 
 
 const initialState = {
@@ -13,23 +13,20 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    // case SET_PROFILE:
-    //   return {
-    //     name: action.profileData.name,
-    //     age: action.profileData.age,
-    //     imageUrl: action.profileData.imageUrl
-    //   };
     case UPDATE_PROFILE:
       return {
-        email: action.profileData.email,
+        ...state,
+        // email: action.profileData.email,
         name: action.profileData.name,
         age: action.profileData.age,
         dateOfBirth: action.profileData.dateOfBirth,
         imageUrl: action.profileData.imageUrl,
-        coverImageUrl: action.profileData.coverImageUrl
+        coverImageUrl: action.profileData.coverImageUrl,
+        // userId: action.profileData.userId
       };
     case CREATE_PROFILE:
       return {
+        ...state,
         email: action.profileData.email,
         // age: action.profileData.age,
         // dateOfBirth: action.profileData.dateOfBirth,

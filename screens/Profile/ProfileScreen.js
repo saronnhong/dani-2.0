@@ -9,6 +9,7 @@ import HeaderButton from '../../components/HeaderButton';
 const ProfileScreen = props => {
     let currentProfile = useSelector(state => state.profile);
     console.log(currentProfile);
+    
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../../assets/images/profileimages/coverphoto.jpg')} />
