@@ -36,7 +36,6 @@ const formReducer = (state, action) => {
 const AuthScreen = props => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
-    const [isSignup, setIsSignup] = useState(false);
     const dispatch = useDispatch();
 
     const [formState, dispatchFormState] = useReducer(formReducer, {
@@ -58,31 +57,16 @@ const AuthScreen = props => {
     }, [error]);
 
     const authHandler = async () => {
-        // console.log(formState.inputValues);
-        let action;
-        if (isSignup) {
-            action = authActions.signup(
-                formState.inputValues.email,
-                formState.inputValues.password
-            );
-        } else {
-            action = authActions.login(
-                formState.inputValues.email,
-                formState.inputValues.password
-            );
-        }
         setError(null);
         setIsLoading(true);
         try {
-            await dispatch(action);
-            if (isSignup) {
-                dispatch(profileActions.createProfile(formState.inputValues.email)).then(()=> {props.navigation.navigate('UserInfo')});
-            }
-            else{
-                dispatch(profileActions.fetchProfile());
-                console.log("send the fetch!");
-                props.navigation.navigate('SpeechMenu');
-            }
+            dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
+                .then(() => {
+                    dispatch(profileActions.fetchProfile());
+                    props.navigation.navigate('SpeechMenu');
+                })
+            setIsLoading(false);
+
         } catch (err) {
             setError(err.message);
             setIsLoading(false);
@@ -150,7 +134,7 @@ const AuthScreen = props => {
                                 )}
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonContainer} onPress={() => {
-                             props.navigation.navigate('CreateAccountScreen')
+                            props.navigation.navigate('CreateAccountScreen')
                         }}>
                             <Button
                                 title='Sign Up'
