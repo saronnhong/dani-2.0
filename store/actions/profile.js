@@ -62,12 +62,12 @@ export const fetchProfile = () => {
             dispatch({
                 type: SET_PROFILE,
                 profileData: {
-                    email: "some email",
-                    name: "some name",
-                    age: "9",
-                    dateOfBirth: "some string",
-                    imageUrl: null,
-                    coverImageUrl: null,
+                    email: resData.email,
+                    name: resData.name,
+                    age: resData.age,
+                    dateOfBirth: resData.dateOfBirth,
+                    imageUrl: resData.imageUrl,
+                    coverImageUrl: resData.coverImageUrl,
                     userId: userId
                 }
             });
@@ -80,7 +80,7 @@ export const fetchProfile = () => {
 export const createProfile = (email, name, age, dateOfBirth, imageUrl, coverImageUrl) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
-        console.log(userId);
+        // console.log(userId);
         const response = await fetch(
             'https://speechboard-api.herokuapp.com/profiles/',
             {
@@ -100,7 +100,7 @@ export const createProfile = (email, name, age, dateOfBirth, imageUrl, coverImag
                 })
             });
         const resData = await response.json();
-        console.log(resData);
+        // console.log(resData);
         dispatch({
             type: CREATE_PROFILE,
             profileData: {

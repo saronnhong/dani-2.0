@@ -10,25 +10,23 @@ const EnterPasswordScreen = props => {
         password: ''
     });
     const accountInfo = props.navigation.state.params.accountInfo;
-    
+
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = () => {
-        dispatch(authActions.signup(accountInfo.email, state.password));
-        dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'));
-        // dispatch(profileActions.updateProfile(accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl'));
+        dispatch(authActions.signup(accountInfo.email, state.password))
+            .then(() => dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl')));
         props.navigation.navigate({
             // routeName: 'SelectProfileImageScreen',
             routeName: 'SpeechMenu',
-            params: {
-                image: require('../../assets/images/profileimages/default.png'),
-                name: accountInfo.name,
-                dateOfBirth: accountInfo.dateOfBirth
-            }
+            // params: {
+            //     image: require('../../assets/images/profileimages/default.png'),
+            //     name: accountInfo.name,
+            //     dateOfBirth: accountInfo.dateOfBirth
+            // }
         });
     }
-    
-   
+
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <Text style={styles.title}>

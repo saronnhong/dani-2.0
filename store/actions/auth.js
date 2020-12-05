@@ -5,6 +5,7 @@ export const LOGOUT = 'LOGOUT';
 
 export const authenticate = (userId, token, expiryTime) => {
     return dispatch => {
+        console.log("the userID is : " + userId);
         dispatch(setLogoutTimer(expiryTime));
         dispatch({ type: AUTHENTICATE, userId: userId, token: token });
     }
@@ -41,6 +42,8 @@ export const signup = (email, password) => {
         }
 
         const resData = await response.json();
+        console.log("data from signup auth");
+        console.log(resData);
         dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
         const expirationDate = new Date(
             new Date().getTime() + parseInt(resData.expiresIn) * 1000
@@ -79,7 +82,7 @@ export const login = (email, password) => {
         }
 
         const resData = await response.json();
-        console.log(resData);
+        // console.log(resData);
         dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
         const expirationDate = new Date(
             new Date().getTime() + parseInt(resData.expiresIn) * 1000
