@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Text, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
+import { IMAGES } from '../../data/profileimg';
 import * as authActions from '../../store/actions/auth';
 import * as profileActions from '../../store/actions/profile';
 
@@ -11,11 +12,14 @@ const EnterPasswordScreen = props => {
     });
     const accountInfo = props.navigation.state.params.accountInfo;
 
+    const defaultImage = {default: require('../../assets/images/profileimages/default.png')}
+    
+
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = () => {
         dispatch(authActions.signup(accountInfo.email, state.password))
-            .then(() => dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, require('../../assets/images/profileimages/default.png'), 'coverUrl')));
+            .then(() => dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl')));
         props.navigation.navigate({
             // routeName: 'SelectProfileImageScreen',
             routeName: 'SpeechMenu',
