@@ -7,14 +7,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
-
     case UPDATE_COUNT:
-     
       return {
-        ...state,
+        // ...state,
         wordCount: action.updatedWordCount
       };
-  
+    default:
+      return state;
   }
-  return state;
 };
