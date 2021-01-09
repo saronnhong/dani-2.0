@@ -11,19 +11,14 @@ import * as wordCountActions from '../../store/actions/count';
 
 
 const SpeechBoard = (props) => {
-
-
-    let wordCounter = {}
-
     const addCountWord = (id) => {
+        let wordCounter = {}
         if(wordCounter[id]){
             wordCounter[id]++
         } 
         else{
             wordCounter[id] = 1
         }
-        console.log('blah is blah. this is from speechboard')
-        console.log(wordCounter)
         dispatch(wordCountActions.updateCount(wordCounter));
     }
 
