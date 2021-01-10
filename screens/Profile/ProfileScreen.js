@@ -1,15 +1,115 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Button, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import Colors from '../../constants/Colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
+import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
+const screenWidth = Dimensions.get('window').width
+const chartConfig = {
+    backgroundGradientFrom: "#1E2923",
+    backgroundGradientFromOpacity: 0,
+    backgroundGradientTo: "#08130D",
+    backgroundGradientToOpacity: 0.5,
+    color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+    strokeWidth: 2, // optional, default 3
+    barPercentage: 0.5,
+    useShadowColorFromDataset: false // optional
+};
+
+let dataArray = [1, 1, 1, 1, 1, 1, 1, 1, 1];
+
+const data = [
+    {
+        name: "Chat",
+        count: dataArray[0],
+        color: Colors.primaryColor,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "I Feel",
+        count: dataArray[1],
+        color: Colors.accentColor,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "About Me",
+        count: dataArray[2],
+        color: Colors.sesameGreen,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "Activities",
+        count: dataArray[3],
+        color: Colors.sesameOrange,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "Food and Drink",
+        count: dataArray[4],
+        color: Colors.sesameYellow,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "Numbers",
+        count: dataArray[5],
+        color: Colors.sesameRed,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "Places",
+        count: dataArray[6],
+        color: Colors.sesameRedOrange,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "Colors",
+        count: dataArray[7],
+        color: Colors.sesamePurple,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    },
+    {
+        name: "core words",
+        count: dataArray[8],
+        color: Colors.sesameGold,
+        legendFontColor: "#7F7F7F",
+        legendFontSize: 15
+    }
+];
 
 
 const ProfileScreen = props => {
     let currentProfile = useSelector(state => state.profile);
+    let currentCount = useSelector(state => state.count);
+    console.log(currentCount);
     console.log(currentProfile);
-    
+
+
+    let increaseCount = () => {
+        for (let item in currentCount) {
+            for(let i = 0; i<dataArray.length; i++) {
+                // if(item === category.name){
+                // }
+            console.log("this is it")
+            console.log(item["core words"])
+            // console.log(category[item.name])
+            }
+        }
+    }
+
+    useEffect(() => {
+       increaseCount()
+       console.log("hi buddy")
+    }, []);
+
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../../assets/images/profileimages/coverphoto.jpg')} />
@@ -28,6 +128,17 @@ const ProfileScreen = props => {
                     <Text>Edit Profile</Text>
                 </View>
             </TouchableOpacity>
+            <PieChart
+                data={data}
+                width={screenWidth}
+                height={250}
+                chartConfig={chartConfig}
+                accessor={"count"}
+                backgroundColor={"transparent"}
+                paddingLeft={"50"}
+                center={[5, 10]}
+                absolute
+            />
         </View>
     )
 };
