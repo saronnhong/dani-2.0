@@ -176,6 +176,24 @@ export const WORDS = [
         require('../assets/images/speechboard/feelings/confused.png')
     ),
     new Word(
+        'f14',
+        'i feel',
+        'Embarrassed',
+        require('../assets/images/speechboard/feelings/embarrassed.png')
+    ),
+    new Word(
+        'f15',
+        'i feel',
+        'Hot',
+        require('../assets/images/speechboard/feelings/hot.png')
+    ),
+    new Word(
+        'f16',
+        'i feel',
+        'Cold',
+        require('../assets/images/speechboard/feelings/cold.png')
+    ),
+    new Word(
         'am1',
         'about me',
         'My name is...',
