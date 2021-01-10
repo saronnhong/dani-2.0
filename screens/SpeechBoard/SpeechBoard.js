@@ -97,7 +97,7 @@ const SpeechBoard = (props) => {
                                     voice: Voices[userSettings.voice]
                                 });
                                 addToState(word);
-                                addCountWord(word._id)
+                                addCountWord(word.categoryId)
                             }}>
                                 <View style={{ ...styles.btnContainer, backgroundColor: color }}>
 
