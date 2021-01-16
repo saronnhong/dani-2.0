@@ -17,98 +17,96 @@ const chartConfig = {
     useShadowColorFromDataset: false // optional
 };
 
-let dataArray = [1, 1, 1, 1, 1, 1, 1, 1, 1];
-
-const data = [
-    {
-        name: "Chat",
-        count: dataArray[0],
-        color: Colors.primaryColor,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "I Feel",
-        count: dataArray[1],
-        color: Colors.accentColor,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "About Me",
-        count: dataArray[2],
-        color: Colors.sesameGreen,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "Activities",
-        count: dataArray[3],
-        color: Colors.sesameOrange,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "Food and Drink",
-        count: dataArray[4],
-        color: Colors.sesameYellow,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "Numbers",
-        count: dataArray[5],
-        color: Colors.sesameRed,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "Places",
-        count: dataArray[6],
-        color: Colors.sesameRedOrange,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "Colors",
-        count: dataArray[7],
-        color: Colors.sesamePurple,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    },
-    {
-        name: "core words",
-        count: dataArray[8],
-        color: Colors.sesameGold,
-        legendFontColor: "#7F7F7F",
-        legendFontSize: 15
-    }
-];
 
 
-const ProfileScreen = props => {
-    let currentProfile = useSelector(state => state.profile);
-    let currentCount = useSelector(state => state.count);
-    console.log(currentCount);
-    console.log(currentProfile);
+
+const ProfileScreen = () => {
+
+
+    const [data, setData] = useState([
+        {
+            name: "chat",
+            count: 0,
+            color: "#bf3f57",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "i feel",
+            count: 0,
+            color: "#a64672",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "about me",
+            count: 0,
+            color: "#4333a6",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "activities",
+            count: 0,
+            color: "#5ba666",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "Food and Drink",
+            count: 0,
+            color: "#f2b591",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "numbers",
+            count: 0,
+            color: "#d9bb84",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "places",
+            count: 0,
+            color: "#bf7636",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "colors",
+            count: 0,
+            color: "#a65e44",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "core words",
+            count: 0,
+            color: "#bf463b",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        }
+    ]);
+    let currentProfile = useSelector(e => e.profile);
+    let currentCount = useSelector(e => e.count);
 
 
     let increaseCount = () => {
-        for (let item in currentCount) {
-            for(let i = 0; i<dataArray.length; i++) {
-                // if(item === category.name){
-                // }
-            console.log("this is it")
-            console.log(item["core words"])
-            // console.log(category[item.name])
+        for (let item in currentCount.wordCount) {
+            for (let i = 0; i < data.length; i++) {
+                if (data[i].name === item) {
+                    data[i].count = currentCount.wordCount[item];
+                }
             }
         }
+        let tempData = data;
+        setData(tempData);
     }
 
     useEffect(() => {
-       increaseCount()
-       console.log("hi buddy")
-    }, []);
+        increaseCount();
+    }, [data, currentCount]);
 
     return (
         <View style={styles.screen}>
