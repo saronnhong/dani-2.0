@@ -27,63 +27,63 @@ const ProfileScreen = () => {
         {
             name: "chat",
             count: 0,
-            color: "#bf3f57",
+            color: "#15a0bf",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "i feel",
             count: 0,
-            color: "#a64672",
+            color: "#f2c849",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "about me",
             count: 0,
-            color: "#4333a6",
+            color: "#f28a2e",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "activities",
             count: 0,
-            color: "#5ba666",
+            color: "#f25922",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "Food and Drink",
             count: 0,
-            color: "#f2b591",
+            color: "#bf2c1f",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "numbers",
             count: 0,
-            color: "#d9bb84",
+            color: "#007a9d",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "places",
             count: 0,
-            color: "#bf7636",
+            color: "#3ba992",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "colors",
             count: 0,
-            color: "#a65e44",
+            color: "#9cb961",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         },
         {
             name: "core words",
             count: 0,
-            color: "#bf463b",
+            color: "#9cb961",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
         }
