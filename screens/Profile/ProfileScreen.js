@@ -25,67 +25,76 @@ const ProfileScreen = () => {
 
     const [data, setData] = useState([
         {
-            name: "chat",
+            name: "Chat",
+            category: "chat",
             count: 0,
             color: "#15a0bf",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "i feel",
+            name: "I Feel",
+            category: "i feel",
             count: 0,
             color: "#f2c849",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "about me",
+            name: "About Me",
+            category: "about me",
             count: 0,
             color: "#f28a2e",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "activities",
+            name: "Activities",
+            category: "activities",
             count: 0,
             color: "#f25922",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "Food and Drink",
+            name: "Food & Drink",
+            category: "food & drink",
             count: 0,
             color: "#bf2c1f",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "numbers",
+            name: "Numbers",
+            category: "numbers",
             count: 0,
-            color: "#007a9d",
+            color: "#9966ff",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "places",
+            name: "Places",
+            category: "places",
             count: 0,
-            color: "#3ba992",
+            color: "#ff99ff",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
         },
         {
-            name: "colors",
-            count: 0,
-            color: "#9cb961",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "core words",
+            name: "Colors",
+            category: "colors",
             count: 0,
             color: "#9cb961",
             legendFontColor: "#7F7F7F",
-            legendFontSize: 15
+            legendFontSize: 10
+        },
+        {
+            name: "Core Words",
+            category: "core words",
+            count: 0,
+            color: "#009933",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 10
         }
     ]);
     let currentProfile = useSelector(e => e.profile);
@@ -95,7 +104,7 @@ const ProfileScreen = () => {
     let increaseCount = () => {
         for (let item in currentCount.wordCount) {
             for (let i = 0; i < data.length; i++) {
-                if (data[i].name === item) {
+                if (data[i].category === item) {
                     data[i].count = currentCount.wordCount[item];
                 }
             }
@@ -126,17 +135,21 @@ const ProfileScreen = () => {
                     <Text>Edit Profile</Text>
                 </View>
             </TouchableOpacity>
-            <PieChart
-                data={data}
-                width={screenWidth}
-                height={250}
-                chartConfig={chartConfig}
-                accessor={"count"}
-                backgroundColor={"transparent"}
-                paddingLeft={"50"}
-                center={[5, 10]}
-                absolute
-            />
+            <View style={styles.pieChart}>
+                <Text style={styles.chartTitle}> User Analytics - Categories</Text>
+                <PieChart
+                    data={data}
+                    width={screenWidth}
+                    height={250}
+                    chartConfig={chartConfig}
+                    accessor={"count"}
+                    backgroundColor={"transparent"}
+                    paddingLeft={"30"}
+                    center={[5, 10]}
+                    // absolute
+                    avoidFalseZero={true}
+                />
+            </View>
         </View>
     )
 };
@@ -197,5 +210,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    chartTitle:{
+        textAlign: 'center',
+        marginTop: 20,
+        fontSize: 18,
+        fontFamily: 'roboto-bold'
+    }
 });
 export default ProfileScreen;
