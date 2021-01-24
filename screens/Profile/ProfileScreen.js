@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Colors from '../../constants/Colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
-import { LineChart, BarChart, PieChart, ProgressChart, ContributionGraph, StackedBarChart } from "react-native-chart-kit";
+import { PieChart } from "react-native-chart-kit";
 const screenWidth = Dimensions.get('window').width
 const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -17,16 +17,16 @@ const chartConfig = {
     useShadowColorFromDataset: false // optional
 };
 
-
-
-
 const ProfileScreen = (props) => {
+    let currentProfile = useSelector(e => e.profile);
+    let currentCount = useSelector(e => e.count);
+    const [hideChart, sethideChart] = useState(false);
 
     const [data, setData] = useState([
         {
             name: "Chat",
             category: "chat",
-            count: 0,
+            count: currentCount.wordCount["chat"] ? currentCount.wordCount["chat"] : 0,
             color: "#15a0bf",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -34,7 +34,7 @@ const ProfileScreen = (props) => {
         {
             name: "I Feel",
             category: "i feel",
-            count: 0,
+            count: currentCount.wordCount["i feel"] ? currentCount.wordCount["i feel"] : 0,
             color: "#f2c849",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -42,7 +42,7 @@ const ProfileScreen = (props) => {
         {
             name: "About Me",
             category: "about me",
-            count: 0,
+            count: currentCount.wordCount["about me"] ? currentCount.wordCount["about me"] : 0,
             color: "#f28a2e",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -50,7 +50,7 @@ const ProfileScreen = (props) => {
         {
             name: "Activities",
             category: "activities",
-            count: 0,
+            count: currentCount.wordCount["activites"] ? currentCount.wordCount["activites"] : 0,
             color: "#f25922",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -58,7 +58,7 @@ const ProfileScreen = (props) => {
         {
             name: "Food & Drink",
             category: "food & drink",
-            count: 0,
+            count: currentCount.wordCount["food & drink"] ? currentCount.wordCount["food & drink"] : 0,
             color: "#bf2c1f",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -66,7 +66,7 @@ const ProfileScreen = (props) => {
         {
             name: "Numbers",
             category: "numbers",
-            count: 0,
+            count: currentCount.wordCount["numbers"] ? currentCount.wordCount["numbers"] : 0,
             color: "#9966ff",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -74,7 +74,7 @@ const ProfileScreen = (props) => {
         {
             name: "Places",
             category: "places",
-            count: 0,
+            count: currentCount.wordCount["places"] ? currentCount.wordCount["places"] : 0,
             color: "#ff99ff",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -82,7 +82,7 @@ const ProfileScreen = (props) => {
         {
             name: "Colors",
             category: "colors",
-            count: 0,
+            count: currentCount.wordCount["colors"] ? currentCount.wordCount["colors"] : 0,
             color: "#9cb961",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
@@ -90,15 +90,12 @@ const ProfileScreen = (props) => {
         {
             name: "Core Words",
             category: "core words",
-            count: 0,
+            count: currentCount.wordCount["core words"] ? currentCount.wordCount["core words"] : 0,
             color: "#009933",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
         }
     ]);
-    let currentProfile = useSelector(e => e.profile);
-    console.log(currentProfile);
-    let currentCount = useSelector(e => e.count);
 
 
     let increaseCount = () => {
@@ -113,9 +110,15 @@ const ProfileScreen = (props) => {
         setData(tempData);
     }
 
-    
     useEffect(() => {
         increaseCount();
+        if (Object.keys(currentCount.wordCount).length === 0) {
+            console.log("lets hide this.");
+            console.log(Object.keys(currentCount.wordCount).length);
+            sethideChart(true);
+        } else {
+            sethideChart(false);
+        }
     }, [data, currentCount]);
 
     return (
@@ -136,21 +139,23 @@ const ProfileScreen = (props) => {
                     <Text>Edit Profile</Text>
                 </View>
             </TouchableOpacity>
-            <View style={styles.pieChart}>
-                <Text style={styles.chartTitle}> User Analytics - Categories</Text>
-                <PieChart
-                    data={data}
-                    width={screenWidth}
-                    height={250}
-                    chartConfig={chartConfig}
-                    accessor={"count"}
-                    backgroundColor={"transparent"}
-                    paddingLeft={"30"}
-                    center={[5, 10]}
-                    // absolute
-                    avoidFalseZero={true}
-                />
-            </View>
+            {hideChart ? null :
+                <View style={styles.pieChart}>
+                    <Text style={styles.chartTitle}> User Analytics - Categories</Text>
+                    <PieChart
+                        data={data}
+                        width={screenWidth}
+                        height={250}
+                        chartConfig={chartConfig}
+                        accessor={"count"}
+                        backgroundColor={"transparent"}
+                        paddingLeft={"30"}
+                        center={[5, 10]}
+                        // absolute
+                        avoidFalseZero={true}
+                    />
+                </View>
+            }
         </View>
     )
 };
@@ -211,7 +216,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    chartTitle:{
+    chartTitle: {
         textAlign: 'center',
         marginTop: 20,
         fontSize: 18,
