@@ -20,8 +20,7 @@ const chartConfig = {
 
 
 
-const ProfileScreen = () => {
-
+const ProfileScreen = (props) => {
 
     const [data, setData] = useState([
         {
@@ -98,6 +97,7 @@ const ProfileScreen = () => {
         }
     ]);
     let currentProfile = useSelector(e => e.profile);
+    console.log(currentProfile);
     let currentCount = useSelector(e => e.count);
 
 
@@ -113,6 +113,7 @@ const ProfileScreen = () => {
         setData(tempData);
     }
 
+    
     useEffect(() => {
         increaseCount();
     }, [data, currentCount]);
