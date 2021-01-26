@@ -70,7 +70,7 @@ const EditNavigator = createStackNavigator({
     Select: SelectUserWord,
     Edit: EditUserWord,
     AddNewWord: AddNewWord
-    
+
 },
     {
         defaultNavigationOptions: {
@@ -195,7 +195,7 @@ const SettingsNavigator = createStackNavigator({
         headerStyle: {
             backgroundColor: Colors.orange,
         },
-        headerTintColor: "white", 
+        headerTintColor: "white",
         headerTitle: ''
     }
 })
@@ -209,16 +209,17 @@ const ProfileNavigator = createStackNavigator({
         headerStyle: {
             backgroundColor: Colors.orange,
         },
-        headerTintColor: "white", 
+        headerTintColor: "white",
         headerTitle: ''
     },
-    
+
 })
 
 const MainNavigator = createDrawerNavigator({
     "Speech Board": TabNavigator,
     Profile: ProfileNavigator,
     Sound: DaniStackNavigator,
+    "Most Used": MostUsedNavigator,
     Settings: SettingsNavigator
 },
     {
@@ -256,7 +257,7 @@ const AuthNavigator = createStackNavigator({
         headerStyle: {
             backgroundColor: Colors.orange,
         },
-        headerTintColor: "white", 
+        headerTintColor: "white",
         headerTitle: ''
     }
 })
