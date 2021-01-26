@@ -123,7 +123,7 @@ const tabScreenConfig = {
                 style: {
                     backgroundColor: Colors.gradientOrangeBottom,
                 }
-            }
+            },
         }
     },
     Tab1: {
@@ -219,7 +219,6 @@ const MainNavigator = createDrawerNavigator({
     "Speech Board": TabNavigator,
     Profile: ProfileNavigator,
     Sound: DaniStackNavigator,
-    "Most Used": MostUsedNavigator,
     Settings: SettingsNavigator
 },
     {

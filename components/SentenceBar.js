@@ -36,9 +36,9 @@ const SentenceBar = props => {
             savedDictionary[sentence]++
         }
         dispatch(sentenceCountActions.updateSentenceCount(savedDictionary));
-        console.log(savedDictionary);
-        const sortable = Object.entries(savedDictionary).sort((a,b) => b[1]-a[1])
-        console.log(sortable[0]);  //returns sorted array
+        // console.log(savedDictionary);
+        // const sortable = Object.entries(savedDictionary).sort((a,b) => b[1]-a[1])
+        // console.log(sortable[0]);  //returns sorted array
     }
 
     let readSentence = async () => {
