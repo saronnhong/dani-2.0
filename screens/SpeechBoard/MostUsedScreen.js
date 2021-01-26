@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
-import { WORDS } from '../../data/words';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
-import { RECORDING_OPTION_IOS_BIT_RATE_STRATEGY_CONSTANT } from 'expo-av/build/Audio';
+import { useFocusEffect } from 'react-navigation-hooks'
 
 const MostUsedScreen = () => {
     let savedDictionary = useSelector(num => num.count.sentenceCount);
     const [sortable, setSortable] = useState([]);
-    const [dictionary, setDictionary] = useState({});
+    const [dictionary, setDictionary] = useState(savedDictionary);
+    let tempNum = 1;
 
     let sortThis = () => {
         setDictionary(savedDictionary);
@@ -19,17 +19,22 @@ const MostUsedScreen = () => {
 
     useEffect(() => {
         sortThis();
-        console.log(sortable[0]);  //returns sorted array
-        console.log(sortable.length + "length of dic")
+        console.log(sortable);  //returns sorted array
     }, [savedDictionary, dictionary]);
-    let tempNum = 1;
+    
+    //useFocusEffect to make up for tabNavigation not updating when page loads
+    useFocusEffect(useCallback(() => {
+        sortThis();
+        // console.log(sortable); 
+    }, []));
+
     return (
         <View style={styles.screen}>
             <Text style={styles.headLine}>Top 10 Most Used Sentences</Text>
             {!sortable.length && <Text style={styles.emptySearch}>No results found.</Text>}
             <View style={styles.listContainer}>
-                {sortable.map(item =>
-                    <Text key={item[0]} style={styles.listItems}>{tempNum++}. {item[0]}</Text>
+                {sortable.slice(0,10).map(item =>
+                    <Text key={item[0]} style={styles.listItems}>{tempNum++}.  {item[0]}</Text>
                 )}
             </View>
 
