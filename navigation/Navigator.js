@@ -29,6 +29,7 @@ import Colors from './../constants/Colors';
 import CreateAccountScreen from '../screens/SignUp/CreateAccountScreen';
 import EnterPasswordScreen from '../screens/SignUp/EnterPasswordScreen';
 import SelectProfileImageScreen from '../screens/SignUp/SelectProfileImageScreen';
+import MostUsedScreen from '../screens/SpeechBoard/MostUsedScreen';
 
 const defaultStackNavOptions = {
     defaultNavigationOptions: {
@@ -94,7 +95,37 @@ const SearchNavigator = createStackNavigator({
         }
     }
 )
+const MostUsedNavigator = createStackNavigator({
+    MostUsed: MostUsedScreen,
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
+    }
+)
 const tabScreenConfig = {
+    Tab0: {
+        screen: MostUsedNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Most Used',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-ribbon' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                }
+            }
+        }
+    },
     Tab1: {
         screen: SearchNavigator,
         navigationOptions: {
