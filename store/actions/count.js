@@ -1,4 +1,5 @@
 export const UPDATE_COUNT = 'UPDATE_COUNT';
+export const UPDATE_SENTENCE_COUNT = 'UPDATE_SENTENCE_COUNT';
 
 export const updateCount = (newWordCount) => {
   return async (dispatch, getState) => {
@@ -17,6 +18,15 @@ export const updateCount = (newWordCount) => {
     dispatch({
       type: UPDATE_COUNT,
       updatedWordCount: stateCount
+    });
+  }
+
+};
+export const updateSentenceCount = (newSentenceCount) => {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: UPDATE_SENTENCE_COUNT,
+      updatedSentenceCount: newSentenceCount
     });
   }
 

@@ -6,13 +6,14 @@ import { Ionicons } from '@expo/vector-icons';
 import Colors from '../constants/Colors';
 import { useSelector, useDispatch } from 'react-redux';
 import * as wordActions from '../store/actions/sentenceBar';
+import * as sentenceCountActions from '../store/actions/count'
 
 const windowWidth = Dimensions.get('window').width;
 
 const SentenceBar = props => {
     const [barStatus, setBarStatus] = useState(false);
     let currState = useSelector(state => state.bar.words);
-    // console.log(currState);
+    
     let wordArr = [];
     for (let i = 0; i < currState.length; i++) {
         if (currState[i].phonetic) {
@@ -26,22 +27,36 @@ const SentenceBar = props => {
     const scrollViewRef = useRef();
     const dispatch = useDispatch();
     let userSettings = useSelector(state => state.setting);
+    let savedDictionary = useSelector(num => num.count.sentenceCount);
 
-    readSentence = async () => {
+    let sentenceCounter = (sentence) => {
+        if(!savedDictionary[sentence]){
+            savedDictionary[sentence] = 1;
+        }else{
+            savedDictionary[sentence]++
+        }
+        dispatch(sentenceCountActions.updateSentenceCount(savedDictionary));
+        console.log(savedDictionary);
+        const sortable = Object.entries(savedDictionary).sort((a,b) => b[1]-a[1])
+        console.log(sortable[0]);  //returns sorted array
+    }
+
+    let readSentence = async () => {
         Speech.speak(newSentence, {
             language: 'en',
             pitch: userSettings.pitch,
             rate: userSettings.rate,
             voice: Voices[userSettings.voice]
-        })
+        });
+        sentenceCounter(newSentence);
     }
 
-    onDelete = async () => {
+    let onDelete = async () => {
         dispatch(wordActions.removeFromBar());
         setBarStatus(!barStatus);
     };
 
-    renderWordImageUrl = (word) => {
+    let renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
         } else {

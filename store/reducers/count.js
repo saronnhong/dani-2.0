@@ -1,16 +1,22 @@
-import { UPDATE_COUNT } from '../actions/count';
+import { UPDATE_COUNT, UPDATE_SENTENCE_COUNT } from '../actions/count';
 
 
 const initialState = {
-  wordCount: {}
+  wordCount: {},
+  sentenceCount: {}
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_COUNT:
       return {
-        // ...state,
+        ...state,
         wordCount: action.updatedWordCount
+      };
+    case UPDATE_SENTENCE_COUNT:
+      return {
+        ...state,
+        sentenceCount: action.updatedSentenceCount
       };
     default:
       return state;
