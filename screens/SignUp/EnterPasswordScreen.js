@@ -5,6 +5,7 @@ import Colors from '../../constants/Colors';
 import { IMAGES } from '../../data/profileimg';
 import * as authActions from '../../store/actions/auth';
 import * as profileActions from '../../store/actions/profile';
+import * as analyticsActions from '../../store/actions/count';
 
 const EnterPasswordScreen = props => {
     const [state, setState] = useState({
@@ -19,7 +20,10 @@ const EnterPasswordScreen = props => {
     const dispatch = useDispatch();
     const authHandler = () => {
         dispatch(authActions.signup(accountInfo.email, state.password))
-            .then(() => dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl')));
+            .then(() => {
+                dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'));
+                dispatch(analyticsActions.createAnalytics());
+        });
         props.navigation.navigate({
             // routeName: 'SelectProfileImageScreen',
             routeName: 'SpeechMenu',
@@ -30,6 +34,8 @@ const EnterPasswordScreen = props => {
             // }
         });
     }
+
+    
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>

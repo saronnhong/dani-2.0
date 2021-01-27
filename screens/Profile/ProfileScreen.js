@@ -67,7 +67,8 @@ const ProfileScreen = (props) => {
             name: "Numbers",
             category: "numbers",
             count: currentCount.wordCount["numbers"] ? currentCount.wordCount["numbers"] : 0,
-            color: "#9966ff",
+            // color: "#9966ff",
+            color: "#8c72a6",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
         },
@@ -75,7 +76,8 @@ const ProfileScreen = (props) => {
             name: "Places",
             category: "places",
             count: currentCount.wordCount["places"] ? currentCount.wordCount["places"] : 0,
-            color: "#ff99ff",
+            // color: "#ff99ff",
+            color: '#f25774',
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
         },
@@ -83,7 +85,8 @@ const ProfileScreen = (props) => {
             name: "Colors",
             category: "colors",
             count: currentCount.wordCount["colors"] ? currentCount.wordCount["colors"] : 0,
-            color: "#9cb961",
+            // color: "#9cb961",
+            color: "#87dda0",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
         },
@@ -91,7 +94,8 @@ const ProfileScreen = (props) => {
             name: "Core Words",
             category: "core words",
             count: currentCount.wordCount["core words"] ? currentCount.wordCount["core words"] : 0,
-            color: "#009933",
+            // color: "#009933",
+            color: "#367368",
             legendFontColor: "#7F7F7F",
             legendFontSize: 10
         }
