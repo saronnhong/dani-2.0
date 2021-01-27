@@ -3,6 +3,7 @@ import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, Activ
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import * as profileActions from '../store/actions/profile';
+import * as analyticsActions from '../store/actions/count';
 import Input from '../components/Input';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -63,6 +64,7 @@ const AuthScreen = props => {
             dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
                 .then(() => {
                     dispatch(profileActions.fetchProfile());
+                    dispatch(analyticsActions.fetchAnalytics());
                     props.navigation.navigate('SpeechMenu');
                 })
             setIsLoading(false);

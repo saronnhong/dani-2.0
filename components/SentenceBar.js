@@ -27,13 +27,15 @@ const SentenceBar = props => {
     const scrollViewRef = useRef();
     const dispatch = useDispatch();
     let userSettings = useSelector(state => state.setting);
-    let savedDictionary = useSelector(num => num.count.sentenceCount);
+    // let savedDictionary = useSelector(num => num.count.sentenceCount);
+    let savedDictionary = {};
 
     let sentenceCounter = (sentence) => {
+
         if(!savedDictionary[sentence]){
             savedDictionary[sentence] = 1;
         }else{
-            savedDictionary[sentence]++
+            savedDictionary[sentence]++;
         }
         dispatch(sentenceCountActions.updateSentenceCount(savedDictionary));
         // console.log(savedDictionary);
