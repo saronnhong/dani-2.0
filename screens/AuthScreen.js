@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import * as profileActions from '../store/actions/profile';
 import * as analyticsActions from '../store/actions/count';
+import * as sentenceBarActions from '../store/actions/sentenceBar';
 import Input from '../components/Input';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -66,7 +67,10 @@ const AuthScreen = props => {
                     dispatch(profileActions.fetchProfile())
                         .then(() => {
                             dispatch(analyticsActions.fetchAnalytics())
-                            .then(() => props.navigation.navigate('SpeechMenu'))
+                                .then(() => {
+                                    dispatch(sentenceBarActions.resetBar());
+                                    props.navigation.navigate('SpeechMenu');
+                                })
                         })
                 })
             setIsLoading(false);
