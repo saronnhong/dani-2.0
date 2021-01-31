@@ -22,11 +22,13 @@ const EnterPasswordScreen = props => {
 
         await dispatch(authActions.signup(accountInfo.email, state.password))
             .then(() => {
-                dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'));
-                dispatch(analyticsActions.createAnalytics());
-                props.navigation.navigate({
-                    routeName: 'SpeechMenu'
-                });
+                dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'))
+                    .then(() => dispatch(analyticsActions.createAnalytics())
+                            .then(() => {
+                                props.navigation.navigate({
+                                    routeName: 'SpeechMenu'
+                                });
+                            }))
             })
             .catch(err => {
                 alert(err);
