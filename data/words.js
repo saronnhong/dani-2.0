@@ -100,7 +100,7 @@ export const WORDS = [
     new Word(
         'f1',
         'i feel',
-        'I feel...',
+        'I feel',
         require('../assets/images/speechboard/feelings/Ifeel.png')
     ),
     new Word(
