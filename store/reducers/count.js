@@ -1,4 +1,4 @@
-import { UPDATE_WORD_COUNT, UPDATE_SENTENCE_COUNT, SET_ANALYTICS } from '../actions/count';
+import { UPDATE_WORD_COUNT, UPDATE_SENTENCE_COUNT, SET_ANALYTICS, CREATE_ANALYTICS } from '../actions/count';
 
 
 const initialState = {
@@ -18,22 +18,17 @@ export default (state = initialState, action) => {
         ...state,
         sentenceCount: action.updatedSentenceCount
       };
-    // case CREATE_ANALYTIC:
-    //   return {
-    //     ...state,
-    //     wordCount: action.analyticsData.word,
-    //     sentenceCount: action.analyticsData.sentence
-    //   };
+    case CREATE_ANALYTICS:
+      return {
+        ...state,
+        wordCount: {},
+        sentenceCount: {}
+      };
     case SET_ANALYTICS:
       return {
+        ...state,
         wordCount: action.analyticsData.word,
         sentenceCount: action.analyticsData.sentence
-        // wordCount: {
-        //   "chat": 100
-        // },
-        // sentenceCount: {
-        //   "hello from the galaxy": 300
-        // }
       };
     default:
       return state;

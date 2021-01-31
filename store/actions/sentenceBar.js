@@ -8,3 +8,4 @@ export const addToBar = word => {
 export const removeFromBar = () => {
   return { type: REMOVE_FROM_BAR };
 };
+

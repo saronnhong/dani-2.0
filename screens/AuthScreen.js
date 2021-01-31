@@ -63,9 +63,11 @@ const AuthScreen = props => {
         try {
             dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
                 .then(() => {
-                    dispatch(profileActions.fetchProfile());
-                    dispatch(analyticsActions.fetchAnalytics());
-                    props.navigation.navigate('SpeechMenu');
+                    dispatch(profileActions.fetchProfile())
+                        .then(() => {
+                            dispatch(analyticsActions.fetchAnalytics())
+                            .then(() => props.navigation.navigate('SpeechMenu'))
+                        })
                 })
             setIsLoading(false);
         } catch (err) {
