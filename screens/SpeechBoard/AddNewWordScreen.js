@@ -77,10 +77,15 @@ const AddNewWordScreen = props => {
         }
 
         const word = state.word;
-        const phonetic = state.phonetic
+        let phonetic = "";
+        if (state.phonetic === null) {
+            phonetic = state.word;
+        } else {
+            phonetic = state.phonetic;
+        }
         const categoryId = state.categoryId;
 
-        if (state.word === null || state.categoryId === null || state.phonetic === null || pickedImage === null) {
+        if (state.word === null || state.categoryId === null || pickedImage === null) {
             Alert.alert("Missing item in the form!");
             setPickedImage(null);
         } else {
