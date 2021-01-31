@@ -64,6 +64,13 @@ SelectUserWordScreen.navigationOptions = navData => {
     return {
         headerTitle: 'Select User Word',
         headerBackTitle: ' ',
+        headerLeft: () => (
+            <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                <Item title="Menu" iconName='ios-menu' onPress={() => {
+                    navData.navigation.toggleDrawer();
+                }} />
+            </HeaderButtons>
+        ),
         headerRight: () => (
             <HeaderButtons HeaderButtonComponent={HeaderButton}>
                 <Item title="Edit" iconName='ios-add' onPress={() => {
