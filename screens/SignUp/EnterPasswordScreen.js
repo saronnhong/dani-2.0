@@ -6,6 +6,7 @@ import { IMAGES } from '../../data/profileimg';
 import * as authActions from '../../store/actions/auth';
 import * as profileActions from '../../store/actions/profile';
 import * as analyticsActions from '../../store/actions/count';
+import * as sentenceBarActions from '../../store/actions/sentenceBar';
 
 const EnterPasswordScreen = props => {
     const [state, setState] = useState({
@@ -15,35 +16,27 @@ const EnterPasswordScreen = props => {
 
     const defaultImage = { default: require('../../assets/images/profileimages/default.png') }
 
-
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = async () => {
-
         await dispatch(authActions.signup(accountInfo.email, state.password))
             .then(() => {
                 dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'))
                     .then(() => dispatch(analyticsActions.createAnalytics())
-                            .then(() => {
-                                props.navigation.navigate({
-                                    routeName: 'SpeechMenu'
-                                });
-                            }))
+                        .then(() => {
+                            dispatch(sentenceBarActions.resetBar());
+                            props.navigation.navigate({
+                                routeName: 'SpeechMenu'
+                            });
+                        }))
             })
             .catch(err => {
                 alert(err);
                 props.navigation.navigate({
                     routeName: 'CreateAccountScreen'
                 });
-
             });
-
-
-
-
     }
-
-
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
