@@ -36,14 +36,13 @@ export const signup = (email, password) => {
             const errorId = errorResData.error.message;
             let message = 'Something went wrong!';
             if (errorId === 'EMAIL_EXISTS') {
-                message = 'This email exists already!';
+                message = 'This email exists already! Please try a different one.';
             }
             throw new Error(message);
+            
         }
 
         const resData = await response.json();
-        console.log("data from signup auth");
-        console.log(resData);
         dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
         const expirationDate = new Date(
             new Date().getTime() + parseInt(resData.expiresIn) * 1000
@@ -82,7 +81,6 @@ export const login = (email, password) => {
         }
 
         const resData = await response.json();
-        // console.log(resData);
         dispatch(authenticate(resData.localId, resData.idToken, parseInt(resData.expiresIn) * 1000));
         const expirationDate = new Date(
             new Date().getTime() + parseInt(resData.expiresIn) * 1000
