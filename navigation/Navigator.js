@@ -218,7 +218,7 @@ const ProfileNavigator = createStackNavigator({
 const MainNavigator = createDrawerNavigator({
     "Speech Board": TabNavigator,
     Profile: ProfileNavigator,
-    Sound: DaniStackNavigator,
+    // Sound: DaniStackNavigator,
     Settings: SettingsNavigator
 },
     {

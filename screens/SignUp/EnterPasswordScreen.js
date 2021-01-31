@@ -13,29 +13,35 @@ const EnterPasswordScreen = props => {
     });
     const accountInfo = props.navigation.state.params.accountInfo;
 
-    const defaultImage = {default: require('../../assets/images/profileimages/default.png')}
-    
+    const defaultImage = { default: require('../../assets/images/profileimages/default.png') }
+
 
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
-    const authHandler = () => {
-        dispatch(authActions.signup(accountInfo.email, state.password))
+    const authHandler = async () => {
+
+        await dispatch(authActions.signup(accountInfo.email, state.password))
             .then(() => {
                 dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'));
                 dispatch(analyticsActions.createAnalytics());
-        });
-        props.navigation.navigate({
-            // routeName: 'SelectProfileImageScreen',
-            routeName: 'SpeechMenu',
-            // params: {
-            //     image: require('../../assets/images/profileimages/default.png'),
-            //     name: accountInfo.name,
-            //     dateOfBirth: accountInfo.dateOfBirth
-            // }
-        });
+                props.navigation.navigate({
+                    routeName: 'SpeechMenu'
+                });
+            })
+            .catch(err => {
+                alert(err);
+                props.navigation.navigate({
+                    routeName: 'CreateAccountScreen'
+                });
+
+            });
+
+
+
+
     }
 
-    
+
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
