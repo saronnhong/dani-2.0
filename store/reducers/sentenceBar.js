@@ -1,5 +1,5 @@
 import wordItem from '../../models/words';
-import { ADD_TO_BAR, REMOVE_FROM_BAR } from '../actions/sentenceBar';
+import { ADD_TO_BAR, REMOVE_FROM_BAR, RESET_BAR } from '../actions/sentenceBar';
 
 const initialState = {
     words: []
@@ -23,7 +23,11 @@ export default (state = initialState, action) => {
                 ...state,
                 words: state.words
             }
-            
+        case RESET_BAR:
+            return {
+                ...state,
+                words: []
+            }
         default:
             return state;
     }

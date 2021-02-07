@@ -1,6 +1,6 @@
 export const UPDATE_WORD_COUNT = 'UPDATE_WORD_COUNT';
 export const UPDATE_SENTENCE_COUNT = 'UPDATE_SENTENCE_COUNT';
-export const CREATE_ANALYTIC = 'CREATE_ANALYTIC';
+export const CREATE_ANALYTICS = 'CREATE_ANALYTICS';
 export const SET_ANALYTICS = 'SET_ANALYTICS'
 
 export const updateCount = (newWordCount) => {
@@ -88,22 +88,25 @@ export const createAnalytics = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          word: {},
-          sentence: {},
+          word: {
+            "numbers": 0
+          },
+          sentence: {
+            "numbers": 0
+          },
           userId: userId,
 
         })
       });
     const resData = await response.json();
-    // console.log(resData);
-    // dispatch({
-    //   type: CREATE_ANALYTIC,
-    //   analyticsData: {
-    //     word: {},
-    //     sentence: {},
-    //     userId: userId
-    //   }
-    // });
+    dispatch({
+      type: CREATE_ANALYTICS,
+      analyticsData: {
+        word: {},
+        sentence: {},
+        userId: userId
+      }
+    });
   };
 };
 
