@@ -30,6 +30,9 @@ import CreateAccountScreen from '../screens/SignUp/CreateAccountScreen';
 import EnterPasswordScreen from '../screens/SignUp/EnterPasswordScreen';
 import SelectProfileImageScreen from '../screens/SignUp/SelectProfileImageScreen';
 import MostUsedScreen from '../screens/SpeechBoard/MostUsedScreen';
+import ImageExplorer from '../screens/ImageExplorer/imageExplorerScreen';
+import ImageGallery from '../screens/ImageExplorer/imageGalleryScreen';
+import ImageTinder from '../screens/ImageExplorer/imageTinderScreen';
 
 const defaultStackNavOptions = {
     defaultNavigationOptions: {
@@ -49,6 +52,21 @@ const DaniStackNavigator = createStackNavigator({
 },
     {
         defaultNavigationOptions: defaultStackNavOptions
+    }
+)
+const ImageExplorerNavigator = createStackNavigator({
+    ImageExplorer: ImageExplorer,
+    ImageGallery: ImageGallery,
+    ImageTinder: ImageTinder
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
     }
 )
 
@@ -217,6 +235,7 @@ const ProfileNavigator = createStackNavigator({
 
 const MainNavigator = createDrawerNavigator({
     "Speech Board": TabNavigator,
+    "Image Explorer": ImageExplorerNavigator,
     Profile: ProfileNavigator,
     // Sound: DaniStackNavigator,
     Settings: SettingsNavigator
