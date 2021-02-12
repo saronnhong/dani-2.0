@@ -128,7 +128,7 @@ const ProfileScreen = (props) => {
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../../assets/images/profileimages/coverphoto.jpg')} />
-            <Image style={styles.profileimage} source={currentProfile.imageUrl} />
+            <Image style={styles.profileimage} source={currentProfile ? currentProfile.imageUrl : null} />
             <Text style={styles.name}>{currentProfile.name}</Text>
             <Text style={styles.age}>Age: {currentProfile.age}</Text>
             <TouchableOpacity onPress={() => {
