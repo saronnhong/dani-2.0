@@ -1,15 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
+import { Ionicons } from '@expo/vector-icons';
 
 const windowWidth = Dimensions.get('window').width;
 
 const ImageGalleryScreen = (props) => {
     let userSettings = useSelector(state => state.setting);
     const unsplashResults = props.navigation.state.params.results;
-    // console.log(unsplashResults[0].urls.regular);
+
+    const [isFav, setIsFav] = useState(false);
 
     let goToTinder = (category, details) => {
         Speech.speak(category, {
@@ -31,48 +33,52 @@ const ImageGalleryScreen = (props) => {
         <View style={styles.screen}>
             <ScrollView >
                 <View style={styles.pageGroups}>
-                    {unsplashResults.map(item => 
+                    {unsplashResults.map(item =>
                         <TouchableOpacity key={item.id} style={styles.image} onPress={() => goToTinder(item.description, item)}>
                             <Image source={{ uri: item.urls.small }}
                                 style={styles.imageSource} />
+                            <TouchableOpacity>
+                                {!isFav ? <Ionicons style={styles.favs} name='ios-heart-empty' size={25} color='red' /> : <Ionicons style={styles.favs} name='ios-heart' size={25} color='red' />}
+                            </TouchableOpacity>
                         </TouchableOpacity>
                     )}
-
-
                 </View>
             </ScrollView>
         </View>
     )
 };
 
-ImageGalleryScreen.navigationOptions = navData => {
-
+ImageGalleryScreen.navigationOptions = () => {
     return {
         headerTitle: 'Image Gallery',
         headerBackTitle: ' ',
     }
 }
 
-
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'rgba(255, 185, 64, .3)',
+        alignItems: 'center'
     },
     pageGroups: {
         flexDirection: 'row',
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 10
+        marginTop: 1
     },
     image: {
-        margin: 5
+        margin: 1
     },
     imageSource: {
-        width: windowWidth * .4,
-        height: windowWidth * .4
+        width: windowWidth * .49,
+        height: windowWidth * .49
+    },
+    favs: {
+        position: 'absolute',
+        bottom: 5,
+        right: 10,
+        fontSize: 30
     }
 });
 export default ImageGalleryScreen;
