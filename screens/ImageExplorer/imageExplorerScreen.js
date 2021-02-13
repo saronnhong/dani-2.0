@@ -68,7 +68,7 @@ const ImageExplorerScreen = (props) => {
     let userSettings = useSelector(state => state.setting);
 
     let getUnsplashResults = async (keyword) => {
-        let randomPage = Math.floor(Math.random()*10);
+        let randomPage = Math.floor(Math.random()*20);
         let response = await fetch(`https://api.unsplash.com/search/photos?page=${randomPage}&query=${keyword}&client_id=${unsplashAPI}`);
         let json = await response.json();
         return json.results;

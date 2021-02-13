@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import { Ionicons } from '@expo/vector-icons';
+import FavIcon from '../../components/FavoriteIcon';
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -23,10 +24,26 @@ const ImageGalleryScreen = (props) => {
         props.navigation.navigate({
             routeName: 'ImageTinder',
             params: {
-                imageUrl: "https://i.pinimg.com/736x/33/32/6d/33326dcddbf15c56d631e374b62338dc.jpg",
                 results: details
             }
         })
+    }
+    const [favHash, setFavHash] = useState({})
+    let makeFav = (id) => {
+        if (!favHash[id]) {
+            let tempHash = favHash;
+            tempHash[id] = 1;
+            setFavHash(tempHash);
+            console.log(favHash);
+            setIsFav(!isFav);
+        }else{
+            let tempHash = favHash;
+            delete tempHash[id];
+            setFavHash(tempHash);
+            console.log(favHash);
+            setIsFav(!isFav)
+        }
+        
     }
 
     return (
@@ -37,8 +54,10 @@ const ImageGalleryScreen = (props) => {
                         <TouchableOpacity key={item.id} style={styles.image} onPress={() => goToTinder(item.description, item)}>
                             <Image source={{ uri: item.urls.small }}
                                 style={styles.imageSource} />
-                            <TouchableOpacity>
-                                {!isFav ? <Ionicons style={styles.favs} name='ios-heart-empty' size={25} color='red' /> : <Ionicons style={styles.favs} name='ios-heart' size={25} color='red' />}
+                            <TouchableOpacity style={styles.favs} hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} onPress={() => makeFav(item.id)}>
+                                {favHash[item.id] ?
+                                    <Ionicons style={styles.favs} name='ios-heart' size={25} color='red' /> :
+                                    <Ionicons style={styles.favs} name='ios-heart-empty' size={25} color='red' />}
                             </TouchableOpacity>
                         </TouchableOpacity>
                     )}
