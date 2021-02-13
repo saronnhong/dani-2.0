@@ -7,16 +7,31 @@ const windowHeight = Dimensions.get('window').height;
 
 const ImageTinderScreen = (props) => {
     const imageDetails = props.navigation.state.params.results;
-    const [isFav, setIsFav] = useState(true);
-
+    const [isFav, setIsFav] = useState(false);
+    const [favHash, setFavHash] = useState({})
+   
+    let makeFav = (id) => {
+        if (!favHash[id]) {
+            let tempHash = favHash;
+            tempHash[id] = 1;
+            setFavHash(tempHash);
+            setIsFav(!isFav);
+        }else{
+            let tempHash = favHash;
+            delete tempHash[id];
+            setFavHash(tempHash);
+            setIsFav(!isFav)
+        }
+    }
+    
 
     return (
         <View style={styles.screen}>
             <View style={styles.image}>
                 <Image source={{ uri: imageDetails.urls.regular }}
-                    style={styles.imageSource} />
-                <TouchableOpacity>
-                    {isFav ? <Ionicons style={styles.favs} name='ios-heart-empty' size={25} color='red' /> : <Ionicons style={styles.favs} name='ios-heart' size={25} color='red' />}
+                    style={imageDetails.width > imageDetails.height ? styles.imageSourceLandscape : styles.imageSourcePortrait} />
+                <TouchableOpacity onPress={() => makeFav(imageDetails.id)} hitSlop={{top: 200, bottom: 200, left: 200, right: 200}}>
+                    {isFav ? <Ionicons style={imageDetails.width > imageDetails.height ? styles.favsLandscape : styles.favsPortrait} name='ios-heart' color='red' /> : <Ionicons style={imageDetails.width > imageDetails.height ? styles.favsLandscape : styles.favsPortrait} name='ios-heart-empty' color='red' />}
                 </TouchableOpacity>
             </View>
         </View>
@@ -39,14 +54,24 @@ const styles = StyleSheet.create({
     image: {
         // marginTop: 1
     },
-    imageSource: {
+    imageSourcePortrait: {
         width: windowWidth,
-        height: windowHeight
+        height: windowHeight - 100
     },
-    favs: {
+    imageSourceLandscape: {
+        width: windowWidth,
+        height: windowWidth
+    },
+    favsPortrait: {
         position: 'absolute',
-        bottom: 120,
-        right: 30,
+        bottom: 20,
+        right: 15,
+        fontSize: 60
+    },
+    favsLandscape: {
+        position: 'absolute',
+        bottom: 0,
+        right: 15,
         fontSize: 60
     }
 });

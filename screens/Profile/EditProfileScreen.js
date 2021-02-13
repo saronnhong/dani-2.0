@@ -47,7 +47,7 @@ const EditProfileScreen = props => {
                         userImage: 'profileImage'
                     })
             }}>
-                <Image style={styles.profileImage} source={state.imageUrl} />
+                <Image style={styles.profileImage} source={{uri: state.imageUrl}} />
             </TouchableOpacity>
             <View style={styles.firstField}>
                 <Text style={styles.fieldName}>Name:</Text>

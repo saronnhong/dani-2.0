@@ -5,6 +5,7 @@ import Colors from '../../constants/Colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
 import { PieChart } from "react-native-chart-kit";
+
 const screenWidth = Dimensions.get('window').width
 const chartConfig = {
     backgroundGradientFrom: "#1E2923",
@@ -21,6 +22,7 @@ const ProfileScreen = (props) => {
     let currentProfile = useSelector(e => e.profile);
     let currentCount = useSelector(e => e.count);
     const [hideChart, sethideChart] = useState(false);
+    
 
     const [data, setData] = useState([
         {
@@ -113,12 +115,10 @@ const ProfileScreen = (props) => {
         let tempData = data;
         setData(tempData);
     }
-
+    
     useEffect(() => {
         increaseCount();
         if (Object.keys(currentCount.wordCount).length === 0) {
-            console.log("lets hide this.");
-            console.log(Object.keys(currentCount.wordCount).length);
             sethideChart(true);
         } else {
             sethideChart(false);
@@ -128,7 +128,7 @@ const ProfileScreen = (props) => {
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../../assets/images/profileimages/coverphoto.jpg')} />
-            <Image style={styles.profileimage} source={currentProfile ? currentProfile.imageUrl : null} />
+            <Image style={styles.profileimage} source={{uri: currentProfile.imageUrl}} />
             <Text style={styles.name}>{currentProfile.name}</Text>
             <Text style={styles.age}>Age: {currentProfile.age}</Text>
             <TouchableOpacity onPress={() => {
