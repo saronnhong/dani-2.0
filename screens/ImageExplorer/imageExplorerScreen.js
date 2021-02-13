@@ -10,7 +10,6 @@ import API_Keys from '../../api_key'
 
 const windowWidth = Dimensions.get('window').width;
 const unsplashAPI = API_Keys.unsplash_api;
-console.log(unsplashAPI);
 
 const ImageExplorerScreen = (props) => {
     let imageDataSet = [
@@ -108,7 +107,7 @@ const ImageExplorerScreen = (props) => {
     )
 };
 
-ImageExplorerScreen.navigationOptions = navData => {
+ImageExplorerScreen.navigationOptions = () => {
 
     return {
         headerTitle: 'Image Explorer',
@@ -122,19 +121,17 @@ ImageExplorerScreen.navigationOptions = navData => {
     }
 }
 
-
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center',
-        backgroundColor: 'rgba(255, 185, 64, .3)',
+        alignItems: 'center'
     },
     imageGroups: {
         flexDirection: 'row',
         borderWidth: 1,
-        borderColor: Colors.border,
-        width: windowWidth * 0.9,
-        margin: 10
+        borderColor: 'rgba(33,33,33,.66)',
+        width: windowWidth * 0.99,
+        margin: 1,
     },
     textGroups: {
         flex: 1,
