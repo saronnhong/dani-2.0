@@ -6,56 +6,103 @@ import Voices from '../../constants/Voices';
 import Colors from '../../constants/Colors'
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
+import API_Keys from '../../api_key'
 
 const windowWidth = Dimensions.get('window').width;
+const unsplashAPI = API_Keys.unsplash_api;
+console.log(unsplashAPI);
 
 const ImageExplorerScreen = (props) => {
+    let imageDataSet = [
+        {
+            id: 1,
+            category: "Cat",
+            default_image: "https://i.pinimg.com/736x/33/32/6d/33326dcddbf15c56d631e374b62338dc.jpg"
+        },
+        {
+            id: 2,
+            category: "Dog",
+            default_image: "http://p.favim.com/orig/2018/07/31/pomerian-pet-cute-puppy-Favim.com-6086020.jpg"
+        },
+        {
+            id: 3,
+            category: "Bird",
+            default_image: "https://ca.audubon.org/sites/default/files/blog/wp-content/uploads/2012/10/Western-Snowy-Plover-je-lg.jpg"
+        },
+        {
+            id: 4,
+            category: "Fruits",
+            default_image: "https://images.unsplash.com/photo-1577554105754-602c7bc6adaa?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+        },
+        {
+            id: 5,
+            category: "Dessert",
+            default_image: "https://images.unsplash.com/photo-1571115177098-24ec42ed204d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=668&q=80"
+        },
+        {
+            id: 6,
+            category: "Ice Cream",
+            default_image: "https://images.unsplash.com/photo-1488900128323-21503983a07e?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=668&q=80"
+        },
+        {
+            id: 7,
+            category: "Beach",
+            default_image: "https://images.unsplash.com/photo-1538964173425-93884d739596?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        },
+        {
+            id: 8,
+            category: "Fish",
+            default_image: "https://images.unsplash.com/photo-1514855333255-65e03dd92cdc?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1703&q=80"
+        },
+        {
+            id: 9,
+            category: "Space",
+            default_image: "https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1500&q=80"
+        },
+        {
+            id: 10,
+            category: "Wonders of the World",
+            default_image: "https://images.unsplash.com/photo-1609949165382-2e442783c8d5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=664&q=80"
+        },
+        
+    ]
     let userSettings = useSelector(state => state.setting);
+
+    let getUnsplashResults = async (keyword) => {
+        let randomPage = Math.floor(Math.random()*10);
+        let response = await fetch(`https://api.unsplash.com/search/photos?page=${randomPage}&query=${keyword}&client_id=${unsplashAPI}`);
+        let json = await response.json();
+        return json.results;
+    }
+
+    let goToGallery = async (category) => {
+        let results = await getUnsplashResults(category);
+        Speech.speak(category, {
+            language: 'en',
+            pitch: userSettings.pitch,
+            rate: userSettings.rate,
+            voice: Voices[userSettings.voice]
+        });
+        props.navigation.navigate({
+            routeName: 'ImageGallery',
+            params: {
+                results: results
+            }
+        })
+    }
 
     return (
         <View style={styles.screen}>
             <ScrollView>
-                <TouchableOpacity style={styles.imageGroups} onPress={() => {
-                    Speech.speak("Kitty Cat", {
-                        language: 'en',
-                        pitch: userSettings.pitch,
-                        rate: userSettings.rate,
-                        voice: Voices[userSettings.voice]
-                    });
-                    props.navigation.navigate({
-                        routeName: 'ImageGallery',
-                        params: {
-                            imageUrl: "https://i.pinimg.com/736x/33/32/6d/33326dcddbf15c56d631e374b62338dc.jpg"
-                        }
-                    })
-                }}>
-                    <Image source={{ uri: "https://i.pinimg.com/736x/33/32/6d/33326dcddbf15c56d631e374b62338dc.jpg" }}
-                        style={{ width: 150, height: 150 }} />
-                    <View style={styles.textGroups}>
-                        <Text>Kitty</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imageGroups}>
-                    <Image source={{ uri: "http://p.favim.com/orig/2018/07/31/pomerian-pet-cute-puppy-Favim.com-6086020.jpg" }}
-                        style={{ width: 150, height: 150 }} />
-                    <View style={styles.textGroups}>
-                        <Text>Puppy</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imageGroups}>
-                    <Image source={{ uri: "https://ca.audubon.org/sites/default/files/blog/wp-content/uploads/2012/10/Western-Snowy-Plover-je-lg.jpg" }}
-                        style={{ width: 150, height: 150 }} />
-                    <View style={styles.textGroups}>
-                        <Text>Baby Bird</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.imageGroups}>
-                    <Image source={{ uri: "https://www.thetimes.co.uk/imageserver/image/%2Fmethode%2Fsundaytimes%2Fprod%2Fweb%2Fbin%2F05330d0c-6104-11e8-859e-536709dc09ad.jpg?crop=2230%2C1254%2C1%2C185&resize=1180" }}
-                        style={{ width: 150, height: 150 }} />
-                    <View style={styles.textGroups}>
-                        <Text>Panda</Text>
-                    </View>
-                </TouchableOpacity>
+                {imageDataSet.map(item =>
+                    <TouchableOpacity key={item.id} style={styles.imageGroups} onPress={() => goToGallery(item.category)}>
+                        <Image source={{ uri: item.default_image }}
+                            style={{ width: 150, height: 150 }} />
+                        <View style={styles.textGroups}>
+                            <Text>{item.category}</Text>
+                        </View>
+                    </TouchableOpacity>
+                )}
             </ScrollView>
         </View>
     )
@@ -79,7 +126,8 @@ ImageExplorerScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 185, 64, .3)',
     },
     imageGroups: {
         flexDirection: 'row',
@@ -91,7 +139,8 @@ const styles = StyleSheet.create({
     textGroups: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'whitesmoke'
     }
 });
 export default ImageExplorerScreen;

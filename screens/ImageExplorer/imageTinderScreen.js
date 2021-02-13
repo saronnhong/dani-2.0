@@ -1,20 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 
-import Colors from '../../constants/Colors'
-
 const windowWidth = Dimensions.get('window').width;
 
 const ImageTinderScreen = (props) => {
-
+    const imageDetails = props.navigation.state.params.results;
+    console.log(imageDetails.color)
 
     return (
         <View style={styles.screen}>
-            <Text>Tinder</Text>
             <TouchableOpacity style={styles.image}>
-                <Image source={{ uri: props.navigation.state.params.imageUrl }}
+                <Image source={{ uri: imageDetails.urls.regular }}
                     style={styles.imageSource} />
             </TouchableOpacity>
+            <Text>{imageDetails.description}</Text>
         </View>
     )
 };
@@ -22,7 +21,7 @@ const ImageTinderScreen = (props) => {
 ImageTinderScreen.navigationOptions = navData => {
 
     return {
-        headerTitle: 'Image Tinder',
+        headerTitle: 'Tinder',
         headerBackTitle: ' ',
     }
 }
@@ -31,14 +30,16 @@ ImageTinderScreen.navigationOptions = navData => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 185, 64, .3)'
     },
     image: {
-        margin: 5
+        marginTop: 10,
+        marginBottom: 20
     },
-    imageSource: { 
-        width: windowWidth, 
-        height: windowWidth
+    imageSource: {
+        width: windowWidth,
+        height: windowWidth,
     }
 });
 export default ImageTinderScreen;
