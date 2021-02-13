@@ -86,7 +86,7 @@ const SpeechMenu = (props) => {
 
 
     if (userSettings.voice === null) {
-        dispatch(settingsActions.updateSettings("Medium", "Nicky", "1", "1"));
+        dispatch(settingsActions.updateSettings("Medium", "Fred", "1", "1"));
     }
 
     return (
