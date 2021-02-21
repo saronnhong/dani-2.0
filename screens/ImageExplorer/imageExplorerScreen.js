@@ -107,7 +107,7 @@ const ImageExplorerScreen = (props) => {
     )
 };
 
-ImageExplorerScreen.navigationOptions = () => {
+ImageExplorerScreen.navigationOptions = navData => {
 
     return {
         headerTitle: 'Image Explorer',
