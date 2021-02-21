@@ -13,7 +13,7 @@ const EnterPasswordScreen = props => {
     });
     const accountInfo = props.navigation.state.params.accountInfo;
 
-    const defaultImage = { default: require('../../assets/images/profileimages/default.png') }
+    const defaultImage = { default: "https://pbs.twimg.com/media/EttqzgQUUAIfh8U.jpg"}
 
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
