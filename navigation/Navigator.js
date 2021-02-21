@@ -30,6 +30,9 @@ import CreateAccountScreen from '../screens/SignUp/CreateAccountScreen';
 import EnterPasswordScreen from '../screens/SignUp/EnterPasswordScreen';
 import SelectProfileImageScreen from '../screens/SignUp/SelectProfileImageScreen';
 import MostUsedScreen from '../screens/SpeechBoard/MostUsedScreen';
+import ImageExplorer from '../screens/ImageExplorer/imageExplorerScreen';
+import ImageGallery from '../screens/ImageExplorer/imageGalleryScreen';
+import ImageTinder from '../screens/ImageExplorer/imageTinderScreen';
 
 const defaultStackNavOptions = {
     defaultNavigationOptions: {
@@ -49,6 +52,21 @@ const DaniStackNavigator = createStackNavigator({
 },
     {
         defaultNavigationOptions: defaultStackNavOptions
+    }
+)
+const ImageExplorerNavigator = createStackNavigator({
+    ImageExplorer: ImageExplorer,
+    ImageGallery: ImageGallery,
+    ImageTinder: ImageTinder
+},
+    {
+        defaultNavigationOptions: {
+            headerStyle: {
+                backgroundColor: Colors.orange,
+            },
+            headerTintColor: "white",
+            headerTitle: ''
+        }
     }
 )
 
@@ -186,6 +204,84 @@ const TabNavigator = createBottomTabNavigator(tabScreenConfig, {
     }
 });
 
+const tabImageExplorerScreenConfig = {
+    Tab1: {
+        screen: ImageExplorerNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Home',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-home' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                }
+            },
+        }
+    },
+    Tab2: {
+        screen: ImageExplorerNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Search',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-search' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            }
+        }
+    },
+    Tab3: {
+        screen: ImageExplorerNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Favorites',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-heart' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
+        }
+    },
+    Tab4: {
+        screen: ImageExplorerNavigator,
+        navigationOptions: {
+            tabBarLabel: 'Profile',
+            tabBarIcon: (tabInfo) => {
+                return <Ionicons name='ios-contact' size={25} color={tabInfo.tintColor} />
+            },
+            tabBarColor: Colors.accentColor,
+            tabBarOptions: {
+                activeTintColor: 'rgb(255, 245, 227)',
+                inactiveTintColor: Colors.border,
+                style: {
+                    backgroundColor: Colors.gradientOrangeBottom,
+                },
+            },
+        }
+    }
+}
+
+const TabImageExplorerNavigator = createBottomTabNavigator(tabImageExplorerScreenConfig, {
+    initialRouteName: "Tab1",
+    tabBarOptions: {
+        activeTintColor: Colors.sesameRed
+    }
+});
+
 
 const SettingsNavigator = createStackNavigator({
     Settings: SettingsScreen,
@@ -217,6 +313,7 @@ const ProfileNavigator = createStackNavigator({
 
 const MainNavigator = createDrawerNavigator({
     "Speech Board": TabNavigator,
+    "Image Explorer": TabImageExplorerNavigator,
     Profile: ProfileNavigator,
     // Sound: DaniStackNavigator,
     Settings: SettingsNavigator

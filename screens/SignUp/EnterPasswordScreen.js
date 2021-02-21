@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Text, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
-import { IMAGES } from '../../data/profileimg';
 import * as authActions from '../../store/actions/auth';
 import * as profileActions from '../../store/actions/profile';
 import * as analyticsActions from '../../store/actions/count';
@@ -51,7 +50,7 @@ const EnterPasswordScreen = props => {
                 keyboardType='default'
                 secureTextEntry={reveal}
             />
-            <TouchableOpacity onPress={() => setReveal(!reveal)}>
+            <TouchableOpacity style={styles.revealPasswordContainer} onPress={() => setReveal(!reveal)}>
                 <Text style={styles.revealPassword}>{reveal ? 'Reveal password' : 'Hide password'}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.nextButton} onPress={authHandler}>
@@ -80,9 +79,7 @@ const styles = StyleSheet.create({
         color: Colors.border
     },
     userInput: {
-        // flex: 1,
         width: '85%',
-        // backgroundColor: Colors.sesameGreen,
         marginTop: 30,
         height: 50,
         paddingHorizontal: 2,
@@ -90,9 +87,14 @@ const styles = StyleSheet.create({
         borderBottomWidth: 0.5,
         color: Colors.border
     },
+    revealPasswordContainer: {
+        display: 'flex',
+        width: '85%',
+        alignItems: 'flex-end'
+    },
     revealPassword: {
         color: Colors.sesameBlue,
-        justifyContent: 'flex-end'
+        margin: 10
     },
     nextButton: {
         backgroundColor: Colors.sesameBlue,
