@@ -25,12 +25,6 @@ export const WORDS = [
         'Thank You',
         require('../assets/images/speechboard/chat/thankyou.png')
     ),
-    // new Word(
-    //     't4',
-    //     'chat',
-    //     'No Thank You',
-    //     require('../assets/images/speechboard/chat/cow.png')
-    // ),
     new Word(
         't5',
         'chat',
@@ -106,7 +100,7 @@ export const WORDS = [
     new Word(
         'f1',
         'i feel',
-        'I feel...',
+        'I feel',
         require('../assets/images/speechboard/feelings/Ifeel.png')
     ),
     new Word(
