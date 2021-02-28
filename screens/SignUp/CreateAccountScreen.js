@@ -1,5 +1,5 @@
 import React, { useState, } from 'react';
-import { Text,  View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import Colors from '../../constants/Colors';
 import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -10,21 +10,25 @@ const CreateAccountScreen = props => {
         name: '',
         email: '',
         age: '',
-        dateOfBirth: ''
+        dateOfBirth: '',
+        birthMonth: '',
+        birthDay: '',
+        birthYear: ''
     });
 
     const [date, setDate] = useState(new Date(1598051730000));
     const [mode, setMode] = useState('date');
     const [show, setShow] = useState(false);
-    
+
 
     const onPickDate = (event, selectedDate) => {
-        setDate(selectedDate);
-        var newDate = new Date(selectedDate)
+        // let userDob = state.birthMonth + state.birthDay + state.birthYear
+        // setDate(selectedDate);
+        var newDate = new Date(state.birthYear, state.birthMonth, state.birthDay);
         let mm = newDate.getMonth() + 1;
         let dd = newDate.getDate();
         let year = newDate.getFullYear()
-        let formatedDate = mm + "/" + dd + "/" + year;
+        let formattedDate = mm + "/" + dd + "/" + year;
 
         var currentDate = new Date();
         var age = currentDate.getFullYear() - newDate.getFullYear()
@@ -32,13 +36,20 @@ const CreateAccountScreen = props => {
         if (m < 0 || (m === 0 && currentDate.getDate() < newDate.getDate())) {
             age--;
         }
+
+
         console.log(age);
-        setState({ 
-            ...state, 
-            dateOfBirth: formatedDate, 
+        setState({
+            ...state,
+            dateOfBirth: formattedDate,
             age: age
         })
     };
+
+    // const onPickDate = (selectedDate) => {
+    //     setState({selectedDate})
+    // }
+
 
 
     const showMode = (currentMode) => {
@@ -73,7 +84,7 @@ const CreateAccountScreen = props => {
                 placeholder='Email'
                 keyboardType='email-address'
             />
-            <View>
+            {/* <View>
                 <TextInput
                     style={styles.datePicker}
                     placeholder='Date of Birth'
@@ -93,9 +104,35 @@ const CreateAccountScreen = props => {
                         />
                     )}
                 </View>
+            </View> */}
+            <Text style={styles.dobTitle}>Date of Birth</Text>
+            <View style={styles.dateRow}>
+                <TextInput
+                    style={styles.dateInput}
+                    placeholder='mm'
+                    keyboardType='numeric'
+                    onChangeText={text => setState({ ...state, birthMonth: text })}
+                    value={state.birthMonth}
+                />
+
+                <TextInput
+                    style={styles.dateInput}
+                    placeholder='dd'
+                    keyboardType='name-phone-pad'
+                    onChangeText={text => setState({ ...state, birthDay: text })}
+                    value={state.birthDay}
+                />
+                <TextInput 
+                    style={styles.dateInput}
+                    placeholder='yyyy'
+                    keyboardType='name-phone-pad'
+                    onChangeText={text => setState({ ...state, birthYear: text })}
+                    value={state.birthYear}
+                />
             </View>
 
             <TouchableOpacity style={styles.nextButton} onPress={() => {
+                onPickDate();
                 props.navigation.navigate({
                     routeName: 'EnterPasswordScreen',
                     params: {
@@ -139,7 +176,8 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 100,
         borderRadius: 20,
-        marginTop: 40
+        marginTop: 40,
+        marginBottom: 400
     },
     buttonText: {
         color: 'white',
@@ -153,6 +191,23 @@ const styles = StyleSheet.create({
         borderBottomColor: Colors.border,
         borderBottomWidth: 0.5,
         color: Colors.border
+    },
+    dateRow: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    dateInput: {
+        width: windowWidth * 0.2,
+        height: 50,
+        paddingHorizontal: 2,
+        marginRight: 10,
+        borderBottomColor: Colors.border,
+        borderBottomWidth: 0.5,
+        color: Colors.border,
+        // flex: 0.28
+    },
+    dobTitle: {
+        marginTop: 10
     }
 });
 
