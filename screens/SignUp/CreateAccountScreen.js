@@ -99,13 +99,16 @@ const CreateAccountScreen = props => {
                             value={date}
                             mode='date'
                             is24Hour={true}
-                            display="default"
+                            display="inline"
                             onChange={onPickDate}
                         />
                     )}
                 </View>
             </View> */}
-            <Text style={styles.dobTitle}>Date of Birth</Text>
+            <View style={styles.dobTitleContainer}>
+                <Text style={styles.dobTitle}>Date of Birth</Text>
+            </View>
+
             <View style={styles.dateRow}>
                 <TextInput
                     style={styles.dateInput}
@@ -118,14 +121,14 @@ const CreateAccountScreen = props => {
                 <TextInput
                     style={styles.dateInput}
                     placeholder='dd'
-                    keyboardType='name-phone-pad'
+                    keyboardType='numeric'
                     onChangeText={text => setState({ ...state, birthDay: text })}
                     value={state.birthDay}
                 />
-                <TextInput 
+                <TextInput
                     style={styles.dateInput}
                     placeholder='yyyy'
-                    keyboardType='name-phone-pad'
+                    keyboardType='numeric'
                     onChangeText={text => setState({ ...state, birthYear: text })}
                     value={state.birthYear}
                 />
@@ -176,8 +179,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 100,
         borderRadius: 20,
-        marginTop: 40,
-        marginBottom: 400
+        marginTop: 40
     },
     buttonText: {
         color: 'white',
@@ -193,8 +195,9 @@ const styles = StyleSheet.create({
         color: Colors.border
     },
     dateRow: {
-        flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        width: windowWidth * 0.85
     },
     dateInput: {
         width: windowWidth * 0.2,
@@ -203,11 +206,12 @@ const styles = StyleSheet.create({
         marginRight: 10,
         borderBottomColor: Colors.border,
         borderBottomWidth: 0.5,
-        color: Colors.border,
-        // flex: 0.28
+        color: Colors.border
     },
-    dobTitle: {
-        marginTop: 10
+    dobTitleContainer: {
+        marginTop: 20,
+        width: windowWidth * 0.85,
+        justifyContent: 'flex-start',
     }
 });
 
