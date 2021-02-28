@@ -19,6 +19,7 @@ const CreateAccountScreen = props => {
     
 
     const onPickDate = (event, selectedDate) => {
+        console.log(selectedDate);
         setDate(selectedDate);
         var newDate = new Date(selectedDate)
         let mm = newDate.getMonth() + 1;
@@ -88,7 +89,7 @@ const CreateAccountScreen = props => {
                             value={date}
                             mode='date'
                             is24Hour={true}
-                            display="default"
+                            display="inline"
                             onChange={onPickDate}
                         />
                     )}
