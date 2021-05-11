@@ -22,7 +22,7 @@
     "expo-speech": "^8.2.1",
     "expo-status-bar": "^1.0.2",
     "expo-updates": "~0.2.8",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "logkitty": "^0.7.1",
     "react": "~16.11.0",
     "react-dom": "~16.11.0",
