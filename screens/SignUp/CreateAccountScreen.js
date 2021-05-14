@@ -1,12 +1,11 @@
-import React, { useState} from 'react';
+import React, { Component, useState } from 'react';
 import { Text, View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import Colors from '../../constants/Colors';
-import DateTimePicker from '@react-native-community/datetimepicker';
 
 const windowWidth = Dimensions.get('window').width;
 
-const CreateAccountScreen = props => {
-    const [state, setState] = useState({
+class CreateAccountScreen extends Component {
+    state = {
         name: '',
         email: '',
         age: '',
@@ -14,138 +13,112 @@ const CreateAccountScreen = props => {
         birthMonth: '',
         birthDay: '',
         birthYear: ''
-    });
+    };
 
-    const [date, setDate] = useState(new Date(1598051730000));
-    const [mode, setMode] = useState('date');
-    const [show, setShow] = useState(false);
-
-
-    const onPickDate = (event, selectedDate) => {
-        // let userDob = state.birthMonth + state.birthDay + state.birthYear
-        // setDate(selectedDate);
-        var newDate = new Date(state.birthYear, state.birthMonth, state.birthDay);
+    onPickDate = () => {
+        let newDate = new Date(this.state.birthYear, this.state.birthMonth, this.state.birthDay);
         let mm = newDate.getMonth() + 1;
         let dd = newDate.getDate();
         let year = newDate.getFullYear()
         let formattedDate = mm + "/" + dd + "/" + year;
 
-        var currentDate = new Date();
-        var age = currentDate.getFullYear() - newDate.getFullYear()
-        var m = currentDate.getMonth() - newDate.getMonth();
+        let currentDate = new Date();
+        let age = currentDate.getFullYear() - newDate.getFullYear()
+        let m = currentDate.getMonth() - newDate.getMonth();
         if (m < 0 || (m === 0 && currentDate.getDate() < newDate.getDate())) {
             age--;
         }
 
-
-        console.log(age);
-        setState({
-            ...state,
+        this.setState({
+            ...this.state,
             dateOfBirth: formattedDate,
             age: age
-        })
+        }, () => this.submitData())
     };
 
-    // const onPickDate = (selectedDate) => {
-    //     setState({selectedDate})
-    // }
+    submitData = () => {
+        console.log("grabbing a new state", this.state)
+        this.props.navigation.navigate({
+            routeName: 'EnterPasswordScreen',
+            params: {
+                accountInfo: this.state
+            }
+        });
+    }
 
+    refs = {}
 
-
-    // const showMode = (currentMode) => {
-    //     setShow(true);
-    //     setMode(currentMode);
-    // };
-
-    // const showDatepicker = () => {
-    //     showMode('date');
-    // };
-
-    // const hideDatepicker = () => {
-    //     setShow(false);
-    // }
-
-    // let inputs = {};
-
-    // let focusTheField = (id) => {
-        
-    //     inputs[id].focus();
-    //   }
-
-
-    return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
-            <Text style={styles.title}>
-                Create your account
+    render() {
+        return (
+            <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
+                <Text style={styles.title}>
+                    Create your account
             </Text>
-            <TextInput
-                onChangeText={text => setState({ ...state, name: text })}
-                style={styles.userInput}
-                value={state.name}
-                placeholder='Name'
-            />
-            <TextInput
-                onChangeText={text => setState({ ...state, email: text })}
-                style={styles.userInput}
-                value={state.email}
-                placeholder='Email'
-                keyboardType='email-address'
-            />
-            <View style={styles.dobTitleContainer}>
-                <Text style={styles.dobTitle}>Date of Birth</Text>
-            </View>
-
-            <View style={styles.dateRow}>
                 <TextInput
-                    style={styles.dateInput}
-                    placeholder='mm'
-                    keyboardType='numeric'
-                    onChangeText={text => {
-                        setState({ ...state, birthMonth: text });
-                        // if (text.length === 2) focusTheField('field2');
-                    }}
-                    value={state.birthMonth}
-                    maxLength={2}
-                    // getRef={input => inputs['field1'] = input }
-                    
-                />
-
-                <TextInput
-                    style={styles.dateInput}
-                    placeholder='dd'
-                    keyboardType='numeric'
-                    onChangeText={text => setState({ ...state, birthDay: text })}
-                    value={state.birthDay}
-                    maxLength={2}
-                    // getRef={input => inputs['field2'] = input }
-                
+                    onChangeText={text => this.setState({ ...this.state, name: text })}
+                    style={styles.userInput}
+                    value={this.state.name}
+                    placeholder='Name'
                 />
                 <TextInput
-                    style={styles.dateInput}
-                    placeholder='yyyy'
-                    keyboardType='numeric'
-                    onChangeText={text => setState({ ...state, birthYear: text })}
-                    value={state.birthYear}
-                    maxLength={4}
-                    
+                    onChangeText={text => this.setState({ ...this.state, email: text })}
+                    style={styles.userInput}
+                    value={this.state.email}
+                    placeholder='Email'
+                    keyboardType='email-address'
                 />
-            </View>
+                <View style={styles.dobTitleContainer}>
+                    <Text style={styles.dobTitle}>Date of Birth</Text>
+                </View>
 
-            <TouchableOpacity style={styles.nextButton} onPress={() => {
-                onPickDate();
-                props.navigation.navigate({
-                    routeName: 'EnterPasswordScreen',
-                    params: {
-                        accountInfo: state
-                    }
-                });
-            }}>
-                <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>
+                <View style={styles.dateRow}>
+                    <TextInput
+                        style={styles.dateInput}
+                        placeholder='mm'
+                        keyboardType='numeric'
+                        onChangeText={text => {
+                            this.setState({ ...this.state, birthMonth: text });
+                            if (text.length === 2) this.refs['second'].focus()
+                        }}
+                        value={this.state.birthMonth}
+                        maxLength={2}
+                        ref="first"
+                    />
 
-        </KeyboardAvoidingView>
-    )
-};
+                    <TextInput
+                        style={styles.dateInput}
+                        placeholder='dd'
+                        keyboardType='numeric'
+                        onChangeText={text => {
+                            this.setState({ ...this.state, birthDay: text })
+                            if (text.length === 2) this.refs['third'].focus()
+                        }}
+                        value={this.state.birthDay}
+                        maxLength={2}
+                        ref="second"
+                    />
+                    <TextInput
+                        style={styles.dateInput}
+                        placeholder='yyyy'
+                        keyboardType='numeric'
+                        onChangeText={text => {
+                            this.setState({ ...this.state, birthYear: text })
+                        }}
+                        value={this.state.birthYear}
+                        maxLength={4}
+                        ref="third"
+                    />
+                </View>
+
+                <TouchableOpacity style={styles.nextButton} onPress={() => this.onPickDate()}>
+                    <Text style={styles.buttonText}>Next</Text>
+                </TouchableOpacity>
+
+            </KeyboardAvoidingView>
+        )
+    }
+}
+
 
 CreateAccountScreen.navigationOptions = {
     headerTitle: 'Create Account'

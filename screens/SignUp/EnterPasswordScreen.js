@@ -8,6 +8,7 @@ import * as analyticsActions from '../../store/actions/count';
 import * as sentenceBarActions from '../../store/actions/sentenceBar';
 
 const EnterPasswordScreen = props => {
+    console.log(props.navigation.state.params.accountInfo)
     const [state, setState] = useState({
         password: ''
     });
