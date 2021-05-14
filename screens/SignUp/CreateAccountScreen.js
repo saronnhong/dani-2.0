@@ -1,4 +1,4 @@
-import React, { useState, } from 'react';
+import React, { useState} from 'react';
 import { Text, View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import Colors from '../../constants/Colors';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -52,18 +52,25 @@ const CreateAccountScreen = props => {
 
 
 
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
+    // const showMode = (currentMode) => {
+    //     setShow(true);
+    //     setMode(currentMode);
+    // };
 
-    const showDatepicker = () => {
-        showMode('date');
-    };
+    // const showDatepicker = () => {
+    //     showMode('date');
+    // };
 
-    const hideDatepicker = () => {
-        setShow(false);
-    }
+    // const hideDatepicker = () => {
+    //     setShow(false);
+    // }
+
+    // let inputs = {};
+
+    // let focusTheField = (id) => {
+        
+    //     inputs[id].focus();
+    //   }
 
 
     return (
@@ -84,27 +91,6 @@ const CreateAccountScreen = props => {
                 placeholder='Email'
                 keyboardType='email-address'
             />
-            {/* <View>
-                <TextInput
-                    style={styles.datePicker}
-                    placeholder='Date of Birth'
-                    onFocus={() => showDatepicker()}
-                    onBlur={() => hideDatepicker()}
-                    value={state.dateOfBirth}
-                />
-                <View>
-                    {show && (
-                        <DateTimePicker
-                            testID="dateTimePicker"
-                            value={date}
-                            mode='date'
-                            is24Hour={true}
-                            display="inline"
-                            onChange={onPickDate}
-                        />
-                    )}
-                </View>
-            </View> */}
             <View style={styles.dobTitleContainer}>
                 <Text style={styles.dobTitle}>Date of Birth</Text>
             </View>
@@ -114,8 +100,14 @@ const CreateAccountScreen = props => {
                     style={styles.dateInput}
                     placeholder='mm'
                     keyboardType='numeric'
-                    onChangeText={text => setState({ ...state, birthMonth: text })}
+                    onChangeText={text => {
+                        setState({ ...state, birthMonth: text });
+                        // if (text.length === 2) focusTheField('field2');
+                    }}
                     value={state.birthMonth}
+                    maxLength={2}
+                    // getRef={input => inputs['field1'] = input }
+                    
                 />
 
                 <TextInput
@@ -124,6 +116,9 @@ const CreateAccountScreen = props => {
                     keyboardType='numeric'
                     onChangeText={text => setState({ ...state, birthDay: text })}
                     value={state.birthDay}
+                    maxLength={2}
+                    // getRef={input => inputs['field2'] = input }
+                
                 />
                 <TextInput
                     style={styles.dateInput}
@@ -131,6 +126,8 @@ const CreateAccountScreen = props => {
                     keyboardType='numeric'
                     onChangeText={text => setState({ ...state, birthYear: text })}
                     value={state.birthYear}
+                    maxLength={4}
+                    
                 />
             </View>
 

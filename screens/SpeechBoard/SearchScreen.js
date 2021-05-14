@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity, Image, Scr
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import { WORDS } from '../../data/words';
+import { VERBS } from '../../data/verbs';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
 import * as Speech from 'expo-speech';
@@ -32,6 +33,7 @@ const SearchScreen = props => {
         }
         let filteredArr = [];
         let filteredUserWordsArr = [];
+        let filteredVerbArr = [];
         const newText = text.toLowerCase();
 
         for (let i = 0; i < WORDS.length; i++) {
@@ -44,7 +46,12 @@ const SearchScreen = props => {
                 filteredUserWordsArr.push(userWords[i]);
             }
         }
-        filteredArr = filteredArr.concat(filteredUserWordsArr);
+        for (let i = 0; i < VERBS.length; i++) {
+            if (VERBS[i].word.toLowerCase().includes(newText)) {
+                filteredVerbArr.push(VERBS[i]);
+            }
+        }
+        filteredArr = filteredArr.concat(filteredUserWordsArr.concat(filteredVerbArr));
         setSearchResults(filteredArr);
     }
     
