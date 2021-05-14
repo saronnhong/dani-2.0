@@ -127,7 +127,8 @@ CreateAccountScreen.navigationOptions = {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'rgba(255, 185, 64, .15)',
     },
     title: {
         fontSize: 24,
