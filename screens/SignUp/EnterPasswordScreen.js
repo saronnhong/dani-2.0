@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { Text, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
 import * as authActions from '../../store/actions/auth';
@@ -9,25 +9,29 @@ import * as sentenceBarActions from '../../store/actions/sentenceBar';
 
 const EnterPasswordScreen = props => {
     console.log(props.navigation.state.params.accountInfo)
+    const [isLoading, setIsLoading] = useState(false);
     const [state, setState] = useState({
         password: ''
     });
     const accountInfo = props.navigation.state.params.accountInfo;
 
-    const defaultImage = { default: "https://pbs.twimg.com/media/EttqzgQUUAIfh8U.jpg"}
+    const defaultImage = { default: "https://pbs.twimg.com/media/EttqzgQUUAIfh8U.jpg" }
 
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = async () => {
+        setIsLoading(true);
         await dispatch(authActions.signup(accountInfo.email, state.password))
             .then(() => {
                 dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'))
                     .then(() => dispatch(analyticsActions.createAnalytics())
                         .then(() => {
                             dispatch(sentenceBarActions.resetBar());
+                            setIsLoading(false);
                             props.navigation.navigate({
                                 routeName: 'SpeechMenu'
                             });
+                            
                         }))
             })
             .catch(err => {
@@ -54,9 +58,14 @@ const EnterPasswordScreen = props => {
             <TouchableOpacity style={styles.revealPasswordContainer} onPress={() => setReveal(!reveal)}>
                 <Text style={styles.revealPassword}>{reveal ? 'Reveal password' : 'Hide password'}</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.nextButton} onPress={authHandler}>
-                <Text style={styles.buttonText}>Next</Text>
-            </TouchableOpacity>
+            {isLoading ?
+                <ActivityIndicator size="large" color={Colors.primary} />
+                :
+                <TouchableOpacity style={styles.nextButton} onPress={authHandler}>
+                    <Text style={styles.buttonText}>Next</Text>
+                </TouchableOpacity>
+            }
+
         </KeyboardAvoidingView>
     )
 };
