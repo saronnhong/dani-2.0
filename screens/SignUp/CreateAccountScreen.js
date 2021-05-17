@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Text, View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
+import { Text, View, KeyboardAvoidingView, StyleSheet, TextInput, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import Colors from '../../constants/Colors';
 
 const windowWidth = Dimensions.get('window').width;
@@ -78,7 +78,13 @@ class CreateAccountScreen extends Component {
                         keyboardType='numeric'
                         onChangeText={text => {
                             this.setState({ ...this.state, birthMonth: text });
-                            if (text.length === 2) this.refs['second'].focus()
+                            if (text.length === 2 && text > 0 && text <= 12 && !text.includes(".")) {
+                                this.refs['second'].focus()
+                            }
+                            if (text.length === 2 && (text <= 0 || text > 12) || text.includes(".")) {
+                                Alert.alert("Please enter a valid Month.")
+                                this.setState({ ...this.state, birthMonth: "" });
+                            }
                         }}
                         value={this.state.birthMonth}
                         maxLength={2}
@@ -91,7 +97,13 @@ class CreateAccountScreen extends Component {
                         keyboardType='numeric'
                         onChangeText={text => {
                             this.setState({ ...this.state, birthDay: text })
-                            if (text.length === 2) this.refs['third'].focus()
+                            if (text.length === 2 && text > 0 && text <= 31 && !text.includes(".")) {
+                                this.refs['third'].focus()
+                            }
+                            if (text.length === 2 && (text <= 0 || text > 31) || text.includes(".")) {
+                                Alert.alert("Please enter a valid Day.")
+                                this.setState({ ...this.state, birthDay: "" });
+                            }
                         }}
                         value={this.state.birthDay}
                         maxLength={2}
@@ -103,6 +115,13 @@ class CreateAccountScreen extends Component {
                         keyboardType='numeric'
                         onChangeText={text => {
                             this.setState({ ...this.state, birthYear: text })
+                            // if (text.length === 4 && text > 0 && text <= 31 && !text.includes(".")) {
+                            //     this.refs['third'].focus()
+                            // }
+                            if (text.length === 4 && (text <= 1900 || text > 2021) || text.includes(".")) {
+                                Alert.alert("Please enter a valid Year.")
+                                this.setState({ ...this.state, birthYear: "" });
+                            }
                         }}
                         value={this.state.birthYear}
                         maxLength={4}
