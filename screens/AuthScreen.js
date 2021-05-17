@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert } from 'react-native';
+import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import * as profileActions from '../store/actions/profile';
@@ -134,11 +134,11 @@ const AuthScreen = props => {
                             {isLoading ? (
                                 <ActivityIndicator size="small" color={Colors.primary} />
                             ) : (
-                                    <Button
-                                        title='Login'
-                                        color='white'
-                                    />
-                                )}
+                                <Button
+                                    title='Login'
+                                    color='white'
+                                />
+                            )}
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.buttonContainer} onPress={() => {
                             props.navigation.navigate('CreateAccountScreen')
@@ -156,7 +156,17 @@ const AuthScreen = props => {
 };
 
 AuthScreen.navigationOptions = {
-    headerTitle: 'Authenticate'
+    // headerTitle: 'Authenticate',
+    // backgroundColor: Colors.orange,
+    headerBackground: () => (
+        <View style={styles.headerScreen}>
+            <Image
+                style={styles.header}
+                source={require('../assets/images/dani_logo_01.png')}
+            />
+        </View>
+
+    ),
 }
 
 const styles = StyleSheet.create({
@@ -165,6 +175,20 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 185, 64, .2)',
         // justifyContent: 'center',
         alignItems: 'center'
+    },
+    header: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 40,
+        height: 40,
+        marginTop: 15
+    },
+    headerScreen: {
+        flex: 1,
+        backgroundColor: Colors.orange,
+        justifyContent: 'center',
+        alignItems: 'center',
+        
     },
     authContainer: {
         width: '80%',
