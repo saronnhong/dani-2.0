@@ -157,7 +157,6 @@ const AuthScreen = props => {
 
 AuthScreen.navigationOptions = {
     // headerTitle: 'Authenticate',
-    // backgroundColor: Colors.orange,
     headerBackground: () => (
         <View style={styles.headerScreen}>
             <Image
@@ -173,7 +172,6 @@ const styles = StyleSheet.create({
     screen: {
         flex: 1,
         backgroundColor: 'rgba(255, 185, 64, .2)',
-        // justifyContent: 'center',
         alignItems: 'center'
     },
     header: {

@@ -37,13 +37,25 @@ class CreateAccountScreen extends Component {
     };
 
     submitData = () => {
-        console.log("grabbing a new state", this.state)
-        this.props.navigation.navigate({
-            routeName: 'EnterPasswordScreen',
-            params: {
-                accountInfo: this.state
-            }
-        });
+        if (this.state.name.length === 0) {
+            alert("No name entered.");
+            this.refs['name'].focus()
+        } else if (this.state.email.length === 0) {
+            alert("No email entered.");
+            this.refs['email'].focus()
+        } else if (this.state.birthMonth.length === 0 || this.state.birthDay.length === 0 || this.state.birthYear.length === 0) {
+            alert("Invalid birthdate entered.");
+            this.refs['day'].focus()
+        } else {
+            console.log("grabbing a new state", this.state)
+            this.props.navigation.navigate({
+                routeName: 'EnterPasswordScreen',
+                params: {
+                    accountInfo: this.state
+                }
+            });
+        }
+
     }
 
     refs = {}
@@ -59,6 +71,7 @@ class CreateAccountScreen extends Component {
                     style={styles.userInput}
                     value={this.state.name}
                     placeholder='Name'
+                    ref="name"
                 />
                 <TextInput
                     onChangeText={text => this.setState({ ...this.state, email: text })}
@@ -66,6 +79,7 @@ class CreateAccountScreen extends Component {
                     value={this.state.email}
                     placeholder='Email'
                     keyboardType='email-address'
+                    ref="email"
                 />
                 <View style={styles.dobTitleContainer}>
                     <Text style={styles.dobTitle}>Date of Birth</Text>
@@ -79,7 +93,7 @@ class CreateAccountScreen extends Component {
                         onChangeText={text => {
                             this.setState({ ...this.state, birthMonth: text });
                             if (text.length === 2 && text > 0 && text <= 12 && !text.includes(".")) {
-                                this.refs['second'].focus()
+                                this.refs['day'].focus()
                             }
                             if (text.length === 2 && (text <= 0 || text > 12) || text.includes(".")) {
                                 Alert.alert("Please enter a valid Month.")
@@ -88,7 +102,7 @@ class CreateAccountScreen extends Component {
                         }}
                         value={this.state.birthMonth}
                         maxLength={2}
-                        ref="first"
+                        ref="month"
                     />
 
                     <TextInput
@@ -98,7 +112,7 @@ class CreateAccountScreen extends Component {
                         onChangeText={text => {
                             this.setState({ ...this.state, birthDay: text })
                             if (text.length === 2 && text > 0 && text <= 31 && !text.includes(".")) {
-                                this.refs['third'].focus()
+                                this.refs['year'].focus()
                             }
                             if (text.length === 2 && (text <= 0 || text > 31) || text.includes(".")) {
                                 Alert.alert("Please enter a valid Day.")
@@ -107,7 +121,7 @@ class CreateAccountScreen extends Component {
                         }}
                         value={this.state.birthDay}
                         maxLength={2}
-                        ref="second"
+                        ref="day"
                     />
                     <TextInput
                         style={styles.dateInput}
@@ -115,9 +129,6 @@ class CreateAccountScreen extends Component {
                         keyboardType='numeric'
                         onChangeText={text => {
                             this.setState({ ...this.state, birthYear: text })
-                            // if (text.length === 4 && text > 0 && text <= 31 && !text.includes(".")) {
-                            //     this.refs['third'].focus()
-                            // }
                             if (text.length === 4 && (text <= 1900 || text > 2021) || text.includes(".")) {
                                 Alert.alert("Please enter a valid Year.")
                                 this.setState({ ...this.state, birthYear: "" });
@@ -125,7 +136,7 @@ class CreateAccountScreen extends Component {
                         }}
                         value={this.state.birthYear}
                         maxLength={4}
-                        ref="third"
+                        ref="year"
                     />
                 </View>
 
