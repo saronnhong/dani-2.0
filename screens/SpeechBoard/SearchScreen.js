@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, TextInput, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import Colors from '../../constants/Colors';
@@ -11,7 +11,7 @@ import Voices from '../../constants/Voices';
 import SentenceBar from '../../components/SentenceBar';
 import * as wordActions from '../../store/actions/sentenceBar'
 
-const SearchScreen = props => {
+const SearchScreen = () => {
     const [search, setSearch] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [showSentenceBar, setShowSentenceBar] = useState(false);
@@ -23,10 +23,10 @@ const SearchScreen = props => {
     const addToState = (word) => {
         dispatch(wordActions.addToBar(word));
     }
-   
-    const searchForWord = async (text) => {
 
-        if (text.length <= 0) {
+    const searchForWord = (text, type) => {
+
+        if (text.length === 0 && type === 'buttonSubmit') {
             Alert.alert("Search field is empty. Please enter what you are looking for.");
             setSearchResults([]);
             return;
@@ -34,27 +34,37 @@ const SearchScreen = props => {
         let filteredArr = [];
         let filteredUserWordsArr = [];
         let filteredVerbArr = [];
+        let exactMatch = [];
         const newText = text.toLowerCase();
 
-        for (let i = 0; i < WORDS.length; i++) {
-            if (WORDS[i].word.toLowerCase().includes(newText)) {
-                filteredArr.push(WORDS[i]);
+        for (const word of WORDS) {
+            if (word.word.toLowerCase() === newText) {
+                exactMatch.push(word);
+            }
+            else if (word.word.toLowerCase().includes(newText)) {
+                filteredArr.push(word);
             }
         }
-        for (let i = 0; i < userWords.length; i++) {
-            if (userWords[i].word.toLowerCase().includes(newText)) {
-                filteredUserWordsArr.push(userWords[i]);
+        for (const userWord of userWords) {
+            if (userWord.word.toLowerCase() === newText) {
+                exactMatch.push(userWord);
+            }
+            else if (userWord.word.toLowerCase().includes(newText)) {
+                filteredUserWordsArr.push(userWord);
             }
         }
-        for (let i = 0; i < VERBS.length; i++) {
-            if (VERBS[i].word.toLowerCase().includes(newText)) {
-                filteredVerbArr.push(VERBS[i]);
+        for (const verb of VERBS) {
+            if (verb.word.toLowerCase() === newText) {
+                exactMatch.push(verb);
+            }
+            else if (verb.word.toLowerCase().includes(newText)) {
+                filteredVerbArr.push(verb);
             }
         }
-        filteredArr = filteredArr.concat(filteredUserWordsArr.concat(filteredVerbArr));
+        filteredArr = exactMatch.concat(filteredArr.concat(filteredUserWordsArr.concat(filteredVerbArr)));
         setSearchResults(filteredArr);
     }
-    
+
     let renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
@@ -65,6 +75,7 @@ const SearchScreen = props => {
 
     return (
         <View style={styles.screen}>
+            
             {showSentenceBar && <View style={{ height: 100, backgroundColor: 'rgba(255, 185, 64, .2)' }}>
                 <SentenceBar />
             </View>}
@@ -72,21 +83,26 @@ const SearchScreen = props => {
             <ScrollView style={styles.scrollViewContainer}>
                 <View style={styles.searchContainer}>
                     <TextInput
-                        onChangeText={text => setSearch(text)}
+                        onChangeText={text => {
+                            setSearch(text);
+                            searchForWord(text, 'onChange');
+                        }}
+                        clearButtonMode={'while-editing'}
                         style={styles.wordInput}
                         selectionColor={Colors.border}
                         color={Colors.border}
                         backgroundColor='rgba(250,250,250,.3)'
                         placeholder="search..."
                         returnKeyType='search'
-                        onSubmitEditing={() => searchForWord(search)}
+                        onSubmitEditing={() => searchForWord(search, 'buttonSubmit')}
                     />
+                    
                 </View>
                 <Button title="Search" onPress={() => searchForWord(search)} />
 
                 <View >
                     <View style={styles.scrollContainer}>
-                        {!searchResults.length && <Text style={styles.emptySearch}>No search results found.</Text>}
+                        {searchResults.length === 0 && <Text style={styles.emptySearch}>No search results found.</Text>}
                         {searchResults.map(word =>
                             <TouchableOpacity key={word._id} onPress={() => {
                                 Speech.speak(word.word, {
@@ -100,8 +116,6 @@ const SearchScreen = props => {
                             }}>
                                 <View style={styles.btnContainer} >
                                     {word.imageUrl != null && renderWordImageUrl(word)}
-                                    {/* {word.imageUrl != null && <Image style={styles.imageBtn} source={word.imageUrl} />} */}
-                                    {/* <Text style={styles.btnText}>{word.word}</Text> */}
                                     {(word.word.length < 7 || (word.word).includes(char => char === " ")) ? <Text style={styles.btnText} >{word.word}</Text> : <Text style={styles.btnTextSmall} >{word.word}</Text>}
 
                                 </View>
@@ -109,7 +123,6 @@ const SearchScreen = props => {
                         )}
                     </View>
                 </View>
-
             </ScrollView>
         </View>
     )
@@ -155,9 +168,6 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     scrollViewContainer: {
-        // width: '100%',
-        // height: 350,
-        // paddingTop: 10,
         backgroundColor: 'rgba(255, 185, 64, .2)'
     },
     btnContainer: {
