@@ -23,10 +23,10 @@ const SearchScreen = props => {
     const addToState = (word) => {
         dispatch(wordActions.addToBar(word));
     }
-   
-    const searchForWord = async (text) => {
 
-        if (text.length <= 0) {
+    const searchForWord = async (text, type) => {
+
+        if (text.length <= 0 && type === 'buttonSubmit') {
             Alert.alert("Search field is empty. Please enter what you are looking for.");
             setSearchResults([]);
             return;
@@ -34,27 +34,37 @@ const SearchScreen = props => {
         let filteredArr = [];
         let filteredUserWordsArr = [];
         let filteredVerbArr = [];
+        let exactMatch = [];
         const newText = text.toLowerCase();
 
-        for (let i = 0; i < WORDS.length; i++) {
-            if (WORDS[i].word.toLowerCase().includes(newText)) {
-                filteredArr.push(WORDS[i]);
+        for (const word of WORDS) {
+            if (word.word.toLowerCase() === newText) {
+                exactMatch.push(word);
+            }
+            else if (word.word.toLowerCase().includes(newText)) {
+                filteredArr.push(word);
             }
         }
-        for (let i = 0; i < userWords.length; i++) {
-            if (userWords[i].word.toLowerCase().includes(newText)) {
-                filteredUserWordsArr.push(userWords[i]);
+        for (const userWord of userWords) {
+            if (userWord.word.toLowerCase() === newText) {
+                exactMatch.push(userWord);
+            }
+            else if (userWord.word.toLowerCase().includes(newText)) {
+                filteredUserWordsArr.push(userWord);
             }
         }
-        for (let i = 0; i < VERBS.length; i++) {
-            if (VERBS[i].word.toLowerCase().includes(newText)) {
-                filteredVerbArr.push(VERBS[i]);
+        for (const verb of VERBS) {
+            if (verb.word.toLowerCase() === newText) {
+                exactMatch.push(verb);
+            }
+            else if (verb.word.toLowerCase().includes(newText)) {
+                filteredVerbArr.push(verb);
             }
         }
-        filteredArr = filteredArr.concat(filteredUserWordsArr.concat(filteredVerbArr));
+        filteredArr = exactMatch.concat(filteredArr.concat(filteredUserWordsArr.concat(filteredVerbArr)));
         setSearchResults(filteredArr);
     }
-    
+
     let renderWordImageUrl = (word) => {
         if (word.phonetic) {
             return <Image style={styles.imageBtn} source={{ uri: word.imageUrl }} />
@@ -72,14 +82,19 @@ const SearchScreen = props => {
             <ScrollView style={styles.scrollViewContainer}>
                 <View style={styles.searchContainer}>
                     <TextInput
-                        onChangeText={text => setSearch(text)}
+                        onChangeText={text => {
+                            setSearch(text);
+                            searchForWord(text, 'onChange')
+                        }}
+                        value={search}
+                        clearButtonMode={'while-editing'}
                         style={styles.wordInput}
                         selectionColor={Colors.border}
                         color={Colors.border}
                         backgroundColor='rgba(250,250,250,.3)'
                         placeholder="search..."
                         returnKeyType='search'
-                        onSubmitEditing={() => searchForWord(search)}
+                        onSubmitEditing={() => searchForWord(search, 'buttonSubmit')}
                     />
                 </View>
                 <Button title="Search" onPress={() => searchForWord(search)} />
