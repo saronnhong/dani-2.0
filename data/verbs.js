@@ -19,4 +19,10 @@ export const VERBS = [
         'An',
         // require('../assets/images/speechboard/chat/hello.png')
     ),
+    new Word(
+        'v4',
+        'verbs',
+        'The',
+        // require('../assets/images/speechboard/chat/hello.png')
+    ),
 ];

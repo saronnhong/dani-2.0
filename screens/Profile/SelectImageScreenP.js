@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     profileImage: {
-        width: windowWidth * 0.32,
-        height: windowWidth * 0.32,
+        width: windowWidth * 0.255,
+        height: windowWidth * 0.255,
         backgroundColor: Colors.sesameGreen,
         borderRadius: 0,
         padding: 10,
