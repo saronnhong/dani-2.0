@@ -22,7 +22,7 @@ const ProfileScreen = (props) => {
     let currentProfile = useSelector(e => e.profile);
     let currentCount = useSelector(e => e.count);
     const [hideChart, sethideChart] = useState(false);
-    
+
 
     const [data, setData] = useState([
         {
@@ -115,7 +115,7 @@ const ProfileScreen = (props) => {
         let tempData = data;
         setData(tempData);
     }
-    
+
     useEffect(() => {
         increaseCount();
         if (Object.keys(currentCount.wordCount).length === 0) {
@@ -128,7 +128,9 @@ const ProfileScreen = (props) => {
     return (
         <View style={styles.screen}>
             <Image style={styles.cover} source={require('../../assets/images/profileimages/coverphoto.jpg')} />
-            <Image style={styles.profileimage} source={{uri: currentProfile.imageUrl}} />
+            <View style={styles.imageContainer}>
+                <Image style={styles.profileimage} source={{ uri: currentProfile.imageUrl }} />
+            </View>
             <Text style={styles.name}>{currentProfile.name}</Text>
             <Text style={styles.age}>Age: {currentProfile.age}</Text>
             <TouchableOpacity onPress={() => {
@@ -199,6 +201,10 @@ const styles = StyleSheet.create({
         marginTop: -50,
         borderColor: 'white',
         borderWidth: 3
+    },
+    imageContainer: {
+        padding: 50,
+        margin: 2
     },
     name: {
         fontSize: 20,
