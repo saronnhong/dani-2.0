@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer, useCallback } from 'react';
-import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, Image } from 'react-native';
+import { Text, ScrollView, View, KeyboardAvoidingView, StyleSheet, Button, ActivityIndicator, Alert, Image, TextInput } from 'react-native';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 import * as profileActions from '../store/actions/profile';
@@ -36,6 +36,10 @@ const formReducer = (state, action) => {
 };
 
 const AuthScreen = props => {
+    const [state, setState] = useState({
+        email: '',
+        password: ''
+    });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
     const dispatch = useDispatch();
@@ -62,7 +66,8 @@ const AuthScreen = props => {
         setError(null);
         setIsLoading(true);
         try {
-            dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
+            // dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
+            dispatch(authActions.login(state.email, state.password))
                 .then(() => {
                     dispatch(profileActions.fetchProfile())
                         .then(() => {
@@ -99,7 +104,7 @@ const AuthScreen = props => {
 
             <Card style={styles.authContainer}>
                 <ScrollView keyboardShouldPersistTaps={'handled'} >
-                    <Input
+                    {/* <Input
                         id='email'
                         label='E-Mail'
                         keyboardType='email-address'
@@ -127,6 +132,26 @@ const AuthScreen = props => {
                         clearTextOnFocus={true}
                         useValidation={true}
 
+                    /> */}
+                    <TextInput
+                        onChangeText={text => setState({ ...state, email: text })}
+                        style={styles.userInput}
+                        value={state.email}
+                        placeholder='Email'
+                        keyboardType='email-address'
+                        autoCapitalize='none'
+                        required
+                    />
+                    <TextInput
+                        onChangeText={text => setState({ ...state, password: text })}
+                        style={styles.userInput}
+                        value={state.password}
+                        placeholder='Password'
+                        keyboardType='default'
+                        clearTextOnFocus={true}
+                        secureTextEntry
+                        autoCapitalize='none'
+                        required
                     />
 
                     <View style={styles.buttonRow}>
@@ -186,7 +211,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.orange,
         justifyContent: 'center',
         alignItems: 'center',
-        
+
     },
     authContainer: {
         width: '80%',
@@ -203,6 +228,13 @@ const styles = StyleSheet.create({
         fontFamily: 'honeybee',
         fontSize: 60,
         color: Colors.sesameGreen
+    },
+    userInput: {
+        height: 45,
+        color: Colors.border,
+        paddingHorizontal: 3,
+        borderBottomColor: 'rgba(250,250,250,.7)',
+        borderBottomWidth: 1
     },
     buttonContainer: {
         marginTop: 10

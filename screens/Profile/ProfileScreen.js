@@ -192,15 +192,22 @@ const styles = StyleSheet.create({
         height: '20%',
 
     },
-    profileimage: {
+    imageContainer: {
         width: 100,
         height: 100,
-        backgroundColor: Colors.sesameGreen,
-        borderRadius: 100,
         padding: 10,
+        backgroundColor: Colors.sesameGreen,
+        borderRadius: 200,
         marginTop: -50,
+        borderWidth: 3,
         borderColor: 'white',
-        borderWidth: 3
+        justifyContent: 'center',
+        alignItems: 'center'
+        
+    },
+    profileimage: {
+        width: 80,
+        height: 80,
     },
     imageContainer: {
         padding: 50,
