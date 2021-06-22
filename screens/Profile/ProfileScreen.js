@@ -131,7 +131,6 @@ const ProfileScreen = (props) => {
             <View style={styles.imageContainer}>
                 <Image style={styles.profileimage} source={{ uri: currentProfile.imageUrl }} />
             </View>
-
             <Text style={styles.name}>{currentProfile.name}</Text>
             <Text style={styles.age}>Age: {currentProfile.age}</Text>
             <TouchableOpacity onPress={() => {
@@ -209,6 +208,10 @@ const styles = StyleSheet.create({
     profileimage: {
         width: 80,
         height: 80,
+    },
+    imageContainer: {
+        padding: 50,
+        margin: 2
     },
     name: {
         fontSize: 20,

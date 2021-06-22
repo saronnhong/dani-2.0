@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Dimensions} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Colors from '../../constants/Colors'
 import { IMAGES } from '../../data/profileimg.js';
 
@@ -8,7 +9,8 @@ const windowWidth = Dimensions.get('window').width;
 
 const SelectImageScreen = props => {
     return (
-        <View style={styles.screen}>
+        <ScrollView style={styles.screen}>
+            
             <View style={styles.imagesRow}>
                 {IMAGES.map(icon =>
                     <TouchableOpacity key={icon.id} onPress={async () => {
@@ -19,14 +21,13 @@ const SelectImageScreen = props => {
                             }
                         });
                     }}>
-
-                        <Image style={styles.profileImage} source={{ uri: icon.imageUrl }} />
-
-
+                        <View style={styles.imageContainer}>
+                            <Image style={styles.profileImage} source={{ uri: icon.imageUrl }} />
+                        </View>
                     </TouchableOpacity>
                 )}
             </View>
-        </View>
+        </ScrollView>
     )
 };
 
@@ -41,7 +42,7 @@ SelectImageScreen.navigationOptions = () => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: 'center',
+        // justifyContent: 'center',
     },
     imagesRow: {
         marginTop: 10,
@@ -52,12 +53,17 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     profileImage: {
-        width: windowWidth * 0.255,
-        height: windowWidth * 0.255,
+        width: windowWidth * 0.2,
+        height: windowWidth * 0.2,
         backgroundColor: Colors.sesameGreen,
         borderRadius: 0,
         padding: 10,
         margin: 2
+    },
+    imageContainer: {
+        padding: 15,
+        margin: 2,
+        backgroundColor: Colors.sesameGreen
     }
 });
 export default SelectImageScreen;
