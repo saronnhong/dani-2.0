@@ -66,7 +66,7 @@ const SelectProfileImageScreen = props => {
                     })
             }}>
             {(selectedImage === 'newAccount') ? 
-             <Image style={styles.profile} source={require('../../assets/images/profileimages/default.png')}/> : 
+             <Image style={styles.profile} source={require('../../assets/images/profileimages/021-puzzle.png')}/> : 
               <Image style={styles.profile} source={selectedImage}/>
             } 
            
