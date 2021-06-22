@@ -19,7 +19,10 @@ const SelectImageScreen = props => {
                             }
                         });
                     }}>
-                        <Image style={styles.profileImage} source={{uri: icon.imageUrl}} />
+
+                        <Image style={styles.profileImage} source={{ uri: icon.imageUrl }} />
+
+
                     </TouchableOpacity>
                 )}
             </View>
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
         flex: 1,
         width: '100%',
         flexWrap: 'wrap',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     profileImage: {
         width: windowWidth * 0.255,
