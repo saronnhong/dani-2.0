@@ -10,51 +10,53 @@ import Card from '../components/Card';
 import Colors from '../constants/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
+// const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
 
-const formReducer = (state, action) => {
-    if (action.type === FORM_INPUT_UPDATE) {
-        const updatedValues = {
-            ...state.inputValues,
-            [action.input]: action.value
-        }
-        const updatedValidities = {
-            ...state.inputValidities,
-            [action.input]: action.isValid
-        }
-        let updatedFormIsValid = true;
-        for (const key in updatedValidities) {
-            updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
-        }
-        return {
-            formIsValid: updatedFormIsValid,
-            inputValidities: updatedValidities,
-            inputValues: updatedValues
-        }
-    }
-    return state;
-};
+// const formReducer = (state, action) => {
+//     if (action.type === FORM_INPUT_UPDATE) {
+//         const updatedValues = {
+//             ...state.inputValues,
+//             [action.input]: action.value
+//         }
+//         const updatedValidities = {
+//             ...state.inputValidities,
+//             [action.input]: action.isValid
+//         }
+//         let updatedFormIsValid = true;
+//         for (const key in updatedValidities) {
+//             updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+//         }
+//         return {
+//             formIsValid: updatedFormIsValid,
+//             inputValidities: updatedValidities,
+//             inputValues: updatedValues
+//         }
+//     }
+//     return state;
+// };
 
 const AuthScreen = props => {
     const [state, setState] = useState({
         email: '',
-        password: ''
+        password: '',
+        validEmail: true,
+        validPassword: true
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
     const dispatch = useDispatch();
 
-    const [formState, dispatchFormState] = useReducer(formReducer, {
-        inputValues: {
-            email: '',
-            password: ''
-        },
-        inputValidities: {
-            email: false,
-            password: false
-        },
-        formIsValid: false
-    });
+    // const [formState, dispatchFormState] = useReducer(formReducer, {
+    //     inputValues: {
+    //         email: '',
+    //         password: ''
+    //     },
+    //     inputValidities: {
+    //         email: false,
+    //         password: false
+    //     },
+    //     formIsValid: false
+    // });
 
     useEffect(() => {
         if (error) {
@@ -66,35 +68,46 @@ const AuthScreen = props => {
         setError(null);
         setIsLoading(true);
         try {
-            // dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
-            dispatch(authActions.login(state.email, state.password))
-                .then(() => {
-                    dispatch(profileActions.fetchProfile())
-                        .then(() => {
-                            dispatch(analyticsActions.fetchAnalytics())
-                                .then(() => {
-                                    dispatch(sentenceBarActions.resetBar());
-                                    props.navigation.navigate('SpeechMenu');
-                                })
-                        })
-                })
+            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (state.password.length < 5) {
+                setState({ ...state, validPassword: false })
+            }
+            if (!emailRegex.test(state.email.toLowerCase())) {
+                setState({ ...state, validEmail: false })
+            }
+            else {
+                // dispatch(authActions.login(formState.inputValues.email, formState.inputValues.password))
+                dispatch(authActions.login(state.email, state.password))
+                    .then(() => {
+                        dispatch(profileActions.fetchProfile())
+                            .then(() => {
+                                dispatch(analyticsActions.fetchAnalytics())
+                                    .then(() => {
+                                        dispatch(sentenceBarActions.resetBar());
+                                        props.navigation.navigate('SpeechMenu');
+                                    })
+                            })
+                    })
+            }
+
             setIsLoading(false);
         } catch (err) {
             setError(err.message);
+            Alert("An Error has occurred");
             setIsLoading(false);
         }
     }
 
-    const inputChangeHandler = useCallback(
-        (inputIdentifier, inputValue, inputValidity) => {
-            dispatchFormState({
-                type: FORM_INPUT_UPDATE,
-                value: inputValue,
-                isValid: inputValidity,
-                input: inputIdentifier
-            });
+    // const inputChangeHandler = useCallback(
+    //     (inputIdentifier, inputValue, inputValidity) => {
+    //         dispatchFormState({
+    //             type: FORM_INPUT_UPDATE,
+    //             value: inputValue,
+    //             isValid: inputValidity,
+    //             input: inputIdentifier
+    //         });
 
-        }, [dispatchFormState]);
+    //     }, [dispatchFormState]);
 
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
@@ -142,6 +155,7 @@ const AuthScreen = props => {
                         autoCapitalize='none'
                         required
                     />
+                    {state.validEmail ? null : <View style={styles.errorContainer}><Text style={styles.errorText}>Invalid Email address</Text></View>}
                     <TextInput
                         onChangeText={text => setState({ ...state, password: text })}
                         style={styles.userInput}
@@ -153,7 +167,7 @@ const AuthScreen = props => {
                         autoCapitalize='none'
                         required
                     />
-
+                    {state.validPassword ? null : <View style={styles.errorContainer}><Text style={styles.errorText}>Invalid Password</Text></View>}
                     <View style={styles.buttonRow}>
                         <TouchableOpacity style={styles.buttonContainer} onPress={authHandler}>
                             {isLoading ? (
@@ -242,6 +256,14 @@ const styles = StyleSheet.create({
     buttonRow: {
         flexDirection: 'row',
         justifyContent: 'center'
+    },
+    errorContainer: {
+        marginVertical: 5
+    },
+    errorText: {
+        fontFamily: 'roboto',
+        color: Colors.sesameRedOrange,
+        fontSize: 12
     }
 });
 
