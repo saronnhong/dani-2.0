@@ -45,7 +45,7 @@ const EditNewWordScreen = props => {
         }
         
         const gallery = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
+            allowsEditing: false,
             aspect: [16, 9],
             quality: 0.5
         });
@@ -59,7 +59,7 @@ const EditNewWordScreen = props => {
             return;
         }
         const camera = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
+            allowsEditing: false,
             aspect: [16, 9],
             quality: 0.5
         });
@@ -78,12 +78,14 @@ const EditNewWordScreen = props => {
             state.word,
             state.imageUrl,
             state.phonetic,
-        ))
+        ));
+        dispatch(wordsCardActions.fetchWords());
         props.navigation.navigate('Select');
     }
 
     const onDeleteWord = () => {
         dispatch(wordsCardActions.deleteWord(state._id));
+        dispatch(wordsCardActions.fetchWords());
         props.navigation.navigate('Select');
     }
 

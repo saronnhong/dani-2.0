@@ -34,13 +34,13 @@ const AddNewWordScreen = props => {
     };
 
     const takeGalleryHandler = async () => {
-        const hasPermission = await verifyPermissions('CAMERA_ROLL');
+        const hasPermission = verifyPermissions('CAMERA_ROLL');
         if (!hasPermission) {
             return;
         }
 
         const gallery = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: true,
+            allowsEditing: false,
             aspect: [16, 9],
             quality: 0.5
         });
@@ -48,12 +48,12 @@ const AddNewWordScreen = props => {
         setPickedImage(gallery.uri);
     };
     const takeCameraHandler = async () => {
-        const hasPermission = await verifyPermissions('CAMERA');
+        const hasPermission = verifyPermissions('CAMERA');
         if (!hasPermission) {
             return;
         }
         const camera = await ImagePicker.launchCameraAsync({
-            allowsEditing: true,
+            allowsEditing: false,
             aspect: [16, 9],
             quality: 0.5
         });
