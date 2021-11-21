@@ -80,7 +80,6 @@ export const fetchProfile = () => {
 export const createProfile = (email, name, age, dateOfBirth, imageUrl, coverImageUrl) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
-        // console.log(userId);
         const response = await fetch(
             'https://speechboard-api.herokuapp.com/profiles/',
             {
