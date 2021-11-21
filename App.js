@@ -4,7 +4,8 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import ReduxThunk from 'redux-thunk';
 import * as Font from 'expo-font';
-import { AppLoading } from 'expo';
+// import { AppLoading } from 'expo';
+import AppLoading from 'expo-app-loading'
 import Navigator from './navigation/Navigator';
 import { enableScreens } from 'react-native-screens';
 import authReducer from './store/reducers/auth';
@@ -49,6 +50,7 @@ export default function App() {
       <AppLoading
         startAsync={fetchFonts}
         onFinish={() => setFontLoaded(true)}
+        onError={console.warn}
       />
     );
   }

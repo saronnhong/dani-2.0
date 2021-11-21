@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: -50,
         borderColor: 'white',
-        borderWidth: 3
+        borderWidth: 3 
     },
     firstField: {
         flexDirection: 'row',

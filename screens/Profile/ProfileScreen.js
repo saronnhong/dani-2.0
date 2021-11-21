@@ -190,27 +190,23 @@ const styles = StyleSheet.create({
     cover: {
         width: '100%',
         height: '20%',
-
     },
     imageContainer: {
-        width: 100,
-        height: 100,
         padding: 10,
         backgroundColor: Colors.sesameGreen,
-        borderRadius: 200,
-        marginTop: -50,
+    },
+    profileimage: {
+        marginTop: -70,
+        width: 100,
+        height: 100,
+        borderRadius: 100,
         borderWidth: 3,
         borderColor: 'white',
         justifyContent: 'center',
         alignItems: 'center'
-        
-    },
-    profileimage: {
-        width: 80,
-        height: 80,
     },
     imageContainer: {
-        padding: 50,
+        padding: 20,
         margin: 2
     },
     name: {
