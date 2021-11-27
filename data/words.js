@@ -956,4 +956,9 @@ export const WORDS = [
         'Out',
         require('../assets/images/speechboard/corewords/out.png')
     ),
+    new Word(
+        'cw40',
+        'core words',
+        'At'
+    ),
 ];

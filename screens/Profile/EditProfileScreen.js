@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
     },
     profileImage: {
         alignItems: 'center',
-        width: 100,
-        height: 100,
-        backgroundColor: Colors.sesameGreen,
+        width: 120,
+        height: 120,
+        backgroundColor: Colors.sesameBlue,
         borderRadius: 100,
         padding: 10,
         marginTop: -50,
