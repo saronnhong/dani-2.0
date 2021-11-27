@@ -3,7 +3,7 @@ import { SafeAreaView, Button, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
@@ -133,6 +133,7 @@ const tabScreenConfig = {
             tabBarLabel: 'Most Used',
             tabBarIcon: (tabInfo) => {
                 return <Ionicons name='ios-ribbon' size={25} color={tabInfo.tintColor} />
+                
             },
             tabBarColor: Colors.accentColor,
             tabBarOptions: {
@@ -261,7 +262,7 @@ const tabImageExplorerScreenConfig = {
         navigationOptions: {
             tabBarLabel: 'Profile',
             tabBarIcon: (tabInfo) => {
-                return <Ionicons name='ios-contact' size={25} color={tabInfo.tintColor} />
+                return <FontAwesome5 name="user-alt" size={25} color={tabInfo.tintColor} />
             },
             tabBarColor: Colors.accentColor,
             tabBarOptions: {
