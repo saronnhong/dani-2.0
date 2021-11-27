@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, ScrollView
 import { useSelector } from 'react-redux';
 import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, FontAwesome } from '@expo/vector-icons';
 import FavIcon from '../../components/FavoriteIcon';
 
 const windowWidth = Dimensions.get('window').width;
@@ -36,14 +36,14 @@ const ImageGalleryScreen = (props) => {
             setFavHash(tempHash);
             console.log(favHash);
             setIsFav(!isFav);
-        }else{
+        } else {
             let tempHash = favHash;
             delete tempHash[id];
             setFavHash(tempHash);
             console.log(favHash);
             setIsFav(!isFav)
         }
-        
+
     }
 
     return (
@@ -54,10 +54,14 @@ const ImageGalleryScreen = (props) => {
                         <TouchableOpacity key={item.id} style={styles.image} onPress={() => goToTinder(item.description, item)}>
                             <Image source={{ uri: item.urls.small }}
                                 style={styles.imageSource} />
-                            <TouchableOpacity style={styles.favs} hitSlop={{top: 10, bottom: 10, left: 10, right: 10}} onPress={() => makeFav(item.id)}>
+                            <TouchableOpacity style={styles.favs} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }} onPress={() => makeFav(item.id)}>
                                 {favHash[item.id] ?
-                                    <Ionicons style={styles.favs} name='ios-heart' size={25} color='red' /> :
-                                    <Ionicons style={styles.favs} name='ios-heart-empty' size={25} color='red' />}
+                                    <FontAwesome name="heart" style={styles.favs} size={25} color='red' />
+                                    // <Ionicons style={styles.favs} name='ios-heart' size={25} color='red' /> 
+                                    :
+                                    <FontAwesome name="heart-o" style={styles.favs} size={25} color='red' />
+                                    // <Ionicons style={styles.favs} name='ios-heart-empty' size={25} color='red' />
+                                }
                             </TouchableOpacity>
                         </TouchableOpacity>
                     )}
