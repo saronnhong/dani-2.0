@@ -9,31 +9,8 @@ import Input from '../components/Input';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { assert } from '../utils';
 
-// const FORM_INPUT_UPDATE = 'FORM_INPUT_UPDATE';
-
-// const formReducer = (state, action) => {
-//     if (action.type === FORM_INPUT_UPDATE) {
-//         const updatedValues = {
-//             ...state.inputValues,
-//             [action.input]: action.value
-//         }
-//         const updatedValidities = {
-//             ...state.inputValidities,
-//             [action.input]: action.isValid
-//         }
-//         let updatedFormIsValid = true;
-//         for (const key in updatedValidities) {
-//             updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
-//         }
-//         return {
-//             formIsValid: updatedFormIsValid,
-//             inputValidities: updatedValidities,
-//             inputValues: updatedValues
-//         }
-//     }
-//     return state;
-// };
 
 const AuthScreen = props => {
     const [state, setState] = useState({
@@ -46,18 +23,6 @@ const AuthScreen = props => {
     const [error, setError] = useState();
     const dispatch = useDispatch();
 
-    // const [formState, dispatchFormState] = useReducer(formReducer, {
-    //     inputValues: {
-    //         email: '',
-    //         password: ''
-    //     },
-    //     inputValidities: {
-    //         email: false,
-    //         password: false
-    //     },
-    //     formIsValid: false
-    // });
-
     useEffect(() => {
         if (error) {
             Alert.alert('An Error Occurred!', error, [{ text: 'Okay' }]);
@@ -67,6 +32,7 @@ const AuthScreen = props => {
     const authHandler = async () => {
         setError(null);
         setIsLoading(true);
+        // assert(test, "authHalder test has passed");
         try {
             const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (state.password.length < 5) {
@@ -98,17 +64,6 @@ const AuthScreen = props => {
         }
     }
 
-    // const inputChangeHandler = useCallback(
-    //     (inputIdentifier, inputValue, inputValidity) => {
-    //         dispatchFormState({
-    //             type: FORM_INPUT_UPDATE,
-    //             value: inputValue,
-    //             isValid: inputValidity,
-    //             input: inputIdentifier
-    //         });
-
-    //     }, [dispatchFormState]);
-
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <View style={styles.titleContainer}>
@@ -117,35 +72,6 @@ const AuthScreen = props => {
 
             <Card style={styles.authContainer}>
                 <ScrollView keyboardShouldPersistTaps={'handled'} >
-                    {/* <Input
-                        id='email'
-                        label='E-Mail'
-                        keyboardType='email-address'
-                        required
-                        email
-                        autoCapitalize='none'
-                        errorText="Please enter a valid email address"
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        color='white'
-                        useValidation={true}
-                    />
-                    <Input
-                        id='password'
-                        label='Password'
-                        keyboardType='default'
-                        secureTextEntry
-                        required
-                        minLength={5}
-                        autoCapitalize='none'
-                        errorText="Please enter a valid password"
-                        onInputChange={inputChangeHandler}
-                        initialValue=""
-                        color='white'
-                        clearTextOnFocus={true}
-                        useValidation={true}
-
-                    /> */}
                     <TextInput
                         onChangeText={text => setState({ ...state, email: text })}
                         style={styles.userInput}
@@ -203,7 +129,6 @@ AuthScreen.navigationOptions = {
                 source={require('../assets/images/dani_logo_01.png')}
             />
         </View>
-
     ),
 }
 
