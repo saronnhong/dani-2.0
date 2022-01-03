@@ -360,7 +360,7 @@ const AuthNavigator = createStackNavigator({
 })
 
 const Main2Navigator = createSwitchNavigator({
-    Startup: StartupScreen,
+    // Startup: StartupScreen,
     Auth: AuthNavigator,
     Tab2: MainNavigator
     // Main: MainNavigator
