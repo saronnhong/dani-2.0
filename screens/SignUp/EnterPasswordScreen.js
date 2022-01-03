@@ -15,7 +15,7 @@ const EnterPasswordScreen = props => {
     });
     const accountInfo = props.navigation.state.params.accountInfo;
 
-    const defaultImage = { default: "https://pbs.twimg.com/media/EttqzgQUUAIfh8U.jpg" }
+    const defaultImage = { default: "http://www.saronnhong.com/images/021-puzzle.png" }
 
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
