@@ -12,6 +12,7 @@ import * as settingsActions from '../../store/actions/settings';
 import * as profileActions from '../../store/actions/profile';
 
 
+
 const SpeechMenu = (props) => {
     const categories = [
         {
@@ -88,6 +89,7 @@ const SpeechMenu = (props) => {
     if (userSettings.voice === null) {
         dispatch(settingsActions.updateSettings("Medium", "Fred", "1", "1"));
     }
+    
 
     return (
         <View style={styles.screen}>

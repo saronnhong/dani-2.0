@@ -7,7 +7,7 @@ const dispatch = useDispatch();
 const [testPassed, setTestPassed] = useState(0);
 
 //Write to database
-let write_to_database = (id, word, path, phonetic) => {
+let write_to_database = async (id, word, path, phonetic) => {
     dispatch(wordsActions.createWord(id, word, path, phonetic));
     const response = await fetch(`https://speechboard-api.herokuapp.com/words/${id}`);
     assert(response.id === id &&
