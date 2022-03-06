@@ -44,8 +44,16 @@ class CreateAccountScreen extends Component {
             alert("No email entered.");
             this.refs['email'].focus()
         } else if (this.state.birthMonth.length === 0 || this.state.birthDay.length === 0 || this.state.birthYear.length === 0) {
-            alert("Invalid birthdate entered.");
-            this.refs['day'].focus()
+            // alert("Invalid birthdate entered.");
+            // this.refs['day'].focus()
+            this.setState({
+                ...this.state,
+                birthMonth:  '1',
+                birthDay: '1',
+                birthYear: '2022',
+                dateOfBirth: '01/01/2022',
+                age: 0
+            }, () => this.submitData());
         } else {
             console.log("grabbing a new state", this.state)
             this.props.navigation.navigate({

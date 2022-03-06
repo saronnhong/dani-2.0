@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "danispeak",
-    "slug": "danispeak",
-    "version": "1.0.1",
+    "name": "danispeech",
+    "slug": "danispeech",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.daniapp.danispeak"
+      "bundleIdentifier": "com.daniapp.danispeech"
     },
     "web": {
       "favicon": "./assets/favicon.png"
