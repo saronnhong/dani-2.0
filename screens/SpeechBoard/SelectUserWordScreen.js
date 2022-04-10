@@ -36,7 +36,15 @@ const SelectUserWordScreen = (props) => {
     return (
         <View style={styles.editContainer}>
             <ScrollView >
-                <View style={styles.wordRow}>
+            {(userWords.length === 0) ? (
+                <View>
+                    <Image style={styles.emptyContainer} source={require('../../assets/images/box.png')} />
+                    <Text style={styles.emptyText}>No user words found</Text>
+                </View>
+            ):(
+                
+                     <View style={styles.wordRow}>
+                    
                     {userWords.map(word =>
                         <TouchableOpacity key={word._id} onPress={() => {
                             props.navigation.navigate('Edit',
@@ -55,6 +63,11 @@ const SelectUserWordScreen = (props) => {
                         </TouchableOpacity>
                     )}
                 </View>
+             )}
+               
+
+
+
             </ScrollView>
         </View>
     )
@@ -120,6 +133,15 @@ const styles = StyleSheet.create({
         width: '100%',
         flexWrap: 'wrap',
         paddingTop: 10
+    },
+    emptyContainer: {
+       alignItems: 'center',
+        margin: 90
+    },
+    emptyText: {
+        fontSize: 30,
+        fontFamily: 'roboto',
+        textAlign: 'center'
     }
 });
 
