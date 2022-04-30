@@ -32,9 +32,9 @@ const SentenceBar = props => {
 
     let sentenceCounter = (sentence) => {
 
-        if(!savedDictionary[sentence]){
+        if(!savedDictionary[sentence]&& sentence.length > 1){
             savedDictionary[sentence] = 1;
-        }else{
+        }else if (savedDictionary[sentence] && sentence.length > 1){
             savedDictionary[sentence]++;
         }
         dispatch(sentenceCountActions.updateSentenceCount(savedDictionary));
