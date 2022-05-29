@@ -62,10 +62,14 @@ const SettingsScreen = props => {
             setSpeechPitch(data.value);
         } else if (data.settingType === 'rate') {
             setSpeechRate(data.value);
+        } else if (data.settingType === 'silentMode'){
+            setSilentMode(data.value);
         }
     }
     const saveSettings = useCallback(async () => {
         if (silentMode !== userSettings.silentMode) {
+            console.log(silentMode);
+            console.log(userSettings.silentMode);
             Alert.alert(
                 "Do you want to restart now?",
                 "App needs to restart in order for changes to be applied.",
@@ -73,8 +77,10 @@ const SettingsScreen = props => {
                     {
                         text: "Yes",
                         onPress: () => {
+                            // Updates.reloadAsync();
                             dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate, silentMode));
-                            Updates.reloadAsync();
+                            console.log(userSettings.silentMode)
+                            console.log(silentMode)
                         }
                     },
                     {
@@ -88,6 +94,7 @@ const SettingsScreen = props => {
         } else {
             dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate, silentMode));
             Alert.alert("Settings has been saved!");
+            console.log(userSettings)
             props.navigation.navigate({ routeName: "SpeechMenu" });
         }
 
