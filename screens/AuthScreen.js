@@ -67,7 +67,7 @@ const AuthScreen = props => {
     return (
         <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={20} style={styles.screen}>
             <View style={styles.titleContainer}>
-                <Text style={styles.title}>Speech Board</Text>
+                <Text style={styles.title}>DANISpeech</Text>
             </View>
 
             <Card style={styles.authContainer}>
@@ -161,10 +161,11 @@ const styles = StyleSheet.create({
         marginBottom: '40%'
     },
     titleContainer: {
-        marginVertical: 35
+        marginVertical: 60,
+        marginTop: 150
     },
     title: {
-        fontFamily: 'honeybee',
+        fontFamily: 'Futura',
         fontSize: 60,
         color: Colors.sesameGreen
     },

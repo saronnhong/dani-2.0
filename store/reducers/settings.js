@@ -5,7 +5,7 @@ const initialState = {
   voice: null,
   pitch: null,
   rate: null,
-  silentMode: false
+  silentMode: null
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +18,11 @@ export default (state = initialState, action) => {
         rate: action.settingData.rate,
         silentMode: action.settingData.silentMode
       };
+
+
+      
+    default:
+      return state;
   }
-  return state;
+ 
 };
