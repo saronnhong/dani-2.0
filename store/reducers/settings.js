@@ -1,11 +1,11 @@
 import { UPDATE_SETTING, SET_SETTING } from '../actions/settings';
 
 const initialState = {
-  cardSize: "Medium",
-  voice: "Fred",
-  pitch: "1",
-  rate: "1",
-  silentMode: false
+  cardSize: null,
+  voice: null,
+  pitch: null,
+  rate: null,
+  silentMode: null
 };
 
 export default (state = initialState, action) => {
@@ -18,6 +18,9 @@ export default (state = initialState, action) => {
         rate: action.settingData.rate,
         silentMode: action.settingData.silentMode
       };
+
+
+      
     default:
       return state;
   }

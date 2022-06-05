@@ -77,8 +77,8 @@ const SettingsScreen = props => {
                     {
                         text: "Yes",
                         onPress: () => {
-                            // Updates.reloadAsync();
                             dispatch(settingsActions.updateSettings(cardSize, speechVoice, speechPitch, speechRate, silentMode));
+                            Updates.reloadAsync();
                             console.log(userSettings.silentMode)
                             console.log(silentMode)
                         }
@@ -104,6 +104,8 @@ const SettingsScreen = props => {
         if (data) {
             getSettings();
         }
+        console.log("This is silentMode state:", silentMode)
+        console.log("This is voice:", speechVoice)
     }, [getSettings]);
 
     useEffect(() => {
