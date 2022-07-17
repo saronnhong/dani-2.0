@@ -1,13 +1,13 @@
 export const UPDATE_SETTING = 'UPDATE_SETTING';
 export const SET_SETTING = 'SET_SETTING'
 
-export const updateSettings = (cardSize, voice, pitch, rate, silentMode) => {
+export const updateSettings = (cardSize, voice, pitch, rate, silentMode, userId) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
         const userEmail = getState().profile.email;
 
         const response = await fetch(
-            `https://speechboard-api.herokuapp.com/profiles/${userId}`,
+            `https://speechboard-api.herokuapp.com/settings/${userId}`,
             {
                 method: 'PATCH',
                 headers: {
@@ -18,7 +18,8 @@ export const updateSettings = (cardSize, voice, pitch, rate, silentMode) => {
                     voice,
                     pitch,
                     rate,
-                    silentMode
+                    silentMode,
+                    userId
                 })
             });
 
@@ -29,7 +30,8 @@ export const updateSettings = (cardSize, voice, pitch, rate, silentMode) => {
                 voice: voice,
                 pitch: pitch,
                 rate: rate,
-                silentMode: silentMode
+                silentMode: silentMode,
+                userId: userId
             }
         });
     }
@@ -42,7 +44,7 @@ export const fetchSettings = () => {
         try {
 
             const response = await
-                fetch(`https://speechboard-api.herokuapp.com/profiles/${userId}`
+                fetch(`https://speechboard-api.herokuapp.com/settings/${userId}`,
             {
                         method: 'GET',
                         headers: {
@@ -56,17 +58,18 @@ export const fetchSettings = () => {
 
 
             const resData = await response.json();
-            console.log("from the fetch here: ")
+            console.log("from the settings fetch here: ")
             console.log(resData);
 
             dispatch({
-                type: SET_SETTINGS,
+                type: SET_SETTING,
                 settingsData: {
                     cardSize: resData.cardSize,
                     voice: resData.voice,
                     pitch: resData.pitch,
                     rate: resData.rate,
-                    silentMode: resData.silentMode
+                    silentMode: resData.silentMode,
+                    userId: userId
                 }
             });
 
@@ -74,6 +77,40 @@ export const fetchSettings = () => {
             throw err;
         }
     }
-
-
 }
+
+export const createSettings = (email, name, age, dateOfBirth, imageUrl, coverImageUrl) => {
+    return async (dispatch, getState) => {
+        const userId = getState().auth.userId;
+        const response = await fetch(
+            'https://speechboard-api.herokuapp.com/settings',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    cardSize: cardSize,
+                    voice: voice,
+                    pitch: pitch,
+                    rate: rate,
+                    silentMode: silentMode,
+                    userId: userId
+
+                })
+            });
+        const resData = await response.json();
+        // console.log(resData);
+        dispatch({
+            type: CREATE_SETTING,
+            profileData: {
+                cardSize: cardSize,
+                voice: voice,
+                pitch: pitch,
+                rate: rate,
+                silentMode: silentMode,
+                userId: userId
+            }
+        });
+    };
+};

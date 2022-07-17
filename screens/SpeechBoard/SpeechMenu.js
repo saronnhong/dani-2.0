@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import HeaderButton from '../../components/HeaderButton';
@@ -7,8 +7,8 @@ import * as Speech from 'expo-speech';
 import Voices from '../../constants/Voices';
 import Colors from '../../constants/Colors';
 import { Audio } from 'expo-av';
-import { useSelector, useDispatch } from 'react-redux';
-import * as settingsActions from '../../store/actions/settings';
+import { useSelector, useDispatch} from 'react-redux';
+import { fetchSettings } from '../../store/actions/settings';
 import * as profileActions from '../../store/actions/profile';
 
 
@@ -80,17 +80,33 @@ const SpeechMenu = (props) => {
     }
 
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        console.log("hello this is a test")
+        const loadSettings = async () => {
+            // setIsLoading(true);
+            await dispatch(fetchSettings);
+            // setIsLoading(false);
+        };
+        loadSettings();
+    }, [dispatch]);
+
     // let userId = useSelector(state => state.auth.userId);
     // Axios.get(`https://dani-2.firebaseio.com/profile/${userId}.json`).then(function (response) {
     //     let newUser = new Object(response.data)
     // });
 
 
-    if (userSettings.voice === null) {
-        console.log(userSettings)
-        // dispatch(settingsActions.updateSettings("Medium", "Samantha", "2", "1", false));
-    }
+    // if (userSettings.voice === null) {
+    //     console.log(userSettings)
+    //     // dispatch(settingsActions.updateSettings("Medium", "Samantha", "2", "1", false));
+    // }
     
+
+
+
+ 
+
 
     return (
         <View style={styles.screen}>
