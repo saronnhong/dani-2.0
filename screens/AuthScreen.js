@@ -5,6 +5,7 @@ import * as authActions from '../store/actions/auth';
 import * as profileActions from '../store/actions/profile';
 import * as analyticsActions from '../store/actions/count';
 import * as sentenceBarActions from '../store/actions/sentenceBar';
+import * as settingsActions from '../store/actions/settings'
 import Input from '../components/Input';
 import Card from '../components/Card';
 import Colors from '../constants/Colors';
@@ -48,10 +49,13 @@ const AuthScreen = props => {
                         dispatch(profileActions.fetchProfile())
                             .then(() => {
                                 dispatch(analyticsActions.fetchAnalytics())
-                                    .then(() => {
-                                        dispatch(sentenceBarActions.resetBar());
-                                        props.navigation.navigate('SpeechMenu');
-                                    })
+                                .then (() => {
+                                    dispatch(settingsActions.fetchSettings())
+                                        .then(() => {
+                                            dispatch(sentenceBarActions.resetBar());
+                                            props.navigation.navigate('SpeechMenu');
+                                        })
+                                 })
                             })
                     })
             }
@@ -166,7 +170,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: 'Futura',
-        fontSize: 60,
+        fontSize: 50,
         color: Colors.sesameGreen
     },
     userInput: {
