@@ -55,7 +55,7 @@ class CreateAccountScreen extends Component {
                 age: 0
             }, () => this.submitData());
         } else {
-            console.log("grabbing a new state", this.state)
+            // console.log("grabbing a new state", this.state)
             this.props.navigation.navigate({
                 routeName: 'EnterPasswordScreen',
                 params: {
