@@ -82,7 +82,7 @@ const SpeechMenu = (props) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("hello this is a test")
+        // console.log("hello this is a test")
         const loadSettings = async () => {
             // setIsLoading(true);
             await dispatch(fetchSettings);
@@ -97,10 +97,10 @@ const SpeechMenu = (props) => {
     // });
 
 
-    // if (userSettings.voice === null) {
-    //     console.log(userSettings)
-    //     // dispatch(settingsActions.updateSettings("Medium", "Samantha", "2", "1", false));
-    // }
+    if (userSettings.voice === null) {
+        // console.log(userSettings)
+        // dispatch(settingsActions.fetchSettings());
+    }
     
 
 

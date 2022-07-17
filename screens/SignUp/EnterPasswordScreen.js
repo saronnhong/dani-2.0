@@ -6,6 +6,7 @@ import * as authActions from '../../store/actions/auth';
 import * as profileActions from '../../store/actions/profile';
 import * as analyticsActions from '../../store/actions/count';
 import * as sentenceBarActions from '../../store/actions/sentenceBar';
+import * as settingsActions from '../../store/actions/settings';
 
 const EnterPasswordScreen = props => {
     console.log(props.navigation.state.params.accountInfo)
@@ -17,6 +18,8 @@ const EnterPasswordScreen = props => {
 
     const defaultImage = { default: "http://www.saronnhong.com/images/021-puzzle.png" }
 
+    // email, name, age, dateOfBirth, imageUrl, coverImageUrl
+
     const [reveal, setReveal] = useState(true)
     const dispatch = useDispatch();
     const authHandler = async () => {
@@ -24,15 +27,16 @@ const EnterPasswordScreen = props => {
         await dispatch(authActions.signup(accountInfo.email, state.password))
             .then(() => {
                 dispatch(profileActions.createProfile(accountInfo.email, accountInfo.name, accountInfo.age, accountInfo.dateOfBirth, defaultImage.default, 'coverUrl'))
-                    .then(() => dispatch(analyticsActions.createAnalytics())
-                        .then(() => {
-                            dispatch(sentenceBarActions.resetBar());
-                            setIsLoading(false);
-                            props.navigation.navigate({
-                                routeName: 'SpeechMenu'
-                            });
-                            
-                        }))
+                    .then(() => dispatch(settingsActions.createSettings("1", "Nicky", "0.1", "2", false)))
+                        .then(() => dispatch(analyticsActions.createAnalytics())
+                            .then(() => {
+                                dispatch(sentenceBarActions.resetBar());
+                                setIsLoading(false);
+                                props.navigation.navigate({
+                                    routeName: 'SpeechMenu'
+                                });
+                                
+                            }))
             })
             .catch(err => {
                 alert(err);

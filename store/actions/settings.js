@@ -1,7 +1,7 @@
 export const UPDATE_SETTING = 'UPDATE_SETTING';
 export const SET_SETTING = 'SET_SETTING'
 
-export const updateSettings = (cardSize, voice, pitch, rate, silentMode, userId) => {
+export const updateSettings = (cardSize, voice, pitch, rate, silentMode) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
         const userEmail = getState().profile.email;
@@ -79,7 +79,7 @@ export const fetchSettings = () => {
     }
 }
 
-export const createSettings = (email, name, age, dateOfBirth, imageUrl, coverImageUrl) => {
+export const createSettings = (cardSize, voice, pitch, rate, silentMode) => {
     return async (dispatch, getState) => {
         const userId = getState().auth.userId;
         const response = await fetch(
@@ -100,7 +100,7 @@ export const createSettings = (email, name, age, dateOfBirth, imageUrl, coverIma
                 })
             });
         const resData = await response.json();
-        // console.log(resData);
+        console.log("createSettings print out:", resData);
         dispatch({
             type: CREATE_SETTING,
             profileData: {
